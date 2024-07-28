@@ -18,29 +18,45 @@
       <sprites name="Spells">
         <sprite>sprites\art_bolt</sprite>
       </sprites>
+      <sprites name="Enchantments">
+        <sprite>sprites\art_Vigor</sprite>
+      </sprites>
     </sprites>
     <sprite>sprites\spr_profiles</sprite>
     <sprite>sprites\spr_card</sprite>
+    <sprite>sprites\spr_card_spell</sprite>
+    <sprite>sprites\spr_card_enchantment</sprite>
     <sprite>sprites\spr_cardSlot</sprite>
     <sprites name="buttons">
       <sprite>sprites\spr_button_show_hand</sprite>
     </sprites>
+    <sprite>sprites\spr_numbers_health</sprite>
+    <sprite>sprites\spr_cost_circle</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\setup_rules.gml</script>
     <script>scripts\setup_depths.gml</script>
+    <script>scripts\setup_sprite_scales.gml</script>
     <script>scripts\exists.gml</script>
     <script>scripts\damage.gml</script>
     <script>scripts\log_error.gml</script>
     <script>scripts\build_deck.gml</script>
     <script>scripts\draw_card.gml</script>
     <script>scripts\mouseOver.gml</script>
+    <script>scripts\mouseOverCard.gml</script>
+    <script>scripts\gameOver.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\font_normal</font>
+    <font>fonts\font_bold</font>
+  </fonts>
   <objects name="objects">
     <object>objects\MASTER</object>
     <object>objects\GUI</object>
     <object>objects\DUEL_CONTROLLER</object>
+    <object>objects\HAND_CONTROLLER</object>
     <object>objects\DECK</object>
     <object>objects\CONTESTANT</object>
     <object>objects\ENEMY</object>
@@ -55,6 +71,10 @@
       <objects name="Spells">
         <object>objects\SPELL_CARD</object>
         <object>objects\spell_Bolt</object>
+      </objects>
+      <objects name="Enchantments">
+        <object>objects\ENCHANTMENT_CARD</object>
+        <object>objects\enchant_Vigor</object>
       </objects>
     </objects>
     <objects name="GUI">

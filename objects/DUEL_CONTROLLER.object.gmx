@@ -28,6 +28,7 @@
             <string>/// start a duel
 global.enemy  = instance_create(x, y, ENEMY);
 global.player = instance_create(x, y, PLAYER);
+playerHand = instance_create(x, y, HAND_CONTROLLER);
 
 // game area
 cardSlotsPerRow = 6;
@@ -55,8 +56,10 @@ for(var i=0; i&lt;cardSlotsPerRow; i++) {
 }
 
 
-// start 
-alarm[0] = 1;
+/// draw starting cards
+with (CONTESTANT) {
+    alarm[0] = 2;
+}
 </string>
           </argument>
         </arguments>

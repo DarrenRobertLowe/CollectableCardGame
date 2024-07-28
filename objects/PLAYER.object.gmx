@@ -29,21 +29,26 @@
 event_inherited();
 
 
-ds_list_add(cards, cc_VampireBat);
-ds_list_add(cards, cc_VampireBat);
-ds_list_add(cards, cc_VampireBat);
-ds_list_add(cards, cc_VampireBat);
-ds_list_add(cards, cc_Ankylo);
-ds_list_add(cards, cc_Ankylo);
-ds_list_add(cards, cc_Ankylo);
-ds_list_add(cards, cc_Ankylo);
-ds_list_add(cards, spell_Bolt);
-ds_list_add(cards, spell_Bolt);
-ds_list_add(cards, spell_Bolt);
-ds_list_add(cards, spell_Bolt);
+ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
+ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
+ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
+ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
+ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
+ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
+ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
+ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
+ds_list_add(cards, instance_create(0, 0, spell_Bolt));
+ds_list_add(cards, instance_create(0, 0, spell_Bolt));
+ds_list_add(cards, instance_create(0, 0, spell_Bolt));
+ds_list_add(cards, instance_create(0, 0, spell_Bolt));
+ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
+ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
+ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
+ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
 
-
-deck = instance_create(x, y, DECK);
+deck = instance_create(10, (view_hview[0] - 10) - sprite_get_height(spr_profiles), DECK);
+deck.image_index = 1; // portrait will be chosen by the player
+deck.owner = id;
 
 deck.cards = cards;
 deck.alarm[0] = 1;

@@ -2,10 +2,10 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CONTESTANT</parentName>
+  <parentName>ENCHANTMENT_CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,34 +25,38 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Setup this specific contestant's stats and deck
+            <string>/// CLASS VARS
 event_inherited();
 
+name        = "Vigor";
+image       = art_Vigor;
+castingCost = 2;
+description = "Target creature gains +2/+0.";
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// SPELL EFFECT
 
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
-
-
-deck = instance_create(((view_wview[0] - 10) - sprite_get_width(spr_profiles)), 10, DECK);
-deck.image_index = 0; // portrait
-deck.owner = id;
-
-deck.cards = cards;
-deck.alarm[0] = 1;
+damage(target, 2);
 </string>
           </argument>
         </arguments>

@@ -28,9 +28,10 @@
             <string>/// CLASS VARS
 event_inherited();
 
+sprite_index = spr_card_spell;
+class    = "Spell";
 type     = SPELL_CARD;
 target   = 0;
-ds_list_add(classes, "Spell");
 </string>
           </argument>
         </arguments>

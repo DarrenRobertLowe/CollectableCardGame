@@ -29,6 +29,7 @@
 event_inherited();
 
 name        = "Ankylo";
+class       = "Beast";
 image       = art_ankylo;
 castingCost = 5;
 description = "When defending, Ankylo gains +0/+3.";

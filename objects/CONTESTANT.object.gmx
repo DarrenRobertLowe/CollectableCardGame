@@ -31,9 +31,7 @@ event_inherited();
 hp = 20;
 avatar = 0;
 cards = ds_list_create();   // cards in this hero's deck
-hand = ds_list_create();    // cards in this hero's hand
-
-alarm[0] = 2; // draw starting cards
+hand  = ds_list_create();   // cards in this hero's hand
 </string>
           </argument>
         </arguments>
@@ -56,9 +54,9 @@ alarm[0] = 2; // draw starting cards
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// draw starting cards
+            <string>/// Draw starting cards
 
-repeat(5) { 
+repeat(global.RULES_startingCardsNumber) {
     draw_card(hand, deck);
 }
 </string>

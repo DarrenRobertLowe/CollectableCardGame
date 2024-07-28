@@ -85,6 +85,7 @@ draw_sprite(spr_gui_crescent, 0, playerCrescentX, playerCrescentY);
 
 
 // draw the player's hand
+/*
 if (showHand == true) {
     var cardWidth = sprite_get_width(spr_card);
     var cardHeight = sprite_get_height(spr_card);
@@ -128,7 +129,7 @@ if (showHand == true) {
         draw_sprite_ext(mouseOverCard.image, 0, x1 + (imageOffsetX * zoomScale), y1 + (imageOffsetY * zoomScale), zoomScale, zoomScale, 0, c_white, 1);    
     }
 }
-
+*/
 </string>
           </argument>
         </arguments>

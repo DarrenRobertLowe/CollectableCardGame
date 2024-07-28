@@ -108,10 +108,10 @@ glowing = true;
             <kind>1</kind>
             <string>/// show or hide hand
 
-GUI.showHand = !GUI.showHand;
+HAND_CONTROLLER.showHand = !HAND_CONTROLLER.showHand;
 
 
-if (GUI.showHand == false) {
+if (HAND_CONTROLLER.showHand == false) {
     image_index = 0;
 } else {
     image_index = 1;

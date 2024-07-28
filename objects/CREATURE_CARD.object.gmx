@@ -30,9 +30,83 @@ event_inherited();
 
 subclass = "";
 attack   = 3;
-hp       = 1; // defence and hp are interchangeable in creatures
+defence  = 1; // defence and hp are interchangeable in creatures
 type     = CREATURE_CARD;
 ds_list_add(classes, "Creature");
+
+
+// stats positioning
+base_attackX = 254;
+base_attackY = 468;
+attackX = base_attackX;
+attackY = base_attackY;
+
+base_defenceX = 295;
+base_defenceY = 468;
+attackX = base_attackX;
+attackY = base_attackY;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// reposition attack and defence values
+event_inherited();
+
+attackX = x + (base_attackX * scale);
+attackY = y + (base_attackY * scale);
+
+defenceX = x + (base_defenceX * scale);
+defenceY = y + (base_defenceY * scale);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw attack and hp (defence)
+event_inherited();
+
+// attack and hp(defence)
+draw_set_font(font_bold);
+draw_set_halign(fa_center);
+draw_text(attackX, attackY, attack);
+draw_text(defenceX, defenceY, defence);
+
+draw_set_halign(fa_left);
 </string>
           </argument>
         </arguments>

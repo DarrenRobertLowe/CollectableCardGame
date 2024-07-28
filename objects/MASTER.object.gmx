@@ -30,6 +30,8 @@
 // setup speed
 global.GAMESPEED = 60;
 room_speed = global.GAMESPEED;
+randomize();
+
 
 // setup view
 global.view_width  = 1024;
@@ -40,7 +42,10 @@ view_yview[0] = 0;
 view_wview[0] = global.view_width;
 view_hview[0] = global.view_height;
 
+
 setup_depths();
+setup_sprite_scales();
+setup_rules();
 
 // start game
 instance_create(0, 0, GUI);

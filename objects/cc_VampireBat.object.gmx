@@ -29,11 +29,12 @@
 event_inherited();
 
 name        = "Vampire Bat";
+class       = "Bat";
 image       = art_vampirebat;
 ds_list_add(abilities, "Flying", "Drain");
 
 castingCost = 3;
-description = "";
+description = "When Vampire Bat deals damage to target enemy, controller gains health equal to damage dealt.";
 attack      = 2;
 defence     = 1;
 
