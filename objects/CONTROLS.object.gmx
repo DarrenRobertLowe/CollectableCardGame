@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,42 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// decks contain cards
+            <string>/// setup
 
-sprite_index = spr_profiles;
-image_speed = 0;
-owner = noone;
-cards = ds_list_create();
-playStack = ds_stack_create();
-
-
-setup_glowing();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// shuffle and stack the deck
-
-ds_list_shuffle(cards);
-playStack = build_deck(cards);
+doubleClickWindowMax = 15;
 </string>
           </argument>
         </arguments>
@@ -83,42 +50,8 @@ playStack = build_deck(cards);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// click to draw card
-/*
-if (mouseOver()) {
-    if (mouse_check_button_pressed(mb_left)) {
-        draw_card(owner.hand, id);
-    }
-}
-*/
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// draw self and glowing
-event_inherited();
-
-draw_self();
-
-check_glow();
+            <string>/// check controls
+check_controls();
 </string>
           </argument>
         </arguments>

@@ -28,7 +28,13 @@
             <string>/// start a duel
 global.enemy  = instance_create(x, y, ENEMY);
 global.player = instance_create(x, y, PLAYER);
-playerHand = instance_create(x, y, HAND_CONTROLLER);
+
+var playerHand      = instance_create(x, y, HAND_CONTROLLER);
+playerHand.owner = global.player;
+
+var playerGrave     = instance_create(x, y, GRAVE_CONTROLLER);
+playerGrave.owner = global.player;
+
 
 // game area
 cardSlotsPerRow = 6;

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>SPELL_CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,42 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// decks contain cards
-
-sprite_index = spr_profiles;
-image_speed = 0;
-owner = noone;
-cards = ds_list_create();
-playStack = ds_stack_create();
-
-
-setup_glowing();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// shuffle and stack the deck
-
-ds_list_shuffle(cards);
-playStack = build_deck(cards);
+            <string>/// Deals a specific amount of damage (N) or heals by that amount.
+event_inherited();
 </string>
           </argument>
         </arguments>
@@ -83,42 +49,38 @@ playStack = build_deck(cards);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// click to draw card
-/*
-if (mouseOver()) {
-    if (mouse_check_button_pressed(mb_left)) {
-        draw_card(owner.hand, id);
-    }
-}
-*/
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// draw self and glowing
+            <string>/// targeting
 event_inherited();
 
-draw_self();
-
-check_glow();
+if (choosingTarget) {
+    show_debug_message("CHOOSING TARGET!");
+    if (global.controls_cancel == true) {
+        choosingTarget = false;
+        show_debug_message("Cancelled.");
+    }
+    
+    var target = noone;
+    
+    if (ds_list_find_index(validTargets, "creature") &gt; -1) {
+        target = mouseOverCreature();
+        
+        if (target == noone) {
+            if (ds_list_find_index(validTargets, "player") &gt; -1) {
+                target = mouseOverPlayer();
+            }
+        }
+    }
+    
+    if (target != noone) {
+        // add condition: if canTarget() {
+        // change mouse pointer here
+        target.glowing = true;
+        if (global.controls_accept) {
+            damage(target, attack);
+            finishCasting();
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

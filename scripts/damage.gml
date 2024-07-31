@@ -5,4 +5,5 @@ var amount = argument1;
 
 if (exists(target)) {
     target.hp -= amount;
+    show_debug_message("damage dealt: " +string(amount) + " to " + string(target));
 } else log_error("Invalid target for damage: " + string(target), true);

@@ -9,6 +9,7 @@
     <sprite>sprites\spr_none</sprite>
     <sprites name="GUI_Elements">
       <sprite>sprites\spr_gui_crescent</sprite>
+      <sprite>sprites\spr_show_graveyard</sprite>
     </sprites>
     <sprites name="CardArts">
       <sprites name="Creatures">
@@ -17,6 +18,7 @@
       </sprites>
       <sprites name="Spells">
         <sprite>sprites\art_bolt</sprite>
+        <sprite>sprites\art_heal</sprite>
       </sprites>
       <sprites name="Enchantments">
         <sprite>sprites\art_Vigor</sprite>
@@ -47,20 +49,38 @@
     <script>scripts\mouseOver.gml</script>
     <script>scripts\mouseOverCard.gml</script>
     <script>scripts\gameOver.gml</script>
+    <script>scripts\check_controls.gml</script>
+    <script>scripts\glow.gml</script>
+    <scripts name="TARGETTING">
+      <script>scripts\mouseOverCreature.gml</script>
+      <script>scripts\mouseOverPlayer.gml</script>
+    </scripts>
+    <script>scripts\setup_glowing.gml</script>
+    <script>scripts\check_glow.gml</script>
+    <script>scripts\create_card.gml</script>
+    <scripts name="Card Events">
+      <script>scripts\basicActivationChecks.gml</script>
+      <script>scripts\finishCasting.gml</script>
+    </scripts>
+    <script>scripts\sendToGraveyard.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font_normal</font>
     <font>fonts\font_bold</font>
+    <font>fonts\font_health</font>
   </fonts>
   <objects name="objects">
     <object>objects\MASTER</object>
     <object>objects\GUI</object>
     <object>objects\DUEL_CONTROLLER</object>
+    <object>objects\CONTROLS</object>
     <object>objects\HAND_CONTROLLER</object>
+    <object>objects\GRAVE_CONTROLLER</object>
     <object>objects\DECK</object>
     <object>objects\CONTESTANT</object>
     <object>objects\ENEMY</object>
     <object>objects\PLAYER</object>
+    <object>objects\EVENT_HANDLER</object>
     <objects name="CARDS">
       <object>objects\CARD</object>
       <objects name="Creatures">
@@ -70,7 +90,9 @@
       </objects>
       <objects name="Spells">
         <object>objects\SPELL_CARD</object>
+        <object>objects\N_DAMAGE_SPELL</object>
         <object>objects\spell_Bolt</object>
+        <object>objects\spell_Heal</object>
       </objects>
       <objects name="Enchantments">
         <object>objects\ENCHANTMENT_CARD</object>
@@ -78,6 +100,7 @@
       </objects>
     </objects>
     <objects name="GUI">
+      <object>objects\button_ShowGraveyard</object>
       <object>objects\button_ShowHand</object>
       <object>objects\CARDSLOT</object>
     </objects>

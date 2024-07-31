@@ -1,5 +1,5 @@
 /// build_deck(list of cards);
-// Adds and instantiates cards in a deck for a duel.
+// Adds cards in a deck for a duel.
 
 var cards = argument0;
 

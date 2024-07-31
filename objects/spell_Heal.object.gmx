@@ -2,10 +2,10 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CONTESTANT</parentName>
+  <parentName>N_DAMAGE_SPELL</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,38 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Setup this specific contestant's stats and deck
+            <string>/// CLASS VARS
 event_inherited();
 
-
-ds_list_add(cards, create_card(cc_VampireBat, id));
-ds_list_add(cards, create_card(cc_VampireBat, id));
-ds_list_add(cards, create_card(cc_VampireBat, id));
-ds_list_add(cards, create_card(cc_VampireBat, id));
-ds_list_add(cards, create_card(cc_Ankylo, id));
-ds_list_add(cards, create_card(cc_Ankylo, id));
-ds_list_add(cards, create_card(cc_Ankylo, id));
-ds_list_add(cards, create_card(cc_Ankylo, id));
-ds_list_add(cards, create_card(spell_Bolt, id));
-ds_list_add(cards, create_card(spell_Bolt, id));
-ds_list_add(cards, create_card(spell_Bolt, id));
-ds_list_add(cards, create_card(spell_Bolt, id));
-ds_list_add(cards, create_card(spell_Heal, id));
-ds_list_add(cards, create_card(spell_Heal, id));
-ds_list_add(cards, create_card(spell_Heal, id));
-ds_list_add(cards, create_card(spell_Heal, id));
-ds_list_add(cards, create_card(enchant_Vigor, id));
-ds_list_add(cards, create_card(enchant_Vigor, id));
-ds_list_add(cards, create_card(enchant_Vigor, id));
-ds_list_add(cards, create_card(enchant_Vigor, id));
-
-
-deck = instance_create(10, (view_hview[0] - 10) - sprite_get_height(spr_profiles), DECK);
-deck.image_index = 1; // portrait will be chosen by the player
-deck.owner = id;
-
-deck.cards = cards;
-deck.alarm[0] = 1;
+name        = "Heal";
+image       = art_heal;
+castingCost = 1;
+description = "Target creature or player gains 3 health.";
+ds_list_add(validTargets, "player", "creature");
+attack      = -3;
 </string>
           </argument>
         </arguments>

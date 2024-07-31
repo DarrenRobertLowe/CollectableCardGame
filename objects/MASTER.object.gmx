@@ -48,6 +48,7 @@ setup_sprite_scales();
 setup_rules();
 
 // start game
+instance_create(0, 0, CONTROLS);
 instance_create(0, 0, GUI);
 instance_create(0, 0, DUEL_CONTROLLER);
 </string>

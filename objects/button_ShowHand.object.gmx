@@ -32,10 +32,7 @@ image_speed = 0;
 depth = global.GUI_button_depth;
 
 
-glowing = false;
-glowAlpha = 1;
-glowAlphaSwitch = 0;
-glowSpeed = 0.05;
+setup_glowing();
 </string>
           </argument>
         </arguments>
@@ -108,13 +105,13 @@ glowing = true;
             <kind>1</kind>
             <string>/// show or hide hand
 
-HAND_CONTROLLER.showHand = !HAND_CONTROLLER.showHand;
-
-
 if (HAND_CONTROLLER.showHand == false) {
-    image_index = 0;
-} else {
     image_index = 1;
+    HAND_CONTROLLER.showHand = true;
+    GRAVE_CONTROLLER.showHand = false;
+} else {
+    image_index = 0;
+    HAND_CONTROLLER.showHand = false
 }
 </string>
           </argument>
@@ -141,29 +138,7 @@ if (HAND_CONTROLLER.showHand == false) {
             <string>/// draw self
 
 
-// draw the hover glow behind the sprite
-if (glowing == true) {
-
-    if (glowAlphaSwitch = 0) {
-        glowAlpha += glowSpeed;
-        if (glowAlpha &gt;= 1.5) {
-            glowAlphaSwitch = 1;
-        }
-    }
-    
-    if (glowAlphaSwitch = 1) {
-        glowAlpha -= glowSpeed;
-        if (glowAlpha &lt;= .2) {
-            glowAlphaSwitch = 0;
-        }
-    }
-    
-    draw_set_blend_mode(bm_add);
-    draw_sprite_ext(sprite_index, image_index, x, y, 1.2, 1.2, 0, c_aqua, glowAlpha);
-    draw_set_blend_mode(bm_normal);
-} else {
-    glowAlpha = 0;
-}
+check_glow();   // draw the hover glow behind the sprite
 
 // draw the button sprite
 draw_sprite(sprite_index, image_index, x, y);

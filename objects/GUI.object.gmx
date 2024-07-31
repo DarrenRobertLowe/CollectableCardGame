@@ -38,6 +38,12 @@ imageOffsetY = 43;
 playerCrescentX = 6;
 playerCrescentY = playerProfileY + 174;
 
+enemyCrescentX = 925;
+enemyCrescentY = 187;
+
+showPlayerGraveyardX = 167;
+showPlayerGraveyardY = 525;
+
 
 defaultHandScale = 0.4;
 handScale = defaultHandScale;
@@ -47,11 +53,14 @@ playerHandY = playerProfileY;
 
 // hand show/hide button
 showHand = true;
-instance_create (
+instance_create(
     playerProfileX + (sprite_get_width(spr_profiles) - 40),
     (view_hview[0] - 40),
     button_ShowHand
 );
+
+// graveyard show/hide button
+instance_create(showPlayerGraveyardX, showPlayerGraveyardY, button_ShowGraveyard);
 </string>
           </argument>
         </arguments>
@@ -82,54 +91,16 @@ draw_sprite(spr_profiles, 0, enemyProfileX,  enemyProfileY);
 draw_sprite(spr_profiles, 1, playerProfileX, playerProfileY);
 
 draw_sprite(spr_gui_crescent, 0, playerCrescentX, playerCrescentY);
+draw_sprite(spr_gui_crescent, 0, enemyCrescentX, enemyCrescentY);
 
 
-// draw the player's hand
-/*
-if (showHand == true) {
-    var cardWidth = sprite_get_width(spr_card);
-    var cardHeight = sprite_get_height(spr_card);
-    var hand = global.player.hand;
-    var mouseOverCard = -1;
-    var cardOverIndex = -1;
-    var x1;
-    var y1;
-    
-    for(var i=0; i&lt;ds_list_size(hand); i++) {
-        var handScale = defaultHandScale;
-        x1 = playerHandX + (i * handXSeparation);
-        y1 = playerHandY;
-        
-        if  (mouse_x &gt; x1) and (mouse_y &gt; playerHandY)
-        and (mouse_x &lt; (x1 + cardWidth * defaultHandScale)) 
-        and (mouse_y &lt; (playerHandY + cardHeight * defaultHandScale)) {
-            mouseOverCard = ds_list_find_value(hand, i);
-            cardOverIndex = i;
-            show_debug_message("card over: " +string(i) + " : " +string(mouseOverCard));
-        }
-        
-        draw_sprite_ext(spr_card, 1, x1, y1, handScale, handScale, 0, c_white, 1);
-        
-        var card = ds_list_find_value(hand, i);
-        draw_sprite_ext(card.image, 0, x1 + (imageOffsetX * handScale), y1 + (imageOffsetY * handScale), handScale, handScale, 0, c_white, 1);    
-    }
-    
-    
-    // zoomed card
-    zoomScale           = (defaultHandScale * 2);
-    var halfWidth       = ((cardWidth * zoomScale) * 0.5);
-    
-    if (mouseOverCard &gt; -1) {
-        x1 = (playerHandX + (cardOverIndex * handXSeparation)) - (halfWidth * 0.5) ;
-        y1 = (view_hview[0] - (cardHeight * zoomScale));
-        
-        draw_sprite_ext(spr_card, 1, x1, y1, zoomScale, zoomScale, 0, c_white, 1);
-        
-        
-        draw_sprite_ext(mouseOverCard.image, 0, x1 + (imageOffsetX * zoomScale), y1 + (imageOffsetY * zoomScale), zoomScale, zoomScale, 0, c_white, 1);    
-    }
-}
-*/
+draw_set_font(font_health);
+draw_set_colour(c_lime);
+draw_set_halign(fa_center);
+draw_text(playerCrescentX + 30, playerCrescentY, global.player.hp);
+draw_text(enemyCrescentX + 30, enemyCrescentY, global.enemy.hp);
+draw_set_font(font_normal);
+draw_set_halign(fa_left);
 </string>
           </argument>
         </arguments>

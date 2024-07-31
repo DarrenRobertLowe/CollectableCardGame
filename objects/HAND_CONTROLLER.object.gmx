@@ -31,6 +31,7 @@ handX = profileArea;
 handY = (view_hview[0] - 220);
 handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
 showHand = true;
+owner = noone;
 
 base_cardSeparation = 150;
 cardSeparation = base_cardSeparation;
@@ -60,7 +61,7 @@ cardHoverQueue = ds_priority_create(); // used for depth sorting in hand
           <argument>
             <kind>1</kind>
             <string>/// sort hand
-var hand = PLAYER.hand;
+var hand = owner.hand;
 var cardSeparation = base_cardSeparation;
 
 if (hand &gt; 0) {

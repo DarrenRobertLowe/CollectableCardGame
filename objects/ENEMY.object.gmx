@@ -29,22 +29,22 @@
 event_inherited();
 
 
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_VampireBat));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, cc_Ankylo));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, spell_Bolt));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
-ds_list_add(cards, instance_create(0, 0, enchant_Vigor));
+ds_list_add(cards, create_card(cc_VampireBat, id));
+ds_list_add(cards, create_card(cc_VampireBat, id));
+ds_list_add(cards, create_card(cc_VampireBat, id));
+ds_list_add(cards, create_card(cc_VampireBat, id));
+ds_list_add(cards, create_card(cc_Ankylo, id));
+ds_list_add(cards, create_card(cc_Ankylo, id));
+ds_list_add(cards, create_card(cc_Ankylo, id));
+ds_list_add(cards, create_card(cc_Ankylo, id));
+ds_list_add(cards, create_card(spell_Bolt, id));
+ds_list_add(cards, create_card(spell_Bolt, id));
+ds_list_add(cards, create_card(spell_Bolt, id));
+ds_list_add(cards, create_card(spell_Bolt, id));
+ds_list_add(cards, create_card(enchant_Vigor, id));
+ds_list_add(cards, create_card(enchant_Vigor, id));
+ds_list_add(cards, create_card(enchant_Vigor, id));
+ds_list_add(cards, create_card(enchant_Vigor, id));
 
 
 deck = instance_create(((view_wview[0] - 10) - sprite_get_width(spr_profiles)), 10, DECK);
