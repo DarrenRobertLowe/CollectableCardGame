@@ -30,7 +30,7 @@ var profileArea = sprite_get_width(spr_profiles) + 20;
 handX = profileArea;
 handY = (view_hview[0] - 220);
 handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
-showHand = true;
+showHand = false;
 owner = noone;
 
 base_cardSeparation = 150;
@@ -61,32 +61,8 @@ cardHoverQueue = ds_priority_create(); // used for depth sorting in hand
           <argument>
             <kind>1</kind>
             <string>/// sort grave
-var hand = owner.graveyard;
-var cardSeparation = base_cardSeparation;
 
-if (hand &gt; 0) {
-    var handsize = ds_list_size(hand);
-    
-    if (handsize &gt; 5)
-        then cardSeparation = (handAreaWidth / handsize);
-    
-    if (handsize &gt; 0) {
-        for (var i=0; i&lt;handsize; i++) {
-            var card = ds_list_find_value(hand, i);
-            card.x = handX + (i * cardSeparation);
-            card.y = handY;
-            card.depth = ((global.hand_depth - handsize) + i);
-            if (showHand == true) {
-                card.displayed = true;
-                card.position  = "hand";
-                card.faceUp    = true;
-            } else {
-                card.displayed = false;
-            }
-        }
-    }
-}
-
+organizeHand(owner.graveyard);
 </string>
           </argument>
         </arguments>

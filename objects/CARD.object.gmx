@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>CLICKABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -43,6 +43,9 @@ activationChecking = false;
 displayed = false;  // display or don't display the card
 position  = "none"; // in "hand", in "deck", on "board", in "graveyard", or "none"
 faceUp    = false;  // 0 or 1, false or true, it corresponds to the image_index.
+canUse    = false;
+clicked   = false;
+canPlayFromGraveyard = true;
 setup_glowing();
 
 
@@ -116,73 +119,96 @@ artY = base_artY;
 if (doubleClickWindow &gt; 0)
   then doubleClickWindow--;
 
-if (displayed == true) {
-    visible = true;
-} else visible = false;
+if (displayed == false) {
+    visible = false;
+}
 
 image_index = faceUp;
 
 switch (position) {
-    case "hand":
-    //depth = global.hand_depth;
-    //displayed = true;
-    scale = global.card_hand_scale;
-    image_xscale = scale;
-    image_yscale = scale;
-    y = HAND_CONTROLLER.handY;
-    break;
-    
-    case "board":
-    //depth = global.card_depth;
-    displayed = true;
-    scale = global.card_board_scale;
-    image_xscale = scale;
-    image_yscale = scale;
-    break;
-    
     case "deck":
         displayed = false;
-    break;
+        break;
+        
+    case "hand":
+        canUse = true;
+        scale = global.card_hand_scale;
+        y = owner.handController.handY;
+        break;
+        
+    case "board":
+        canUse = true;
+        displayed = true;
+        scale = global.card_board_scale;
+        break;
+        
+    case "graveyard":
+        if (canPlayFromGraveyard)
+            then canUse = true;
+            else canUse = false;
+        break;
 }
 
 
-if (mouseOverCard() == id) {
-    y = (HAND_CONTROLLER.handY - 30);
-    depth -= 10; // just make it appear above all other cards
-    
-    if (global.controls_accept == true) {
-        if (doubleClickWindow &gt; 0) {
-            show_debug_message("Double-click registered : "+string(id));
-            activationChecking = true;
-        } else doubleClickWindow = CONTROLS.doubleClickWindowMax;
+if (displayed) {
+    // interactivity
+    if (mouseOverCard() == id) {
+        y = (owner.handController.handY - 30);
+        depth -= 10; // just make it appear above all other cards
+        
+        if (clicked == true) {
+            if (doubleClickWindow &gt; 0) {
+                if (canUse) {
+                    show_debug_message("Double-click registered : "+string(id));
+                    activationChecking = true;
+                    doubleClickWindow = 0;
+                } else {
+                    show_debug_message("Card cannot be used at this time.");
+                }
+            } else {
+                doubleClickWindow = CONTROLS.doubleClickWindowMax;
+            }
+            
+            clicked = false;
+        }
     }
+    
+    // visuals
+    image_xscale = scale;
+    image_yscale = scale;
+    visible = true;
+    if (owner == global.enemy) {    // flip opponent's card on face
+        image_index = 0;
+        faceUp = false;
+    }
+    positionCardElements();
+} else {
+    visible = false;
 }
-
-
-
-
-/// position card elements
-castCircleX = x + (base_castCircleX * scale);
-castCircleY = y + (base_castCircleY * scale);
-castingCostX = x + (base_castingCostX * scale);
-castingCostY = y + (base_castingCostY * scale);
-
-nameX = x + (base_nameX * scale);
-nameY = y + (base_nameY * scale);
-
-classX = x + (base_classX * scale);
-classY = y + (base_classY * scale);
-
-artX = x + (base_artX * scale);
-artY = y + (base_artY * scale);
-
-descriptionX = x + (base_descriptionX * scale);
-descriptionY = y + (base_descriptionY * scale);
-separation = (base_separation * scale);
-descriptionWidth = (base_descriptionWidth * scale);
-
-
-
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// no glow
+glowing = false;
 </string>
           </argument>
         </arguments>

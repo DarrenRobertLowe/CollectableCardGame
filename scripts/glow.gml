@@ -15,5 +15,5 @@ if (glowAlphaSwitch = 1) {
 }
 
 draw_set_blend_mode(bm_add);
-draw_sprite_ext(sprite_index, image_index, x, y, 1.2, 1.2, 0, c_aqua, glowAlpha);
+draw_sprite_ext(sprite_index, image_index, x-5, y-3, scale * 1.1, scale * 1.1, 0, c_aqua, glowAlpha);
 draw_set_blend_mode(bm_normal);

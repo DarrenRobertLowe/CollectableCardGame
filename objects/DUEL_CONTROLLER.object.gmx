@@ -26,15 +26,26 @@
           <argument>
             <kind>1</kind>
             <string>/// start a duel
-global.enemy  = instance_create(x, y, ENEMY);
-global.player = instance_create(x, y, PLAYER);
+instance_create(-100, -100, BOARD_CONTROLLER);
+global.enemy  = instance_create(view_wview[0], 0, ENEMY);
+global.player = instance_create(0, view_hview[0], PLAYER);
 
-var playerHand      = instance_create(x, y, HAND_CONTROLLER);
+var playerHand      = instance_create(-100, -100, PLAYER_HAND_CONTROLLER);
 playerHand.owner = global.player;
+global.player.handController = playerHand;
 
-var playerGrave     = instance_create(x, y, GRAVE_CONTROLLER);
+var playerGrave     = instance_create(-100, -100, PLAYER_GRAVE_CONTROLLER);
 playerGrave.owner = global.player;
+global.player.graveController = playerGrave;
 
+
+var enemyHand      = instance_create(-100, -100, ENEMY_HAND_CONTROLLER);
+enemyHand.owner = global.enemy;
+global.enemy.handController = enemyHand;
+
+var enemyGrave     = instance_create(-100, -100, ENEMY_GRAVE_CONTROLLER);
+enemyGrave.owner = global.enemy;
+global.enemy.graveController = enemyGrave;
 
 // game area
 cardSlotsPerRow = 6;
@@ -51,16 +62,19 @@ playerBackRow   = 589;
 
 // player side
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(playerCardsX + (i * cardSeparation), playerFrontRow, CARDSLOT)
-    instance_create(playerCardsX + (i * cardSeparation), playerBackRow, CARDSLOT)
+    instance_create(playerCardsX + (i * cardSeparation), playerFrontRow, PLAYER_CARDSLOT)
+}
+for(var i=0; i&lt;cardSlotsPerRow; i++) {
+    instance_create(playerCardsX + (i * cardSeparation), playerBackRow, PLAYER_CARDSLOT)
 }
 
 // enemy side
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(enemyCardsX + (i * cardSeparation), enemyBackRow, CARDSLOT);
-    instance_create(enemyCardsX + (i * cardSeparation), enemyFrontRow, CARDSLOT);
+    instance_create(enemyCardsX + (i * cardSeparation), enemyBackRow, ENEMY_CARDSLOT);
 }
-
+for(var i=0; i&lt;cardSlotsPerRow; i++) {
+    instance_create(enemyCardsX + (i * cardSeparation), enemyFrontRow, ENEMY_CARDSLOT);
+}
 
 /// draw starting cards
 with (CONTESTANT) {

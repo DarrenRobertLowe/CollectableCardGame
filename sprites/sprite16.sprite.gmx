@@ -7,20 +7,17 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>1</bbox_left>
-  <bbox_right>98</bbox_right>
-  <bbox_top>8</bbox_top>
-  <bbox_bottom>80</bbox_bottom>
+  <bbox_left>0</bbox_left>
+  <bbox_right>0</bbox_right>
+  <bbox_top>0</bbox_top>
+  <bbox_bottom>0</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>100</width>
-  <height>90</height>
-  <frames>
-    <frame index="0">images\spr_button_show_hand_0.png</frame>
-    <frame index="1">images\spr_button_show_hand_1.png</frame>
-  </frames>
+  <width>32</width>
+  <height>32</height>
+  <frames/>
 </sprite>

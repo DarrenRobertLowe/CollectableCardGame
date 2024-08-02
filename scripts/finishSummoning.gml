@@ -1,0 +1,3 @@
+///finishSummoning();
+
+owner.mana -= castingCost;

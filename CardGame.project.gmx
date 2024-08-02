@@ -7,9 +7,16 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_none</sprite>
+    <sprite>sprites\spr_cardSlot</sprite>
     <sprites name="GUI_Elements">
+      <sprites name="buttons">
+        <sprite>sprites\spr_button_show_hand</sprite>
+        <sprite>sprites\spr_show_graveyard</sprite>
+      </sprites>
+      <sprite>sprites\spr_profiles</sprite>
       <sprite>sprites\spr_gui_crescent</sprite>
-      <sprite>sprites\spr_show_graveyard</sprite>
+      <sprite>sprites\spr_numbers_health</sprite>
+      <sprite>sprites\spr_deckcount</sprite>
     </sprites>
     <sprites name="CardArts">
       <sprites name="Creatures">
@@ -24,16 +31,16 @@
         <sprite>sprites\art_Vigor</sprite>
       </sprites>
     </sprites>
-    <sprite>sprites\spr_profiles</sprite>
-    <sprite>sprites\spr_card</sprite>
-    <sprite>sprites\spr_card_spell</sprite>
-    <sprite>sprites\spr_card_enchantment</sprite>
-    <sprite>sprites\spr_cardSlot</sprite>
-    <sprites name="buttons">
-      <sprite>sprites\spr_button_show_hand</sprite>
+    <sprites name="Card Elements">
+      <sprite>sprites\spr_cost_circle</sprite>
+      <sprite>sprites\spr_costCircle_yellow</sprite>
+      <sprite>sprites\spr_costCircle_green</sprite>
+      <sprite>sprites\spr_costCircle_blue</sprite>
+      <sprite>sprites\spr_costCircle_black</sprite>
+      <sprite>sprites\spr_card</sprite>
+      <sprite>sprites\spr_card_spell</sprite>
+      <sprite>sprites\spr_card_enchantment</sprite>
     </sprites>
-    <sprite>sprites\spr_numbers_health</sprite>
-    <sprite>sprites\spr_cost_circle</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -63,24 +70,41 @@
       <script>scripts\finishCasting.gml</script>
     </scripts>
     <script>scripts\sendToGraveyard.gml</script>
+    <script>scripts\organizeHand.gml</script>
+    <script>scripts\positionCardElements.gml</script>
+    <script>scripts\placeOnBoard.gml</script>
+    <script>scripts\removeCardFromHand.gml</script>
+    <script>scripts\finishSummoning.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font_normal</font>
     <font>fonts\font_bold</font>
+    <font>fonts\font_cardcount</font>
     <font>fonts\font_health</font>
   </fonts>
   <objects name="objects">
     <object>objects\MASTER</object>
     <object>objects\GUI</object>
-    <object>objects\DUEL_CONTROLLER</object>
     <object>objects\CONTROLS</object>
-    <object>objects\HAND_CONTROLLER</object>
-    <object>objects\GRAVE_CONTROLLER</object>
+    <object>objects\CLICKABLE</object>
+    <object>objects\DUEL_CONTROLLER</object>
+    <object>objects\PLAYER_HAND_CONTROLLER</object>
+    <object>objects\PLAYER_GRAVE_CONTROLLER</object>
+    <object>objects\ENEMY_HAND_CONTROLLER</object>
+    <object>objects\ENEMY_GRAVE_CONTROLLER</object>
     <object>objects\DECK</object>
     <object>objects\CONTESTANT</object>
     <object>objects\ENEMY</object>
     <object>objects\PLAYER</object>
-    <object>objects\EVENT_HANDLER</object>
+    <objects name="GUI">
+      <object>objects\GUI_BUTTON</object>
+      <object>objects\BUTTON_SHOW_GRAVEYARD</object>
+      <object>objects\button_showPlayerGraveyard</object>
+      <object>objects\button_showEnemyGraveyard</object>
+      <object>objects\BUTTON_SHOWHAND</object>
+      <object>objects\button_showPlayerHand</object>
+      <object>objects\button_showEnemyHand</object>
+    </objects>
     <objects name="CARDS">
       <object>objects\CARD</object>
       <objects name="Creatures">
@@ -99,10 +123,11 @@
         <object>objects\enchant_Vigor</object>
       </objects>
     </objects>
-    <objects name="GUI">
-      <object>objects\button_ShowGraveyard</object>
-      <object>objects\button_ShowHand</object>
+    <objects name="BOARD">
+      <object>objects\BOARD_CONTROLLER</object>
       <object>objects\CARDSLOT</object>
+      <object>objects\PLAYER_CARDSLOT</object>
+      <object>objects\ENEMY_CARDSLOT</object>
     </objects>
   </objects>
   <rooms name="rooms">

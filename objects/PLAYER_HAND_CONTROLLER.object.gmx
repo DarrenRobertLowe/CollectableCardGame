@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CARD</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,15 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
-event_inherited();
+            <string>/// setup
+var profileArea = sprite_get_width(spr_profiles) + 20;
+handX = profileArea + 20;
+handY = (view_hview[0] - 220);
 
-sprite_index = spr_card_spell;
-class    = "Spell";
-type     = SPELL_CARD;
-validTargets   = ds_list_create();
-target   = 0;
-choosingTarget = false;
+handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
+showHand = true;
+owner = noone;
+
+base_cardSeparation = 150;
+cardSeparation = base_cardSeparation;
+
+currentCardHover = noone;
+cardHoverQueue = ds_priority_create(); // used for depth sorting in hand
 </string>
           </argument>
         </arguments>
@@ -56,17 +61,9 @@ choosingTarget = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// common to all spells, overwrite in custom spells if required
-event_inherited();
+            <string>/// sort hand
 
-if (activationChecking) {
-    basicActivationChecks();
-}
-
-if (activated) {
-    choosingTarget = true;
-    activated = false;
-}
+organizeHand(owner.hand);
 </string>
           </argument>
         </arguments>

@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>CLICKABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -30,7 +30,7 @@ event_inherited();
 
 hp      = 20;
 avatar  = 0;
-mana    = 10; //arcana, essence, power, spirit, energy
+mana    = 20; //arcana, essence, power, spirit, energy
 cards   = ds_list_create();   // cards in this hero's deck
 hand    = ds_list_create();   // cards in this hero's hand
 graveyard = ds_list_create();   // cards in this hero's grave

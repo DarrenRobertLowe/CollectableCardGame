@@ -1,6 +1,14 @@
 /// sendToGraveyard(card instance)
 var card = argument0;
 
-ds_list_add(card.owner.graveyard, id);
-var handIndex = ds_list_find_index(card.owner.hand, id);
-ds_list_delete(card.owner.hand, handIndex);
+// avoid duplicates
+var ind = ds_list_find_index(card.owner.graveyard, card);
+if (ind > -1) {
+    ds_list_delete(card.owner.graveyard, ind);
+}
+
+// add to the graveyard
+ds_list_add(card.owner.graveyard, card);
+removeCardFromHand(card);
+
+card.position = "graveyard";

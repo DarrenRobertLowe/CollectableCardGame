@@ -28,39 +28,61 @@
             <string>/// Initialize
 depth = global.GUI_depth;
 var margin = 10;
-enemyProfileX   = ((view_wview[0] - margin) - sprite_get_width(spr_profiles));
-enemyProfileY   = (0 + margin);
 
+// profiles
+profileWidth    = sprite_get_width(spr_profiles);
+profileHeight   = sprite_get_height(spr_profiles);
+enemyProfileX   = ((view_wview[0] - margin) - profileWidth);
+enemyProfileY   = (0 + margin);
 playerProfileX  = (0 + margin);
-playerProfileY  = ((view_hview[0] - margin) - sprite_get_height(spr_profiles));
+playerProfileY  = ((view_hview[0] - margin) - profileHeight);
+
 imageOffsetX = 22;
 imageOffsetY = 43;
+
+// health crescents
 playerCrescentX = 6;
 playerCrescentY = playerProfileY + 174;
-
 enemyCrescentX = 925;
 enemyCrescentY = 187;
 
-showPlayerGraveyardX = 167;
-showPlayerGraveyardY = 525;
+// deck count
+playerDeckCounterX  = (playerProfileX + 1);
+playerDeckCounterY  = (playerProfileY + 1);
+enemyDeckCounterX   = (enemyProfileX + profileWidth - sprite_get_width(spr_deckcount) -1);
+enemyDeckCounterY   = (enemyProfileY + 1)
 
 
-defaultHandScale = 0.4;
-handScale = defaultHandScale;
-handXSeparation = margin + (sprite_get_width(spr_card)*handScale);
-playerHandX = (playerProfileX + (sprite_get_width(spr_profiles) + (margin*5) ));
-playerHandY = playerProfileY;
-
-// hand show/hide button
+// show/hide hand button
 showHand = true;
 instance_create(
-    playerProfileX + (sprite_get_width(spr_profiles) - 40),
-    (view_hview[0] - 40),
-    button_ShowHand
+    playerProfileX + 20 + (profileWidth - sprite_get_width(spr_button_show_hand)),
+    playerProfileY + (profileHeight - sprite_get_height(spr_button_show_hand)),
+    button_showPlayerHand
 );
 
-// graveyard show/hide button
-instance_create(showPlayerGraveyardX, showPlayerGraveyardY, button_ShowGraveyard);
+// show graveyard button
+showPlayerGraveyardX = playerProfileX + profileWidth - sprite_get_width(spr_show_graveyard);
+showPlayerGraveyardY = playerProfileY + 125;
+instance_create(showPlayerGraveyardX, showPlayerGraveyardY, button_showPlayerGraveyard);
+
+
+
+
+/// ENEMY BUTTONS
+// show/hide hand button
+showHand = true;
+instance_create(
+    enemyProfileX,
+    enemyProfileY + (profileHeight - sprite_get_height(spr_button_show_hand)),
+    button_showEnemyHand
+);
+
+// show graveyard button
+showPlayerGraveyardX = enemyProfileX;
+showPlayerGraveyardY = enemyProfileY + 125;
+instance_create(showPlayerGraveyardX, showPlayerGraveyardY, button_showEnemyGraveyard);
+
 </string>
           </argument>
         </arguments>
@@ -86,21 +108,33 @@ instance_create(showPlayerGraveyardX, showPlayerGraveyardY, button_ShowGraveyard
             <string>/// draw the GUI
 
 // draw the player profile pictures
-
 draw_sprite(spr_profiles, 0, enemyProfileX,  enemyProfileY);
 draw_sprite(spr_profiles, 1, playerProfileX, playerProfileY);
 
 draw_sprite(spr_gui_crescent, 0, playerCrescentX, playerCrescentY);
 draw_sprite(spr_gui_crescent, 0, enemyCrescentX, enemyCrescentY);
 
+// Deck Counts
+draw_set_font(font_cardcount);
+draw_set_colour(c_orange);
+draw_set_halign(fa_center);
+draw_sprite(spr_deckcount, 0, playerDeckCounterX, playerDeckCounterY);
+draw_text(playerDeckCounterX + 20, playerDeckCounterY + 2, ds_stack_size(global.player.deck.playStack));
+draw_sprite(spr_deckcount, 0, enemyDeckCounterX, enemyDeckCounterY);
+draw_text(enemyDeckCounterX + 20, enemyDeckCounterY + 2, ds_stack_size(global.enemy.deck.playStack));
 
+// HP
 draw_set_font(font_health);
 draw_set_colour(c_lime);
-draw_set_halign(fa_center);
 draw_text(playerCrescentX + 30, playerCrescentY, global.player.hp);
 draw_text(enemyCrescentX + 30, enemyCrescentY, global.enemy.hp);
+
+// reset text
 draw_set_font(font_normal);
 draw_set_halign(fa_left);
+
+
+
 </string>
           </argument>
         </arguments>

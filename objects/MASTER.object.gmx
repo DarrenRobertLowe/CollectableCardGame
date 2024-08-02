@@ -49,8 +49,9 @@ setup_rules();
 
 // start game
 instance_create(0, 0, CONTROLS);
-instance_create(0, 0, GUI);
 instance_create(0, 0, DUEL_CONTROLLER);
+instance_create(0, 0, GUI);
+
 </string>
           </argument>
         </arguments>

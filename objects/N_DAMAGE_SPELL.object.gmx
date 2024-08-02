@@ -53,7 +53,7 @@ event_inherited();
 event_inherited();
 
 if (choosingTarget) {
-    show_debug_message("CHOOSING TARGET!");
+    //show_debug_message("CHOOSING TARGET!");
     if (global.controls_cancel == true) {
         choosingTarget = false;
         show_debug_message("Cancelled.");
@@ -76,6 +76,7 @@ if (choosingTarget) {
         // change mouse pointer here
         target.glowing = true;
         if (global.controls_accept) {
+        //if (target.clicked) {
             damage(target, attack);
             finishCasting();
         }

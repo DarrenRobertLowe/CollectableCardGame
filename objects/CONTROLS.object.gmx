@@ -28,6 +28,8 @@
             <string>/// setup
 
 doubleClickWindowMax = 15;
+
+clickableUnderPointer = ds_priority_create();
 </string>
           </argument>
         </arguments>
@@ -52,6 +54,47 @@ doubleClickWindowMax = 15;
             <kind>1</kind>
             <string>/// check controls
 check_controls();
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// determine what we're clicking on
+
+with(CLICKABLE) {
+    if (mouseOver()) {
+        ds_priority_add(CONTROLS.clickableUnderPointer, id, depth);
+    }
+}
+
+if (ds_priority_size(clickableUnderPointer) &gt; 0) {
+    var clicked = ds_priority_find_min(clickableUnderPointer);
+    clicked.clicked = true;
+    show_debug_message("clicked: " +string(clicked));
+}
+
+
+
+ds_priority_clear(clickableUnderPointer);
 </string>
           </argument>
         </arguments>

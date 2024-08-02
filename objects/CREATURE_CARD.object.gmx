@@ -30,7 +30,7 @@ event_inherited();
 
 subclass = "";
 attack   = 3;
-defence  = 1; // defence and hp are interchangeable in creatures
+hp       = 1; // defence and hp are interchangeable in creatures
 type     = CREATURE_CARD;
 ds_list_add(classes, "Creature");
 
@@ -70,11 +70,17 @@ attackY = base_attackY;
             <string>/// reposition attack and defence values
 event_inherited();
 
-attackX = x + (base_attackX * scale);
-attackY = y + (base_attackY * scale);
+if (activationChecking) {
+    basicActivationChecks();
+}
 
-defenceX = x + (base_defenceX * scale);
-defenceY = y + (base_defenceY * scale);
+if (activated) {
+    if (placeOnBoard(PLAYER_CARDSLOT, id) &gt; 0) {
+        finishSummoning();
+    }
+    
+    activated = false;
+}
 </string>
           </argument>
         </arguments>

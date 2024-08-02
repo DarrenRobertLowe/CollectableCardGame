@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>CLICKABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -29,9 +29,9 @@
 
 sprite_index = spr_profiles;
 image_speed = 0;
-owner = noone;
-cards = ds_list_create();
-playStack = ds_stack_create();
+owner       = noone;
+cards       = ds_list_create();
+playStack   = ds_stack_create();
 
 
 setup_glowing();
@@ -84,13 +84,14 @@ playStack = build_deck(cards);
           <argument>
             <kind>1</kind>
             <string>/// click to draw card
-/*
+
+
 if (mouseOver()) {
     if (mouse_check_button_pressed(mb_left)) {
         draw_card(owner.hand, id);
     }
 }
-*/
+
 </string>
           </argument>
         </arguments>
