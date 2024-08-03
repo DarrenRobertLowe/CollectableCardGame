@@ -31,7 +31,7 @@ handX = (view_wview[0] - profileArea - (sprite_get_width(spr_card) * global.card
 handY = 20;
 
 handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
-showHand = true;
+showHand = false;
 owner = noone;
 
 base_cardSeparation = 150;

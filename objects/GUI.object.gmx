@@ -54,35 +54,59 @@ enemyDeckCounterY   = (enemyProfileY + 1)
 
 
 // show/hide hand button
-showHand = true;
+playerShowHandX = playerProfileX + 20 + (profileWidth - sprite_get_width(spr_button_show_hand));
+playerShowHandY = playerProfileY + (profileHeight - sprite_get_height(spr_button_show_hand));
 instance_create(
-    playerProfileX + 20 + (profileWidth - sprite_get_width(spr_button_show_hand)),
-    playerProfileY + (profileHeight - sprite_get_height(spr_button_show_hand)),
+    playerShowHandX,
+    playerShowHandY,
     button_showPlayerHand
 );
 
+
 // show graveyard button
-showPlayerGraveyardX = playerProfileX + profileWidth - sprite_get_width(spr_show_graveyard);
-showPlayerGraveyardY = playerProfileY + 125;
+showPlayerGraveyardX = playerProfileX + (profileWidth + 4) - sprite_get_width(spr_show_graveyard);
+showPlayerGraveyardY = playerProfileY + 90;
 instance_create(showPlayerGraveyardX, showPlayerGraveyardY, button_showPlayerGraveyard);
+
 
 
 
 
 /// ENEMY BUTTONS
 // show/hide hand button
-showHand = true;
+showEnemyHandX = enemyProfileX;
+showEnemyHandY = enemyProfileY + (profileHeight - sprite_get_height(spr_button_show_hand));
 instance_create(
-    enemyProfileX,
-    enemyProfileY + (profileHeight - sprite_get_height(spr_button_show_hand)),
+    showEnemyHandX,
+    showEnemyHandY,
     button_showEnemyHand
 );
 
-// show graveyard button
-showPlayerGraveyardX = enemyProfileX;
-showPlayerGraveyardY = enemyProfileY + 125;
-instance_create(showPlayerGraveyardX, showPlayerGraveyardY, button_showEnemyGraveyard);
 
+// show graveyard button
+showEnemyGraveyardX = enemyProfileX - 3;
+showEnemyGraveyardY = enemyProfileY + 90;
+instance_create(showEnemyGraveyardX, showEnemyGraveyardY, button_showEnemyGraveyard);
+
+// mana count
+manaX   = playerProfileX + 162;
+manaY   = playerProfileY + 0;
+manaBGx1 = manaX + 5;
+manaBGy1 = manaY + 34;
+manaBGx2 = manaBGx1 + 25;
+manaBGy2 = manaBGy1 + 23;
+manaCountX = manaBGx1 + 13;
+manaCountY = manaBGy1 + 5;
+
+// enemy mana count
+enemyManaX    = enemyProfileX - 3;
+enemyManaY    = enemyProfileY + 0;
+enemyManaBGx1 = enemyManaX + 5;
+enemyManaBGy1 = enemyManaY + 34;
+enemyManaBGx2 = enemyManaBGx1 + 25;
+enemyManaBGy2 = enemyManaBGy1 + 23;
+enemyManaCountX = enemyManaBGx1 + 13;
+enemyManaCountY = enemyManaBGy1 + 5;
 </string>
           </argument>
         </arguments>
@@ -123,18 +147,34 @@ draw_text(playerDeckCounterX + 20, playerDeckCounterY + 2, ds_stack_size(global.
 draw_sprite(spr_deckcount, 0, enemyDeckCounterX, enemyDeckCounterY);
 draw_text(enemyDeckCounterX + 20, enemyDeckCounterY + 2, ds_stack_size(global.enemy.deck.playStack));
 
+
 // HP
 draw_set_font(font_health);
 draw_set_colour(c_lime);
 draw_text(playerCrescentX + 30, playerCrescentY, global.player.hp);
 draw_text(enemyCrescentX + 30, enemyCrescentY, global.enemy.hp);
 
+
+
+// draw mana
+draw_set_font(font_cardcount);
+draw_sprite(spr_mana, 0, manaX, manaY);
+draw_set_color(c_black);
+draw_rectangle(manaBGx1, manaBGy1, manaBGx2, manaBGy2, false); 
+draw_set_color(c_orange);
+draw_text(manaCountX, manaCountY, global.player.mana);
+
+// draw enemy mana
+draw_set_font(font_cardcount);
+draw_sprite(spr_mana, 0, enemyManaX, enemyManaY);
+draw_set_color(c_black);
+draw_rectangle(enemyManaBGx1, enemyManaBGy1, enemyManaBGx2, enemyManaBGy2, false); 
+draw_set_color(c_orange);
+draw_text(enemyManaCountX, enemyManaCountY, global.enemy.mana);
+
 // reset text
 draw_set_font(font_normal);
 draw_set_halign(fa_left);
-
-
-
 </string>
           </argument>
         </arguments>

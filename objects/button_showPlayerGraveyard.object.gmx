@@ -30,6 +30,8 @@ event_inherited();
 
 graveController = global.player.graveController;
 handController = global.player.handController;
+
+hand = global.player.graveyard;
 </string>
           </argument>
         </arguments>

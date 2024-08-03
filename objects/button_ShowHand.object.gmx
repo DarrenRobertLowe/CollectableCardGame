@@ -29,7 +29,14 @@
 event_inherited();
 
 setup_glowing();
-image_index = 1;
+count  = 0;
+countX = x + 47;
+countY = y + 62;
+countBGx1 = countX - 12;
+countBGy1 = countY - 2;
+countBGx2 = countX + 12;
+countBGy2 = countY + 20;
+image_index = 0;
 image_speed = 0;
 depth = global.GUI_button_depth;
 
@@ -55,15 +62,19 @@ depth = global.GUI_button_depth;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// set correct index
+            <string>/// get image, get count and show/hide
 
+// get count
+count = ds_list_size(hand); 
+
+// set correct image index
 if (handController.showHand = true) {
     image_index = 1;
 } else {
     image_index = 0;
 }
 
-/// show or hide hand
+// show or hide hand
 if (clicked) {
     clicked = false;
     if (handController.showHand == false) {
@@ -149,6 +160,16 @@ check_glow();   // draw the hover glow behind the sprite
 
 // draw the button sprite
 draw_sprite(sprite_index, image_index, x, y);
+
+// draw count rectangle
+draw_set_color(c_black);
+draw_rectangle(countBGx1, countBGy1, countBGx2, countBGy2, false);
+// draw the count
+draw_set_halign(fa_center);
+draw_set_font(font_cardcount);
+draw_set_colour(c_orange);
+draw_text(countX, countY, count);
+draw_set_halign(fa_left);
 </string>
           </argument>
         </arguments>

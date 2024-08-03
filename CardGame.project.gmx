@@ -17,6 +17,7 @@
       <sprite>sprites\spr_gui_crescent</sprite>
       <sprite>sprites\spr_numbers_health</sprite>
       <sprite>sprites\spr_deckcount</sprite>
+      <sprite>sprites\spr_mana</sprite>
     </sprites>
     <sprites name="CardArts">
       <sprites name="Creatures">
@@ -97,7 +98,7 @@
     <object>objects\CONTESTANT</object>
     <object>objects\ENEMY</object>
     <object>objects\PLAYER</object>
-    <objects name="GUI">
+    <objects name="GUI Buttons">
       <object>objects\GUI_BUTTON</object>
       <object>objects\BUTTON_SHOW_GRAVEYARD</object>
       <object>objects\button_showPlayerGraveyard</object>
