@@ -56,7 +56,6 @@
     <script>scripts\mouseOver.gml</script>
     <script>scripts\mouseOverCard.gml</script>
     <script>scripts\gameOver.gml</script>
-    <script>scripts\check_controls.gml</script>
     <script>scripts\glow.gml</script>
     <scripts name="TARGETTING">
       <script>scripts\mouseOverCreature.gml</script>
@@ -67,7 +66,7 @@
     <script>scripts\create_card.gml</script>
     <scripts name="Card Events">
       <script>scripts\basicActivationChecks.gml</script>
-      <script>scripts\finishCasting.gml</script>
+      <script>scripts\completeCasting.gml</script>
     </scripts>
     <script>scripts\sendToGraveyard.gml</script>
     <script>scripts\organizeHand.gml</script>
@@ -75,6 +74,7 @@
     <script>scripts\placeOnBoard.gml</script>
     <script>scripts\removeCardFromHand.gml</script>
     <script>scripts\finishSummoning.gml</script>
+    <script>scripts\stopTargeting.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font_normal</font>
@@ -87,6 +87,7 @@
     <object>objects\GUI</object>
     <object>objects\CONTROLS</object>
     <object>objects\CLICKABLE</object>
+    <object>objects\TARGETABLE</object>
     <object>objects\DUEL_CONTROLLER</object>
     <object>objects\PLAYER_HAND_CONTROLLER</object>
     <object>objects\PLAYER_GRAVE_CONTROLLER</object>

@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// setup
-
+global.target = noone;
 doubleClickWindowMax = 15;
 
 clickableUnderPointer = ds_priority_create();
@@ -52,10 +52,30 @@ clickableUnderPointer = ds_priority_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// check controls
-check_controls();
+            <string>/// controls and mouse over
+ds_priority_clear(clickableUnderPointer);
+// find what the mouse pointer is over
+with(CLICKABLE) {
+    if (mouseOver()) {
+        if (displayed) {
+            ds_priority_add(CONTROLS.clickableUnderPointer, id, depth);
+        }
+    }
+}
 
+/// check_controls
+global.controls_cancel = false;
+global.controls_accept = false;
 
+if (mouse_check_button_released(mb_left)) {
+    global.controls_accept = true;
+    mouse_clear(mb_left);
+}
+
+if (mouse_check_button_released(mb_right)) {
+    global.controls_cancel = true;
+    mouse_clear(mb_right);
+}
 </string>
           </argument>
         </arguments>
@@ -80,16 +100,12 @@ check_controls();
             <kind>1</kind>
             <string>/// determine what we're clicking on
 
-with(CLICKABLE) {
-    if (mouseOver()) {
-        ds_priority_add(CONTROLS.clickableUnderPointer, id, depth);
-    }
-}
-
 if (ds_priority_size(clickableUnderPointer) &gt; 0) {
-    var clicked = ds_priority_find_min(clickableUnderPointer);
-    clicked.clicked = true;
-    show_debug_message("clicked: " +string(clicked));
+    global.target = ds_priority_find_min(clickableUnderPointer);
+    if (global.target != noone){
+        global.target.clicked = true;
+        show_debug_message("clicked: " +string(global.target));
+    }
 }
 
 

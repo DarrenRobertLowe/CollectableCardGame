@@ -76,6 +76,10 @@ for(var i=0; i&lt;cardSlotsPerRow; i++) {
     instance_create(enemyCardsX + (i * cardSeparation), enemyFrontRow, ENEMY_CARDSLOT);
 }
 
+
+// setup global vars
+global.choosingTarget = false;
+
 /// draw starting cards
 with (CONTESTANT) {
     alarm[0] = 2;

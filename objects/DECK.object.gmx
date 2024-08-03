@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CLICKABLE</parentName>
+  <parentName>TARGETABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,13 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>/// decks contain cards
+event_inherited();
 
 sprite_index = spr_profiles;
 image_speed = 0;
+type        = DECK;
 owner       = noone;
 cards       = ds_list_create();
 playStack   = ds_stack_create();
-
 
 setup_glowing();
 </string>
@@ -85,9 +86,13 @@ playStack = build_deck(cards);
             <kind>1</kind>
             <string>/// click to draw card
 
-
-if (mouseOver()) {
-    if (mouse_check_button_pressed(mb_left)) {
+if (clicked) {
+    show_debug_message("I, a deck, have been clicked!");
+    clicked = false;
+    
+    if (global.choosingTarget == true) {
+        global.target = id;
+    } else {
         draw_card(owner.hand, id);
     }
 }

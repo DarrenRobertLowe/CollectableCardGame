@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///setup
 clicked = false;
+displayed = true; // needed for click interaction
 </string>
           </argument>
         </arguments>
