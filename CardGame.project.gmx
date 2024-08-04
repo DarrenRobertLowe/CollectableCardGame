@@ -100,6 +100,7 @@
     <object>objects\CONTESTANT</object>
     <object>objects\ENEMY</object>
     <object>objects\PLAYER</object>
+    <object>objects\PHASE_CONTROLLER</object>
     <objects name="GUI Buttons">
       <object>objects\GUI_BUTTON</object>
       <object>objects\BUTTON_SHOW_GRAVEYARD</object>
@@ -108,7 +109,6 @@
       <object>objects\BUTTON_SHOWHAND</object>
       <object>objects\button_showPlayerHand</object>
       <object>objects\button_showEnemyHand</object>
-      <object>objects\PHASE_CONTROLLER</object>
     </objects>
     <objects name="CARDS">
       <object>objects\CARD</object>

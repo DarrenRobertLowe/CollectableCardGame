@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// start a duel
 global.GAME_PHASE = "start";
-instance_create(room_width -50, room_height -100, PHASE_CONTROLLER);
+instance_create(room_width -25, room_height -40, PHASE_CONTROLLER);
 
 instance_create(-100, -100, BOARD_CONTROLLER);
 global.enemy  = instance_create(view_wview[0], 0, ENEMY);

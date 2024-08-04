@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>GUI_BUTTON</parentName>
+  <parentName>CLICKABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,13 +28,29 @@
             <string>/// setup
 event_inherited();
 
+depth = global.GUI_button_depth;
 showPhaseBanner = false;
 bannerTimer = 0;
 bannerTimerMax = 90;
 bannerX = (room_width * 0.5);
 bannerY = (room_height * 0.5);
+animate = false;
+animationTimeMax = 20;
+animationTime = 0;
 
+/// hovering
+initialY = y;
+hoverSwitch = false;
+hoverAmount = 0;
+hoverMax = 10;
+hoverMin = -10;
+hoverAccel = 0.1;
 
+rotateSwitch = false;
+rotateAmount = 0;
+rotateMax = 20;
+rotateMin = -20;
+rotateSpeed = 0.3;
 </string>
           </argument>
         </arguments>
@@ -57,9 +73,73 @@ bannerY = (room_height * 0.5);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (clicked) {
-    clicked = false;
-    next_phase();
+            <string>/// interaction
+
+// hover on mouse over
+if (animate == false) {
+    if (mouseOver()) {
+        if (hoverSwitch == false) {
+            hoverAmount -= hoverAccel;
+            if (hoverAmount &lt;= hoverMin) {
+                hoverSwitch = true;
+            }
+        }
+        
+        if (hoverSwitch == true) {
+            hoverAmount += hoverAccel;
+            
+            if (hoverAmount &gt;= hoverMax) {
+                hoverSwitch = false;
+            }
+        }
+        
+        
+        if (rotateSwitch == false) {
+            rotateAmount -= rotateSpeed;
+             if (rotateAmount &lt;= rotateMin) {
+                rotateSwitch = true;
+            }
+        }
+        if (rotateSwitch == true) {
+            rotateAmount += rotateSpeed;
+            
+            if (rotateAmount &gt;= rotateMax) {
+                rotateSwitch = false;
+            }
+        }
+        
+    } else {
+        hoverAmount  = 0;
+        rotateAmount = 0;
+        rotateSwitch = choose(0, 1);
+        hoverSwitch  = 0; //choose(0, 1);
+    }
+}
+
+if (animate == false) {
+    if (clicked) {
+        clicked = false;
+        if (doubleClickWindow &gt; 0) {
+            doubleClickWindow = 0;
+            next_phase();
+            animate = true;
+            animationTime = animationTimeMax;
+            //hoverAmount  = 0;
+            //rotateAmount = 0;
+        } else {
+            doubleClickWindow = CONTROLS.doubleClickWindowMax;
+        }
+    }
+}
+
+if (animate) {
+    animationTime--;
+    image_angle = (animationTimeMax * animationTime);
+    if (animationTime &lt;= 0) {
+        animationTime = 0;
+        image_angle = 0;
+        animate = 0;
+    }
 }
 </string>
           </argument>
@@ -86,7 +166,7 @@ bannerY = (room_height * 0.5);
             <string>/// animation
 event_inherited();
 
-draw_self();
+draw_sprite_ext(sprite_index, image_index, x, y + hoverAmount, 1, 1, image_angle + rotateAmount, c_white, 1);
 
 draw_set_color(c_red);
 draw_set_font(font_health);

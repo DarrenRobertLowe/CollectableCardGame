@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// CLASS VARS
+event_inherited();
 
 depth = global.card_depth;
 name = "";
@@ -49,9 +50,6 @@ clicked   = false;
 canPlayFromGraveyard = true;
 setup_glowing();
 
-
-/// INTERACTION
-doubleClickWindow = 0;
 
 
 /// CARD ELEMENTS
@@ -116,9 +114,10 @@ artY = base_artY;
           <argument>
             <kind>1</kind>
             <string>/// state and element positions
-
+/*
 if (doubleClickWindow &gt; 0)
   then doubleClickWindow--;
+*/
 
 if (displayed == false) {
     visible = false;
