@@ -38,8 +38,9 @@ sprite_index = spr_card;
 image_index = round(random(image_number - 1));
 image_speed = 0;
 scale = global.card_hand_scale;
-activated = false;
-activationChecking = false;
+casting = false;
+castingChecking = false;
+activate  = false;
 displayed = false;  // display or don't display the card
 position  = "none"; // in "hand", in "deck", on "board", in "graveyard", or "none"
 faceUp    = false;  // 0 or 1, false or true, it corresponds to the image_index.
@@ -150,40 +151,61 @@ switch (position) {
 }
 
 
-if (displayed) {
-    // interactivity
-    if (mouseOverCard() == id) {
-        y = (owner.handController.handY - 30);
-        depth -= 10; // just make it appear above all other cards
+if (position == "hand"){
+    if (displayed) {
+        // interactivity
+        if (mouseOverCard() == id) {
+            y = (owner.handController.handY - 30);
+            depth -= 10; // just make it appear above all other cards
+            
+            if (clicked == true) {
+                if (doubleClickWindow &gt; 0) {
+                    if (canUse) {
+                        show_debug_message("Double-click registered : "+string(id));
+                        castingChecking = true;
+                        doubleClickWindow = 0;
+                    } else {
+                        show_debug_message("Card cannot be used at this time.");
+                    }
+                } else {
+                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                }
+                
+                clicked = false;
+            }
+        }
         
+        // visuals
+        image_xscale = scale;
+        image_yscale = scale;
+        visible = true;
+        if (owner == global.enemy) {    // flip opponent's card on face
+            image_index = 0;
+            faceUp = false;
+        }
+        positionCardElements();
+    } else {
+        visible = false;
+    }
+}
+
+
+if (position == "board") {
+    if (mouseOverCard() == id) {
         if (clicked == true) {
             if (doubleClickWindow &gt; 0) {
-                if (canUse) {
-                    show_debug_message("Double-click registered : "+string(id));
-                    activationChecking = true;
-                    doubleClickWindow = 0;
-                } else {
-                    show_debug_message("Card cannot be used at this time.");
-                }
+                activate = true;
             } else {
                 doubleClickWindow = CONTROLS.doubleClickWindowMax;
             }
-            
-            clicked = false;
         }
     }
     
     // visuals
     image_xscale = scale;
     image_yscale = scale;
-    visible = true;
-    if (owner == global.enemy) {    // flip opponent's card on face
-        image_index = 0;
-        faceUp = false;
-    }
+    //visible = true;
     positionCardElements();
-} else {
-    visible = false;
 }
 </string>
           </argument>

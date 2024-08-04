@@ -26,6 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>/// start a duel
+global.GAME_PHASE = "start";
+instance_create(room_width -50, room_height -100, PHASE_CONTROLLER);
+
 instance_create(-100, -100, BOARD_CONTROLLER);
 global.enemy  = instance_create(view_wview[0], 0, ENEMY);
 global.player = instance_create(0, view_hview[0], PLAYER);
@@ -84,6 +87,9 @@ global.choosingTarget = false;
 with (CONTESTANT) {
     alarm[0] = 2;
 }
+
+/// start the game
+next_phase();
 </string>
           </argument>
         </arguments>

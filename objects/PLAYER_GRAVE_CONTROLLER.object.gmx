@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// setup
 var profileArea = sprite_get_width(spr_profiles) + 20;
-handX = profileArea;
+handX = profileArea + 20;
 handY = (view_hview[0] - 220);
 handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
 showHand = false;

@@ -1,3 +1,7 @@
 ///finishSummoning();
 
 owner.mana -= castingCost;
+if (global.RULES_summoningSickness == true) {
+    // if (ds_list_find_value(abilities, "haste" == -1)
+    hasSummoningSickness = true;
+}

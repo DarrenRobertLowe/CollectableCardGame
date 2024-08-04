@@ -79,17 +79,7 @@ if (choosingTarget) {
             }
         }
     }
-    /*
-    if (ds_list_find_index(validTargets, "creature") &gt; -1) {
-        ptarget = mouseOverCreature();
-        
-        if (ptarget == noone) {
-            if (ds_list_find_index(validTargets, "player") &gt; -1) {
-                ptarget = mouseOverPlayer();
-            }
-        }
-    }
-    */
+
     
     if (ptarget != noone) {
         show_debug_message("potential target is : " +string(ptarget));

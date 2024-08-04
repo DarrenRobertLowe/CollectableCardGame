@@ -34,6 +34,7 @@ hp       = 1; // defence and hp are interchangeable in creatures
 type     = CREATURE_CARD;
 ds_list_add(classes, "Creature");
 
+hasSummoningSickness = false;
 
 // stats positioning
 base_attackX = 254;
@@ -70,16 +71,20 @@ attackY = base_attackY;
             <string>/// reposition attack and defence values
 event_inherited();
 
-if (activationChecking) {
+if (castingChecking) {
     basicActivationChecks();
 }
 
-if (activated) {
+if (casting) {
     if (placeOnBoard(PLAYER_CARDSLOT, id) &gt; 0) {
         finishSummoning();
     }
     
-    activated = false;
+    casting = false;
+}
+
+if (activate) {
+    attacking = true;
 }
 </string>
           </argument>
