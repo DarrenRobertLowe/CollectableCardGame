@@ -35,6 +35,7 @@ type     = CREATURE_CARD;
 ds_list_add(classes, "Creature");
 
 hasSummoningSickness = false;
+attacking = false;
 
 // stats positioning
 base_attackX = 254;
@@ -83,9 +84,14 @@ if (casting) {
     casting = false;
 }
 
-if (activate) {
-    attacking = true;
+if (global.GAME_PHASE == "combat") {
+    if (clicked) {
+        // some check
+        attacking = !(attacking);
+        clicked = false;
+    }
 }
+
 </string>
           </argument>
         </arguments>
@@ -118,6 +124,11 @@ draw_text(attackX, attackY, attack);
 draw_text(defenceX, defenceY, defence);
 
 draw_set_halign(fa_left);
+
+// attack / defence indicators
+if (attacking) {
+    draw_sprite(spr_attacking, 0, x, y);
+}
 </string>
           </argument>
         </arguments>

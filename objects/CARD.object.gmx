@@ -114,10 +114,7 @@ artY = base_artY;
           <argument>
             <kind>1</kind>
             <string>/// state and element positions
-/*
-if (doubleClickWindow &gt; 0)
-  then doubleClickWindow--;
-*/
+event_inherited();
 
 if (displayed == false) {
     visible = false;
@@ -150,7 +147,7 @@ switch (position) {
 }
 
 
-if (position == "hand"){
+if ((position == "hand") or (position == "graveyard")) {
     if (displayed) {
         // interactivity
         if (mouseOverCard() == id) {

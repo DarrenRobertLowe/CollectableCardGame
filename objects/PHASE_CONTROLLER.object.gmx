@@ -74,6 +74,8 @@ rotateSpeed = 0.3;
           <argument>
             <kind>1</kind>
             <string>/// interaction
+event_inherited();
+
 
 // hover on mouse over
 if (animate == false) {
@@ -124,8 +126,6 @@ if (animate == false) {
             next_phase();
             animate = true;
             animationTime = animationTimeMax;
-            //hoverAmount  = 0;
-            //rotateAmount = 0;
         } else {
             doubleClickWindow = CONTROLS.doubleClickWindowMax;
         }
@@ -180,27 +180,27 @@ if (showPhaseBanner) {
     }
     
     
-    if (global.GAME_PHASE = "draw") {
+    if (global.GAME_PHASE == "draw") {
         draw_text(bannerX, bannerY, "DRAW PHASE");
     }
     
-    if (global.GAME_PHASE = "payment") {
+    if (global.GAME_PHASE == "payment") {
         draw_text(bannerX, bannerY, "PAYMENT PHASE");
     }
     
-    if (global.GAME_PHASE = "main1") {
+    if (global.GAME_PHASE == "main1") {
         draw_text(bannerX, bannerY, "MAIN PHASE 1");
     }
     
-    if (global.GAME_PHASE = "combat") {
+    if (global.GAME_PHASE == "combat") {
         draw_text(bannerX, bannerY, "COMBAT PHASE");
     }
     
-    if (global.GAME_PHASE = "main2") {
+    if (global.GAME_PHASE == "main2") {
         draw_text(bannerX, bannerY, "MAIN PHASE 2");
     }
     
-    if (global.GAME_PHASE = "endturn") {
+    if (global.GAME_PHASE == "endturn") {
         draw_text(bannerX, bannerY, "END TURN");
     }
 }
