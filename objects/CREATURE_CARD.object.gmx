@@ -28,25 +28,51 @@
             <string>/// CLASS VARS
 event_inherited();
 
-subclass = "";
-attack   = 3;
-hp       = 1; // defence and hp are interchangeable in creatures
-type     = CREATURE_CARD;
+subclass    = "";
+type        = CREATURE_CARD;
+
+// stats
+baseAttack  = 1;
+baseDefence = 0;
+baseHp      = 1;
+attack      = baseAttack;
+defence     = baseDefence;
+hp          = baseHp;
+
+// classes
 ds_list_add(classes, "Creature");
 
+// default values
 hasSummoningSickness = false;
 attacking = false;
+target    = noone;
 
 // stats positioning
-base_attackX = 254;
-base_attackY = 468;
+base_statValuesY = 468;
+/*
+hpY          = base_statValuesY;
+defenceY     = base_statValuesY;
+attackY      = base_statValuesY;
+*/
+base_attackX = 71;
 attackX = base_attackX;
-attackY = base_attackY;
 
-base_defenceX = 295;
-base_defenceY = 468;
-attackX = base_attackX;
-attackY = base_attackY;
+base_defenceX = 177;
+defenceX = base_defenceX;
+
+base_hpX = 289;
+defenceX = base_defenceX;
+
+// stat icons positioning
+base_attackIconX    = 17;
+base_defenceIconX   = 121;
+base_hpIconX        = 231;
+base_iconY          = 468;
+
+attackIconX  = base_attackIconX;
+defenceIconX = base_defenceIconX;
+hpIconX      = base_hpIconX;
+
 </string>
           </argument>
         </arguments>
@@ -86,9 +112,43 @@ if (casting) {
 
 if (global.GAME_PHASE == "combat") {
     if (clicked) {
-        // some check
-        attacking = !(attacking);
         clicked = false;
+        
+        if (countDefenders(global.enemy) == 0) {
+            attacking = true;
+            // attack the enemy directly
+            var event = instance_create(-100, -100, Event_Combat);
+            event.attaker = id;
+            event.target  = global.enemy;
+            global.choosingTarget = false;
+            ds_stack_push(global.EVENT_STACK, event);
+        } else {
+            global.choosingTarget = true;
+        }
+        
+        if ( global.choosingTarget == true ) {
+            global.currentCard = id;
+            
+            if (global.target != noone) {
+                // create the event
+                attacking = true;
+                var event = instance_create(-100, -100, Event_Combat);
+                event.attaker = id;
+                event.target  = target;
+                global.target = target;
+                ds_stack_push(global.EVENT_STACK, event);
+                
+                // finish
+                global.choosingTarget = false;
+            }
+        }
+    }
+    
+    // cancel action
+    if (attacking) {
+        if (mouse_check_button_pressed(mb_right)) {
+            attacking = false;
+        }
     }
 }
 
@@ -117,13 +177,51 @@ if (global.GAME_PHASE == "combat") {
             <string>///draw attack and hp (defence)
 event_inherited();
 
+// draw stat icons
+draw_sprite_ext(spr_stat_icons, 0, attackIconX, attackIconY, scale, scale, 0, c_white, 1);
+draw_sprite_ext(spr_stat_icons, 1, defenceIconX, defenceIconY, scale, scale, 0, c_white, 1);
+draw_sprite_ext(spr_stat_icons, 2, hpIconX, hpIconY, scale, scale, 0, c_white, 1);
+
 // attack and hp(defence)
-draw_set_font(font_bold);
+switch (position) {
+    case "hand":
+    case "graveyard":
+        draw_set_font(global.font_CardBold_Hand);
+    break;
+    
+    case "board":
+        draw_set_font(global.font_CardBold_Board);
+    break;
+}
 draw_set_halign(fa_center);
-draw_text(attackX, attackY, attack);
+draw_set_valign(fa_top);
+draw_set_color(c_black);
+
+// attack
+if (attack &lt; baseAttack)
+    then draw_set_color(c_orange);
+if (attack &gt; baseAttack)
+    then draw_set_color(c_green);
+draw_text(attackX,  attackY,  attack);
+
+// defence
+if (defence &lt; baseDefence)
+    then draw_set_color(c_orange);
+if (defence &gt; baseDefence)
+    then draw_set_color(c_green);
 draw_text(defenceX, defenceY, defence);
 
+// health
+if (hp &lt; baseHp)
+    then draw_set_color(c_red);
+draw_text(hpX, hpY, hp);
+
+
+// reset text
+draw_set_color(c_black);
 draw_set_halign(fa_left);
+
+
 
 // attack / defence indicators
 if (attacking) {

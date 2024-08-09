@@ -32,14 +32,21 @@ name        = "Ankylo";
 class       = "Beast";
 image       = art_ankylo;
 castingCost = 5;
-description = "When defending, Ankylo gains +0/+3.";
-attack      = 2;
-defence     = 6;
+description = "All HP damage to Ankylo from melee is halved (round down).";
 
-ds_list_add(abilities, "Ironskin");
+baseAttack  = 2;
+baseDefence = 5;
+baseHp      = 2;
+attack      = baseAttack;
+defence     = baseDefence;
+hp          = baseHp;
+
+// lists
+ds_list_add(abilities, "Ironskin"); //Ironskin - Melee damage to this creature is halved (rounded down). 
+
+alarm[0] = 1;
 
 
-//Ironskin - Melee damage to this creature is halved (rounded down). 
 </string>
           </argument>
         </arguments>

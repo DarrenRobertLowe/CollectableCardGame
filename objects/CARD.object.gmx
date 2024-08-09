@@ -28,25 +28,24 @@
             <string>/// CLASS VARS
 event_inherited();
 
-depth = global.card_depth;
-name = "";
-class = "";
-description = "This is the default card and if you're reading this, something went wrong";
-castingCost = 1;
-abilities = ds_list_create();
-classes = ds_list_create();
-sprite_index = spr_card;
-image_index = round(random(image_number - 1));
-image_speed = 0;
-scale = global.card_hand_scale;
-casting = false;
+name            = "";
+class           = "";
+description     = "This is the default card and if you're reading this, something went wrong";
+castingCost     = 1;
+abilities       = ds_list_create();
+classes         = ds_list_create();
+sprite_index    = spr_card;
+image_index     = round(random(image_number - 1));
+image_speed     = 0;
+scale           = global.card_hand_scale;
+casting         = false;
 castingChecking = false;
-activate  = false;
-displayed = false;  // display or don't display the card
-position  = "none"; // in "hand", in "deck", on "board", in "graveyard", or "none"
-faceUp    = false;  // 0 or 1, false or true, it corresponds to the image_index.
-canUse    = false;
-clicked   = false;
+activate        = false;
+displayed       = false;      // display or don't display the card
+position        = "none";     // in "hand", in "deck", on "board", in "graveyard", or "none"
+faceUp          = false;      // 0 or 1, false or true, it corresponds to the image_index.
+canUse          = false;
+clicked         = false;
 canPlayFromGraveyard = true;
 setup_glowing();
 
@@ -87,6 +86,7 @@ base_artX = 22;
 base_artY = 43;
 artX = base_artX;
 artY = base_artY;
+
 
 
 
@@ -187,12 +187,24 @@ if ((position == "hand") or (position == "graveyard")) {
 
 
 if (position == "board") {
-    if (mouseOverCard() == id) {
-        if (clicked == true) {
-            if (doubleClickWindow &gt; 0) {
-                activate = true;
-            } else {
-                doubleClickWindow = CONTROLS.doubleClickWindowMax;
+    // allow this card to be selected as a combat target
+    if (global.choosingTarget == true) {
+        if (mouseOverCard() == id) {
+            if (clicked) {
+                clicked = false;
+                global.currentCard.target = id;
+            }
+        }
+    } else {
+        // normal activation of card (e.g. combat)
+        if (mouseOverCard() == id) {
+            if (clicked == true) {
+                if (doubleClickWindow &gt; 0) {
+                    activate = true;
+                    clicked = false;
+                } else {
+                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                }
             }
         }
     }
@@ -260,20 +272,39 @@ if (displayed) {
     
     if (faceUp) {
         // name
-        draw_set_font(font_bold);
+        switch (position) {
+            case "hand":
+            case "graveyard":
+                draw_set_font(global.font_CardBold_Hand);
+            break;
+            
+            case "board":
+                draw_set_font(global.font_CardBold_Board);
+            break;
+        }
         draw_text(nameX, nameY, name);
         
         // casting cost
         draw_set_halign(fa_center);
         draw_sprite_ext(spr_cost_circle, 0, castCircleX, castCircleY, scale, scale, 0, c_white, 1);
-        draw_text(castingCostX, castingCostY, castingCost);
+        draw_sprite_ext(spr_card_castingCost_numbers, castingCost, castingCostX, castingCostY, scale, scale, 0, c_white, 1);
         draw_set_halign(fa_left);
         
         // art
         draw_sprite_ext(image, image_index, artX, artY, scale, scale, 0, c_white, 1);
         
         // class
-        draw_set_font(font_normal);
+        switch (position) {
+            case "hand":
+            case "graveyard":
+                draw_set_font(global.font_CardText_Hand);
+            break;
+            
+            case "board":
+                draw_set_font(global.font_CardText_Board);
+            break;
+        }
+        
         draw_text(classX, classY, class);
         
         // abilities
@@ -293,7 +324,17 @@ if (displayed) {
         }
         
         // description
-        draw_set_font(font_normal);
+        switch (position) {
+            case "hand":
+            case "graveyard":
+                draw_set_font(global.font_CardText_Hand);
+            break;
+            
+            case "board":
+                draw_set_font(global.font_CardText_Board);
+            break;
+        }
+        
         draw_text_ext(descriptionX, descriptionY, str + string(description), separation, descriptionWidth);
     }
     

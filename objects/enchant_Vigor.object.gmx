@@ -28,10 +28,10 @@
             <string>/// CLASS VARS
 event_inherited();
 
-name        = "Vigor";
-image       = art_Vigor;
+name        = "Lion's Strength";
+image       = art_LionStrength;
 castingCost = 2;
-description = "Target creature gains +2/+0.";
+description = "Target creature gains +2/+0/+0.";
 </string>
           </argument>
         </arguments>

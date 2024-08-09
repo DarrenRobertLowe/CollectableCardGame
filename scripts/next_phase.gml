@@ -39,6 +39,14 @@ if (global.GAME_PHASE == "main1") {
 }
 
 if (global.GAME_PHASE == "combat") {
+    // resolve combat
+    while(ds_stack_size(global.EVENT_STACK) > 0) {
+        var event = ds_stack_pop(global.EVENT_STACK);
+        
+        event_perform_object(event, ev_other, ev_user0);
+            
+    }
+    
     global.GAME_PHASE = "main2";
     exit;
 }

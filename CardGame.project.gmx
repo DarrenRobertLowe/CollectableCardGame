@@ -30,7 +30,7 @@
         <sprite>sprites\art_heal</sprite>
       </sprites>
       <sprites name="Enchantments">
-        <sprite>sprites\art_Vigor</sprite>
+        <sprite>sprites\art_LionStrength</sprite>
       </sprites>
     </sprites>
     <sprites name="Card Elements">
@@ -42,6 +42,10 @@
       <sprite>sprites\spr_card</sprite>
       <sprite>sprites\spr_card_spell</sprite>
       <sprite>sprites\spr_card_enchantment</sprite>
+      <sprite>sprites\spr_stat_icons</sprite>
+      <sprites name="Bold Numbers">
+        <sprite>sprites\spr_card_castingCost_numbers</sprite>
+      </sprites>
     </sprites>
     <sprite>sprites\spr_attacking</sprite>
   </sprites>
@@ -79,10 +83,17 @@
     <script>scripts\finishSummoning.gml</script>
     <script>scripts\stopTargeting.gml</script>
     <script>scripts\next_phase.gml</script>
+    <script>scripts\countDefenders.gml</script>
+    <script>scripts\fight.gml</script>
+    <script>scripts\setup_fonts.gml</script>
   </scripts>
   <fonts name="fonts">
-    <font>fonts\font_normal</font>
-    <font>fonts\font_bold</font>
+    <fonts name="Card Fonts">
+      <font>fonts\fnt_cardText_hand</font>
+      <font>fonts\fnt_cardText_board</font>
+      <font>fonts\fnt_bold_hand</font>
+      <font>fonts\fnt_bold_board</font>
+    </fonts>
     <font>fonts\font_cardcount</font>
     <font>fonts\font_health</font>
   </fonts>
@@ -134,6 +145,10 @@
       <object>objects\CARDSLOT</object>
       <object>objects\PLAYER_CARDSLOT</object>
       <object>objects\ENEMY_CARDSLOT</object>
+    </objects>
+    <objects name="EVENTS">
+      <object>objects\EVENT</object>
+      <object>objects\Event_Combat</object>
     </objects>
   </objects>
   <rooms name="rooms">

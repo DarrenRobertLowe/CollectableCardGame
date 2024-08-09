@@ -26,7 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>/// start a duel
-global.GAME_PHASE = "start";
+// setup global vars
+global.GAME_PHASE   = "start";
+global.EVENT_STACK  = ds_stack_create();
+global.currentCard  = noone; // the currently active card (e.g. the attacker card while choosing a target to attack)
+global.choosingTarget = false;
+global.target       = noone;
+ 
 instance_create(room_width -25, room_height -40, PHASE_CONTROLLER);
 
 instance_create(-100, -100, BOARD_CONTROLLER);
@@ -80,8 +86,7 @@ for(var i=0; i&lt;cardSlotsPerRow; i++) {
 }
 
 
-// setup global vars
-global.choosingTarget = false;
+
 
 /// draw starting cards
 with (CONTESTANT) {
@@ -90,6 +95,35 @@ with (CONTESTANT) {
 
 /// start the game
 next_phase();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// RESOLVE EVENT STACK
+
+var stack = global.EVENT_STACK;
+var event ds_stack_pop(stack);
+
+
+
 </string>
           </argument>
         </arguments>

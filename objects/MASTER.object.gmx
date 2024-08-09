@@ -46,6 +46,7 @@ view_hview[0] = global.view_height;
 setup_depths();
 setup_sprite_scales();
 setup_rules();
+setup_fonts();
 
 // start game
 instance_create(0, 0, CONTROLS);

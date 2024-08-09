@@ -22,7 +22,19 @@ descriptionWidth = (base_descriptionWidth * scale);
 if (type = CREATURE_CARD) {
     // position attack/defence
     attackX  = x + (base_attackX * scale);
-    attackY  = y + (base_attackY * scale);
+    attackY  = y + (base_statValuesY * scale);
     defenceX = x + (base_defenceX * scale);
-    defenceY = y + (base_defenceY * scale);
+    defenceY = y + (base_statValuesY * scale);
+    hpX      = x + (base_hpX * scale);
+    hpY      = y + (base_statValuesY * scale);
+    
+    // position stat icons
+    attackIconX  = x + (base_attackIconX * scale);
+    attackIconY  = y + (base_iconY * scale);
+    
+    defenceIconX  = x + (base_defenceIconX * scale);
+    defenceIconY  = y + (base_iconY * scale);
+    
+    hpIconX     = x + (base_hpIconX * scale);
+    hpIconY     = y + (base_iconY * scale);
 }
