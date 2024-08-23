@@ -27,9 +27,11 @@
             <kind>1</kind>
             <string>/// setup
 event_inherited();
-graveController = global.enemy.graveController;
-handController = global.enemy.handController;
-hand = global.enemy.graveyard;
+
+graveyard = global.enemy.graveyard;
+hand      = global.enemy.hand;
+
+contents  = graveyard.contents;
 </string>
           </argument>
         </arguments>

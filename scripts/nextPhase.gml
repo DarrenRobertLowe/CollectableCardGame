@@ -7,8 +7,10 @@ PHASES
  - used for paying mana towards a monster's existance or enchantments, etc.
 "main1"
  - summon, cast spells, use enchantments or effects
+"combat planning"
+ - assign combat targets
 "combat"
- - assign targets
+ - combat resolves
 "main2"
  - summon, cast spells, use enchantments or effects
 "endturn"
@@ -34,29 +36,31 @@ if (global.GAME_PHASE == "payment") {
 }
 
 if (global.GAME_PHASE == "main1") {
+    global.GAME_PHASE = "combat planning";
+    exit;
+}
+
+if (global.GAME_PHASE == "combat planning") {
     global.GAME_PHASE = "combat";
+    // resolve combat
+    nextEvent();
     exit;
 }
 
 if (global.GAME_PHASE == "combat") {
-    // resolve combat
-    while(ds_stack_size(global.EVENT_STACK) > 0) {
-        var event = ds_stack_pop(global.EVENT_STACK);
-        
-        event_perform_object(event, ev_other, ev_user0);
-            
-    }
-    
     global.GAME_PHASE = "main2";
     exit;
 }
 
 if (global.GAME_PHASE == "main2") {
     global.GAME_PHASE = "endturn";
-    exit;
 }
 
 if (global.GAME_PHASE == "endturn") {
+    with (CREATURE_CARD) {
+        attackedThisTurn = false;
+        alarm[0] = 1; // recalculate stats
+    }
     global.GAME_PHASE = "draw";
     exit;
 }

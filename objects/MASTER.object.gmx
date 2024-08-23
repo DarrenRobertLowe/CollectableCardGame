@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// SETUP GAME
+global.DEBUG = true;
 
 // setup speed
 global.GAMESPEED = 60;

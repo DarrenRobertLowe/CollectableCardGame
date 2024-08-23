@@ -55,6 +55,7 @@
     <script>scripts\setup_rules.gml</script>
     <script>scripts\setup_depths.gml</script>
     <script>scripts\setup_sprite_scales.gml</script>
+    <script>scripts\setup_fonts.gml</script>
     <script>scripts\exists.gml</script>
     <script>scripts\damage.gml</script>
     <script>scripts\log_error.gml</script>
@@ -82,10 +83,11 @@
     <script>scripts\removeCardFromHand.gml</script>
     <script>scripts\finishSummoning.gml</script>
     <script>scripts\stopTargeting.gml</script>
-    <script>scripts\next_phase.gml</script>
     <script>scripts\countDefenders.gml</script>
     <script>scripts\fight.gml</script>
-    <script>scripts\setup_fonts.gml</script>
+    <script>scripts\nextPhase.gml</script>
+    <script>scripts\nextEvent.gml</script>
+    <script>scripts\hourglassHover.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -104,10 +106,10 @@
     <object>objects\CLICKABLE</object>
     <object>objects\TARGETABLE</object>
     <object>objects\DUEL_CONTROLLER</object>
-    <object>objects\PLAYER_HAND_CONTROLLER</object>
-    <object>objects\PLAYER_GRAVE_CONTROLLER</object>
-    <object>objects\ENEMY_HAND_CONTROLLER</object>
-    <object>objects\ENEMY_GRAVE_CONTROLLER</object>
+    <object>objects\PLAYER_HAND</object>
+    <object>objects\PLAYER_GRAVE</object>
+    <object>objects\ENEMY_HAND</object>
+    <object>objects\ENEMY_GRAVE</object>
     <object>objects\DECK</object>
     <object>objects\CONTESTANT</object>
     <object>objects\ENEMY</object>

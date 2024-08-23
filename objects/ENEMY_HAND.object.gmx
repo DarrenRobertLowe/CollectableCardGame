@@ -26,11 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>/// setup
+contents = ds_list_create();
+
 var profileArea = sprite_get_width(spr_profiles) + 20;
-handX = ENEMY_HAND_CONTROLLER.handX;
-handY = ENEMY_HAND_CONTROLLER.handY;
+handX = (view_wview[0] - profileArea - (sprite_get_width(spr_card) * global.card_hand_scale));
+handY = 20;
+
 handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
-showHand = false;
+showContents = false;
 owner = noone;
 
 base_cardSeparation = 150;
@@ -60,9 +63,9 @@ cardHoverQueue = ds_priority_create(); // used for depth sorting in hand
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// sort grave
+            <string>/// sort hand
 
-organizeHand(owner.graveyard);
+organizeHand(contents);
 </string>
           </argument>
         </arguments>

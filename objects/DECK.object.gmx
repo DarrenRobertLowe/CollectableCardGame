@@ -35,6 +35,14 @@ owner       = noone;
 cards       = ds_list_create();
 playStack   = ds_stack_create();
 
+drawnCard   = noone;
+animateDrawingCard = false;
+finishedDrawing = false
+cardMoveSpeed = 0;
+cardTargetX = 0;
+cardTargetY = 0;
+cardMoveDistance = 0;
+
 setup_glowing();
 </string>
           </argument>
@@ -87,16 +95,25 @@ playStack = build_deck(cards);
             <string>/// click to draw card
 
 if (clicked) {
-    show_debug_message("I, a deck, have been clicked!");
     clicked = false;
     
     if (global.choosingTarget == true) {
         global.target = id;
     } else {
-        draw_card(owner.hand, id);
+        if (global.GAME_PHASE == "draw") {
+            if (global.TURN == owner) {
+                draw_card(owner.hand, id);
+                nextPhase();
+            }
+        }
     }
 }
 
+if (finishedDrawing) {
+    ds_list_add(hand, card);
+    card.position = "hand";
+    show_debug_message("card :" +string(card) + " added to hand.");
+}
 </string>
           </argument>
         </arguments>

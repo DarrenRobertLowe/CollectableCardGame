@@ -1,15 +1,11 @@
-/// exists(target);
+/// exists(instance);
 
-var target = argument0;
+var instance = argument0;
 
-if !(is_undefined(target)) {
-    if (target > 0) and (instance_exists(target)) {
+if !(is_undefined(instance)) {
+    if (instance > 0) and (instance_exists(instance)) {
         return true;
-    } else {
-        log_error("exist() found target instance " + string(target) +" does not exist", true);
-    }
-} else {
-    log_error("exist() found target " + string(target) +" was undefined", true);
-}
+    } else log_error("Error in exist(): " + string(instance) +" does not exist", true, global.DEBUG);
+} else log_error("Error in exist(): " + string(instance) +" was undefined", true, global.DEBUG);
 
 return false;

@@ -38,12 +38,17 @@ sprite_index    = spr_card;
 image_index     = round(random(image_number - 1));
 image_speed     = 0;
 scale           = global.card_hand_scale;
+fullyDrawn      = false;        // a check for animation
+carddraw_xSpeed = 10;//room_width / room_speed;
+carddraw_xSpeedMax = 10;
+carddraw_clampDistance = 10;
+draw_targetX    = 0;
 casting         = false;
 castingChecking = false;
 activate        = false;
-displayed       = false;      // display or don't display the card
-position        = "none";     // in "hand", in "deck", on "board", in "graveyard", or "none"
-faceUp          = false;      // 0 or 1, false or true, it corresponds to the image_index.
+displayed       = false;        // display or don't display the card
+position        = "none";       // in "hand", in "deck", on "board", in "graveyard", or "none"
+faceUp          = false;        // 0 or 1, false or true, it corresponds to the image_index.
 canUse          = false;
 clicked         = false;
 canPlayFromGraveyard = true;
@@ -126,11 +131,36 @@ switch (position) {
     case "deck":
         displayed = false;
         break;
+    
+    case "drawing":
+        y = owner.hand.handY;
+        var dist = abs(x - draw_targetX);
+        if (dist &lt;= 1) then dist = 1;
         
-    case "hand":
-        canUse = true;
+        carddraw_xSpeed = (dist / carddraw_xSpeedMax);
+        
+        x += carddraw_xSpeed;
+        displayed = true;
+        fullyDrawn = false;
+        faceUp = false;
+        visible = true;
         scale = global.card_hand_scale;
-        y = owner.handController.handY;
+        depth = global.handFX_depth;
+        
+        
+        
+        if (dist &lt;= carddraw_clampDistance) {
+            x = draw_targetX;
+            position = "hand";
+            fullyDrawn = true;
+            faceUp = true;
+        }
+    break;
+    
+    case "hand":
+        if (global.GAME_PHASE == "main1") then canUse = true;
+        scale = global.card_hand_scale;
+        y = owner.hand.handY;
         break;
         
     case "board":
@@ -147,39 +177,35 @@ switch (position) {
 }
 
 
+
 if ((position == "hand") or (position == "graveyard")) {
     if (displayed) {
         // interactivity
         if (mouseOverCard() == id) {
-            y = (owner.handController.handY - 30);
-            depth -= 10; // just make it appear above all other cards
-            
-            if (clicked == true) {
-                if (doubleClickWindow &gt; 0) {
-                    if (canUse) {
+            if (canUse) {
+                y = (owner.hand.handY - 30);
+                depth -= 10; //  make it appear above all other cards
+                
+                if (clicked == true) {
+                    clicked = false;
+                    
+                    if (doubleClickWindow &gt; 0) {
                         show_debug_message("Double-click registered : "+string(id));
                         castingChecking = true;
                         doubleClickWindow = 0;
                     } else {
-                        show_debug_message("Card cannot be used at this time.");
+                        doubleClickWindow = CONTROLS.doubleClickWindowMax;
                     }
-                } else {
-                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
                 }
-                
-                clicked = false;
             }
         }
         
         // visuals
-        image_xscale = scale;
-        image_yscale = scale;
         visible = true;
         if (owner == global.enemy) {    // flip opponent's card on face
             image_index = 0;
             faceUp = false;
         }
-        positionCardElements();
     } else {
         visible = false;
     }
@@ -208,11 +234,14 @@ if (position == "board") {
             }
         }
     }
-    
+}
+
+
+
+if (displayed) {
     // visuals
     image_xscale = scale;
     image_yscale = scale;
-    //visible = true;
     positionCardElements();
 }
 </string>

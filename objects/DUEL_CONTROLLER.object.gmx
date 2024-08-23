@@ -28,33 +28,39 @@
             <string>/// start a duel
 // setup global vars
 global.GAME_PHASE   = "start";
-global.EVENT_STACK  = ds_stack_create();
+global.EVENT_LIST  = ds_list_create();
 global.currentCard  = noone; // the currently active card (e.g. the attacker card while choosing a target to attack)
 global.choosingTarget = false;
 global.target       = noone;
- 
+global.WAIT         = false;
+
+
 instance_create(room_width -25, room_height -40, PHASE_CONTROLLER);
-
 instance_create(-100, -100, BOARD_CONTROLLER);
-global.enemy  = instance_create(view_wview[0], 0, ENEMY);
+
 global.player = instance_create(0, view_hview[0], PLAYER);
-
-var playerHand      = instance_create(-100, -100, PLAYER_HAND_CONTROLLER);
-playerHand.owner = global.player;
-global.player.handController = playerHand;
-
-var playerGrave     = instance_create(-100, -100, PLAYER_GRAVE_CONTROLLER);
-playerGrave.owner = global.player;
-global.player.graveController = playerGrave;
+global.enemy  = instance_create(view_wview[0], 0, ENEMY);
+global.player.opponent  = global.enemy;
+global.enemy.opponent   = global.player;
+global.TURN             = global.player;
 
 
-var enemyHand      = instance_create(-100, -100, ENEMY_HAND_CONTROLLER);
-enemyHand.owner = global.enemy;
-global.enemy.handController = enemyHand;
+var playerHand      = instance_create(-100, -100, PLAYER_HAND);
+playerHand.owner    = global.player;
+global.player.hand  = playerHand;
 
-var enemyGrave     = instance_create(-100, -100, ENEMY_GRAVE_CONTROLLER);
+var playerGrave     = instance_create(-100, -100, PLAYER_GRAVE);
+playerGrave.owner   = global.player;
+global.player.graveyard = playerGrave;
+
+
+var enemyHand       = instance_create(-100, -100, ENEMY_HAND);
+enemyHand.owner     = global.enemy;
+global.enemy.hand   = enemyHand;
+
+var enemyGrave     = instance_create(-100, -100, ENEMY_GRAVE);
 enemyGrave.owner = global.enemy;
-global.enemy.graveController = enemyGrave;
+global.enemy.graveyard = enemyGrave;
 
 // game area
 cardSlotsPerRow = 6;
@@ -94,36 +100,7 @@ with (CONTESTANT) {
 }
 
 /// start the game
-next_phase();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// RESOLVE EVENT STACK
-
-var stack = global.EVENT_STACK;
-var event ds_stack_pop(stack);
-
-
-
+nextPhase();
 </string>
           </argument>
         </arguments>

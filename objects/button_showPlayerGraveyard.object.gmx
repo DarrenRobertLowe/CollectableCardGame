@@ -28,10 +28,10 @@
             <string>/// setup
 event_inherited();
 
-graveController = global.player.graveController;
-handController = global.player.handController;
+graveyard = global.player.graveyard;
+hand      = global.player.hand;
 
-hand = global.player.graveyard;
+contents  = graveyard.contents;
 </string>
           </argument>
         </arguments>

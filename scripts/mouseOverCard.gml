@@ -1,12 +1,12 @@
 /// mouseOverCard();
 
-var hand  = PLAYER_HAND_CONTROLLER;
-var grave = PLAYER_GRAVE_CONTROLLER;
+var hand  = global.player.hand;
+var grave = global.player.graveyard;
 
 // prevent clicking through hand to cards below
 if (position == "board") {
-    if (hand.showHand == true)
-    or (grave.showHand == true) {
+    if (hand.showContents == true)
+    or (grave.showContents == true) {
         return false;
     }
 }

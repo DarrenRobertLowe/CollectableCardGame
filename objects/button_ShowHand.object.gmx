@@ -65,10 +65,10 @@ depth = global.GUI_button_depth;
             <string>/// get image, get count and show/hide
 
 // get count
-count = ds_list_size(hand); 
+count = ds_list_size(hand.contents); 
 
 // set correct image index
-if (handController.showHand = true) {
+if (hand.showContents = true) {
     image_index = 1;
 } else {
     image_index = 0;
@@ -77,11 +77,11 @@ if (handController.showHand = true) {
 // show or hide hand
 if (clicked) {
     clicked = false;
-    if (handController.showHand == false) {
-    handController.showHand = true;
-    graveController.showHand = false;
+    if (hand.showContents == false) {
+    hand.showContents = true;
+    graveyard.showContents = false;
     } else {
-        handController.showHand = false
+        hand.showContents = false
     }
 }
 </string>

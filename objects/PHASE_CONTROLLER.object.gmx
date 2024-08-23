@@ -37,6 +37,7 @@ bannerY = (room_height * 0.5);
 animate = false;
 animationTimeMax = 20;
 animationTime = 0;
+option_doubleClickRequired = false;
 
 /// hovering
 initialY = y;
@@ -80,35 +81,7 @@ event_inherited();
 // hover on mouse over
 if (animate == false) {
     if (mouseOver()) {
-        if (hoverSwitch == false) {
-            hoverAmount -= hoverAccel;
-            if (hoverAmount &lt;= hoverMin) {
-                hoverSwitch = true;
-            }
-        }
-        
-        if (hoverSwitch == true) {
-            hoverAmount += hoverAccel;
-            
-            if (hoverAmount &gt;= hoverMax) {
-                hoverSwitch = false;
-            }
-        }
-        
-        
-        if (rotateSwitch == false) {
-            rotateAmount -= rotateSpeed;
-             if (rotateAmount &lt;= rotateMin) {
-                rotateSwitch = true;
-            }
-        }
-        if (rotateSwitch == true) {
-            rotateAmount += rotateSpeed;
-            
-            if (rotateAmount &gt;= rotateMax) {
-                rotateSwitch = false;
-            }
-        }
+        hourglassHover();
         
     } else {
         hoverAmount  = 0;
@@ -118,20 +91,30 @@ if (animate == false) {
     }
 }
 
+// not in a locked-in animation (changing phase)
 if (animate == false) {
     if (clicked) {
-        clicked = false;
-        if (doubleClickWindow &gt; 0) {
-            doubleClickWindow = 0;
-            next_phase();
-            animate = true;
-            animationTime = animationTimeMax;
-        } else {
-            doubleClickWindow = CONTROLS.doubleClickWindowMax;
-        }
+        if (global.WAIT &lt;= 0) {
+            clicked = false;
+            if (option_doubleClickRequired) {
+                if (doubleClickWindow &gt; 0) {
+                    doubleClickWindow = 0;
+                    nextPhase();
+                    animate = true;
+                    animationTime = animationTimeMax;
+                } else {
+                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                }
+            } else {
+                nextPhase();
+                animate = true;
+                animationTime = animationTimeMax;
+            }
+        } else show_debug_message("can't click now, waiting...");
     }
 }
 
+// animation that plays while changing phase
 if (animate) {
     animationTime--;
     image_angle = (animationTimeMax * animationTime);
@@ -190,6 +173,10 @@ if (showPhaseBanner) {
     
     if (global.GAME_PHASE == "main1") {
         draw_text(bannerX, bannerY, "MAIN PHASE 1");
+    }
+    
+    if (global.GAME_PHASE == "combat planning") {
+        draw_text(bannerX, bannerY, "PLAN YOUR ATTACKS");
     }
     
     if (global.GAME_PHASE == "combat") {
