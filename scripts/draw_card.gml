@@ -17,6 +17,12 @@ if (ds_stack_size(deck.playStack) > 0) {
     card.x = 0;
     card.position = "drawing";
     card.draw_targetX = (handController.handX + ((handSize-1) * handController.cardSeparation));
+    
+    // remove a phase blocker
+    var phaseBlockerIndex = ds_list_find_index(global.NEXT_PHASE_BLOCKERS, "draw card");
+    if (phaseBlockerIndex > -1) {
+        ds_list_delete(global.NEXT_PHASE_BLOCKERS, phaseBlockerIndex);
+    }
 } else {
     show_debug_message("no cards left!");
     if (global.RULES_loseOnNoCards) {

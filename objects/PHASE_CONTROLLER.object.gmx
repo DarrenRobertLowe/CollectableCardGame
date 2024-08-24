@@ -30,6 +30,8 @@ event_inherited();
 
 depth = global.GUI_button_depth;
 showPhaseBanner = false;
+bannerTimesOut  = false;
+
 bannerTimer = 0;
 bannerTimerMax = 90;
 bannerX = (room_width * 0.5);
@@ -39,19 +41,8 @@ animationTimeMax = 20;
 animationTime = 0;
 option_doubleClickRequired = false;
 
-/// hovering
-initialY = y;
-hoverSwitch = false;
-hoverAmount = 0;
-hoverMax = 10;
-hoverMin = -10;
-hoverAccel = 0.1;
-
-rotateSwitch = false;
-rotateAmount = 0;
-rotateMax = 20;
-rotateMin = -20;
-rotateSpeed = 0.3;
+/// floating animation
+anim_float_setup();
 </string>
           </argument>
         </arguments>
@@ -79,13 +70,13 @@ event_inherited();
 
 
 // hover on mouse over
-if (animate == false) {
+if (animate == false) {    
     if (mouseOver()) {
-        hourglassHover();
-        
+        if (ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
+            anim_float();
+        }
     } else {
-        hoverAmount  = 0;
-        rotateAmount = 0;
+        anim_floatReturn();
         rotateSwitch = choose(0, 1);
         hoverSwitch  = 0; //choose(0, 1);
     }
@@ -96,19 +87,21 @@ if (animate == false) {
     if (clicked) {
         if (global.WAIT &lt;= 0) {
             clicked = false;
-            if (option_doubleClickRequired) {
-                if (doubleClickWindow &gt; 0) {
-                    doubleClickWindow = 0;
+            if (ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
+                if (option_doubleClickRequired) {
+                    if (doubleClickWindow &gt; 0) {
+                        doubleClickWindow = 0;
+                        nextPhase();
+                        animate = true;
+                        animationTime = animationTimeMax;
+                    } else {
+                        doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                    }
+                } else {
                     nextPhase();
                     animate = true;
                     animationTime = animationTimeMax;
-                } else {
-                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
                 }
-            } else {
-                nextPhase();
-                animate = true;
-                animationTime = animationTimeMax;
             }
         } else show_debug_message("can't click now, waiting...");
     }
@@ -149,19 +142,27 @@ if (animate) {
             <string>/// animation
 event_inherited();
 
-draw_sprite_ext(sprite_index, image_index, x, y + hoverAmount, 1, 1, image_angle + rotateAmount, c_white, 1);
+// draw self
+if !(ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
+    draw_sprite_ext(sprite_index, image_index, x, y + hoverAmount, 1, 1, image_angle + rotateAmount, c_gray, 1);
+} else {
+    draw_sprite_ext(sprite_index, image_index, x, y + hoverAmount, 1, 1, image_angle + rotateAmount, c_white, 1);
+}
 
+// draw current phase text
 draw_set_color(c_red);
 draw_set_font(font_health);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 
 if (showPhaseBanner) {
-    bannerTimer--;
-    if (bannerTimer &lt;= 0) {
-        showPhaseBanner = false;
-    }
     
+    if (bannerTimesOut) {
+        bannerTimer--;
+        if (bannerTimer &lt;= 0) {
+            showPhaseBanner = false;
+        }
+    }
     
     if (global.GAME_PHASE == "draw") {
         draw_text(bannerX, bannerY, "DRAW PHASE");

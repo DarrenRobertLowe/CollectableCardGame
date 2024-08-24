@@ -42,6 +42,7 @@ attack      = baseAttack;
 defence     = baseDefence;
 hp          = baseHp;
 
+
 // lists
 ds_list_add(abilities, "Flying", "Drain");
 

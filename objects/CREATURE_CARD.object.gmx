@@ -29,7 +29,7 @@
 event_inherited();
 
 subclass    = "";
-type        = CREATURE_CARD;
+type        = CREATURE_CARD
 
 // stats
 baseAttack  = 1;
@@ -46,8 +46,10 @@ ds_list_add(classes, "Creature");
 hasSummoningSickness = false;
 attacking = false;
 target    = noone;
+canAttack = true;
 attackEvent = instance_create(x, y, Event_Combat);
 attackEvent.parent = id;
+
 
 // stats positioning
 base_statValuesY = 468;
@@ -69,6 +71,9 @@ base_iconY          = 468;
 attackIconX  = base_attackIconX;
 defenceIconX = base_defenceIconX;
 hpIconX      = base_hpIconX;
+
+
+
 
 </string>
           </argument>
@@ -123,7 +128,7 @@ attacking   = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// reposition attack and defence values
+            <string>/// interaction
 event_inherited();
 
 if (castingChecking) {
@@ -141,48 +146,56 @@ if (casting) {
 if (global.GAME_PHASE == "combat planning") {
     if (clicked) {
         clicked = false;
-        
-        // cancel attack
-        if (attacking == true) {
-            attacking = false;
-            var position = ds_list_find_index(global.EVENT_LIST, attackEvent);
-            if (position &gt; -1) {
-                ds_list_delete(global.EVENT_LIST, position);
-                attackEvent.attacking = false;
-            }
-        } else {
-            attacking = true;
-            attackEvent.attacking   = true;
-            attackEvent.attacker    = id;   
-            
-            // NO DEFENDERS
-            if (countDefenders(global.TURN.opponent) == 0) {
-                attackEvent.target    = global.enemy; // attack the enemy directly
-                global.choosingTarget = false;
-                ds_list_insert(global.EVENT_LIST, 0, attackEvent);
-                show_debug_message("event id: " + string(attackEvent));
-            } else {
-                global.choosingTarget = true;
-            }
-            
-            
-            // DEFENDERS
-            if ( global.choosingTarget == true ) {
-                global.currentCard = id;
+    
+        if (position == "board") {
+            // cancel attack
+            if (attacking == true) {
+                attacking = false;
                 
-                if (global.target != noone) {
-                    global.target = target;
-                    attackEvent.target = target;                    
-                    ds_list_insert(global.EVENT_LIST, 0, attackEvent);
-                    
-                    // finish
+                var index = ds_list_find_index(global.EVENT_LIST, attackEvent);
+                if (index &gt; -1) {
+                    ds_list_delete(global.EVENT_LIST, index);
+                    attackEvent.attacking = false;
+                }
+            } else {
+                attacking = true;
+                attackEvent.attacking   = true;
+                attackEvent.attacker    = id;   
+                
+                // NO DEFENDERS
+                if (countDefenders(global.TURN.opponent) == 0) {
+                    attackEvent.target    = global.enemy; // attack the enemy directly
                     global.choosingTarget = false;
+                    ds_list_insert(global.EVENT_LIST, 0, attackEvent);
+                    show_debug_message("event id: " + string(attackEvent));
+                } else {
+                    global.choosingTarget = true;
+                }
+                
+                
+                // DEFENDERS
+                if ( global.choosingTarget == true ) {
+                    global.currentCard = id;
+                    
+                    if (global.target != noone) {
+                        global.target = target;
+                        attackEvent.target = target;                    
+                        ds_list_insert(global.EVENT_LIST, 0, attackEvent);
+                        
+                        // finish
+                        global.choosingTarget = false;
+                    }
                 }
             }
         }
     }
 }
 
+
+
+
+// clear click state
+clicked = false;
 </string>
           </argument>
         </arguments>
@@ -209,48 +222,59 @@ if (global.GAME_PHASE == "combat planning") {
 event_inherited();
 
 // draw stat icons
-draw_sprite_ext(spr_stat_icons, 0, attackIconX, attackIconY, scale, scale, 0, c_white, 1);
-draw_sprite_ext(spr_stat_icons, 1, defenceIconX, defenceIconY, scale, scale, 0, c_white, 1);
-draw_sprite_ext(spr_stat_icons, 2, hpIconX, hpIconY, scale, scale, 0, c_white, 1);
-
-// attack and hp(defence)
-switch (position) {
-    case "hand":
-    case "graveyard":
-        draw_set_font(global.font_CardBold_Hand);
-    break;
+if (faceUp == true) {
+    // darken stat icons if we can't play the card right now
+    if (canPlay == false) { 
+        draw_sprite_ext(spr_stat_icons, 0, attackIconX, attackIconY, scale, scale, 0, c_gray, 1);
+        draw_sprite_ext(spr_stat_icons, 1, defenceIconX, defenceIconY, scale, scale, 0, c_gray, 1);
+        draw_sprite_ext(spr_stat_icons, 2, hpIconX, hpIconY, scale, scale, 0, c_gray, 1);
+    } else {
+        draw_sprite_ext(spr_stat_icons, 0, attackIconX, attackIconY, scale, scale, 0, c_white, 1);
+        draw_sprite_ext(spr_stat_icons, 1, defenceIconX, defenceIconY, scale, scale, 0, c_white, 1);
+        draw_sprite_ext(spr_stat_icons, 2, hpIconX, hpIconY, scale, scale, 0, c_white, 1);
+    }
     
-    case "board":
-        draw_set_font(global.font_CardBold_Board);
-    break;
+
+    // attack and hp(defence)
+    switch (position) {
+        case "hand":
+        case "graveyard":
+            draw_set_font(global.font_CardBold_Hand);
+        break;
+        
+        case "board":
+            draw_set_font(global.font_CardBold_Board);
+        break;
+    }
+    
+    
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_top);
+    draw_set_color(c_black);
+    
+    // attack
+    if (attack &lt; baseAttack)
+        then draw_set_color(c_orange);
+    if (attack &gt; baseAttack)
+        then draw_set_color(c_green);
+    draw_text(attackX,  attackY,  attack);
+    
+    // defence
+    if (defence &lt; baseDefence)
+        then draw_set_color(c_orange);
+    if (defence &gt; baseDefence)
+        then draw_set_color(c_green);
+    draw_text(defenceX, defenceY, defence);
+    
+    // health
+    if (hp &lt; baseHp)
+        then draw_set_color(c_red);
+    draw_text(hpX, hpY, hp);
+    
+    // reset text
+    draw_set_color(c_black);
+    draw_set_halign(fa_left);
 }
-draw_set_halign(fa_center);
-draw_set_valign(fa_top);
-draw_set_color(c_black);
-
-// attack
-if (attack &lt; baseAttack)
-    then draw_set_color(c_orange);
-if (attack &gt; baseAttack)
-    then draw_set_color(c_green);
-draw_text(attackX,  attackY,  attack);
-
-// defence
-if (defence &lt; baseDefence)
-    then draw_set_color(c_orange);
-if (defence &gt; baseDefence)
-    then draw_set_color(c_green);
-draw_text(defenceX, defenceY, defence);
-
-// health
-if (hp &lt; baseHp)
-    then draw_set_color(c_red);
-draw_text(hpX, hpY, hp);
-
-// reset text
-draw_set_color(c_black);
-draw_set_halign(fa_left);
-
 
 </string>
           </argument>

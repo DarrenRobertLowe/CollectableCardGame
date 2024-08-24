@@ -25,8 +25,20 @@ if (global.GAME_PHASE == "start") {
     exit;
 }
 
+
+if !ds_list_empty(global.NEXT_PHASE_BLOCKERS) {
+    var reason = ds_list_find_value(global.NEXT_PHASE_BLOCKERS, 0);
+    show_debug_message("Cannot move to next phase! reason: " +string(reason));
+    exit;
+}
+
+
 if (global.GAME_PHASE == "draw") {
     global.GAME_PHASE = "payment";
+    
+    if (ds_list_empty(global.PAYMENT_PHASE_LIST )) {
+        global.GAME_PHASE = "main1";
+    }
     exit;
 }
 
@@ -36,7 +48,21 @@ if (global.GAME_PHASE == "payment") {
 }
 
 if (global.GAME_PHASE == "main1") {
-    global.GAME_PHASE = "combat planning";
+    var player = global.TURN;
+    var cardsOnBoard = global.TURN.cardsInPlay;
+    
+    if !ds_list_empty(cardsOnBoard) {
+        for(var i=0; i<ds_list_size(cardsOnBoard); i++) {
+            card = ds_list_find_value(cardsOnBoard, i);
+            if (card.canAttack) {
+                global.GAME_PHASE = "combat planning";
+                exit; // end the loop
+            }
+        }
+        // if it reaches here there's no combat creatures
+        global.GAME_PHASE = "main2";
+    }
+    global.GAME_PHASE = "main2";
     exit;
 }
 
@@ -61,6 +87,8 @@ if (global.GAME_PHASE == "endturn") {
         attackedThisTurn = false;
         alarm[0] = 1; // recalculate stats
     }
+    
+    phaseSetup_draw_phase();
     global.GAME_PHASE = "draw";
     exit;
 }

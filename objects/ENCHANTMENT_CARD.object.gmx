@@ -30,7 +30,7 @@ event_inherited();
 
 sprite_index = spr_card_enchantment;
 class    = "Enchantment";
-type     = ENCHANTMENT_CARD;
+type     = ENCHANTMENT_CARD
 target   = 0;
 </string>
           </argument>

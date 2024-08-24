@@ -8,6 +8,14 @@ if (ind > -1) {
     ds_list_delete(grave, ind);
 }
 
+
+// remove from cardsInPlay list
+ind = ds_list_find_index(owner.cardsInPlay, id);
+if ((ind) > -1) {
+    ds_list_delete(owner.cardsInPlay, ind);
+}
+
+
 // add to the graveyard
 ds_list_add(grave, card);
 removeCardFromHand(card);

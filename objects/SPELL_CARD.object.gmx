@@ -30,7 +30,7 @@ event_inherited();
 
 sprite_index = spr_card_spell;
 class    = "Spell";
-type     = SPELL_CARD;
+type     = SPELL_CARD
 validTargets   = ds_list_create();
 isTargeted = true;
 target   = 0;

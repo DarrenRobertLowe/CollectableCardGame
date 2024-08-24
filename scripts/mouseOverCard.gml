@@ -25,7 +25,7 @@ with (CARD) {
         if  (mouse_x > x)
         and (mouse_y > y)
         and (mouse_x < (x + sprite_width))
-        and (mouse_y < (y + sprite_width)) {
+        and (mouse_y < (y + sprite_height)) {
             ds_priority_add(hand.cardHoverQueue, id, depth);
         }
     }

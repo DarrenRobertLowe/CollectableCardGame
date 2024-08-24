@@ -28,7 +28,9 @@
             <string>/// start a duel
 // setup global vars
 global.GAME_PHASE   = "start";
+global.NEXT_PHASE_BLOCKERS = ds_list_create(); // stuff that prevents the player from advancing to the next phase e.g. having to draw a card
 global.EVENT_LIST  = ds_list_create();
+global.PAYMENT_PHASE_LIST = ds_list_create();
 global.currentCard  = noone; // the currently active card (e.g. the attacker card while choosing a target to attack)
 global.choosingTarget = false;
 global.target       = noone;

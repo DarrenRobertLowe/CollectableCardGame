@@ -30,9 +30,10 @@ event_inherited();
 
 hp      = 20;
 avatar  = 0;
-mana    = 140; //arcana, essence, power, spirit, energy
-cards   = ds_list_create();   // cards in this hero's deck
-graveyard = ds_list_create();   // cards in this hero's grave
+mana    = 140;                      // arcana, essence, power, spirit, energy
+cards   = ds_list_create();         // cards in this hero's deck
+graveyard = ds_list_create();       // cards in this hero's grave
+cardsInPlay = ds_list_create();     // a list of anything on the board under this player's control
 </string>
           </argument>
         </arguments>
@@ -60,6 +61,8 @@ graveyard = ds_list_create();   // cards in this hero's grave
 repeat(global.RULES_startingCardsNumber) {
     draw_card(hand, deck);
 }
+
+phaseSetup_draw_phase();
 </string>
           </argument>
         </arguments>
