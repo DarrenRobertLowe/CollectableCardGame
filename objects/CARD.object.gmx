@@ -40,9 +40,10 @@ image_speed     = 0;
 scale           = global.card_hand_scale;
 fullyDrawn      = false;        // a check for animation
 carddraw_xSpeed = 10;//room_width / room_speed;
-carddraw_xSpeedMax = 10;
-carddraw_clampDistance = 10;
-draw_targetX    = 0;
+cardSlideSpeedMax = 10;
+cardSnapDistance= 4;
+targetX         = room_width * 0.5;
+targetY         = y;
 casting         = false;
 castingChecking = false;
 activate        = false;
@@ -130,13 +131,19 @@ switch (position) {
         break;
     
     case "drawing":
-        y = owner.hand.handY;
+        /*
+        
         var dist = abs(x - draw_targetX);
         if (dist &lt;= 1) then dist = 1;
         
         carddraw_xSpeed = (dist / carddraw_xSpeedMax);
-        
         x += carddraw_xSpeed;
+        */
+        
+        
+        
+        //targetY = owner.hand.handY;
+        //y = targetY;
         displayed = true;
         fullyDrawn = false;
         faceUp = false;
@@ -144,12 +151,11 @@ switch (position) {
         scale = global.card_hand_scale;
         depth = global.handFX_depth;
         
-        
-        if (dist &lt;= carddraw_clampDistance) {
-            x = draw_targetX;
-            position = "hand";
-            fullyDrawn = true;
-            faceUp = true;
+        // finish
+        if (x == targetX) {
+            position    = "hand";
+            fullyDrawn  = true;
+            faceUp      = true;
         }
     break;
     
@@ -235,6 +241,24 @@ if (position == "board") {
 
 canPlay = check_canPlayCard();    // check if can't be played so we can darken the card
 
+// slide into position
+if (position == "hand") or (position == "board") or (position == "drawing"){
+    if (x != targetX) {
+        show_debug_message("sanity check on movement: "+string(current_second));
+        var dist = abs(targetX - x);
+        var epsilon = 0.00001; // avoid division by zero
+        
+        var cardSlideSpeed = ceil((dist + epsilon) / cardSlideSpeedMax);
+        
+        if (x &lt; targetX) then x += cardSlideSpeed;
+        else if (x &gt; targetX) then x -= cardSlideSpeed;
+        
+        // clamp
+        if (dist &lt; cardSnapDistance) {
+            x = targetX;
+        }
+    }
+}
 
 if (displayed) {
     // visuals
@@ -374,7 +398,6 @@ if (displayed) {
             draw_set_alpha(1);
         }
     }
-    
     
     check_glow();   // draw the hover glow behind the sprite
 }

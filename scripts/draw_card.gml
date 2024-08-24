@@ -10,14 +10,11 @@ show_debug_message("ds_stack_size(deck.playStack) : " + string(ds_stack_size(dec
 if (ds_stack_size(deck.playStack) > 0) {
     var card = ds_stack_pop(deck.playStack);
     ds_list_add(hand.contents, card);
-    var handSize = ds_list_size(hand.contents);
     
-    var cardSeparation = (handController.handAreaWidth / handSize);
-
-    card.x = 0;
+    card.y = global.player.deck.y;
+    card.x = global.player.deck.x;
     card.position = "drawing";
-    card.draw_targetX = (handController.handX + ((handSize-1) * handController.cardSeparation));
-    
+
     // remove a phase blocker
     var phaseBlockerIndex = ds_list_find_index(global.NEXT_PHASE_BLOCKERS, "draw card");
     if (phaseBlockerIndex > -1) {

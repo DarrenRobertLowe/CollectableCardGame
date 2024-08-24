@@ -85,11 +85,11 @@
     <script>scripts\stopTargeting.gml</script>
     <script>scripts\countDefenders.gml</script>
     <script>scripts\fight.gml</script>
-    <script>scripts\nextPhase.gml</script>
     <script>scripts\nextEvent.gml</script>
     <script>scripts\anim_float.gml</script>
     <script>scripts\anim_float_setup.gml</script>
     <scripts name="Animation">
+      <script>scripts\nextPhase.gml</script>
       <script>scripts\anim_floatReturn.gml</script>
     </scripts>
     <scripts name="Phases">
