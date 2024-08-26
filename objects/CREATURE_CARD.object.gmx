@@ -234,7 +234,7 @@ if (faceUp == true) {
         draw_sprite_ext(spr_stat_icons, 2, hpIconX, hpIconY, scale, scale, 0, c_white, 1);
     }
     
-
+    
     // attack and hp(defence)
     switch (position) {
         case "hand":

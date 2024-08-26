@@ -15,10 +15,6 @@ if (position == "board") {
 ds_priority_clear(hand.cardHoverQueue);
 var val = id;
 
-// keep us on top if we're already on top.
-if (hand.currentCardHover == id)
-  then return id;
-
 // otherwise, find which card should be on top
 with (CARD) {
     if (position == "hand") {
@@ -30,7 +26,6 @@ with (CARD) {
         }
     }
 }
-
 
 var val = ds_priority_find_min(hand.cardHoverQueue);
 hand.currentCardHover = val;

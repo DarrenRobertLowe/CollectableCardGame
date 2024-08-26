@@ -52,10 +52,12 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\draw_text_bordered.gml</script>
     <script>scripts\setup_rules.gml</script>
     <script>scripts\setup_depths.gml</script>
     <script>scripts\setup_sprite_scales.gml</script>
     <script>scripts\setup_fonts.gml</script>
+    <script>scripts\setup_text_colours.gml</script>
     <script>scripts\exists.gml</script>
     <script>scripts\damage.gml</script>
     <script>scripts\log_error.gml</script>
@@ -72,30 +74,36 @@
     <script>scripts\setup_glowing.gml</script>
     <script>scripts\check_glow.gml</script>
     <script>scripts\create_card.gml</script>
-    <scripts name="Card Events">
+    <scripts name="Cards">
+      <script>scripts\organizeHand.gml</script>
       <script>scripts\basicActivationChecks.gml</script>
       <script>scripts\completeCasting.gml</script>
+      <script>scripts\removeCardFromHand.gml</script>
+      <script>scripts\positionCardElements.gml</script>
+      <script>scripts\finishSummoning.gml</script>
+      <script>scripts\placeOnBoard.gml</script>
+      <script>scripts\sendToGraveyard.gml</script>
+      <script>scripts\cardSlideIntoPosition.gml</script>
+      <script>scripts\removeCardFromDeck.gml</script>
     </scripts>
-    <script>scripts\sendToGraveyard.gml</script>
-    <script>scripts\organizeHand.gml</script>
-    <script>scripts\positionCardElements.gml</script>
-    <script>scripts\placeOnBoard.gml</script>
-    <script>scripts\removeCardFromHand.gml</script>
-    <script>scripts\finishSummoning.gml</script>
     <script>scripts\stopTargeting.gml</script>
     <script>scripts\countDefenders.gml</script>
     <script>scripts\fight.gml</script>
     <script>scripts\nextEvent.gml</script>
-    <script>scripts\anim_float.gml</script>
-    <script>scripts\anim_float_setup.gml</script>
     <scripts name="Animation">
       <script>scripts\nextPhase.gml</script>
       <script>scripts\anim_floatReturn.gml</script>
+      <script>scripts\anim_float.gml</script>
+      <script>scripts\anim_float_setup.gml</script>
     </scripts>
     <scripts name="Phases">
       <script>scripts\phaseSetup_draw_phase.gml</script>
     </scripts>
     <script>scripts\check_canPlayCard.gml</script>
+    <scripts name="FX">
+      <script>scripts\fx_darken_card.gml</script>
+    </scripts>
+    <script>scripts\removeCardFromBoard.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -159,6 +167,9 @@
     <objects name="EVENTS">
       <object>objects\EVENT</object>
       <object>objects\Event_Combat</object>
+    </objects>
+    <objects name="COMBAT">
+      <object>objects\DAMAGE_COUNTER</object>
     </objects>
   </objects>
   <rooms name="rooms">

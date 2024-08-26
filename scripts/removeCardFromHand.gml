@@ -4,4 +4,7 @@ var hand = card.owner.hand;
 var contents = hand.contents;
 
 var index = ds_list_find_index(contents, card);
-ds_list_delete(contents, index);
+
+if (index > -1) {
+    ds_list_delete(contents, index);
+}

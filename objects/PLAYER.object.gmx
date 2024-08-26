@@ -52,6 +52,8 @@ ds_list_add(cards, create_card(enchant_Vigor, id));
 
 
 deck = instance_create(10, (view_hview[0] - 10) - sprite_get_height(spr_profiles), DECK);
+x = deck.x;
+y = deck.y;
 deck.image_index = 1; // portrait will be chosen by the player
 deck.owner = id;
 

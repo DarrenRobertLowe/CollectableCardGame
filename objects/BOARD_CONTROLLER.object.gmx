@@ -28,7 +28,7 @@
             <string>/// setup
 event_inherited();
 
-freeSlots = ds_stack_create();
+freeSlots = ds_list_create();
 </string>
           </argument>
         </arguments>

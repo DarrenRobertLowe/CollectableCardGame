@@ -1,25 +1,26 @@
 ///placeOnBoard(PLAYER_CARDSLOT or ENEMY_CARDSLOT, card id);
-var cardslots = argument0;
+var cardslots   = argument0;
 var cardToPlace = argument1;
-var board = BOARD_CONTROLLER;
+var board       = BOARD_CONTROLLER;
+var slots       = board.freeSlots;
 
-ds_stack_clear(board.freeSlots);
+ds_list_clear(slots);
 
+
+// find all the free slots and add them to slots
+var slots = board.freeSlots;
 with (cardslots) {
     if (card == noone) {
-        show_debug_message("card == noone, pushing to stack!");
-        ds_stack_push(board.freeSlots, id);
-    } else {
-        show_debug_message("card = " +string(card));
+        ds_list_add(slots, id); // the local var "slots" is accessible because of the "with" statment. Neat!
     }
 }
 
-if (ds_stack_size(board.freeSlots) > 0) {
-    var slot = ds_stack_pop(board.freeSlots);
+
+// add this card to the first available slot
+if (ds_list_size(slots) > 0) {
+    var slot = ds_list_find_value(slots, ds_list_size(slots)-1);
     slot.card = cardToPlace;
-    
     cardToPlace.position = "board";
-    
     removeCardFromHand(cardToPlace);
     return slot;
 } else {
