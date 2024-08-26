@@ -56,8 +56,8 @@ card = noone;
             <string>/// position card on slot
 
 if (card != noone) {
-    card.x = x;
-    card.y = y;
+    card.targetX = x;
+    card.targetY = y;
     card.depth = global.card_depth;
 }
 </string>

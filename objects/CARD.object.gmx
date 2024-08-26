@@ -131,25 +131,14 @@ switch (position) {
         break;
     
     case "drawing":
-        /*
-        
-        var dist = abs(x - draw_targetX);
-        if (dist &lt;= 1) then dist = 1;
-        
-        carddraw_xSpeed = (dist / carddraw_xSpeedMax);
-        x += carddraw_xSpeed;
-        */
-        
-        
-        
-        //targetY = owner.hand.handY;
-        //y = targetY;
         displayed = true;
         fullyDrawn = false;
         faceUp = false;
         visible = true;
         scale = global.card_hand_scale;
-        depth = global.handFX_depth;
+        depth = global.drawing_depth;
+        y = owner.hand.handY;
+        targetY = owner.hand.handY;
         
         // finish
         if (x == targetX) {
@@ -157,7 +146,7 @@ switch (position) {
             fullyDrawn  = true;
             faceUp      = true;
         }
-    break;
+        break;
     
     case "hand":
         if (global.GAME_PHASE == "main1")
@@ -176,6 +165,7 @@ switch (position) {
         if (canPlayFromGraveyard)
             then canUse = true;
             else canUse = false;
+        y = owner.hand.handY;
         break;
 }
 
@@ -187,7 +177,7 @@ if ((position == "hand") or (position == "graveyard")) {
         if (mouseOverCard() == id) {
             if (canUse) {
                 y = (owner.hand.handY - 30);
-                depth -= 10; //  make it appear above all other cards
+                depth -= 10; // make it appear above all other cards
                 
                 if (clicked == true) {
                     clicked = false;
@@ -239,26 +229,13 @@ if (position == "board") {
     }
 }
 
-canPlay = check_canPlayCard();    // check if can't be played so we can darken the card
 
-// slide into position
-if (position == "hand") or (position == "board") or (position == "drawing"){
-    if (x != targetX) {
-        show_debug_message("sanity check on movement: "+string(current_second));
-        var dist = abs(targetX - x);
-        var epsilon = 0.00001; // avoid division by zero
-        
-        var cardSlideSpeed = ceil((dist + epsilon) / cardSlideSpeedMax);
-        
-        if (x &lt; targetX) then x += cardSlideSpeed;
-        else if (x &gt; targetX) then x -= cardSlideSpeed;
-        
-        // clamp
-        if (dist &lt; cardSnapDistance) {
-            x = targetX;
-        }
-    }
-}
+// check if can't be played so we can darken the card
+canPlay = check_canPlayCard();
+
+
+// move the card into the targetX and targetY
+cardSlideIntoPosition();
 
 if (displayed) {
     // visuals
@@ -319,10 +296,11 @@ draw_set_alpha(1);
 draw_set_color(c_black);
 
 if (displayed) {
+
     draw_self();
     
     if (faceUp) {
-        // name
+        // name text
         switch (position) {
             case "hand":
             case "graveyard":
@@ -335,16 +313,19 @@ if (displayed) {
         }
         draw_text(nameX, nameY, name);
         
+        
         // casting cost
         draw_set_halign(fa_center);
         draw_sprite_ext(spr_cost_circle, 0, castCircleX, castCircleY, scale, scale, 0, c_white, 1);
         draw_sprite_ext(spr_card_castingCost_numbers, castingCost, castingCostX, castingCostY, scale, scale, 0, c_white, 1);
         draw_set_halign(fa_left);
         
+        
         // art
         draw_sprite_ext(image, image_index, artX, artY, scale, scale, 0, c_white, 1);
         
-        // class
+        
+        // class text
         switch (position) {
             case "hand":
             case "graveyard":
@@ -355,26 +336,25 @@ if (displayed) {
                 draw_set_font(global.font_CardText_Board);
             break;
         }
-        
         draw_text(classX, classY, class);
         
-        // abilities
-        var size = ds_list_size(abilities);
+        
+        // abilities text
         var str = "";
-        for(var i=0; i&lt;ds_list_size(size); i++) {
+        for(var i=0; i&lt;ds_list_size(abilities); i++) {
             var ability = ds_list_find_value(abilities, i);
             if !(is_undefined(ability)) {
                 str += string(ability) + ", ";
             } else break;
         }
-        
         // replace the last ", " with "."
         if (str != "") {
             str = string_copy(str, 1, string_length(str)-2);
-            str += ".#";
+            str += ".#"; // "." and newline
         }
         
-        // description
+        
+        // description text
         switch (position) {
             case "hand":
             case "graveyard":
@@ -387,26 +367,17 @@ if (displayed) {
         }
         
         draw_text_ext(descriptionX, descriptionY, str + string(description), separation, descriptionWidth);
-    
+        
+        
+        
         // darken card if it can't be played
         if (canPlay == false) {
-            var width  = (sprite_get_width(sprite_index) * scale);
-            var height = (sprite_get_height(sprite_index) * scale);
-            draw_set_alpha(0.5);
-            draw_set_colour(c_black);
-            draw_rectangle(x, y, x + width, y + height, false);
-            draw_set_alpha(1);
+            fx_darken_card();
         }
     }
     
     check_glow();   // draw the hover glow behind the sprite
 }
-
-/*
-draw_set_color(c_red);
-draw_set_alpha(0.5);
-draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, false);
-*/
 </string>
           </argument>
         </arguments>

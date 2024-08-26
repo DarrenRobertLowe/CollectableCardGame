@@ -3,4 +3,4 @@
 */
 
 owner.mana -= castingCost;
-sendToGraveyard(self);
+sendToGraveyard(owner.graveyard, id);

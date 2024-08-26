@@ -173,19 +173,19 @@ if (showPhaseBanner) {
     }
     
     if (global.GAME_PHASE == "main1") {
-        draw_text(bannerX, bannerY, "MAIN PHASE 1");
+        draw_text(bannerX, bannerY, "MAIN PHASE");
     }
     
     if (global.GAME_PHASE == "combat planning") {
-        draw_text(bannerX, bannerY, "PLAN YOUR ATTACKS");
+        draw_text(bannerX, bannerY, "CHOOSE YOUR ATTACKERS");
     }
     
     if (global.GAME_PHASE == "combat") {
-        draw_text(bannerX, bannerY, "COMBAT PHASE");
+        draw_text(bannerX, bannerY, "COMBAT!");
     }
     
     if (global.GAME_PHASE == "main2") {
-        draw_text(bannerX, bannerY, "MAIN PHASE 2");
+        draw_text(bannerX, bannerY, "AFTERMATH PHASE");
     }
     
     if (global.GAME_PHASE == "endturn") {

@@ -5,7 +5,6 @@ var deck = argument1;
 var contestant = hand.owner;
 var handController = hand;
 
-show_debug_message("ds_stack_size(deck.playStack) : " + string(ds_stack_size(deck.playStack)));
 
 if (ds_stack_size(deck.playStack) > 0) {
     var card = ds_stack_pop(deck.playStack);
@@ -14,7 +13,14 @@ if (ds_stack_size(deck.playStack) > 0) {
     card.y = global.player.deck.y;
     card.x = global.player.deck.x;
     card.position = "drawing";
-
+    
+    // force show the hand
+    if (global.TURN == global.player) {
+        global.player.hand.showContents = true;
+        global.player.graveyard.showContents = false;
+    }
+    
+    
     // remove a phase blocker
     var phaseBlockerIndex = ds_list_find_index(global.NEXT_PHASE_BLOCKERS, "draw card");
     if (phaseBlockerIndex > -1) {

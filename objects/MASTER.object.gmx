@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>/// SETUP GAME
-global.DEBUG = true;
 
 // setup speed
 global.GAMESPEED = 60;
@@ -48,6 +47,7 @@ setup_depths();
 setup_sprite_scales();
 setup_rules();
 setup_fonts();
+setup_text_colours();
 
 // start game
 instance_create(0, 0, CONTROLS);

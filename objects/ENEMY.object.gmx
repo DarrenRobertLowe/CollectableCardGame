@@ -50,6 +50,8 @@ ds_list_add(cards, create_card(enchant_Vigor, id));
 deck = instance_create(((view_wview[0] - 10) - sprite_get_width(spr_profiles)), 10, DECK);
 deck.image_index = 0; // portrait
 deck.owner = id;
+x = deck.x;
+y = deck.y;
 
 deck.cards = cards;
 deck.alarm[0] = 1;
