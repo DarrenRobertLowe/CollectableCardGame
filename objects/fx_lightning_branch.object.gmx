@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>N_DAMAGE_SPELL</parentName>
+  <parentName>FX</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,22 +25,25 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// setup
 event_inherited();
 
-name        = "Bolt";
-image       = art_bolt;
-castingCost = 2;
-description = "Deal 2 damage to target creature or player.";
-ds_list_add(validTargets, "player", "creature on board");
-attack      = 2;
-castFX      = fx_lightning;
+lifespan = 60;
+angle_variation = 40;       // Angle variation for branches
+endX = x;
+endY = y;
+length = 1;
+chonkiness = 1;
+
+alarm[0] = 1;
+
+alpha = 1;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="10">
+    <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -57,13 +60,73 @@ castFX      = fx_lightning;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// override
+            <string>/// spawn more branches
+endX = (x + lengthdir_x(length, direction));
+endY = (y + lengthdir_y(length, direction));
 
-// create the spell FX
-var target = global.target;
 
-offsety = ((sprite_get_height(target.sprite_index) * target.scale) * 0.5);
-instance_create(target.x, target.y + offsety, castFX);
+if (branches &gt; 0) { // Minimum length to stop branching
+    repeat(choose(1, 2)) {
+        fx_create_lightning_branch();
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// lifespan
+
+lifespan--;
+if (lifespan &lt;= 0) {
+    instance_destroy(self, true);
+}
+
+alpha = (random(1));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// draw the branch
+
+draw_set_alpha(alpha);
+draw_line_width_colour(x, y, endX, endY, chonkiness, c_yellow, c_yellow);
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>

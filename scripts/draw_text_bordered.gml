@@ -6,11 +6,9 @@ var str = argument2;
 var inColour = argument3;
 var outColour = argument4;
 
-draw_set_colour(outColour);
-draw_text(xx, yy-1, str);
+draw_text_colour(xx, yy-1, str, outColour, outColour, outColour, outColour, 1);
 draw_text(xx-1, yy, str);
 draw_text(xx, yy+1, str);
 draw_text(xx+1, yy, str);
 
-draw_set_colour(inColour);
-draw_text(xx, yy, str);
+draw_text_colour(xx, yy, str, inColour, inColour, inColour, inColour, 1);

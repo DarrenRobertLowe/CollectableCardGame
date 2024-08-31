@@ -117,6 +117,7 @@ artY = base_artY;
             <kind>1</kind>
             <string>/// state and element positions
 event_inherited();
+glowing = false;
 
 if (displayed == false) {
     visible = false;
@@ -152,7 +153,10 @@ switch (position) {
         if (global.GAME_PHASE == "main1")
         or (global.GAME_PHASE == "main2") then canUse = true;
         scale = global.card_hand_scale;
-        y = owner.hand.handY;
+        if (global.currentCard != id) {
+            y = owner.hand.handY;
+            targetY = owner.hand.handY;
+        } else targetY = owner.hand.handY;
         break;
         
     case "board":
@@ -170,52 +174,65 @@ switch (position) {
 }
 
 
+if (global.choosingTarget == true) {
+    if (global.currentCard == id) {
+        depth = global.drawing_depth;
+        targetX = 0;
+        targetY = (room_height/2)
+    }
+}
+
 
 if ((position == "hand") or (position == "graveyard")) {
-    if (displayed) {
-        // interactivity
-        if (mouseOverCard() == id) {
-            if (canUse) {
-                y = (owner.hand.handY - 30);
-                depth -= 10; // make it appear above all other cards
-                
-                if (clicked == true) {
-                    clicked = false;
+    if (global.choosingTarget == false) {
+        if (displayed) {
+            // interactivity
+            if (mouseOverCard() == id) {
+                if (canUse) {
+                    y = (owner.hand.handY - 30);
+                    depth -= 10; // make it appear above all other cards
                     
-                    if (doubleClickWindow &gt; 0) {
-                        show_debug_message("Double-click registered : "+string(id));
-                        castingChecking = true;
-                        doubleClickWindow = 0;
-                    } else {
-                        doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                    if (clicked == true) {
+                        clicked = false;
+                        
+                        if (doubleClickWindow &gt; 0) {
+                            show_debug_message("Double-click registered : "+string(id));
+                            castingChecking = true;
+                            doubleClickWindow = 0;
+                        } else {
+                            doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                        }
                     }
                 }
             }
+            
+            // visuals
+            visible = true;
+            if (owner == global.enemy) {    // flip opponent's card on face
+                image_index = 0;
+                faceUp = false;
+            }
+        } else {
+            visible = false;
         }
-        
-        // visuals
-        visible = true;
-        if (owner == global.enemy) {    // flip opponent's card on face
-            image_index = 0;
-            faceUp = false;
-        }
-    } else {
-        visible = false;
     }
 }
 
 
 if (position == "board") {
+
     // allow this card to be selected as a combat target
     if (global.choosingTarget == true) {
         if (mouseOverCard() == id) {
+            glowing = true;
             if (clicked) {
                 clicked = false;
                 global.currentCard.target = id;
             }
         }
-    } else {
-        // normal activation of card (e.g. combat)
+        
+        
+    } else { // normal activation of card (e.g. combat)
         if (mouseOverCard() == id) {
             if (clicked == true) {
                 if (doubleClickWindow &gt; 0) {
@@ -242,6 +259,10 @@ if (displayed) {
     image_xscale = scale;
     image_yscale = scale;
     positionCardElements();
+    
+    if (glowing) {
+        calculate_glowAlpha();
+    }
 }
 </string>
           </argument>
@@ -296,7 +317,7 @@ draw_set_alpha(1);
 draw_set_color(c_black);
 
 if (displayed) {
-
+    
     draw_self();
     
     if (faceUp) {

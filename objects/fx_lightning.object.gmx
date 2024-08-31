@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>N_DAMAGE_SPELL</parentName>
+  <parentName>FX</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,22 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// setup
 event_inherited();
+direction = 0;
 
-name        = "Bolt";
-image       = art_bolt;
-castingCost = 2;
-description = "Deal 2 damage to target creature or player.";
-ds_list_add(validTargets, "player", "creature on board");
-attack      = 2;
-castFX      = fx_lightning;
+lifespan = 30;
+branches = 10;
+length = 50;
+
+
+var branch = instance_create(x, y, fx_lightning_branch);
+var choice = choose(0, 1);
+var angleVariation = round(random(45));
+branch.branches  = branches-1;
+branch.length = length * random_range(0.5, 0.8);
+branch.chonkiness = 3;
+
+switch(choice) {
+    case 0:
+        branch.direction = (direction + angleVariation);
+    break;
+    
+    case 1:
+        branch.direction = (direction - angleVariation);
+    break;
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="10">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -57,13 +72,13 @@ castFX      = fx_lightning;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// override
+            <string>/// emmit oarticles and lifespan
 
-// create the spell FX
-var target = global.target;
+lifespan--;
+if (lifespan &lt;= 0) {
+    instance_destroy(self, true);
+}
 
-offsety = ((sprite_get_height(target.sprite_index) * target.scale) * 0.5);
-instance_create(target.x, target.y + offsety, castFX);
 </string>
           </argument>
         </arguments>

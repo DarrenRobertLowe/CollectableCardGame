@@ -30,6 +30,22 @@
 doubleClickWindowMax = 15;
 
 clickableUnderPointer = ds_priority_create();
+
+// cursor fields
+animate     = false;
+rotate      = 0;        // used when displaying the wand
+rotateCorrectionSpeed = 10;
+rotateSpeed = 1;
+inertia     = 0;
+rotateFriction = 1;
+rotateMax   = 40;
+rotateMin   = -120;
+rotateDir   = 0;
+old_mouse_x = mouse_x;
+depth = global.drawing_depth;
+
+
+setup_wand_particles();
 </string>
           </argument>
         </arguments>
@@ -53,8 +69,12 @@ clickableUnderPointer = ds_priority_create();
           <argument>
             <kind>1</kind>
             <string>/// controls and mouse over
-ds_priority_clear(clickableUnderPointer);
+x = mouse_x;
+y = mouse_y;
+
+
 // find what the mouse pointer is over
+ds_priority_clear(clickableUnderPointer);
 with(CLICKABLE) {
     if (mouseOver()) {
         if (displayed) {
@@ -62,6 +82,7 @@ with(CLICKABLE) {
         }
     }
 }
+
 
 /// check_controls
 global.controls_cancel = false;
@@ -76,6 +97,21 @@ if (mouse_check_button_released(mb_right)) {
     global.controls_cancel = true;
     mouse_clear(mb_right);
 }
+
+
+// particles
+if (global.castingSpell) {
+    window_set_cursor(cr_none);
+    wand_rotate(); // make the wand responsive to mouse movement
+    wand_rotateToNormal();
+    part_particles_create(particle_system, x, y, particle_type, particleCount);
+} else {
+    window_set_cursor(cr_default);
+}
+
+
+// finish
+old_mouse_x = mouse_x;
 </string>
           </argument>
         </arguments>
@@ -134,6 +170,10 @@ ds_priority_clear(clickableUnderPointer);
           <argument>
             <kind>1</kind>
             <string>/// CURSOR
+
+if (global.castingSpell) {
+    draw_sprite_ext(spr_gui_wand, 0, x, y, 1, 1, rotate, c_white, 1);
+}
 
 if (global.GAME_PHASE == "combat") {
     if (global.choosingTarget) {

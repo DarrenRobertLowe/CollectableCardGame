@@ -62,20 +62,28 @@ depth = global.GUI_button_depth;
           <argument>
             <kind>1</kind>
             <string>/// get count and show or hide hand
+event_inherited();
+
 // get count
 count = ds_list_size(contents); 
 
-// show / hide
-if (clicked) {
-    clicked = false;
-    if (graveyard.showContents == false) {
-        image_index = 1;
-        graveyard.showContents = true;
-        hand.showContents = false;
-    } else {
-        image_index = 0;
-        graveyard.showContents = false;
+if (global.currentCard == noone) { // prevent clicking when casting a spell, etc.
+    // show / hide
+    if (clicked) {
+        clicked = false;
+        if (graveyard.showContents == false) {
+            image_index = 1;
+            graveyard.showContents = true;
+            hand.showContents = false;
+        } else {
+            image_index = 0;
+            graveyard.showContents = false;
+        }
     }
+}
+
+if (glowing) {
+    calculate_glowAlpha();
 }
 </string>
           </argument>
@@ -124,7 +132,10 @@ glowing = false;
           <argument>
             <kind>1</kind>
             <string>/// glow
-glowing = true;
+
+if (global.currentCard == noone) {
+    glowing = true;
+}
 </string>
           </argument>
         </arguments>

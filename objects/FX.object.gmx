@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>N_DAMAGE_SPELL</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,45 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
-event_inherited();
+            <string>/// set the depth
 
-name        = "Bolt";
-image       = art_bolt;
-castingCost = 2;
-description = "Deal 2 damage to target creature or player.";
-ds_list_add(validTargets, "player", "creature on board");
-attack      = 2;
-castFX      = fx_lightning;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// override
-
-// create the spell FX
-var target = global.target;
-
-offsety = ((sprite_get_height(target.sprite_index) * target.scale) * 0.5);
-instance_create(target.x, target.y + offsety, castFX);
+depth = global.cardFX_depth;
 </string>
           </argument>
         </arguments>

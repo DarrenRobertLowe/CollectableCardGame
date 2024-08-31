@@ -27,6 +27,11 @@ if (exists(target)) {
     
     if (object_is_ancestor(target.object_index, CARD)) {
         if (target.hp <= 0) {
+            // create an explosion
+            instance_create(
+                target.x + ( (sprite_get_width(spr_card)  * target.scale) * 0.5), 
+                target.y + ( (sprite_get_height(spr_card) * target.scale) * 0.5), 
+                fx_explode);
             sendToGraveyard(target.owner.graveyard, target);
         }
     }

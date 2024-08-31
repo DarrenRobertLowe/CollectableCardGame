@@ -33,6 +33,7 @@ global.EVENT_LIST  = ds_list_create();
 global.PAYMENT_PHASE_LIST = ds_list_create();
 global.currentCard  = noone; // the currently active card (e.g. the attacker card while choosing a target to attack)
 global.choosingTarget = false;
+global.castingSpell = false;
 global.target       = noone;
 global.WAIT         = false;
 

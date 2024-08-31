@@ -8,17 +8,21 @@
   <sprites name="sprites">
     <sprite>sprites\spr_none</sprite>
     <sprite>sprites\spr_cardSlot</sprite>
+    <sprite>sprites\spr_cardslot_glow</sprite>
     <sprites name="GUI_Elements">
       <sprites name="buttons">
         <sprite>sprites\spr_button_show_hand</sprite>
         <sprite>sprites\spr_show_graveyard</sprite>
       </sprites>
       <sprite>sprites\spr_profiles</sprite>
+      <sprite>sprites\spr_deck_glow</sprite>
       <sprite>sprites\spr_gui_crescent</sprite>
       <sprite>sprites\spr_numbers_health</sprite>
       <sprite>sprites\spr_deckcount</sprite>
       <sprite>sprites\spr_mana</sprite>
       <sprite>sprites\spr_hourglass</sprite>
+      <sprite>sprites\spr_gui_gauntlet</sprite>
+      <sprite>sprites\spr_gui_wand</sprite>
     </sprites>
     <sprites name="CardArts">
       <sprites name="Creatures">
@@ -85,6 +89,7 @@
       <script>scripts\sendToGraveyard.gml</script>
       <script>scripts\cardSlideIntoPosition.gml</script>
       <script>scripts\removeCardFromDeck.gml</script>
+      <script>scripts\wand_rotateToNormal.gml</script>
     </scripts>
     <script>scripts\stopTargeting.gml</script>
     <script>scripts\countDefenders.gml</script>
@@ -104,6 +109,12 @@
       <script>scripts\fx_darken_card.gml</script>
     </scripts>
     <script>scripts\removeCardFromBoard.gml</script>
+    <script>scripts\cursor_default.gml</script>
+    <script>scripts\setup_wand_particles.gml</script>
+    <script>scripts\floating.gml</script>
+    <script>scripts\calculate_glowAlpha.gml</script>
+    <script>scripts\wand_rotate.gml</script>
+    <script>scripts\fx_create_lightning_branch.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -170,6 +181,14 @@
     </objects>
     <objects name="COMBAT">
       <object>objects\DAMAGE_COUNTER</object>
+    </objects>
+    <objects name="FX">
+      <object>objects\FX</object>
+      <object>objects\fx_explode</object>
+      <objects name="Lightning">
+        <object>objects\fx_lightning</object>
+        <object>objects\fx_lightning_branch</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>N_DAMAGE_SPELL</parentName>
+  <parentName>FX</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,22 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// create the particle system
 event_inherited();
+lifespan = 10;
 
-name        = "Bolt";
-image       = art_bolt;
-castingCost = 2;
-description = "Deal 2 damage to target creature or player.";
-ds_list_add(validTargets, "player", "creature on board");
-attack      = 2;
-castFX      = fx_lightning;
+particle_system = global.PARTICLE_SYSTEM;
+flare = part_type_create();
+cloud = part_type_create();
+particleCount = 5;
+part_system_depth(particle_system, global.info_depth);
+
+// Define the particle types
+part_type_shape(flare, pt_shape_flare);
+part_type_size(flare, 1, 2, 0, 0.5);
+part_type_colour3(flare, c_white, c_yellow, c_red);
+part_type_alpha3(flare, 1, 0.7, 0);
+part_type_speed(flare, 1, 2, -0.01, 0.5);
+part_type_life(flare, 10, 30);
+
+part_type_shape(cloud, pt_shape_cloud);
+part_type_size(cloud, 0.1, 0.2, 0.05, 0.05);
+part_type_colour3(cloud, c_white, c_gray, c_dkgray);
+part_type_alpha3(cloud, 1, 0.4, 0);
+part_type_speed(cloud, 5, 10, -1, 0);
+part_type_direction(cloud, 0, 359, 1, 2);
+part_type_life(cloud, 60, 120);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="10">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -57,13 +72,16 @@ castFX      = fx_lightning;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// override
+            <string>/// emmit oarticles and lifespan
 
-// create the spell FX
-var target = global.target;
+part_particles_create(particle_system, x, y, flare, particleCount);
+part_particles_create(particle_system, x, y, cloud, particleCount);
 
-offsety = ((sprite_get_height(target.sprite_index) * target.scale) * 0.5);
-instance_create(target.x, target.y + offsety, castFX);
+
+lifespan--;
+if (lifespan &lt;= 0) {
+    instance_destroy(self, true);
+}
 </string>
           </argument>
         </arguments>

@@ -26,11 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>/// setup
-//setup_glowing()
+
 depth = global.cardSlot_depth;
 sprite_index = spr_cardSlot;
 card = noone;
 
+setup_glowing();
+glow_sprite = spr_cardslot_glow;
+glow_colour = c_white;
 </string>
           </argument>
         </arguments>
@@ -55,10 +58,66 @@ card = noone;
             <kind>1</kind>
             <string>/// position card on slot
 
+calculate_glowAlpha();
+/*
+if (glowing) {
+    calculate_glowAlpha();
+}
+*/
 if (card != noone) {
     card.targetX = x;
     card.targetY = y;
     card.depth = global.card_depth;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// stop glowing
+glowing = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// start glowing
+if ((global.choosingTarget) and (card != noone)) {
+    glowing = true;
 }
 </string>
           </argument>
@@ -85,7 +144,7 @@ if (card != noone) {
             <string>/// draw_self and glow
 event_inherited();
 draw_self();
-//check_glow();   // draw the hover glow behind the sprite
+check_glow();   // draw the hover glow behind the sprite
 </string>
           </argument>
         </arguments>

@@ -31,7 +31,7 @@
 global.GAMESPEED = 60;
 room_speed = global.GAMESPEED;
 randomize();
-
+global.PARTICLE_SYSTEM = part_system_create();
 
 // setup view
 global.view_width  = 1024;
