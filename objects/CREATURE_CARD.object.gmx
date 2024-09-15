@@ -130,19 +130,19 @@ attacking   = false;
             <kind>1</kind>
             <string>/// interaction
 event_inherited();
-
-if (castingChecking) {
-    basicActivationChecks();
-}
-
-if (casting) {
-    if (placeOnBoard(PLAYER_CARDSLOT, id) &gt; 0) {
-        finishSummoning();
+if (owner == global.player) {
+    if (castingChecking) {
+        castingChecking = false;
+        if (basicActivationChecks()) {
+            event_user(0); // summon
+        }
     }
-    
-    casting = false;
 }
-
+/*
+if (casting) {
+    event_user(0); // summon
+}
+*/
 if (global.GAME_PHASE == "combat planning") {
     if (clicked) {
         clicked = false;
@@ -196,6 +196,41 @@ if (global.GAME_PHASE == "combat planning") {
 
 // clear click state
 clicked = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// SUMMON
+if (global.DEBUG) {show_debug_message("Summoned " +string(name));}
+
+var side = noone;
+if (global.TURN == global.player)
+  then side = PLAYER_CARDSLOT;
+    else side = ENEMY_CARDSLOT;
+
+if (placeOnBoard(side, id) &gt; 0) {
+    finishSummoning();
+}
+
+//casting = false;
 </string>
           </argument>
         </arguments>

@@ -82,28 +82,31 @@ if (animate == false) {
     }
 }
 
-// not in a locked-in animation (changing phase)
-if (animate == false) {
-    if (clicked) {
-        if (global.WAIT &lt;= 0) {
-            clicked = false;
-            if (ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
-                if (option_doubleClickRequired) {
-                    if (doubleClickWindow &gt; 0) {
-                        doubleClickWindow = 0;
+
+// allow interaction
+if (animate == false) { // not in a locked-in animation such as changing phase
+    if (global.TURN == global.player) {
+        if (clicked) {
+            if (global.WAIT &lt;= 0) {
+                clicked = false;
+                if (ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
+                    if (option_doubleClickRequired) {
+                        if (doubleClickWindow &gt; 0) {
+                            doubleClickWindow = 0;
+                            nextPhase();
+                            animate = true;
+                            animationTime = animationTimeMax;
+                        } else {
+                            doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                        }
+                    } else {
                         nextPhase();
                         animate = true;
                         animationTime = animationTimeMax;
-                    } else {
-                        doubleClickWindow = CONTROLS.doubleClickWindowMax;
                     }
-                } else {
-                    nextPhase();
-                    animate = true;
-                    animationTime = animationTimeMax;
                 }
-            }
-        } else show_debug_message("can't click now, waiting...");
+            } else show_debug_message("can't click now, waiting...");
+        }
     }
 }
 

@@ -28,13 +28,13 @@
             <string>/// setup
 event_inherited();
 
-lifespan = 60;
+lifespan = 160;
 angle_variation = 40;       // Angle variation for branches
 endX = x;
 endY = y;
 length = 1;
 chonkiness = 1;
-
+depth = global.info_depth;
 alarm[0] = 1;
 
 alpha = 1;

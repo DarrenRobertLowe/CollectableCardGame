@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CARD</parentName>
+  <parentName>SPELL_CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,17 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// Parent of N_DAMAGE_SPELL and X_DAMAGE_SPELL
 event_inherited();
 
-sprite_index = spr_card_spell;
-class    = "Spell";
-type     = SPELL_CARD
-validTargets   = ds_list_create();
-isTargeted = true;
-target   = 0;
-choosingTarget = false;
-castFX  = noone;
 </string>
           </argument>
         </arguments>
@@ -58,26 +50,56 @@ castFX  = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// common to all spells, overwrite in custom spells if required
+            <string>/// targeting
 event_inherited();
 
-if (owner == global.player) {
-    if (castingChecking) {
-        castingChecking = false;
-        if( basicActivationChecks() ){
-            casting = true;
+if (choosingTarget) {
+    CONTROLS.animate = true;
+    global.currentCard = id;
+    
+    //show_debug_message("CHOOSING TARGET!");
+    if (global.controls_cancel == true) {
+        stopTargeting();
+        show_debug_message("Cancelled.");
+    }
+    
+    
+    target  = noone;
+    var ptarget = noone;
+    
+    if (global.target != noone) {
+        
+        if (object_is_ancestor(global.target.object_index, TARGETABLE)) {
+        
+            if (ds_list_find_index(validTargets, "player") &gt; -1) {
+                if (global.target.object_index == DECK) {
+                    ptarget = global.target.owner;
+                }
+            }
+            
+            
+            if (global.target.type == CREATURE_CARD) {
+                if (global.target.position == "board") {
+                    if (ds_list_find_index(validTargets, "creature on board") &gt; -1) {
+                        ptarget = global.target;
+                    }
+                }
+            }
         }
     }
 
-    if (casting) {
-        if (isTargeted) {
-            global.target = noone;
-            global.choosingTarget = true; 
-            global.castingSpell = true; 
-            choosingTarget = true;
-        }
+    
+    if (ptarget != noone) {
+        show_debug_message("potential target is : " +string(ptarget));
         
-        casting = false;
+        ptarget.glowing = true;
+        if (global.controls_accept) {
+            target = ptarget;
+            show_debug_message("Actual target is : " +string(target));
+            global.choosingTarget = false;
+            choosingTarget = false;
+            event_user(0); // cast the spell (AI uses this too)
+        }
     }
 }
 </string>

@@ -209,8 +209,8 @@ if ((position == "hand") or (position == "graveyard")) {
             // visuals
             visible = true;
             if (owner == global.enemy) {    // flip opponent's card on face
-                image_index = 0;
-                faceUp = false;
+                //image_index = 0;
+                //faceUp = false;
             }
         } else {
             visible = false;

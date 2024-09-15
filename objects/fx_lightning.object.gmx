@@ -32,23 +32,55 @@ direction = 0;
 lifespan = 30;
 branches = 10;
 length = 50;
+alarm[0] = 1; // create first branches
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// create first branches
 
-var branch = instance_create(x, y, fx_lightning_branch);
+var offsety = ((sprite_get_height(target.sprite_index) * target.scale) * 0.5);
+
+y = offsety;
+
+var branch = instance_create(x, target.y + (sprite_get_height(target.sprite_index) * target.scale) * 0.5, fx_lightning_branch);
 var choice = choose(0, 1);
 var angleVariation = round(random(45));
-branch.branches  = branches-1;
-branch.length = length * random_range(0.5, 0.8);
-branch.chonkiness = 3;
+length = (sprite_get_width(self.target) * 0.5);
+chonkiness = 4;
 
-switch(choice) {
-    case 0:
-        branch.direction = (direction + angleVariation);
-    break;
-    
-    case 1:
-        branch.direction = (direction - angleVariation);
-    break;
+repeat(1) {
+    branch.branches     = self.branches-1;
+    branch.length       = length * random_range(0.7, 0.9);
+    branch.chonkiness   = (chonkiness * 0.8);
+    switch(choice) {
+        case 0:
+            branch.direction = (direction + angleVariation);
+        break;
+        
+        case 1:
+            branch.direction = (direction - angleVariation);
+        break;
+    }
 }
 </string>
           </argument>
@@ -72,7 +104,7 @@ switch(choice) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// emmit oarticles and lifespan
+            <string>/// lifespan
 
 lifespan--;
 if (lifespan &lt;= 0) {

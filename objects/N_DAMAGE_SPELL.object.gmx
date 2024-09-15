@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>SPELL_CARD</parentName>
+  <parentName>DAMAGE_SPELL</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -33,7 +33,7 @@ event_inherited();
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -50,62 +50,14 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// targeting
+            <string>/// CAST THE SPELL
+show_debug_message("Casting: " + object_get_name(object_index));
 event_inherited();
+spawn_CastFX(target); //create the castFX instance
+damage(target, attack);
+completeCasting();
+stopTargeting();
 
-if (choosingTarget) {
-    CONTROLS.animate = true;
-    global.currentCard = id;
-    
-    
-    //show_debug_message("CHOOSING TARGET!");
-    if (global.controls_cancel == true) {
-        stopTargeting();
-        show_debug_message("Cancelled.");
-    }
-    
-    
-    var target  = noone;
-    var ptarget = noone;
-    
-    if (global.target != noone) {
-        
-        if (object_is_ancestor(global.target.object_index, TARGETABLE)) {
-        
-            if (ds_list_find_index(validTargets, "player") &gt; -1) {
-                if (global.target.object_index == DECK) {
-                    ptarget = global.target.owner;
-                }
-            }
-            
-            
-            if (global.target.type == CREATURE_CARD) {
-                if (global.target.position == "board") {
-                    if (ds_list_find_index(validTargets, "creature on board") &gt; -1) {
-                        ptarget = global.target;
-                    }
-                }
-            }
-        }
-    }
-
-    
-    if (ptarget != noone) {
-        show_debug_message("potential target is : " +string(ptarget));
-        
-        ptarget.glowing = true;
-        if (global.controls_accept) {
-            target = ptarget;
-            show_debug_message("Actual target is : " +string(target));
-            global.choosingTarget = false;
-            choosingTarget = false;
-            event_user(0);
-            damage(target, attack);
-            completeCasting();
-            stopTargeting();
-        }
-    }
-}
 </string>
           </argument>
         </arguments>

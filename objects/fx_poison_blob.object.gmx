@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CARD</parentName>
+  <parentName>FX</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,17 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// setup
 event_inherited();
 
-sprite_index = spr_card_spell;
-class    = "Spell";
-type     = SPELL_CARD
-validTargets   = ds_list_create();
-isTargeted = true;
-target   = 0;
-choosingTarget = false;
-castFX  = noone;
+particle_system = global.PARTICLE_SYSTEM;
+blob = part_type_create();
+ring  = part_type_create();
+particleCount = 1;
+lifespan = 30;
+
+
+// Define the particle types
+
+part_type_shape(blob, pt_shape_disk);
+part_type_size(blob, 0.3, 0.5, 0, 0.2);
+part_type_colour3(blob, c_purple, c_green, c_purple);
+part_type_blend(blob, bm_subtract);
+part_type_alpha2(blob, 1, 0);
+part_type_direction(blob, 90, 90, 0, 45);
+part_type_speed(blob, 1, 2, -0.01, 0.5);
+part_type_life(blob, 60, 60);
+
+
+part_type_shape(ring, pt_shape_ring);
+part_type_size(ring, 0.1, 0.2, 0, 0.5);
+part_type_colour1(ring, c_purple);
+part_type_alpha2(ring, 1, 0);
+part_type_life(ring, 60, 60);
+
+
+part_particles_create(particle_system, x, y, blob, particleCount);
+part_particles_create(particle_system, x, y, ring, particleCount);
 </string>
           </argument>
         </arguments>
@@ -58,27 +78,15 @@ castFX  = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// common to all spells, overwrite in custom spells if required
-event_inherited();
+            <string>/// emmit particles
 
-if (owner == global.player) {
-    if (castingChecking) {
-        castingChecking = false;
-        if( basicActivationChecks() ){
-            casting = true;
-        }
-    }
+//part_particles_create(particle_system, x, y, ring, particleCount);
+//part_particles_create(particle_system, x, y, flare, particleCount);
 
-    if (casting) {
-        if (isTargeted) {
-            global.target = noone;
-            global.choosingTarget = true; 
-            global.castingSpell = true; 
-            choosingTarget = true;
-        }
-        
-        casting = false;
-    }
+
+lifespan--;
+if (lifespan &lt;= 0) {
+    instance_destroy(self, true);
 }
 </string>
           </argument>

@@ -33,7 +33,6 @@ particle_system = global.PARTICLE_SYSTEM;
 flare = part_type_create();
 cloud = part_type_create();
 particleCount = 5;
-part_system_depth(particle_system, global.info_depth);
 
 // Define the particle types
 part_type_shape(flare, pt_shape_flare);
@@ -72,7 +71,7 @@ part_type_life(cloud, 60, 120);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// emmit oarticles and lifespan
+            <string>/// emmit particles and lifespan
 
 part_particles_create(particle_system, x, y, flare, particleCount);
 part_particles_create(particle_system, x, y, cloud, particleCount);

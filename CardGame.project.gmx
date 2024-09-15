@@ -115,6 +115,18 @@
     <script>scripts\calculate_glowAlpha.gml</script>
     <script>scripts\wand_rotate.gml</script>
     <script>scripts\fx_create_lightning_branch.gml</script>
+    <script>scripts\spawn_CastFX.gml</script>
+    <scripts name="AI">
+      <script>scripts\AI_playCreatureCard.gml</script>
+      <script>scripts\AI_wait.gml</script>
+      <script>scripts\AI_playDestructionSpells.gml</script>
+      <script>scripts\AI_playAnySpells.gml</script>
+      <script>scripts\getDamageSpellsByStrongestCastable.gml</script>
+      <script>scripts\prioritiseCardsByAttack.gml</script>
+      <script>scripts\getHealingSpellsByStrongestCastable.gml</script>
+    </scripts>
+    <script>scripts\getCreatures.gml</script>
+    <script>scripts\reset_AI_decisions.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -160,6 +172,7 @@
       </objects>
       <objects name="Spells">
         <object>objects\SPELL_CARD</object>
+        <object>objects\DAMAGE_SPELL</object>
         <object>objects\N_DAMAGE_SPELL</object>
         <object>objects\spell_Bolt</object>
         <object>objects\spell_Heal</object>
@@ -188,6 +201,14 @@
       <objects name="Lightning">
         <object>objects\fx_lightning</object>
         <object>objects\fx_lightning_branch</object>
+      </objects>
+      <objects name="Healing">
+        <object>objects\fx_healing</object>
+        <object>objects\fx_orb</object>
+      </objects>
+      <objects name="Poison">
+        <object>objects\fx_poison</object>
+        <object>objects\fx_poison_blob</object>
       </objects>
     </objects>
   </objects>
