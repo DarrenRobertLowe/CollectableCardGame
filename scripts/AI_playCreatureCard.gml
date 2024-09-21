@@ -1,13 +1,14 @@
 /// AI_playCreatureCard()
 show_debug_message("running AI_playCreatureCard()");
+
 // determine what to cast or summon
 if (AI_finishedSummoning == false) {
     var monsterList = ds_priority_create();
     var cards = hand.contents;
     
+    // create a priority queue of creatures to summon, ranked by attack 
     for(var i=0; i<ds_list_size(cards); i++) {
         card = ds_list_find_value(cards, i);
-        // highest attack creature
         if (card.type == CREATURE_CARD and card.castingCost <= mana) {
             ds_priority_add(monsterList, card, card.attack);
         }

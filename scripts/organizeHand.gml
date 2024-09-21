@@ -15,7 +15,11 @@ if (cards > 0) {
     
     for (var i=0; i<handsize; i++) {
         var card = ds_list_find_value(cards, i);
-        card.displayed = showContents; // boolean determined by the showHand button
+        
+        if (global.currentCard != card) {   // we want the current card being played to still be visible
+            card.displayed = showContents;  // boolean determined by the showHand button
+        }
+        
         
         if ((card.position != "hand")
         and (card.position != "graveyard") 

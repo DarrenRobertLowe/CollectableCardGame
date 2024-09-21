@@ -35,5 +35,4 @@ if (exists(target)) {
             sendToGraveyard(target.owner.graveyard, target);
         }
     }
-    
-} else log_error("Invalid target for damage: " + string(target) +" does not exist!", true, global.DEBUG);
+} else log("Error: Invalid target for damage: " + string(target) +" does not exist!", true);

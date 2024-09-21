@@ -1,15 +1,15 @@
 ///check_canPlayCard();
-var canPlay = true;
+canUse = true;
 
 if (global.GAME_PHASE == "draw") {
-    canPlay = false;
+    canUse = false;
 }
 
-if  (position == "hand") {
+if (position == "hand") {
     if  (global.GAME_PHASE != "main1")
     and (global.GAME_PHASE != "main2") {
-        canPlay = false;
+        canUse = false;
     }
 }
 
-return canPlay;
+return canUse;

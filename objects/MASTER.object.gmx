@@ -44,7 +44,7 @@ view_hview[0] = global.view_height;
 
 
 setup_depths();
-setup_sprite_scales();
+setup_card_scales();
 setup_rules();
 setup_fonts();
 setup_text_colours();

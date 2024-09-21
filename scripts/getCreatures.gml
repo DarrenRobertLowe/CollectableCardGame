@@ -1,8 +1,10 @@
-/// getCreatures(CONTESTANT id, targetList)
-show_debug_message("running getCreatures");
+/// getCreatures(CONTESTANT id)
+/* Returns a list of the of the creatures in play
+ * on the side of the given contestant.
+ */
 
 var contestant = argument0;
-var targetList = ds_list_create();
+var creatureList = ds_list_create();
 
 var side = noone;
 
@@ -13,11 +15,10 @@ if (contestant = global.player) {
 with (side) {
     if (card != noone) {
         if (card.type = CREATURE_CARD) {
-            ds_list_add(targetList, card);
+            ds_list_add(creatureList, card);
             show_debug_message(card);
         }
     }
 }
 
-show_debug_message("finished getCreatures()");
-return targetList;
+return creatureList;

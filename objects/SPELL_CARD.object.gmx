@@ -75,6 +75,12 @@ if (owner == global.player) {
             global.choosingTarget = true; 
             global.castingSpell = true; 
             choosingTarget = true;
+            
+            // if this doesn't target cards in graveyard, hand or deck...
+            global.player.hand.showContents      = false;
+            global.player.graveyard.showContents = false;
+            global.enemy.hand.showContents       = false;
+            global.enemy.graveyard.showContents  = false;
         }
         
         casting = false;

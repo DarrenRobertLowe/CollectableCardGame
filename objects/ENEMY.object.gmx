@@ -129,6 +129,7 @@ if (waitTime &lt;= 0) {
         
         // other spells
         if (AI_finishedSummoning)
+        and (AI_finishedDestructionSpellCasting)
         and !(AI_finishedAnySpellCasting) {
             AI_playAnySpells();
         }

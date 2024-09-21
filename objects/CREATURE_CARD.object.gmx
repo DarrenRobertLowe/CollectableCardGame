@@ -167,7 +167,7 @@ if (global.GAME_PHASE == "combat planning") {
                     attackEvent.target    = global.enemy; // attack the enemy directly
                     global.choosingTarget = false;
                     ds_list_insert(global.EVENT_LIST, 0, attackEvent);
-                    show_debug_message("event id: " + string(attackEvent));
+                    debug("event id: " + string(attackEvent));
                 } else {
                     global.choosingTarget = true;
                 }
@@ -219,18 +219,16 @@ clicked = false;
           <argument>
             <kind>1</kind>
             <string>/// SUMMON
-if (global.DEBUG) {show_debug_message("Summoned " +string(name));}
+debug("Summoned " +string(name));
 
 var side = noone;
 if (global.TURN == global.player)
-  then side = PLAYER_CARDSLOT;
-    else side = ENEMY_CARDSLOT;
+    then side = PLAYER_CARDSLOT;
+else side = ENEMY_CARDSLOT;
 
 if (placeOnBoard(side, id) &gt; 0) {
     finishSummoning();
 }
-
-//casting = false;
 </string>
           </argument>
         </arguments>

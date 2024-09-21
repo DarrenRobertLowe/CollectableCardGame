@@ -56,15 +56,19 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="Debug">
+      <script>scripts\log.gml</script>
+      <script>scripts\debug.gml</script>
+      <script>scripts\log_errorOLD.gml</script>
+    </scripts>
     <script>scripts\draw_text_bordered.gml</script>
     <script>scripts\setup_rules.gml</script>
     <script>scripts\setup_depths.gml</script>
-    <script>scripts\setup_sprite_scales.gml</script>
+    <script>scripts\setup_card_scales.gml</script>
     <script>scripts\setup_fonts.gml</script>
     <script>scripts\setup_text_colours.gml</script>
     <script>scripts\exists.gml</script>
     <script>scripts\damage.gml</script>
-    <script>scripts\log_error.gml</script>
     <script>scripts\build_deck.gml</script>
     <script>scripts\draw_card.gml</script>
     <script>scripts\mouseOver.gml</script>

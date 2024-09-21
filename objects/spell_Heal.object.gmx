@@ -37,7 +37,7 @@ attack      = -3;
 
 // fx
 target      = noone;
-castFX      = fx_poison;//fx_healing;
+castFX      = fx_healing;
 
 </string>
           </argument>

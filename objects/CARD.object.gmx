@@ -121,10 +121,14 @@ glowing = false;
 
 if (displayed == false) {
     visible = false;
-}
+} else visible = true;
 
 image_index = faceUp;
-canUse = false;
+
+
+// check if can't be played so we can darken the card
+canUse = check_canPlayCard();
+
 
 switch (position) {
     case "deck":
@@ -162,6 +166,7 @@ switch (position) {
     case "board":
         canUse = true;
         displayed = true;
+        faceUp = true;
         scale = global.card_board_scale;
         break;
         
@@ -170,12 +175,15 @@ switch (position) {
             then canUse = true;
             else canUse = false;
         y = owner.hand.handY;
+        scale = global.card_grave_scale;
         break;
 }
 
 
+// position card to left of screen when casting spell
 if (global.choosingTarget == true) {
     if (global.currentCard == id) {
+        displayed = true;
         depth = global.drawing_depth;
         targetX = 0;
         targetY = (room_height/2)
@@ -212,8 +220,6 @@ if ((position == "hand") or (position == "graveyard")) {
                 //image_index = 0;
                 //faceUp = false;
             }
-        } else {
-            visible = false;
         }
     }
 }
@@ -247,8 +253,7 @@ if (position == "board") {
 }
 
 
-// check if can't be played so we can darken the card
-canPlay = check_canPlayCard();
+
 
 
 // move the card into the targetX and targetY
@@ -321,6 +326,8 @@ if (displayed) {
     draw_self();
     
     if (faceUp) {
+        draw_set_halign(fa_left);
+        
         // name text
         switch (position) {
             case "hand":
@@ -392,7 +399,7 @@ if (displayed) {
         
         
         // darken card if it can't be played
-        if (canPlay == false) {
+        if (canUse == false) {
             fx_darken_card();
         }
     }

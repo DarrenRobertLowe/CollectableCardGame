@@ -52,19 +52,19 @@ if (global.GAME_PHASE == "payment") {
 
 if (global.GAME_PHASE == "main1") {
     var player = global.TURN;
-    var cardsOnBoard = global.TURN.cardsInPlay;
+    var cardsOnBoard = getCreatures(global.player);
     
     if !ds_list_empty(cardsOnBoard) {
         for(var i=0; i<ds_list_size(cardsOnBoard); i++) {
             card = ds_list_find_value(cardsOnBoard, i);
             if (card.canAttack) {
                 global.GAME_PHASE = "combat planning";
-                exit; // end the loop
+                exit; // end the loop and exit nextPhase() script
             }
         }
-        // if it reaches here there's no combat creatures
-        global.GAME_PHASE = "main2";
     }
+    
+    // no more creatures left on our side
     global.GAME_PHASE = "main2";
     exit;
 }
@@ -129,7 +129,7 @@ if (global.GAME_PHASE == "enemy_payment") {
 
 if (global.GAME_PHASE == "enemy_main1") {
     var player = global.TURN;
-    var cardsOnBoard = global.TURN.cardsInPlay;
+    var cardsOnBoard = getCreatures(global.enemy);
     
     if !ds_list_empty(cardsOnBoard) {
         for(var i=0; i<ds_list_size(cardsOnBoard); i++) {
@@ -139,9 +139,9 @@ if (global.GAME_PHASE == "enemy_main1") {
                 exit; // end the loop
             }
         }
-        // if it reaches here there's no combat creatures
-        global.GAME_PHASE = "enemy_main2";
     }
+    
+    // no more creatures left on our side
     global.GAME_PHASE = "enemy_main2";
     exit;
 }
