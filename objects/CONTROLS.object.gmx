@@ -176,7 +176,7 @@ if (global.castingSpell) {
 }
 
 if (global.GAME_PHASE == "combat") {
-    if (global.choosingTarget) {
+    if (global.choosingAttackTarget) {
         draw_sprite_ext(spr_attacking, 0, mouse_x, mouse_y, 0.5, 0.5, 0, c_yellow, 1);
     }
 }

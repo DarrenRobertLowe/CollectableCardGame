@@ -7,10 +7,11 @@ PHASES
  - used for paying mana towards a monster's existance or enchantments, etc.
 "main1"
  - summon, cast spells, use enchantments or effects
+"combat planning"
+ - assign combat targets
 "combat"
- - assign combat target one at a time
- - combat resolves one at a time
-"aftermath"
+ - combat resolves
+"main2"
  - summon, cast spells, use enchantments or effects
 "endturn"
  - some cards might have end of turn effects
@@ -57,7 +58,7 @@ if (global.GAME_PHASE == "main1") {
         for(var i=0; i<ds_list_size(cardsOnBoard); i++) {
             card = ds_list_find_value(cardsOnBoard, i);
             if (card.canAttack) {
-                global.GAME_PHASE = "combat";
+                global.GAME_PHASE = "combat planning";
                 exit; // end the loop and exit nextPhase() script
             }
         }
@@ -68,12 +69,16 @@ if (global.GAME_PHASE == "main1") {
     exit;
 }
 
+if (global.GAME_PHASE == "combat planning") {
+    global.GAME_PHASE = "combat";
+    // resolve combat
+    nextEvent();
+    exit;
+}
+
 if (global.GAME_PHASE == "combat") {
     global.GAME_PHASE = "main2";
-    // resolve combat
-    //nextEvent();
-    if  !(global.choosingAttackTarget) and !(global.choosingEffectTarget)
-    then exit;
+    exit;
 }
 
 if (global.GAME_PHASE == "main2") {

@@ -1,7 +1,8 @@
 /// stopTargeting();
 
 choosingTarget = false;
-global.choosingTarget = false;
+global.choosingEffectTarget = false;
+global.choosingAttackTarget = false;
 global.castingSpell = false;
 global.currentCard = noone;
 global.target = noone;

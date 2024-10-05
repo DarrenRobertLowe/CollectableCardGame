@@ -181,7 +181,7 @@ switch (position) {
 
 
 // position card to left of screen when casting spell
-if (global.choosingTarget == true) {
+if (global.choosingEffectTarget == true) {
     if (global.currentCard == id) {
         displayed = true;
         depth = global.drawing_depth;
@@ -192,7 +192,7 @@ if (global.choosingTarget == true) {
 
 
 if ((position == "hand") or (position == "graveyard")) {
-    if (global.choosingTarget == false) {
+    if (global.choosingEffectTarget == false) and (global.choosingAttackTarget == false) {
         if (displayed) {
             // interactivity
             if (mouseOverCard() == id) {
@@ -226,33 +226,34 @@ if ((position == "hand") or (position == "graveyard")) {
 
 
 if (position == "board") {
-
-    // allow this card to be selected as a combat target
-    if (global.choosingTarget == true) {
-        if (mouseOverCard() == id) {
-            glowing = true;
-            if (clicked) {
+    // normal activation of card (e.g. combat)
+    if (mouseOverCard() == id) {
+        if (clicked == true) {
+            if (doubleClickWindow &gt; 0) {
+                activate = true;
                 clicked = false;
-                global.currentCard.target = id;
-            }
-        }
-        
-        
-    } else { // normal activation of card (e.g. combat)
-        if (mouseOverCard() == id) {
-            if (clicked == true) {
-                if (doubleClickWindow &gt; 0) {
-                    activate = true;
-                    clicked = false;
-                } else {
-                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
-                }
+            } else {
+                doubleClickWindow = CONTROLS.doubleClickWindowMax;
             }
         }
     }
 }
 
 
+
+if (global.choosingEffectTarget == true) {
+    // allow this card to be selected as a combat target
+    if (global.currentCard != id) {
+        if (mouseOverCard() == id) {
+            glowing = true;
+            if (clicked) {
+                clicked = false;
+                //global.currentCard.target = id;
+                global.target = id;
+            }
+        }
+    }
+}
 
 
 

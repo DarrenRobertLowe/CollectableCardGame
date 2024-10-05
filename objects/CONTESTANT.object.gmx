@@ -34,7 +34,7 @@ mana    = 140;                      // arcana, essence, power, spirit, energy
 cards   = ds_list_create();         // cards in this hero's deck
 graveyard = ds_list_create();       // cards in this hero's grave
 cardsInPlay = ds_list_create();     // a list of anything on the board under this player's control
-
+owner   = id;                       // it just helps simplify targeting
 
 waitTime = 0;                       // mainly used for AI timing but could be used for players also
 scale = 1;

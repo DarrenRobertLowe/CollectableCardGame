@@ -11,7 +11,7 @@ if (ds_list_size(list) > 0) {
             event_user(0); // perform the event
         }
     } else {
-        log("Error! Could not find event " + string(event) + "! Skipped to the next instead.", true);
+        log("Error in nextEvent(): Could not find event " + string(event) + "! Skipped to the next instead.");
         nextEvent();
     }
 } else {

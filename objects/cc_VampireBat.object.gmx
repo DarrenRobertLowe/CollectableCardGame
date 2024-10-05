@@ -35,7 +35,7 @@ image       = art_vampirebat;
 castingCost = 3;
 description = "When Vampire Bat deals damage to target enemy, controller gains health equal to damage dealt.";
 
-baseAttack  = 2;
+baseAttack  = 1;
 baseDefence = 0;
 baseHp      = 1;
 attack      = baseAttack;

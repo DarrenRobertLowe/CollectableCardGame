@@ -34,7 +34,7 @@ image       = art_ankylo;
 castingCost = 5;
 description = "All HP damage to Ankylo from melee is halved (round down).";
 
-baseAttack  = 2;
+baseAttack  = 3;
 baseDefence = 5;
 baseHp      = 2;
 attack      = baseAttack;

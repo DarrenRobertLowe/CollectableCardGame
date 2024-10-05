@@ -100,8 +100,8 @@ playStack = build_deck(cards);
 if (clicked) {
     clicked = false;
     
-    if (global.choosingTarget == true) {
-        global.target = id;
+    if (global.choosingEffectTarget == true) or (global.choosingAttackTarget == true) {
+        global.target = owner;
     } else {
         if (global.GAME_PHASE == "draw") {
             if (global.TURN == owner) {
@@ -112,11 +112,19 @@ if (clicked) {
     }
 }
 
-if (global.choosingTarget == true) {
-    if (mouseOver()) {
+if (mouseOver()) {
+    if (global.choosingEffectTarget == true) {
         glowing = true;
     }
+    
+    if (global.choosingAttackTarget == true) {
+        if (canAttackDirectly(owner)) {
+            glowing = true;
+        }
+    }
 }
+
+
 if (glowing) {
     calculate_glowAlpha();
 }

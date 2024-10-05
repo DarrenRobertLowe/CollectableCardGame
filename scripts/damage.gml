@@ -18,7 +18,7 @@ if (exists(target)) {
         targX = GUI.enemyHPX;
         targY = GUI.enemyHPY;
     } else {
-        targX = (target.x + ((sprite_get_width(target.sprite_index) * target.scale) * 0.5));
+        targX = (target.x + ((sprite_get_width(target.sprite_index)  * target.scale) * 0.5));
         targY = (target.y + ((sprite_get_height(target.sprite_index) * target.scale)  * 0.5));
     }
     
@@ -35,4 +35,4 @@ if (exists(target)) {
             sendToGraveyard(target.owner.graveyard, target);
         }
     }
-} else log("Error: Invalid target for damage: " + string(target) +" does not exist!", true);
+} else log("Error: Invalid target for damage: " + string(target) +" does not exist!");

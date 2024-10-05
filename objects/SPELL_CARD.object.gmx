@@ -70,9 +70,9 @@ if (owner == global.player) {
     }
 
     if (casting) {
-        if (isTargeted) {
+        if (isTargeted) {   // is a targeted spell type
             global.target = noone;
-            global.choosingTarget = true; 
+            global.choosingEffectTarget = true; 
             global.castingSpell = true; 
             choosingTarget = true;
             

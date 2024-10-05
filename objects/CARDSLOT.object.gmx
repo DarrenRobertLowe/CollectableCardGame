@@ -116,8 +116,10 @@ glowing = false;
           <argument>
             <kind>1</kind>
             <string>/// start glowing
-if ((global.choosingTarget) and (card != noone)) {
-    glowing = true;
+if ((global.choosingAttackTarget)) {
+    if (isOpponentCreature(card)) {
+        glowing = true;
+    }
 }
 </string>
           </argument>

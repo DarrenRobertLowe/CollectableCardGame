@@ -4,17 +4,17 @@ var attacker = argument0;
 var defender = argument1;
 
 if !(exists(attacker)) {
-    show_message("attacker: " +string(attacker) + " does not exist!");
+    debug("attacker: " +string(attacker) + " does not exist!");
     exit;
 }
 if !(exists(defender)) {
-    show_message("defender: " +string(defender) + " does not exist!");
+    debug("defender: " +string(defender) + " does not exist!");
     exit;
 }
 
 // is the target a player?
 if (object_is_ancestor(defender.object_index, CONTESTANT)) {
-    show_debug_message("defender is a contestant, attacking directly");
+    debug("defender is a contestant, attacking directly");
     damage(defender, attacker.attack);
     attacker.attacking = false;
     attacker.attackedThisTurn = true;

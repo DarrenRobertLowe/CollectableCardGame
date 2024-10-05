@@ -29,7 +29,6 @@
 depth = global.cardFX_depth;
 distance = 0;
 spd = 0;
-attacker = noone;
 attacking = false;
 target = noone;
 animate = false;
@@ -97,16 +96,15 @@ if (animate == true) {
     if (distance &lt;= 0) {
         spd = 0;
         global.WAIT = false;
-        fight(attacker, target);
+        fight(parent, target);
         attacking = false;
         parent.attacking = false;
-        parent.attackedThisTurn = true;
         animate = false;
         
         
         
         // clear our event and move to the next
-        nextEvent();
+        //nextEvent();
     }
 } else {
     x = parent.x;
@@ -137,10 +135,11 @@ if (animate == true) {
             <string>/// The event
 
 global.WAIT = true;
-
+parent.attackedThisTurn = true;
 animate = true;
 distance = point_distance(x, y, target.x, target.y);
 spd = (distance / room_speed) *2;
+
 </string>
           </argument>
         </arguments>

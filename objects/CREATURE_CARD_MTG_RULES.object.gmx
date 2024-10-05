@@ -139,45 +139,32 @@ if (owner == global.player) {
     }
 }
 
-if (global.GAME_PHASE == "combat") {
-    if (position == "board") {
+if (global.RULES_COMBAT_STLYE == "YGO") {
+    if (global.GAME_PHASE == "combat") {
+        if (position == "board") {
         
-        // allow attack cancel
-        if (global.currentCard = id) {
-            if (global.choosingAttackTarget) {
-                if (global.controls_cancel) {
-                    attacking = false;
-                    attackEvent.attacking = false;
-                    global.currentCard = id;
-                    global.target = noone;
-                    global.choosingAttackTarget = false; 
-                }
-            }
-        }
+            if (clicked) {
+                clicked = false;
     
-        if (clicked) {
-            clicked = false;
-            
-            // Our turn
-            if (global.TURN == owner) {
-                // Attacking
-                if (global.choosingAttackTarget == false) {
-                    // start the attacking state
-                    if (!(attacking) and !(attackedThisTurn)) {
-                        attacking = true;
-                        global.currentCard = id;
-                        global.target = noone;
-                        global.choosingAttackTarget = true;
+                if (global.TURN == owner) {
+                    // cancel attack
+                    if (attacking == true) {  
+                        attacking = false;
+                    } else {
+                        if (!(attacking) and !(attackedThisTurn)) {
+                            attacking = true;
+                            attackEvent.attacker  = id;   
+                            global.currentCard = id;
+                            global.target = noone;
+                            global.choosingAttackTarget = true;
+                        }
                     }
-                }
-            }
-            
-            // not our turn
-            if  (global.TURN != owner) 
-            and (global.currentCard != id) {
-                // allow this card to be selected as a combat target
+                } 
+                
+                // Choosing a target to attack
                 if (global.choosingAttackTarget == true) {
-                    if (global.currentCard.owner != owner) {
+                    // allow this card to be selected as a combat target
+                    if (global.currentCard != id) {
                         if (mouseOverCard() == id) {
                             glowing = true;
                             if (clicked) {
@@ -186,26 +173,76 @@ if (global.GAME_PHASE == "combat") {
                             }
                         }
                     }
+                    
+                    // allow this card to attack other creatures
+                    if (global.currentCard = id) {
+                        if (global.target != noone) { // chosen a target?
+                            attackEvent.attacking = true;
+                            attackEvent.target = global.target;
+                            ds_list_insert(global.EVENT_LIST, 0, attackEvent);
+                            nextEvent(); // perform the attack
+                            
+                            // finish
+                            global.currentCard = noone;
+                            global.choosingAttackTarget = false;
+                        }
+                    }
+                }
+            } // end (clicked)
+        } // end (position == "board")
+    } // end (combat)
+} // end YGO rules
+
+/*
+if (global.RULES_COMBAT_STLYE == "MTG") {
+    if (clicked) {
+        clicked = false;
+    
+        if (position == "board") {
+            // cancel attack
+            if (attacking == true) {
+                attacking = false;
+                
+                var index = ds_list_find_index(global.EVENT_LIST, attackEvent);
+                if (index &gt; -1) {
+                    ds_list_delete(global.EVENT_LIST, index);
+                    attackEvent.attacking = false;
+                }
+            } else {
+                attacking = true;
+                attackEvent.attacking   = true;
+                attackEvent.attacker    = id;   
+                
+                // NO DEFENDERS
+                if (countDefenders(global.TURN.opponent) == 0) {
+                    attackEvent.target    = global.enemy; // attack the enemy directly
+                    global.choosingTarget = false;
+                    ds_list_insert(global.EVENT_LIST, 0, attackEvent);
+                    debug("event id: " + string(attackEvent));
+                } else {
+                    global.choosingTarget = true;
+                    global.target = noone;
+                }
+                
+                
+                // DEFENDERS
+                if ( global.choosingTarget == true ) {
+                    global.currentCard = id;
+                    
+                    if (global.target != noone) { // chosen a target?
+                        target = global.target;
+                        attackEvent.target = global.target;
+                        ds_list_insert(global.EVENT_LIST, 0, attackEvent);
+                        
+                        // finish
+                        global.choosingTarget = false;
+                    }
                 }
             }
-        } // end (clicked)
-        
-        
-        // ATTACK ENEMY
-        if (global.currentCard = id) {
-            if (global.target != noone) and (global.target.owner != owner) { // we've chosen a target
-                attackEvent.attacking = true;
-                attackEvent.target = global.target;
-                ds_list_insert(global.EVENT_LIST, 0, attackEvent);
-                nextEvent(); // perform the attack
-                
-                // finish
-                global.currentCard = noone;
-                global.choosingAttackTarget = false;
-            }
         }
-    } // end (position == "board")
-} // end (combat)
+    }
+}
+*/
 
 // clear click state
 clicked = false;
