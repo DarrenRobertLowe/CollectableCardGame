@@ -118,6 +118,9 @@
       <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\getHealingSpellsByStrongestCastable.gml</script>
       <script>scripts\reset_AI_decisions.gml</script>
+      <script>scripts\AI_main_phase.gml</script>
+      <script>scripts\getMaxDamageOutput_spells.gml</script>
+      <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
     </scripts>
     <scripts name="GAME FLOW">
       <scripts name="Phases">

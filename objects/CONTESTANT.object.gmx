@@ -38,6 +38,9 @@ owner   = id;                       // it just helps simplify targeting
 
 waitTime = 0;                       // mainly used for AI timing but could be used for players also
 scale = 1;
+
+
+damageSpellThreshold = 0.75;        // a damage spell is worth using directly if it does more damage than this % of life total
 </string>
           </argument>
         </arguments>

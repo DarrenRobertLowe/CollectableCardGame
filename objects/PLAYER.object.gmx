@@ -61,6 +61,8 @@ deck.cards = cards;
 deck.alarm[0] = 1;
 
 
+///debug
+hp = 1;
 </string>
           </argument>
         </arguments>

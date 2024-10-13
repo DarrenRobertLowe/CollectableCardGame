@@ -104,43 +104,7 @@ if (waitTime &lt;= 0) {
     
     if (global.GAME_PHASE == "enemy_main1") {
         show_debug_message("entered main1 phase");
-        // here we can run the logic per enemy type
-        // for now, we'll just make the most basic logic.
-        
-        // play mana gathering cards
-        // AI_playManaCard;
-        
-        // destruction spells
-        if !(AI_finishedDestructionSpellCasting) {
-            show_debug_message("attempting to cast desctruction spells...");
-            AI_playDestructionSpells();
-        }
-        
-        // summon monsters
-        if (AI_finishedDestructionSpellCasting)
-        and !(AI_finishedSummoning) {
-            AI_playCreatureCard();
-        }
-        
-        // enchantments and other monster buffs
-        //if !(AI_finishedEnchantmentCasting) {
-        //    AI_playEnchantments();
-        //}
-        
-        // other spells
-        if (AI_finishedSummoning)
-        and (AI_finishedDestructionSpellCasting)
-        and !(AI_finishedAnySpellCasting) {
-            AI_playAnySpells();
-        }
-        
-        if  (AI_finishedDestructionSpellCasting)
-        and (AI_finishedSummoning)
-        and ( AI_finishedAnySpellCasting) {
-            show_debug_message("left main1 phase");
-            nextPhase();
-            exit;
-        }
+        AI_main_phase()
     }
     
     
@@ -149,8 +113,7 @@ if (waitTime &lt;= 0) {
         exit;
     }
     if (global.GAME_PHASE == "enemy_main2") {
-        nextPhase();
-        exit;
+        AI_main_phase()
     }
     if (global.GAME_PHASE == "enemy_endturn") {
         nextPhase();

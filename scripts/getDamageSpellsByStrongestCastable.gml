@@ -1,22 +1,24 @@
-/// getDamageSpellsByStrongestCastable();
+/// getDamageSpellsByStrongestCastable(contestant);
 /* 
  * @returns list
  */
 show_debug_message("running getDamageSpellsByStrongestCastable()");
 // check if we have any DAMAGE_SPELLs
-var spellQueue = ds_priority_create();
+var contestant = argument0;
+var hand = contestant.hand;
 var cards = hand.contents;
+var spellQueue = ds_priority_create();
 
 for(var i=0; i<ds_list_size(cards); i++) {
     card = ds_list_find_value(cards, i);
     if (object_is_ancestor(card.object_index, DAMAGE_SPELL)) {
-        show_debug_message("found a type of damage spell card in hand, but could be a heal...");
+        //show_debug_message("found a type of damage spell card in hand, but could be a heal...");
         
         if (card.attack > 0) {
-            show_debug_message("It was a damage card!");
+            //show_debug_message("It was a damage card!");
             
             if (card.castingCost <= mana) {
-                show_debug_message("The card is within our casting budget!");
+                //show_debug_message("The card is within our casting budget!");
                 ds_priority_add(spellQueue, card, card.attack);
             }
         }
