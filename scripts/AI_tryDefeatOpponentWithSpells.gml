@@ -11,8 +11,9 @@ for (var s=ds_list_size(spellList)-1; s>=0; s--) {
     if (opponent.hp <= spell.attack) {
         target = opponent;
         break;
-    } else if (attack > 0) {
-        value = ( attack / (opponent.hp + epsilon) )
+    } else if (spell.attack > 0) {
+        var epsilon = 1.00001;
+        var value = ( spell.attack / (opponent.hp + epsilon) )
         if (value > damageSpellThreshold) {
             target = opponent;
             break;

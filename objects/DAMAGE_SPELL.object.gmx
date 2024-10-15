@@ -67,13 +67,13 @@ if (choosingTarget) {
     target  = noone;
     var ptarget = noone;
     
-    if (global.target != noone) {
+    if (global.target != noone) and (object_is_ancestor(global.target.object_index, TARGETABLE)) {
         
+        /*
         if (object_is_ancestor(global.target.object_index, TARGETABLE)) {
-        
             if (ds_list_find_index(validTargets, "player") &gt; -1) {
-                if (global.target.object_index == DECK) {
-                    ptarget = global.target.owner;
+                if (object_is_ancestor(global.target.object_index, CONTESTANT)) {
+                    ptarget = global.target;
                 }
             }
             
@@ -85,9 +85,13 @@ if (choosingTarget) {
                     }
                 }
             }
+            
+            ptarget = global.target;
         }
+        */
+        ptarget = global.target;
     }
-
+    
     
     if (ptarget != noone) {
         show_debug_message("potential target is : " +string(ptarget));

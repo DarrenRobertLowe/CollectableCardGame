@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>TARGETABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -35,7 +35,7 @@ cards   = ds_list_create();         // cards in this hero's deck
 graveyard = ds_list_create();       // cards in this hero's grave
 cardsInPlay = ds_list_create();     // a list of anything on the board under this player's control
 owner   = id;                       // it just helps simplify targeting
-
+position = "board";                 // it just helps simplify targeting
 waitTime = 0;                       // mainly used for AI timing but could be used for players also
 scale = 1;
 

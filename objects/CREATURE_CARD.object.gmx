@@ -142,8 +142,8 @@ if (owner == global.player) {
 if (global.GAME_PHASE == "combat") {
     if (position == "board") {
         
-        // allow attack cancel
-        if (global.currentCard = id) {
+        // allow attack CANCEL
+        if (global.currentCard == id) {
             if (global.choosingAttackTarget) {
                 if (global.controls_cancel) {
                     attacking = false;
@@ -154,7 +154,7 @@ if (global.GAME_PHASE == "combat") {
                 }
             }
         }
-    
+        
         if (clicked) {
             clicked = false;
             
@@ -192,16 +192,25 @@ if (global.GAME_PHASE == "combat") {
         
         
         // ATTACK ENEMY
-        if (global.currentCard = id) {
-            if (global.target != noone) and (global.target.owner != owner) { // we've chosen a target
-                attackEvent.attacking = true;
-                attackEvent.target = global.target;
-                ds_list_insert(global.EVENT_LIST, 0, attackEvent);
-                nextEvent(); // perform the attack
-                
-                // finish
-                global.currentCard = noone;
-                global.choosingAttackTarget = false;
+        var target = global.target;
+        if (global.currentCard == id) {
+            if (target != noone) { 
+                if (object_is_ancestor(target.object_index, CREATURE_CARD)) 
+                or (object_is_ancestor(target.object_index, CONTESTANT)) { // we've chosen a target
+                    show_debug_message("target: "+ string(target));
+                    if (target.position == "board") {
+                        if (target.owner != owner) {
+                            attackEvent.attacking = true;
+                            attackEvent.target = global.target;
+                            ds_list_insert(global.EVENT_LIST, 0, attackEvent);
+                            nextEvent(); // perform the attack
+                            
+                            // finish
+                            global.currentCard = noone;
+                            global.choosingAttackTarget = false;
+                        }
+                    }
+                }
             }
         }
     } // end (position == "board")

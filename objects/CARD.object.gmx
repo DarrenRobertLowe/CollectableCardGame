@@ -149,13 +149,13 @@ switch (position) {
         if (x == targetX) {
             position    = "hand";
             fullyDrawn  = true;
-            faceUp      = true;
         }
         break;
     
     case "hand":
-        if (global.GAME_PHASE == "main1")
-        or (global.GAME_PHASE == "main2") then canUse = true;
+        if (global.TURN == global.player) then faceUp = true;
+        if (global.GAME_PHASE == "main1") or (global.GAME_PHASE == "main2")
+            then canUse = true;
         scale = global.card_hand_scale;
         if (global.currentCard != id) {
             y = owner.hand.handY;
@@ -192,7 +192,7 @@ if (global.choosingEffectTarget == true) {
 
 
 if ((position == "hand") or (position == "graveyard")) {
-    if (global.choosingEffectTarget == false) and (global.choosingAttackTarget == false) {
+    if (!global.choosingEffectTarget) and (!global.choosingAttackTarget) {
         if (displayed) {
             // interactivity
             if (mouseOverCard() == id) {
@@ -216,10 +216,6 @@ if ((position == "hand") or (position == "graveyard")) {
             
             // visuals
             visible = true;
-            if (owner == global.enemy) {    // flip opponent's card on face
-                //image_index = 0;
-                //faceUp = false;
-            }
         }
     }
 }
@@ -248,7 +244,6 @@ if (global.choosingEffectTarget == true) {
             glowing = true;
             if (clicked) {
                 clicked = false;
-                //global.currentCard.target = id;
                 global.target = id;
             }
         }
