@@ -53,7 +53,7 @@ event_inherited();
             <string>/// CAST THE SPELL
 show_debug_message("Casting: " + object_get_name(object_index));
 event_inherited();
-spawn_CastFX(target); //create the castFX instance
+spawn_CastFX(target);   // gfx
 damage(target, attack);
 completeCasting();
 stopTargeting();

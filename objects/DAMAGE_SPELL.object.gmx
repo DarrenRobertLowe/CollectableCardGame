@@ -102,7 +102,13 @@ if (choosingTarget) {
             show_debug_message("Actual target is : " +string(target));
             global.choosingTarget = false;
             choosingTarget = false;
-            event_user(0); // cast the spell (AI uses this too)
+            
+            // show the popup info to the player
+            var info = instance_create(0, 0, POPUP_EventInfo);
+            info.performer = id;
+            info.target = target;
+            
+            ///event_user(0); // cast the spell (AI uses this too)
         }
     }
 }

@@ -25,6 +25,7 @@
       <sprite>sprites\spr_gui_wand</sprite>
     </sprites>
     <sprites name="CardArts">
+      <sprite>sprites\spr_defaultArt</sprite>
       <sprites name="Creatures">
         <sprite>sprites\art_ankylo</sprite>
         <sprite>sprites\art_vampirebat</sprite>
@@ -67,6 +68,7 @@
     <script>scripts\setup_card_scales.gml</script>
     <script>scripts\setup_fonts.gml</script>
     <script>scripts\setup_text_colours.gml</script>
+    <script>scripts\setup_options.gml</script>
     <scripts name="General">
       <script>scripts\exists.gml</script>
       <script>scripts\isOpponentCreature.gml</script>
@@ -150,6 +152,7 @@
       <script>scripts\mouseOver.gml</script>
       <script>scripts\mouseOverCard.gml</script>
     </scripts>
+    <script>scripts\showPopupSpell.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -235,6 +238,7 @@
         <object>objects\fx_poison_blob</object>
       </objects>
     </objects>
+    <object>objects\POPUP_EventInfo</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

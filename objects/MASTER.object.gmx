@@ -29,8 +29,6 @@
 
 // setup speed
 global.DEBUG = true;
-global.GAMESPEED = 60;
-room_speed = global.GAMESPEED;
 randomize();
 
 // setup view
@@ -42,6 +40,8 @@ view_yview[0] = 0;
 view_wview[0] = global.view_width;
 view_hview[0] = global.view_height;
 
+setup_options();
+room_speed = global.GAMESPEED;
 
 setup_depths();
 setup_card_scales();
