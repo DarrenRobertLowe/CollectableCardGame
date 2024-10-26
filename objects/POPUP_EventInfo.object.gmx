@@ -137,6 +137,7 @@ draw_set_alpha(backgroundAlpha);
 draw_rectangle_colour(backgroundX, backgroundY, backgroundEndX, backgroundEndY, backgroundColour, backgroundColour, backgroundColour, backgroundColour, false);
 draw_set_alpha(1);
 
+
 var perfomer_artIndex = performer.artVariant;
 var target_artIndex = spr_defaultArt;
 var performerImage;

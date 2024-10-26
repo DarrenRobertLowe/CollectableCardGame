@@ -88,6 +88,7 @@
       <script>scripts\cardSlideIntoPosition.gml</script>
       <script>scripts\removeCardFromDeck.gml</script>
       <script>scripts\wand_rotateToNormal.gml</script>
+      <script>scripts\getCardSurface.gml</script>
     </scripts>
     <scripts name="Animation FX">
       <scripts name="Glowing">
@@ -156,10 +157,9 @@
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
-      <font>fonts\fnt_cardText_hand</font>
-      <font>fonts\fnt_cardText_board</font>
-      <font>fonts\fnt_bold_hand</font>
-      <font>fonts\fnt_bold_board</font>
+      <font>fonts\fnt_card_18</font>
+      <font>fonts\fnt_card_18_bold</font>
+      <font>fonts\fnt_card_21_bold</font>
     </fonts>
     <font>fonts\font_cardcount</font>
     <font>fonts\font_health</font>
