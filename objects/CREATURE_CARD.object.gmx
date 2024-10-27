@@ -93,13 +93,14 @@ hpIconY     = iconsY;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// recalculate stats
+            <string>/// reset stats
 
 attack      = baseAttack;
 defence     = baseDefence;
 attacking   = false;
+//hp          = baseHp; // MTG style rules
 
-//hp          = baseHp; // MTG rule
+
 
 // for(var i=0; i&lt;ds_list_size(enchantments); i++){ ... apply enchantments effects ... }
 </string>
@@ -126,11 +127,20 @@ attacking   = false;
             <kind>1</kind>
             <string>/// interaction
 event_inherited();
+
+if !(alreadyActivated) {
+    if (activated) {
+        alreadyActivated = true;
+        event_user(0); // summon
+    }
+}
+
 if (owner == global.player) {
     if (castingChecking) {
         castingChecking = false;
         if (basicActivationChecks()) {
-            event_user(0); // summon
+            //event_user(0); // summon
+            summonCreature(id);
         }
     }
 }

@@ -4,4 +4,3 @@
  */
 
 global.GAMESPEED = 60;
-global.POPUP_showTime = (global.GAMESPEED * 2);

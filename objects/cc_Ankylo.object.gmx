@@ -36,7 +36,7 @@ description = "All HP damage to Ankylo from melee is halved (round down).";
 
 baseAttack  = 3;
 baseDefence = 5;
-baseHp      = 2;
+baseHp      = 5;
 attack      = baseAttack;
 defence     = baseDefence;
 hp          = baseHp;

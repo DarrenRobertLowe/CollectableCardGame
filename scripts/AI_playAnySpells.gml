@@ -13,7 +13,8 @@ for(var s=0; s<ds_list_size(spellList); s++) {
     with(spell) {
         target = id;
         if ( basicActivationChecks() ) {
-            event_user(0);  // cast spell
+            castSpell(spell);
+            //event_user(0);  // cast spell
             waitTime = room_speed;
         }
     }

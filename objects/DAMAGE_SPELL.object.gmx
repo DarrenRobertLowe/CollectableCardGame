@@ -103,12 +103,10 @@ if (choosingTarget) {
             global.choosingTarget = false;
             choosingTarget = false;
             
-            // show the popup info to the player
-            var info = instance_create(0, 0, POPUP_EventInfo);
-            info.performer = id;
-            info.target = target;
+            castSpell(id);
             
-            ///event_user(0); // cast the spell (AI uses this too)
+            // activate the spell
+            activated = true;
         }
     }
 }

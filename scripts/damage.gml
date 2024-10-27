@@ -19,13 +19,19 @@ if (exists(target)) {
         targY = GUI.enemyHPY;
     } else {
         targX = (target.x + ((sprite_get_width(target.sprite_index)  * target.scale) * 0.5));
-        targY = (target.y + ((sprite_get_height(target.sprite_index) * target.scale)  * 0.5));
+        targY = (target.y + ((sprite_get_height(target.sprite_index) * target.scale) * 0.5));
     }
     
     var dmgCounter = instance_create(targX, targY, DAMAGE_COUNTER);
     dmgCounter.value = amount;
     
-    if (object_is_ancestor(target.object_index, CARD)) {
+    if (object_is_ancestor(target.object_index, CREATURE_CARD)) {
+        // update the stats
+        with (target) {
+            getCardSurface();
+        }
+        
+        // destroyed?
         if (target.hp <= 0) {
             // create an explosion
             instance_create(

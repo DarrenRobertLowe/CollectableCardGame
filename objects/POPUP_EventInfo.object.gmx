@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -29,30 +29,37 @@
 
 performer   = noone;
 target      = noone;
-lifetime    = global.POPUP_showTime;
+keyword     = "Casting";
+minlifetime = (room_speed * 0.25);   // prevents accidentally dismissing the message
+maxlifetime = -1; // -1 for infinite lifetime
 depth       = global.info_depth;
-performer_artIndex = 0;
-target_artIndex = 0;
-
-artWidth  = sprite_get_width(spr_defaultArt);
-artHeight = sprite_get_height(spr_defaultArt);
+cardScale   = 0.7;
 
 
+var cardWidth   = (sprite_get_width(spr_card)  * cardScale);
+var cardHeight  = (sprite_get_height(spr_card) * cardScale);
+var middle      = (room_height * 0.5);
+var center      = (room_width  * 0.5);
+var leftHalf    = (room_width  * 0.25);
+var rightHalf   = (room_width  * 0.75);
+var halfCard    = (cardWidth * 0.5);
 
-var center  = ( room_width  * 0.5 );
-var middle  = ( room_height * 0.5 );
-performerX  = (center - (artWidth * 1.5) );
-performerY  = (middle - (artHeight * 0.5) );
-targetX     = (center + (artWidth * 0.5) );
-targetY     = (middle - (artHeight * 0.5) );
+cardY           = (middle - (cardHeight * 0.5));
+performerX      = (leftHalf - halfCard);
+targetX         = (rightHalf - halfCard);
+singleCardX     = (center - halfCard);
 
-var backgroundMargin = 20;
-backgroundX     = (performerX - backgroundMargin);
-backgroundY     = (performerY - backgroundMargin);
-backgroundEndX  = (targetX + artWidth + backgroundMargin);
-backgroundEndY  = (targetY + artHeight + backgroundMargin);
+
+var backgroundMargin = 60;
+titleY = (cardY - 90);
+backgroundX     = 0;
+backgroundY     = (titleY - backgroundMargin);
+backgroundEndX  = view_wview[0];
+backgroundEndY  = ((cardY + cardHeight) + backgroundMargin);
 backgroundColour = make_colour_rgb(10, 0, 0);
 backgroundAlpha = 0.8;
+
+global.POPUP_active = true;
 </string>
           </argument>
         </arguments>
@@ -75,11 +82,10 @@ backgroundAlpha = 0.8;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Trigger the event itself
+            <string>/// deactivate popup
 
-with (performer) {
-    event_user(0);
-}
+global.POPUP_active = false;
+
 </string>
           </argument>
         </arguments>
@@ -104,10 +110,20 @@ with (performer) {
             <kind>1</kind>
             <string>/// countdown lifetime
 
-lifetime--;
+if (maxlifetime &gt; -1) {
+    maxlifetime--;
+    
+    if (maxlifetime &lt;= 0) {
+        instance_destroy(self, true);
+    }
+}
 
-if (lifetime &lt;= 0) {
-    instance_destroy(self, true);
+if (minlifetime &gt; 0) {
+    minlifetime--;
+} else {
+    if (global.controls_accept) {
+        maxlifetime = 0;
+    }
 }
 </string>
           </argument>
@@ -132,34 +148,43 @@ if (lifetime &lt;= 0) {
           <argument>
             <kind>1</kind>
             <string>/// Draw the event info
+var targetSprite = 0;
+var targetIndex = 0;
+var targetScale = cardScale;
 
+// draw the background
 draw_set_alpha(backgroundAlpha);
 draw_rectangle_colour(backgroundX, backgroundY, backgroundEndX, backgroundEndY, backgroundColour, backgroundColour, backgroundColour, backgroundColour, false);
 draw_set_alpha(1);
+draw_set_font(global.font_InfoPopupTitles);
+draw_set_colour(global.GUI_title_colour);
 
 
-var perfomer_artIndex = performer.artVariant;
-var target_artIndex = spr_defaultArt;
-var performerImage;
-var targetImage;
-
-if (object_is_ancestor(performer.object_index, CONTESTANT)) {
-    performerImage = spr_profiles;
-    performer_artIndex = performer.artVariant;
+// draw the activated card
+if (target == noone) {
+    draw_text(singleCardX, titleY, keyword);
+    draw_sprite_ext(performer.cardSurfaceSprite, 0, singleCardX, cardY, cardScale, cardScale, 0, c_white, 1);
 } else {
-    performerImage = performer.image;
+    // draw the activated card
+    draw_text(performerX, titleY, keyword);
+    draw_sprite_ext(performer.cardSurfaceSprite, 0, performerX, cardY, cardScale, cardScale, 0, c_white, 1);
 }
 
-
-if (object_is_ancestor(target.object_index, CONTESTANT)) {
-    targetImage = spr_profiles;
-    target_artIndex = target.artVariant;
-} else {
-    targetImage = target.image;
+// draw the target if there is one
+if ( exists(target) ) {
+    draw_text(targetX, titleY, "Target");
+    
+    if ( object_is_ancestor(target.object_index, CONTESTANT) ) {
+        targetSprite = target.deck.sprite_index;
+        targetIndex = target.deck.image_index;
+        targetScale = 1;
+    } else {
+        targetSprite = target.cardSurfaceSprite;
+        targetIndex = target.artVariant;
+    }
+    
+    draw_sprite_ext(targetSprite, targetIndex, targetX, cardY, targetScale, targetScale, 0, c_white, 1);
 }
-
-draw_sprite(performerImage, performer_artIndex,  performerX,  performerY);
-draw_sprite(targetImage, target_artIndex, targetX, targetY);
 </string>
           </argument>
         </arguments>

@@ -30,8 +30,10 @@ depth = global.GUI_depth;
 var margin = 10;
 
 // profiles
-profileWidth    = sprite_get_width(spr_profiles);
-profileHeight   = sprite_get_height(spr_profiles);
+playerDeckImage = global.player.deck.sprite_index;
+enemyDeckImage  = global.enemy.deck.sprite_index;
+profileWidth    = sprite_get_width(global.player.deck.sprite_index);
+profileHeight   = sprite_get_height(global.player.deck.sprite_index);
 enemyProfileX   = ((view_wview[0] - margin) - profileWidth);
 enemyProfileY   = (0 + margin);
 playerProfileX  = (0 + margin);
@@ -140,15 +142,12 @@ enemyManaCountY = enemyManaBGy1 + 5;
             <kind>1</kind>
             <string>/// draw the GUI
 
-// draw the player profile pictures
-draw_sprite(spr_profiles, 0, enemyProfileX,  enemyProfileY);
-draw_sprite(spr_profiles, 1, playerProfileX, playerProfileY);
-
+// draw the crescents
 draw_sprite(spr_gui_crescent, 0, playerCrescentX, playerCrescentY);
 draw_sprite(spr_gui_crescent, 0, enemyCrescentX, enemyCrescentY);
 
 // Deck Counts
-draw_set_font(font_cardcount);
+draw_set_font(global.font_Stats);
 draw_set_colour(c_orange);
 draw_set_halign(fa_center);
 draw_sprite(spr_deckcount, 0, playerDeckCounterX, playerDeckCounterY);
@@ -156,16 +155,15 @@ draw_text(playerDeckCounterX + 20, playerDeckCounterY + 2, ds_stack_size(global.
 draw_sprite(spr_deckcount, 0, enemyDeckCounterX, enemyDeckCounterY);
 draw_text(enemyDeckCounterX + 20, enemyDeckCounterY + 2, ds_stack_size(global.enemy.deck.playStack));
 
-
 // HP
 draw_set_halign(fa_center);
-draw_set_font(font_health);
+draw_set_font(global.font_Health);
 draw_set_colour(c_lime);
 draw_text(playerHPX, playerHPY, global.player.hp);
 draw_text(enemyHPX, enemyHPY, global.enemy.hp);
 
 // draw mana
-draw_set_font(font_cardcount);
+draw_set_font(global.font_Stats);
 draw_sprite(spr_mana, 0, manaX, manaY);
 draw_set_color(c_black);
 draw_rectangle(manaBGx1, manaBGy1, manaBGx2, manaBGy2, false); 
@@ -173,7 +171,7 @@ draw_set_color(c_orange);
 draw_text(manaCountX, manaCountY, global.player.mana);
 
 // draw enemy mana
-draw_set_font(font_cardcount);
+draw_set_font(global.font_Stats);
 draw_sprite(spr_mana, 0, enemyManaX, enemyManaY);
 draw_set_color(c_black);
 draw_rectangle(enemyManaBGx1, enemyManaBGy1, enemyManaBGx2, enemyManaBGy2, false); 

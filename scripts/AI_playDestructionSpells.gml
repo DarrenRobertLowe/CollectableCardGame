@@ -77,8 +77,9 @@ if (AI_finishedDestructionSpellCasting == false) {
         with(spell) {
             target = other.target;
             other.waitTime = room_speed;
-            event_user(0);  // cast spell
         }
+        
+        castSpell(spell);
         
         exit;
     } else {

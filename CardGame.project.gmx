@@ -14,7 +14,7 @@
         <sprite>sprites\spr_button_show_hand</sprite>
         <sprite>sprites\spr_show_graveyard</sprite>
       </sprites>
-      <sprite>sprites\spr_profiles</sprite>
+      <sprite>sprites\spr_avatars</sprite>
       <sprite>sprites\spr_deck_glow</sprite>
       <sprite>sprites\spr_gui_crescent</sprite>
       <sprite>sprites\spr_numbers_health</sprite>
@@ -25,7 +25,7 @@
       <sprite>sprites\spr_gui_wand</sprite>
     </sprites>
     <sprites name="CardArts">
-      <sprite>sprites\spr_defaultArt</sprite>
+      <sprite>sprites\spr_defaultArt_OLD</sprite>
       <sprites name="Creatures">
         <sprite>sprites\art_ankylo</sprite>
         <sprite>sprites\art_vampirebat</sprite>
@@ -124,6 +124,7 @@
       <script>scripts\AI_main_phase.gml</script>
       <script>scripts\getMaxDamageOutput_spells.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
+      <script>scripts\AI_paused.gml</script>
     </scripts>
     <scripts name="GAME FLOW">
       <scripts name="Phases">
@@ -153,16 +154,19 @@
       <script>scripts\mouseOver.gml</script>
       <script>scripts\mouseOverCard.gml</script>
     </scripts>
-    <script>scripts\showPopupSpell.gml</script>
+    <script>scripts\castSpell.gml</script>
+    <script>scripts\summonCreature.gml</script>
+    <script>scripts\show_EventPopup.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
       <font>fonts\fnt_card_18</font>
       <font>fonts\fnt_card_18_bold</font>
       <font>fonts\fnt_card_21_bold</font>
+      <font>fonts\fnt_card_24_bold</font>
     </fonts>
-    <font>fonts\font_cardcount</font>
-    <font>fonts\font_health</font>
+    <font>fonts\font_gui_small</font>
+    <font>fonts\font_gui_large</font>
   </fonts>
   <objects name="objects">
     <object>objects\MASTER</object>

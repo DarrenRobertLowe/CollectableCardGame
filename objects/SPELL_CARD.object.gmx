@@ -86,6 +86,16 @@ if (owner == global.player) {
         casting = false;
     }
 }
+
+
+if (alreadyActivated == false) {
+    if (activated) {
+        if (global.POPUP_active == false) {
+            event_user(0); // actually cast the spell
+            alreadyActivated = true;
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

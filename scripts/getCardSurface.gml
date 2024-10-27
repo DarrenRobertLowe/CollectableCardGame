@@ -1,5 +1,5 @@
-/// createCardSurface()
-
+/// getCardSurface()
+show_debug_message("running getCardSurface()");
 var cardSurface = surface_create(sprite_get_width(spr_card), sprite_get_height(spr_card));
 
 if (surface_exists(cardSurface)) {

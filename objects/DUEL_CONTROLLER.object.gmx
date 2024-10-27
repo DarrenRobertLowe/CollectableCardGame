@@ -32,12 +32,14 @@ global.NEXT_PHASE_BLOCKERS = ds_list_create(); // stuff that prevents the player
 global.EVENT_LIST  = ds_list_create();
 global.PAYMENT_PHASE_LIST  = ds_list_create();
 global.ENEMY_PAYMENT_PHASE_LIST = ds_list_create();
-global.currentCard  = noone; // the currently active card (e.g. the attacker card while choosing a target to attack)
+global.currentCard  = noone;    // the currently active card (e.g. the attacker card while choosing a target to attack)
 global.choosingEffectTarget = false;
 global.choosingAttackTarget = false;
 global.castingSpell = false;
 global.target       = noone;
 global.WAIT         = false;
+global.POPUP_active = false;
+global.PAUSED       = false;
 
 
 instance_create(room_width -25, room_height -40, PHASE_CONTROLLER);

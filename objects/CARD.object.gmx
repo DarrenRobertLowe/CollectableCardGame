@@ -47,7 +47,9 @@ targetX         = room_width * 0.5;
 targetY         = y;
 casting         = false;
 castingChecking = false;
-activate        = false;
+tap             = false;
+activated       = false;
+alreadyActivated= false;
 displayed       = false;        // display or don't display the card
 position        = "none";       // in "hand", in "deck", on "board", in "graveyard", or "none"
 faceUp          = false;        // 0 or 1, false or true, it corresponds to the image_index.
@@ -67,7 +69,7 @@ abilitiesFont   = fnt_card_18_bold;
 costFont        = fnt_card_21_bold;
 classFont       = fnt_card_18_bold;
 descriptionFont = fnt_card_18;
-statsFont       = fnt_card_21_bold;
+statsFont       = fnt_card_24_bold;
 castCircleX = 278;
 castCircleY = 4;
 castingCostX = 295;
@@ -173,7 +175,7 @@ switch (position) {
 if (global.choosingEffectTarget == true) {
     if (global.currentCard == id) {
         displayed = true;
-        depth = global.drawing_depth;
+        depth = global.cardZoomed_depth;
         targetX = 0;
         targetY = (room_height/2)
     }
@@ -215,7 +217,7 @@ if (position == "board") {
     if (mouseOverCard() == id) {
         if (clicked == true) {
             if (doubleClickWindow &gt; 0) {
-                activate = true;
+                tap = true;
                 clicked = false;
             } else {
                 doubleClickWindow = CONTROLS.doubleClickWindowMax;
@@ -248,7 +250,6 @@ if (displayed) {
     // visuals
     image_xscale = scale;
     image_yscale = scale;
-    //positionCardElements();
     
     if (glowing) {
         calculate_glowAlpha();

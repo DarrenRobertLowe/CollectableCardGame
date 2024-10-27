@@ -28,7 +28,7 @@
             <string>/// setup
 contents = ds_list_create();
 
-var profileArea = sprite_get_width(spr_profiles) + 20;
+var profileArea = sprite_get_width(global.player.deck.sprite_index) + 20;
 handX = profileArea + 20;
 handY = (view_hview[0] - 220);
 

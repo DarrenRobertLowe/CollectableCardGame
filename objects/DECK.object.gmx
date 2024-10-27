@@ -28,7 +28,6 @@
             <string>/// decks contain cards
 event_inherited();
 
-sprite_index = spr_profiles;
 image_speed = 0;
 type        = DECK;
 owner       = noone;

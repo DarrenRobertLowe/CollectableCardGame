@@ -28,7 +28,6 @@
             <string>/// setup
 
 doubleClickWindowMax = 15;
-
 clickableUnderPointer = ds_priority_create();
 
 // cursor fields
@@ -43,7 +42,6 @@ rotateMin   = -120;
 rotateDir   = 0;
 old_mouse_x = mouse_x;
 depth = global.drawing_depth;
-
 
 setup_wand_particles();
 </string>
@@ -75,14 +73,16 @@ y = mouse_y;
 
 // find what the mouse pointer is over
 ds_priority_clear(clickableUnderPointer);
-with(CLICKABLE) {
-    if (mouseOver()) {
-        if (displayed) {
-            ds_priority_add(CONTROLS.clickableUnderPointer, id, depth);
+
+if (global.POPUP_active == false) {
+    with(CLICKABLE) {
+        if (mouseOver()) {
+            if (displayed) {
+                ds_priority_add(CONTROLS.clickableUnderPointer, id, depth);
+            }
         }
     }
 }
-
 
 /// check_controls
 global.controls_cancel = false;

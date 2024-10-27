@@ -28,7 +28,7 @@
             <string>/// setup
 contents = ds_list_create();
 
-var profileArea = sprite_get_width(spr_profiles) + 20;
+var profileArea = sprite_get_width(global.player.deck.sprite_index) + 20;
 handX = ENEMY_HAND.handX;
 handY = ENEMY_HAND.handY;
 handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
