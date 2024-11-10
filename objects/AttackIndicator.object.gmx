@@ -55,8 +55,6 @@ animate = false;
           <argument>
             <kind>1</kind>
             <string>/// clean up
-show_message(string(id) + " says: I've been destroyed!");
-
 if (exists(attacker)) {
     attacker.attackEvent = noone;
 }
@@ -76,39 +74,33 @@ if (exists(attacker)) {
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>AttackIndicator</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
             <string>/// animate
-if (attacking) {
-    visible = true;
-} else {
-    visible = false;
-}
-
-if (animate == true) {
-    move_towards_point(target.x, target.y, spd);
-    distance -= spd;
-    
-    if (distance &lt;= 0) {
-        spd = 0;
-        global.WAIT = false;
-        fight(parent, target);
-        attacking = false;
-        parent.attacking = false;
-        animate = false;
+if (global.POPUP_active == false) {
+    if (animate == true) {
+        global.WAIT = true;
+        visible = true;
+        move_towards_point(targetX, targetY, spd);
         
+        distance = point_distance(x, y, targetX, targetY);
+        distance -= spd;
         
-        
-        // clear our event and move to the next
-        //nextEvent();
+        if (distance &lt;= 0) {
+            spd = 0;
+            global.WAIT = false;
+            fight(parent, target);
+            attacking = false;
+            parent.attacking = false;
+            animate = false;
+            //x = parent.x;
+            //y = parent.y;
+        }
     }
-} else {
-    x = parent.x;
-    y = parent.y;
 }
 </string>
           </argument>
@@ -137,8 +129,18 @@ if (animate == true) {
 global.WAIT = true;
 parent.attackedThisTurn = true;
 animate = true;
-distance = point_distance(x, y, target.x, target.y);
-spd = (distance / room_speed) *2;
+
+if object_is_ancestor(target, CONTESTANT)
+  then target = target.parent;
+
+x = parent.x;
+y = parent.y;
+targetX = target.x;
+targetY = target.y;
+distance = point_distance(x, y, targetX, targetY);
+spd = (distance / room_speed) * 2;
+
+show_EventPopup(parent, target, "Attacking");
 
 </string>
           </argument>

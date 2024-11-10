@@ -81,44 +81,48 @@ deck.alarm[0] = 1;  // shuffles the deck and creates the play stack
           <argument>
             <kind>1</kind>
             <string>/// ENEMY AI
-if (waitTime &gt; 0) {
+if (waitTime &gt; 0)
+or (global.WAIT &gt; 0){
+    if (global.WAIT &gt; waitTime)
+      then waitTime = global.WAIT;
+      
     waitTime--;
-}
-
-if (waitTime &lt;= 0) {
-    if (global.GAME_PHASE == "enemy_draw") {
-        draw_card(hand, deck);
-        waitTime = room_speed;
-        show_debug_message("drew a card");
-        nextPhase();
-        exit;
+} else {
+    if (global.TURN == id) {
+        if (global.GAME_PHASE == "draw") {
+            draw_card(hand, deck);
+            waitTime = room_speed;
+            show_debug_message("drew a card");
+            nextPhase();
+            exit;
+        }
+        
+        if (global.GAME_PHASE == "payment") {
+            show_debug_message("entered payment phase");
+            waitTime = room_speed;
+            nextPhase();
+            show_debug_message("left payment phase");
+            exit;
+        }
+        
+        if (global.GAME_PHASE == "main1") {
+            waitTime = room_speed;
+            show_debug_message("entered main1 phase");
+            AI_main_phase()
+        }
+        
+        
+        if (global.GAME_PHASE == "combat") {
+            AI_combat_phase();
+        }
+        if (global.GAME_PHASE == "main2") {
+            AI_main_phase()
+        }
+        if (global.GAME_PHASE == "endturn") {
+            nextPhase();
+            exit;
+        }
     }
-    
-    if (global.GAME_PHASE == "enemy_payment") {
-        show_debug_message("entered payment phase");
-        nextPhase();
-        show_debug_message("left payment phase");
-        exit;
-    }
-    
-    if (global.GAME_PHASE == "enemy_main1") {
-        show_debug_message("entered main1 phase");
-        AI_main_phase()
-    }
-    
-    
-    if (global.GAME_PHASE == "enemy_combat_planning") {
-        nextPhase();
-        exit;
-    }
-    if (global.GAME_PHASE == "enemy_main2") {
-        AI_main_phase()
-    }
-    if (global.GAME_PHASE == "enemy_endturn") {
-        nextPhase();
-        exit;
-    }
-    
 }
 </string>
           </argument>

@@ -89,6 +89,8 @@
       <script>scripts\removeCardFromDeck.gml</script>
       <script>scripts\wand_rotateToNormal.gml</script>
       <script>scripts\getCardSurface.gml</script>
+      <script>scripts\creatureCanAttack.gml</script>
+      <script>scripts\creatureCanDefend.gml</script>
     </scripts>
     <scripts name="Animation FX">
       <scripts name="Glowing">
@@ -125,6 +127,7 @@
       <script>scripts\getMaxDamageOutput_spells.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
       <script>scripts\AI_paused.gml</script>
+      <script>scripts\AI_combat_phase.gml</script>
     </scripts>
     <scripts name="GAME FLOW">
       <scripts name="Phases">
@@ -166,21 +169,26 @@
       <font>fonts\fnt_card_24_bold</font>
     </fonts>
     <font>fonts\font_gui_small</font>
+    <font>fonts\font_gui_medium</font>
     <font>fonts\font_gui_large</font>
   </fonts>
   <objects name="objects">
+    <objects name="ABSTRACT CLASSES">
+      <object>objects\CLICKABLE</object>
+      <object>objects\TARGETABLE</object>
+      <object>objects\ATTACKABLE</object>
+      <object>objects\CONTESTANT</object>
+      <object>objects\CARDSLOT</object>
+    </objects>
     <object>objects\MASTER</object>
     <object>objects\GUI</object>
     <object>objects\CONTROLS</object>
-    <object>objects\CLICKABLE</object>
-    <object>objects\TARGETABLE</object>
     <object>objects\DUEL_CONTROLLER</object>
     <object>objects\PLAYER_HAND</object>
     <object>objects\PLAYER_GRAVE</object>
     <object>objects\ENEMY_HAND</object>
     <object>objects\ENEMY_GRAVE</object>
     <object>objects\DECK</object>
-    <object>objects\CONTESTANT</object>
     <object>objects\ENEMY</object>
     <object>objects\PLAYER</object>
     <object>objects\PHASE_CONTROLLER</object>
@@ -215,13 +223,13 @@
     </objects>
     <objects name="BOARD">
       <object>objects\BOARD_CONTROLLER</object>
-      <object>objects\CARDSLOT</object>
       <object>objects\PLAYER_CARDSLOT</object>
       <object>objects\ENEMY_CARDSLOT</object>
     </objects>
     <objects name="EVENTS">
+      <object>objects\POPUP_EventInfo</object>
       <object>objects\EVENT</object>
-      <object>objects\Event_Combat</object>
+      <object>objects\AttackIndicator</object>
     </objects>
     <objects name="COMBAT">
       <object>objects\DAMAGE_COUNTER</object>
@@ -242,7 +250,6 @@
         <object>objects\fx_poison_blob</object>
       </objects>
     </objects>
-    <object>objects\POPUP_EventInfo</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

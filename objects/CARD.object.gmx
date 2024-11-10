@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>TARGETABLE</parentName>
+  <parentName>ATTACKABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -47,7 +47,7 @@ targetX         = room_width * 0.5;
 targetY         = y;
 casting         = false;
 castingChecking = false;
-tap             = false;
+tapped          = false;
 activated       = false;
 alreadyActivated= false;
 displayed       = false;        // display or don't display the card
@@ -217,7 +217,7 @@ if (position == "board") {
     if (mouseOverCard() == id) {
         if (clicked == true) {
             if (doubleClickWindow &gt; 0) {
-                tap = true;
+                tapped = true;
                 clicked = false;
             } else {
                 doubleClickWindow = CONTROLS.doubleClickWindowMax;

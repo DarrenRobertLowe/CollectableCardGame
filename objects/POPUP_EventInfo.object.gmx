@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -48,7 +48,9 @@ cardY           = (middle - (cardHeight * 0.5));
 performerX      = (leftHalf - halfCard);
 targetX         = (rightHalf - halfCard);
 singleCardX     = (center - halfCard);
-
+singleTextX     = center;
+performerTextX  = leftHalf;
+targetTextX     = rightHalf;
 
 var backgroundMargin = 60;
 titleY = (cardY - 90);
@@ -158,21 +160,21 @@ draw_rectangle_colour(backgroundX, backgroundY, backgroundEndX, backgroundEndY, 
 draw_set_alpha(1);
 draw_set_font(global.font_InfoPopupTitles);
 draw_set_colour(global.GUI_title_colour);
-
+draw_set_halign(fa_center);
 
 // draw the activated card
 if (target == noone) {
-    draw_text(singleCardX, titleY, keyword);
+    draw_text(singleTextX, titleY, keyword);
     draw_sprite_ext(performer.cardSurfaceSprite, 0, singleCardX, cardY, cardScale, cardScale, 0, c_white, 1);
 } else {
     // draw the activated card
-    draw_text(performerX, titleY, keyword);
+    draw_text(performerTextX, titleY, keyword);
     draw_sprite_ext(performer.cardSurfaceSprite, 0, performerX, cardY, cardScale, cardScale, 0, c_white, 1);
 }
 
 // draw the target if there is one
 if ( exists(target) ) {
-    draw_text(targetX, titleY, "Target");
+    draw_text(targetTextX, titleY, "Target");
     
     if ( object_is_ancestor(target.object_index, CONTESTANT) ) {
         targetSprite = target.deck.sprite_index;
@@ -185,6 +187,9 @@ if ( exists(target) ) {
     
     draw_sprite_ext(targetSprite, targetIndex, targetX, cardY, targetScale, targetScale, 0, c_white, 1);
 }
+
+// reset text
+draw_set_halign(fa_left);
 </string>
           </argument>
         </arguments>

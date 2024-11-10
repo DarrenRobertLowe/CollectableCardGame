@@ -23,14 +23,11 @@ if (AI_finishedSummoning == false) {
             if (basicActivationChecks()) {
                 other.waitTime = room_speed;
                 summonCreature(monster);
-                //event_user(0); // summon the creature
             }
         }
-        
     } else {
         show_debug_message("No more monsters to summon");
         AI_finishedSummoning = true;
+        show_debug_message("finished AI_playCreatureCard()");
     }
 }
-
-show_debug_message("finished AI_playCreatureCard()");

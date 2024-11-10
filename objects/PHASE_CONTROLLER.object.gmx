@@ -158,6 +158,7 @@ draw_set_font(global.font_Phase);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 
+
 if (showPhaseBanner) {
     
     if (bannerTimesOut) {
@@ -168,7 +169,7 @@ if (showPhaseBanner) {
     }
     
     if (global.GAME_PHASE == "draw") {
-        draw_text(bannerX, bannerY, "DRAW PHASE");
+        draw_text(bannerX, bannerY, "DRAW PHASE - CLICK DECK TO DRAW A CARD");
     }
     
     if (global.GAME_PHASE == "payment") {
@@ -176,19 +177,15 @@ if (showPhaseBanner) {
     }
     
     if (global.GAME_PHASE == "main1") {
-        draw_text(bannerX, bannerY, "MAIN PHASE");
-    }
-    
-    if (global.GAME_PHASE == "combat planning") {
-        draw_text(bannerX, bannerY, "CHOOSE YOUR ATTACKERS");
+        draw_text(bannerX, bannerY, "MAIN PHASE - CAST SPELLS AND SUMMON MONSTERS");
     }
     
     if (global.GAME_PHASE == "combat") {
-        draw_text(bannerX, bannerY, "COMBAT!");
+        draw_text(bannerX, bannerY, "COMBAT! CHOOSE YOUR ATTACKERS!");
     }
     
     if (global.GAME_PHASE == "main2") {
-        draw_text(bannerX, bannerY, "AFTERMATH PHASE");
+        draw_text(bannerX, bannerY, "AFTERMATH PHASE - CAST SPELLS AND SUMMON MONSTERS");
     }
     
     if (global.GAME_PHASE == "endturn") {

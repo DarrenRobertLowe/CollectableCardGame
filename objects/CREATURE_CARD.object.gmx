@@ -46,10 +46,12 @@ ds_list_add(classes, "Creature");
 hasSummoningSickness = false;
 attacking = false;
 target    = noone;
-canAttack = true;
-attackEvent = instance_create(x, y, Event_Combat);
-attackEvent.parent = id;
+attackIndicator = instance_create(x, y, AttackIndicator);
+attackIndicator.parent = id;
 attackedThisTurn = false;
+canAttack = true;   // e.g. walls can't attack
+canDefend = true;   // e.g. assassins can't defend
+
 
 // CARD ELEMENT POSITIONS
 // position attack/defence
@@ -156,7 +158,7 @@ if (global.GAME_PHASE == "combat") {
                     attackEvent.attacking = false;
                     global.currentCard = id;
                     global.target = noone;
-                    global.choosingAttackTarget = false; 
+                    global.choosingAttackTarget = false;
                 }
             }
         }
@@ -171,6 +173,7 @@ if (global.GAME_PHASE == "combat") {
                     // start the attacking state
                     if (!(attacking) and !(attackedThisTurn)) {
                         attacking = true;
+                        
                         global.currentCard = id;
                         global.target = noone;
                         global.choosingAttackTarget = true;
@@ -201,19 +204,10 @@ if (global.GAME_PHASE == "combat") {
         var target = global.target;
         if (global.currentCard == id) {
             if (target != noone) { 
-                if (object_is_ancestor(target.object_index, CREATURE_CARD)) 
-                or (object_is_ancestor(target.object_index, CONTESTANT)) { // we've chosen a target
-                    show_debug_message("target: "+ string(target));
+                if (object_is_ancestor(target.object_index, ATTACKABLE)) { // we've chosen a valid target
                     if (target.position == "board") {
                         if (target.owner != owner) {
-                            attackEvent.attacking = true;
-                            attackEvent.target = global.target;
-                            ds_list_insert(global.EVENT_LIST, 0, attackEvent);
-                            nextEvent(); // perform the attack
-                            
-                            // finish
-                            global.currentCard = noone;
-                            global.choosingAttackTarget = false;
+                            event_user(1); // setup and perform the attack
                         }
                     }
                 }
@@ -224,6 +218,40 @@ if (global.GAME_PHASE == "combat") {
 
 // clear click state
 clicked = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// SETUP AND PERFORM ATTACK
+
+attackIndicator.attacking = true;
+attackIndicator.target    = global.target;
+ds_list_insert(global.EVENT_LIST, 0, attackIndicator);
+attackedThisTurn = true;
+
+nextEvent(); // perform the attack
+
+// finish
+global.currentCard = noone;
+global.choosingAttackTarget = false;
 </string>
           </argument>
         </arguments>

@@ -57,7 +57,6 @@ if (choosingTarget) {
     CONTROLS.animate = true;
     global.currentCard = id;
     
-    //show_debug_message("CHOOSING TARGET!");
     if (global.controls_cancel == true) {
         stopTargeting();
         show_debug_message("Cancelled.");
@@ -67,28 +66,8 @@ if (choosingTarget) {
     target  = noone;
     var ptarget = noone;
     
-    if (global.target != noone) and (object_is_ancestor(global.target.object_index, TARGETABLE)) {
-        
-        /*
-        if (object_is_ancestor(global.target.object_index, TARGETABLE)) {
-            if (ds_list_find_index(validTargets, "player") &gt; -1) {
-                if (object_is_ancestor(global.target.object_index, CONTESTANT)) {
-                    ptarget = global.target;
-                }
-            }
-            
-            
-            if (global.target.type == CREATURE_CARD) {
-                if (global.target.position == "board") {
-                    if (ds_list_find_index(validTargets, "creature on board") &gt; -1) {
-                        ptarget = global.target;
-                    }
-                }
-            }
-            
-            ptarget = global.target;
-        }
-        */
+    if  (global.target != noone) 
+    and (object_is_ancestor(global.target.object_index, TARGETABLE)) {
         ptarget = global.target;
     }
     
@@ -102,11 +81,8 @@ if (choosingTarget) {
             show_debug_message("Actual target is : " +string(target));
             global.choosingTarget = false;
             choosingTarget = false;
-            
             castSpell(id);
-            
-            // activate the spell
-            activated = true;
+            activated = true;   // activate the spell
         }
     }
 }

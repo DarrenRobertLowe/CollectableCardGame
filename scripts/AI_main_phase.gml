@@ -15,7 +15,7 @@ if !(AI_finishedDestructionSpellCasting) {
 }
 
 // summon monsters
-if (AI_finishedDestructionSpellCasting)
+if  (AI_finishedDestructionSpellCasting)
 and !(AI_finishedSummoning) {
     if !(AI_paused()) {
         show_debug_message("*************** summon monsters ***************");
@@ -24,17 +24,31 @@ and !(AI_finishedSummoning) {
 }
 
 // enchantments and other monster buffs
-//if !(AI_finishedEnchantmentCasting) {
-//    if !(AI_paused()) {
+if  (AI_finishedDestructionSpellCasting)
+and (AI_finishedSummoning) 
+and !(AI_finishedEnchantmentCasting) {
+    if !(AI_paused()) {
 //      show_debug_message("*************** play enchantments and buffs ***************");
 //      AI_playEnchantments();
-//    }
-//}
+        AI_finishedEnchantmentCasting = true; // remove when we actually have enchantment AI being worked on
+    }
+}
+
+// move to combat phase
+if  (AI_finishedDestructionSpellCasting)
+and (AI_finishedSummoning)
+and (AI_finishedEnchantmentCasting)
+and (global.GAME_PHASE == "main1") {
+    nextPhase();
+}
+
 
 // other spells
-if (AI_finishedSummoning)
+if  (AI_finishedSummoning)
 and (AI_finishedDestructionSpellCasting)
-and !(AI_finishedAnySpellCasting) {
+and (AI_finishedEnchantmentCasting)
+and !(AI_finishedAnySpellCasting)
+and (global.GAME_PHASE == "main2") {
     if !(AI_paused()) {
         show_debug_message("*************** play remaining spells ***************");
         AI_playAnySpells();
@@ -43,9 +57,12 @@ and !(AI_finishedAnySpellCasting) {
 
 if  (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
-and ( AI_finishedAnySpellCasting) {
+and (AI_finishedEnchantmentCasting)
+and (AI_finishedSummoning)
+and (AI_finishedAnySpellCasting)
+and (global.GAME_PHASE == "main2") {
     if !(AI_paused()) {
-        show_debug_message("left main1 phase");
+        show_debug_message("*************** finished turn ***************");
         nextPhase();
         exit;
     }
