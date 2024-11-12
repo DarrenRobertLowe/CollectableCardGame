@@ -83,6 +83,7 @@ if (exists(attacker)) {
             <string>/// animate
 if (global.POPUP_active == false) {
     if (animate == true) {
+    /*
         global.WAIT = true;
         visible = true;
         move_towards_point(targetX, targetY, spd);
@@ -92,14 +93,16 @@ if (global.POPUP_active == false) {
         
         if (distance &lt;= 0) {
             spd = 0;
+            */
             global.WAIT = false;
             fight(parent, target);
             attacking = false;
             parent.attacking = false;
             animate = false;
+            visible = false;
             //x = parent.x;
             //y = parent.y;
-        }
+        //}
     }
 }
 </string>

@@ -59,7 +59,7 @@ deck.sprite_index = spr_avatars;
 deck.alarm[0] = 1;  // shuffles the deck and creates the play stack
 
 ///debug
-hp = 1;
+hp = 20;
 </string>
           </argument>
         </arguments>

@@ -29,10 +29,12 @@
 lifespan = room_speed * 2.5;
 value = 0;
 parsedValue = "";
-depth = global.info_depth;
+depth = global.cardZoomed_depth;
 ySpeed = 0.5;
-alpha = 1.75;
-alphaSpeed = 0.01
+alpha = 1;
+var duration_in_seconds = 2; 
+alphaSpeed = 1 / (room_speed * duration_in_seconds);
+
 </string>
           </argument>
         </arguments>
@@ -57,13 +59,16 @@ alphaSpeed = 0.01
             <kind>1</kind>
             <string>/// lifespan and movement
 
-lifespan--;
-
-if (lifespan &lt;= 0) {
-    instance_destroy(self, true);
+if (global.POPUP_active == false) {
+    lifespan--;
+    
+    if (lifespan &lt;= 0) {
+        instance_destroy(self, true);
+    }
+    
+    y -= ySpeed;
+    alpha -= alphaSpeed;
 }
-
-y -= ySpeed;
 </string>
           </argument>
         </arguments>
@@ -98,10 +103,7 @@ if (value &lt; 0) {
     parsedValue = "-" + string(abs(value));
 }
 
-alpha -= alphaSpeed;
-draw_set_alpha(alpha);
-draw_text_bordered(x, y, parsedValue, colour, global.textBorderColour);
-draw_set_alpha(1);
+draw_text_bordered(x, y, parsedValue, colour, global.textBorderColour, alpha);
 </string>
           </argument>
         </arguments>

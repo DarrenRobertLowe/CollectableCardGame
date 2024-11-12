@@ -127,7 +127,7 @@
       <script>scripts\getMaxDamageOutput_spells.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
       <script>scripts\AI_paused.gml</script>
-      <script>scripts\AI_combat_phase.gml</script>
+      <script>scripts\AI_combat_phaseOLD.gml</script>
     </scripts>
     <scripts name="GAME FLOW">
       <scripts name="Phases">
@@ -160,6 +160,8 @@
     <script>scripts\castSpell.gml</script>
     <script>scripts\summonCreature.gml</script>
     <script>scripts\show_EventPopup.gml</script>
+    <script>scripts\AI_combat_phase.gml</script>
+    <script>scripts\hasDefenders.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">

@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// set the depth
 
-depth = global.cardFX_depth;
+// for depth see MASTER create event
 </string>
           </argument>
         </arguments>

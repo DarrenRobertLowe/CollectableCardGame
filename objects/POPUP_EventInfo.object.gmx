@@ -38,15 +38,18 @@ cardScale   = 0.7;
 
 var cardWidth   = (sprite_get_width(spr_card)  * cardScale);
 var cardHeight  = (sprite_get_height(spr_card) * cardScale);
-var middle      = (room_height * 0.5);
-var center      = (room_width  * 0.5);
+middle      = (room_height * 0.5);
+center      = (room_width  * 0.5);
 var leftHalf    = (room_width  * 0.25);
 var rightHalf   = (room_width  * 0.75);
 var halfCard    = (cardWidth * 0.5);
 
+hspd            = (100 / room_speed) * 10;
 cardY           = (middle - (cardHeight * 0.5));
-performerX      = (leftHalf - halfCard);
-targetX         = (rightHalf - halfCard);
+performerX      = (0 - cardWidth);
+performerXEnd   = (leftHalf  - halfCard);
+targetX         = view_wview[0];
+targetXEnd      = (rightHalf - halfCard);
 singleCardX     = (center - halfCard);
 singleTextX     = center;
 performerTextX  = leftHalf;
@@ -112,6 +115,13 @@ global.POPUP_active = false;
             <kind>1</kind>
             <string>/// countdown lifetime
 
+if (performerX &lt; performerXEnd) {
+    performerX += hspd;
+}
+if (targetX &gt; targetXEnd) {
+    targetX -= hspd;
+}
+
 if (maxlifetime &gt; -1) {
     maxlifetime--;
     
@@ -127,6 +137,9 @@ if (minlifetime &gt; 0) {
         maxlifetime = 0;
     }
 }
+
+
+
 </string>
           </argument>
         </arguments>

@@ -51,12 +51,22 @@ ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 
+// combat
+ourCreatures        = ds_list_create();
+theirCreatures      = ds_list_create();
+ourBestCreatures    = ds_priority_create();
+theirScariest       = ds_priority_create();
+listedCreatures     = false;
+
+
 deck = instance_create(((view_wview[0] - 10) - sprite_get_width(spr_avatars)), 10, DECK);
 deck.owner = id;
 deck.cards = cards;
 deck.sprite_index = spr_avatars;
 deck.image_index = image_index;
 deck.alarm[0] = 1;  // shuffles the deck and creates the play stack
+
+
 
 </string>
           </argument>
@@ -90,6 +100,7 @@ or (global.WAIT &gt; 0){
 } else {
     if (global.TURN == id) {
         if (global.GAME_PHASE == "draw") {
+            readDefendingCreatures = false;
             draw_card(hand, deck);
             waitTime = room_speed;
             show_debug_message("drew a card");

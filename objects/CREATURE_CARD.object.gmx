@@ -155,7 +155,6 @@ if (global.GAME_PHASE == "combat") {
             if (global.choosingAttackTarget) {
                 if (global.controls_cancel) {
                     attacking = false;
-                    attackEvent.attacking = false;
                     global.currentCard = id;
                     global.target = noone;
                     global.choosingAttackTarget = false;
@@ -203,11 +202,19 @@ if (global.GAME_PHASE == "combat") {
         // ATTACK ENEMY
         var target = global.target;
         if (global.currentCard == id) {
-            if (target != noone) { 
+            if (target != noone) {
                 if (object_is_ancestor(target.object_index, ATTACKABLE)) { // we've chosen a valid target
                     if (target.position == "board") {
-                        if (target.owner != owner) {
-                            event_user(1); // setup and perform the attack
+                        if (object_is_ancestor(target.object_index, CONTESTANT)) {
+                            if !(hasDefenders(target)) {
+                                if (target.owner != owner) {
+                                    event_user(1); // setup and perform the attack
+                                }
+                            }
+                        } else {
+                            if (target.owner != owner) {
+                                event_user(1); // setup and perform the attack
+                            }
                         }
                     }
                 }
@@ -246,6 +253,8 @@ attackIndicator.attacking = true;
 attackIndicator.target    = global.target;
 ds_list_insert(global.EVENT_LIST, 0, attackIndicator);
 attackedThisTurn = true;
+
+show_debug_message(object_get_name(object_index) + " - " + string(id) + " is attacking");
 
 nextEvent(); // perform the attack
 

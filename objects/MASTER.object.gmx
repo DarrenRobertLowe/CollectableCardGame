@@ -51,7 +51,7 @@ setup_text_colours();
 
 // setup particle fx
 global.PARTICLE_SYSTEM = part_system_create();
-part_system_depth(global.PARTICLE_SYSTEM, global.info_depth);
+part_system_depth(global.PARTICLE_SYSTEM, global.cardFX_depth); // this doesn't seem to work
 
 // start game
 instance_create(0, 0, CONTROLS);
