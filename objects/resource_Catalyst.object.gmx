@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>N_DAMAGE_SPELL</parentName>
+  <parentName>RESOURCE_SPELL</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,16 +28,11 @@
             <string>/// CLASS VARS
 event_inherited();
 
-name        = "Heal";
-image       = art_heal;
-spellResourceCost = 1;
-description = "Target creature or player gains 3 health.";
-ds_list_add(validTargets, "player", "creature on board");
-attack      = -3;
-
-// fx
-target      = noone;
-castFX      = fx_healing;
+name        = "Catalyst";
+image       = choose(art_Mana_Spell_01, art_Mana_Spell_02);
+castingCost = 0;
+amount      = 1;
+description = "Activate: gain " +string(amount) + " Spell Resource.";
 
 </string>
           </argument>

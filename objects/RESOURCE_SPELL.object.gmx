@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>N_DAMAGE_SPELL</parentName>
+  <parentName>RESOURCE_CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,17 +28,32 @@
             <string>/// CLASS VARS
 event_inherited();
 
-name        = "Heal";
-image       = art_heal;
-spellResourceCost = 1;
-description = "Target creature or player gains 3 health.";
-ds_list_add(validTargets, "player", "creature on board");
-attack      = -3;
+sprite_index = spr_card_spell;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// give creature mana
 
-// fx
-target      = noone;
-castFX      = fx_healing;
-
+owner.spellResource += amount;
 </string>
           </argument>
         </arguments>

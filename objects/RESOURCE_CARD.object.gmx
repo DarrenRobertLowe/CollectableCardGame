@@ -2,10 +2,10 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>ATTACKABLE</parentName>
+  <parentName>CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,25 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// CLASS VARS
+            <string>/// CLASS VARS
 event_inherited();
 
-visible     = false;
-hp          = 20;
-mana        = 140;                  // arcana, essence, power, spirit, energy
-cards       = ds_list_create();     // cards in this hero's deck
-graveyard   = ds_list_create();     // cards in this hero's grave
-cardsInPlay = ds_list_create();     // a list of anything on the board under this player's control
-owner       = id;                   // this just helps simplify targeting
-position    = "board";              // this just helps simplify targeting
-waitTime    = 0;                    // mainly used for AI timing but could be used for players also
-scale       = 1;
-creatureResource = 0;
-enchantResource = 0;
-spellResource = 0;
+subclass    = "";
+type        = RESOURCE_CARD
+castingCost = 0;
 
-// AI
-damageSpellThreshold = 0.75;        // a damage spell is worth using directly if it does more damage than this % of life total
+// classes
+ds_list_add(classes, "Creature Resource");
 </string>
           </argument>
         </arguments>
@@ -66,13 +56,66 @@ damageSpellThreshold = 0.75;        // a damage spell is worth using directly if
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw starting cards
+            <string>/// reset stats
 
-repeat(global.RULES_startingCardsNumber) {
-    draw_card(hand, deck);
+alreadyActivated = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// interaction
+event_inherited();
+
+if (position == "hand") {
+    if (owner == global.player) {
+        if (castingChecking) {
+            if (basicActivationChecks()) {
+                playResource(id);
+            }
+            castingChecking = false;
+        }
+    }
 }
 
-phaseSetup_draw_phase();
+
+// activate?
+if (position == "board") {
+    if (clicked) {
+        if (owner == global.player) {
+            if (global.TURN == global.player) {
+                if !(alreadyActivated) {
+                    alreadyActivated = true;
+                    canUse = false;
+                    event_user(0); // give mana
+                }
+            }
+            
+            clicked = false;
+        }
+    }
+}
+
+
+// clear click state
+clicked = false;
 </string>
           </argument>
         </arguments>

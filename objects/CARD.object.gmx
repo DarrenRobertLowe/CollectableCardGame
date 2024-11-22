@@ -47,9 +47,9 @@ targetX         = room_width * 0.5;
 targetY         = y;
 casting         = false;
 castingChecking = false;
-tapped          = false;
 activated       = false;
 alreadyActivated= false;
+tapped          = false;
 displayed       = false;        // display or don't display the card
 position        = "none";       // in "hand", in "deck", on "board", in "graveyard", or "none"
 faceUp          = false;        // 0 or 1, false or true, it corresponds to the image_index.
@@ -57,6 +57,10 @@ canUse          = false;
 clicked         = false;
 canPlay         = true;
 canPlayFromGraveyard = true;
+creatureResourceCost = 0;
+spellResourceCost = 0;
+enchantResourceCost = 0;
+
 setup_glowing();
 
 
@@ -314,11 +318,12 @@ if (displayed) {
         draw_sprite_ext(sprite_index, 0, x, y, scale, scale, 0, c_white, 1); // draw the back of the card
     } else {
         if (cardSurfaceSprite != noone) {
-            draw_sprite_ext(cardSurfaceSprite, 0, x, y, scale, scale, 0, c_white, 1);
+            draw_sprite_ext(cardSurfaceSprite, 0, x, y, scale, scale, image_angle, c_white, 1);
         }
         
         // darken card if it can't be played
-        if (canUse == false) {
+        if (canUse == false) 
+        or (alreadyActivated == true){
             fx_darken_card();
         }
     }

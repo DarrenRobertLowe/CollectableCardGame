@@ -30,7 +30,7 @@ event_inherited();
 
 name        = "Lion's Strength";
 image       = art_LionStrength;
-castingCost = 2;
+enchantResourceCost = 2;
 description = "Target creature gains +2/+0/+0.";
 </string>
           </argument>

@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_none</sprite>
     <sprite>sprites\spr_cardSlot</sprite>
+    <sprite>sprites\spr_resourceSlot</sprite>
     <sprite>sprites\spr_cardslot_glow</sprite>
     <sprites name="GUI_Elements">
       <sprites name="buttons">
@@ -36,6 +37,18 @@
       </sprites>
       <sprites name="Enchantments">
         <sprite>sprites\art_LionStrength</sprite>
+      </sprites>
+      <sprites name="Mana">
+        <sprites name="Creature">
+          <sprite>sprites\art_Mana_Creature_01</sprite>
+        </sprites>
+        <sprites name="Enchantment">
+          <sprite>sprites\art_Mana_Enchantment_01</sprite>
+        </sprites>
+        <sprites name="Spell">
+          <sprite>sprites\art_Mana_Spell_01</sprite>
+          <sprite>sprites\art_Mana_Spell_02</sprite>
+        </sprites>
       </sprites>
     </sprites>
     <sprites name="Card Elements">
@@ -159,9 +172,11 @@
     </scripts>
     <script>scripts\castSpell.gml</script>
     <script>scripts\summonCreature.gml</script>
+    <script>scripts\playResource.gml</script>
     <script>scripts\show_EventPopup.gml</script>
     <script>scripts\AI_combat_phase.gml</script>
     <script>scripts\hasDefenders.gml</script>
+    <script>scripts\resetResources.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -181,6 +196,7 @@
       <object>objects\ATTACKABLE</object>
       <object>objects\CONTESTANT</object>
       <object>objects\CARDSLOT</object>
+      <object>objects\RESOURCESLOT</object>
     </objects>
     <object>objects\MASTER</object>
     <object>objects\GUI</object>
@@ -222,11 +238,28 @@
         <object>objects\ENCHANTMENT_CARD</object>
         <object>objects\enchant_Vigor</object>
       </objects>
+      <objects name="Mana">
+        <object>objects\RESOURCE_CARD</object>
+        <objects name="Creature">
+          <object>objects\RESOURCE_CREATURE</object>
+          <object>objects\resource_Ember</object>
+        </objects>
+        <objects name="Enchantment">
+          <object>objects\RESOURCE_ENCHANTMENT</object>
+          <object>objects\resource_Ether</object>
+        </objects>
+        <objects name="Spell">
+          <object>objects\RESOURCE_SPELL</object>
+          <object>objects\resource_Catalyst</object>
+        </objects>
+      </objects>
     </objects>
     <objects name="BOARD">
       <object>objects\BOARD_CONTROLLER</object>
       <object>objects\PLAYER_CARDSLOT</object>
       <object>objects\ENEMY_CARDSLOT</object>
+      <object>objects\PLAYER_RESOURCESLOT</object>
+      <object>objects\ENEMY_RESOURCESLOT</object>
     </objects>
     <objects name="EVENTS">
       <object>objects\POPUP_EventInfo</object>

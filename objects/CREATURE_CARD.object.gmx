@@ -31,6 +31,7 @@ event_inherited();
 subclass    = "";
 type        = CREATURE_CARD
 
+
 // stats
 baseAttack  = 1;
 baseDefence = 0;

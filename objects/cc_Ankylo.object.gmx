@@ -31,12 +31,12 @@ event_inherited();
 name        = "Ankylo";
 class       = "Beast";
 image       = art_ankylo;
-castingCost = 5;
+creatureResourceCost = 3;
 description = "All HP damage to Ankylo from melee is halved (round down).";
 
 baseAttack  = 3;
 baseDefence = 5;
-baseHp      = 5;
+baseHp      = 2;
 attack      = baseAttack;
 defence     = baseDefence;
 hp          = baseHp;

@@ -50,6 +50,18 @@ ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
 
 deck = instance_create(10, view_hview[0]-10-sprite_get_height(spr_avatars), DECK);
 deck.owner = id;

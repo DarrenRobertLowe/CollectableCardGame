@@ -19,7 +19,23 @@ if (surface_exists(cardSurface)) {
     draw_set_font(costFont);
     draw_set_halign(fa_center);
     draw_sprite(spr_cost_circle, 0, castCircleX, castCircleY);
-    draw_sprite(spr_card_castingCost_numbers, castingCost, castingCostX, castingCostY);
+    
+    if (object_is_ancestor(id.object_index, CREATURE_CARD)) {
+        draw_sprite(spr_card_castingCost_numbers, creatureResourceCost, castingCostX, castingCostY);
+    }
+    
+    if (object_is_ancestor(id.object_index, ENCHANTMENT_CARD)) {
+        draw_sprite(spr_card_castingCost_numbers, enchantResourceCost, castingCostX, castingCostY);
+    }
+    
+    if (object_is_ancestor(id.object_index, SPELL_CARD)) {
+        draw_sprite(spr_card_castingCost_numbers, spellResourceCost, castingCostX, castingCostY);
+    }
+        
+    if (object_is_ancestor(id.object_index, RESOURCE_CARD)) {
+        draw_sprite(spr_card_castingCost_numbers, castingCost, castingCostX, castingCostY);
+    }
+    
     draw_set_halign(fa_left);
     
     // art

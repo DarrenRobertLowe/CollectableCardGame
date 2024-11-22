@@ -70,7 +70,7 @@ enemyGrave.owner = global.enemy;
 global.enemy.graveyard = enemyGrave;
 
 // game area
-cardSlotsPerRow = 6;
+cardSlotsPerRow = 5;
 cardSeparation  = 128;
 
 enemyCardsX     = 58;
@@ -92,14 +92,14 @@ for(var i=0; i&lt;cardSlotsPerRow; i++) {
 
 // enemy side
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(enemyCardsX + (i * cardSeparation), enemyBackRow, ENEMY_CARDSLOT);
+    instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyBackRow, ENEMY_CARDSLOT);
 }
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(enemyCardsX + (i * cardSeparation), enemyFrontRow, ENEMY_CARDSLOT);
+    instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyFrontRow, ENEMY_CARDSLOT);
 }
 
-
-
+instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, PLAYER_RESOURCESLOT);
+instance_create(enemyCardsX, enemyBackRow, ENEMY_RESOURCESLOT);
 
 /// draw starting cards
 with (CONTESTANT) {

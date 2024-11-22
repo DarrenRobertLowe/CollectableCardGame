@@ -100,14 +100,29 @@ showEnemyGraveyardY = enemyProfileY + 90;
 instance_create(showEnemyGraveyardX, showEnemyGraveyardY, button_showEnemyGraveyard);
 
 // mana count
-manaX   = playerProfileX + 162;
-manaY   = playerProfileY + 0;
-manaBGx1 = manaX + 5;
-manaBGy1 = manaY + 34;
-manaBGx2 = manaBGx1 + 25;
-manaBGy2 = manaBGy1 + 23;
-manaCountX = manaBGx1 + 13;
-manaCountY = manaBGy1 + 5;
+var manaWidth  = sprite_get_width(spr_mana);
+var manaMargin = 4;
+var separation = (sprite_get_width(spr_mana) + 4);
+mana3X   = (playerProfileX + sprite_get_width(spr_avatars) - separation);
+mana2X   = mana3X - separation;
+mana1X   = mana2X - separation;
+manaY    = playerProfileY + 0;
+manaBGx1 = mana1X;
+manaBGx2 = mana2X;
+manaBGx3 = mana3X;
+manaBGy1 = manaY + sprite_get_height(spr_mana);
+manaBGy2 = manaBGy1 + 16;
+manaCountX = manaBGx1;
+manaCountY = manaBGy1;
+manaBG3x1 = mana3X;
+manaBG2x1 = mana2X;
+manaBG1x1 = mana1X;
+manaBG3x2 = mana3X + sprite_get_width(spr_mana);
+manaBG2x2 = mana2X + sprite_get_width(spr_mana);
+manaBG1x2 = mana1X + sprite_get_width(spr_mana);
+mana3CountX = mana3X + (manaWidth * 0.5);
+mana2CountX = mana2X + (manaWidth * 0.5);
+mana1CountX = mana1X + (manaWidth * 0.5);
 
 // enemy mana count
 enemyManaX    = enemyProfileX - 3;
@@ -164,11 +179,17 @@ draw_text(enemyHPX, enemyHPY, global.enemy.hp);
 
 // draw mana
 draw_set_font(global.font_Stats);
-draw_sprite(spr_mana, 0, manaX, manaY);
+draw_sprite(spr_mana, 0, mana1X, manaY);
+draw_sprite(spr_mana, 1, mana2X, manaY);
+draw_sprite(spr_mana, 2, mana3X, manaY);
 draw_set_color(c_black);
-draw_rectangle(manaBGx1, manaBGy1, manaBGx2, manaBGy2, false); 
+draw_rectangle(manaBG1x1, manaBGy1, manaBG1x2, manaBGy2, false);
+draw_rectangle(manaBG2x1, manaBGy1, manaBG2x2, manaBGy2, false); 
+draw_rectangle(manaBG3x1, manaBGy1, manaBG3x2, manaBGy2, false); 
 draw_set_color(c_orange);
-draw_text(manaCountX, manaCountY, global.player.mana);
+draw_text(mana1CountX, manaCountY, global.player.creatureResource);
+draw_text(mana2CountX, manaCountY, global.player.spellResource);
+draw_text(mana3CountX, manaCountY, global.player.enchantResource);
 
 // draw enemy mana
 draw_set_font(global.font_Stats);

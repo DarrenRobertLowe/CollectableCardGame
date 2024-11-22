@@ -50,6 +50,18 @@ ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ember, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
 
 // combat
 ourCreatures        = ds_list_create();

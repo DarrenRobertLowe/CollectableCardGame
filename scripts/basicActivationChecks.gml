@@ -1,5 +1,8 @@
 /// basicActivationChecks();
-if (owner.mana > castingCost) {
+if  (owner.creatureResource >= creatureResourceCost)
+and (owner.spellResource    >= spellResourceCost)
+and (owner.enchantResource  >= enchantResourceCost) {
+//if (owner.mana > castingCost) {
     return true;
 } else {
     debug("Not enough mana to cast!");

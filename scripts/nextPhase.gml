@@ -82,6 +82,7 @@ if (global.GAME_PHASE == "endturn") {
     }
     
     phaseSetup_draw_phase();
+    resetResources(global.TURN);
     global.GAME_PHASE = "draw";
     exit;
 }
