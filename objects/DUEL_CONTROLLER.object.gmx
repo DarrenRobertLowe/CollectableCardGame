@@ -98,8 +98,8 @@ for(var i=0; i&lt;cardSlotsPerRow; i++) {
     instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyFrontRow, ENEMY_CARDSLOT);
 }
 
-instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, PLAYER_RESOURCESLOT);
-instance_create(enemyCardsX, enemyBackRow, ENEMY_RESOURCESLOT);
+global.player.resourceLane = instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, PLAYER_RESOURCESLOT);
+global.enemy.resourceLane = instance_create(enemyCardsX, enemyBackRow, ENEMY_RESOURCESLOT);
 
 /// draw starting cards
 with (CONTESTANT) {
@@ -130,9 +130,10 @@ nextPhase();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// GIVE ENEMY A CARD
-
-draw_card(global.enemy.hand, global.enemy.deck);
+            <string>/// GIVE ENEMY A CARD
+if (global.DEBUG) {
+    draw_card(global.enemy.hand, global.enemy.deck);
+}
 </string>
           </argument>
         </arguments>
@@ -155,10 +156,10 @@ draw_card(global.enemy.hand, global.enemy.deck);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Give ENEMY mana
-
-
-global.enemy.mana++;
+            <string>/// GIVE ME A CARD
+if (global.DEBUG) {
+    draw_card(global.player.hand, global.enemy.deck);
+}
 </string>
           </argument>
         </arguments>

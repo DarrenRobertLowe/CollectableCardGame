@@ -30,9 +30,7 @@ event_inherited();
 
 image_index = 1;    // avatar for deck
 
-AI_finishedDestructionSpellCasting = false;
-AI_finishedSummoning = false;
-AI_finishedAnySpellCasting = false;
+reset_AI_actions();
 
 ds_list_add(cards, create_card(cc_VampireBat, id));
 ds_list_add(cards, create_card(cc_VampireBat, id));
@@ -68,6 +66,7 @@ ourCreatures        = ds_list_create();
 theirCreatures      = ds_list_create();
 ourBestCreatures    = ds_priority_create();
 theirScariest       = ds_priority_create();
+//AI_monsterList      = ds_priority_create();
 listedCreatures     = false;
 
 
@@ -77,8 +76,6 @@ deck.cards = cards;
 deck.sprite_index = spr_avatars;
 deck.image_index = image_index;
 deck.alarm[0] = 1;  // shuffles the deck and creates the play stack
-
-
 
 </string>
           </argument>

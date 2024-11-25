@@ -30,10 +30,8 @@ event_inherited();
 
 name        = "Ember";
 image       = art_Mana_Creature_01;
-castingCost = 0;
-amount      = 1;
-description = "Activate: gain " +string(amount) + " Creature Resource.";
-
+creatureResources = 1;
+description = "Activate: gain " +string(creatureResources) + " Creature Resource.";
 </string>
           </argument>
         </arguments>

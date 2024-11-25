@@ -6,8 +6,17 @@
 // play mana gathering cards
 // AI_playManaCard;
 
+if !(AI_finishedResourceCardPlaying) {
+    if !(AI_paused()) {
+        show_debug_message("*************** play resource cards ***************");
+        AI_playResourceCards();
+    }
+}
+
+
 // destruction spells
-if !(AI_finishedDestructionSpellCasting) {
+if  (AI_finishedResourceCardPlaying)
+and !(AI_finishedDestructionSpellCasting) {
     if !(AI_paused()) {
         show_debug_message("*************** cast desctruction spells ***************");
         AI_playDestructionSpells();

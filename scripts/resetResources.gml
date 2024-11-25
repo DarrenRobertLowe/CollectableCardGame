@@ -2,6 +2,6 @@
 
 var combatant = argument0;
 
-combatant.creatureResource  = 0;
-combatant.spellResource     = 0;
-combatant.enchantResource   = 0;
+combatant.creatureResources  = 0;
+combatant.spellResources     = 0;
+combatant.enchantResources   = 0;

@@ -1,10 +1,20 @@
 /// basicActivationChecks();
-if  (owner.creatureResource >= creatureResourceCost)
-and (owner.spellResource    >= spellResourceCost)
-and (owner.enchantResource  >= enchantResourceCost) {
-//if (owner.mana > castingCost) {
+
+if  (owner.creatureResources >= creatureResourceCost)
+and (owner.spellResources    >= spellResourceCost)
+and (owner.enchantResources  >= enchantResourceCost) {
     return true;
 } else {
-    debug("Not enough mana to cast!");
+    debug("Not enough mana in pool to cast, checking resource lane...");
+    
+    if (canAffordCasting(id)) {
+        autoTapResources(global.TURN, id);
+        
+        if  (owner.creatureResources >= creatureResourceCost)
+        and (owner.spellResources    >= spellResourceCost)
+        and (owner.enchantResources  >= enchantResourceCost) {
+            return true;
+        }
+    }
     // we could play a sound or have the text appear to the user somehow.
 }

@@ -135,7 +135,7 @@
       <script>scripts\getDamageSpellsByStrongestCastable.gml</script>
       <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\getHealingSpellsByStrongestCastable.gml</script>
-      <script>scripts\reset_AI_decisions.gml</script>
+      <script>scripts\reset_AI_actions.gml</script>
       <script>scripts\AI_main_phase.gml</script>
       <script>scripts\getMaxDamageOutput_spells.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
@@ -144,7 +144,6 @@
     </scripts>
     <scripts name="GAME FLOW">
       <scripts name="Phases">
-        <script>scripts\nextPhaseMTG.gml</script>
         <script>scripts\nextPhase.gml</script>
         <script>scripts\phaseSetup_draw_phase.gml</script>
       </scripts>
@@ -177,6 +176,14 @@
     <script>scripts\AI_combat_phase.gml</script>
     <script>scripts\hasDefenders.gml</script>
     <script>scripts\resetResources.gml</script>
+    <script>scripts\AI_playResourceCards.gml</script>
+    <script>scripts\canAffordCasting.gml</script>
+    <script>scripts\autoTapResources.gml</script>
+    <script>scripts\getUntappedResources.gml</script>
+    <script>scripts\countCreatureResources.gml</script>
+    <script>scripts\countSpellResources.gml</script>
+    <script>scripts\countEnchantResources.gml</script>
+    <script>scripts\untap_resources.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">

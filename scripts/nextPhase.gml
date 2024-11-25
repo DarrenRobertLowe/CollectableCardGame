@@ -20,7 +20,7 @@ if !ds_list_empty(global.NEXT_PHASE_BLOCKERS) {
 
 
 if (global.GAME_PHASE == "draw") {
-    reset_AI_decisions();
+    reset_AI_actions();
     global.GAME_PHASE = "payment";
     waitTime = room_speed;
     exit;
@@ -55,7 +55,7 @@ if (global.GAME_PHASE == "main1") {
 }
 
 if (global.GAME_PHASE == "combat") {
-    reset_AI_decisions();
+    reset_AI_actions();
     global.GAME_PHASE = "main2";
     waitTime = room_speed;
     exit;
@@ -83,6 +83,7 @@ if (global.GAME_PHASE == "endturn") {
     
     phaseSetup_draw_phase();
     resetResources(global.TURN);
+    untap_resources(global.TURN);
     global.GAME_PHASE = "draw";
     exit;
 }

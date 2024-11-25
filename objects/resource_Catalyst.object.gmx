@@ -30,9 +30,8 @@ event_inherited();
 
 name        = "Catalyst";
 image       = choose(art_Mana_Spell_01, art_Mana_Spell_02);
-castingCost = 0;
-amount      = 1;
-description = "Activate: gain " +string(amount) + " Spell Resource.";
+spellResources = 1;
+description = "Activate: gain " +string(spellResources) + " Spell Resource.";
 
 </string>
           </argument>

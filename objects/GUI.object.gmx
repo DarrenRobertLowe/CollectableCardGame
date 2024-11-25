@@ -102,7 +102,7 @@ instance_create(showEnemyGraveyardX, showEnemyGraveyardY, button_showEnemyGravey
 // mana count
 var manaWidth  = sprite_get_width(spr_mana);
 var manaMargin = 4;
-var separation = (sprite_get_width(spr_mana) + 4);
+var separation = (manaWidth + 4);
 mana3X   = (playerProfileX + sprite_get_width(spr_avatars) - separation);
 mana2X   = mana3X - separation;
 mana1X   = mana2X - separation;
@@ -117,22 +117,35 @@ manaCountY = manaBGy1;
 manaBG3x1 = mana3X;
 manaBG2x1 = mana2X;
 manaBG1x1 = mana1X;
-manaBG3x2 = mana3X + sprite_get_width(spr_mana);
-manaBG2x2 = mana2X + sprite_get_width(spr_mana);
-manaBG1x2 = mana1X + sprite_get_width(spr_mana);
+manaBG3x2 = mana3X + manaWidth;
+manaBG2x2 = mana2X + manaWidth;
+manaBG1x2 = mana1X + manaWidth;
 mana3CountX = mana3X + (manaWidth * 0.5);
 mana2CountX = mana2X + (manaWidth * 0.5);
 mana1CountX = mana1X + (manaWidth * 0.5);
 
+
 // enemy mana count
-enemyManaX    = enemyProfileX - 3;
-enemyManaY    = enemyProfileY + 0;
-enemyManaBGx1 = enemyManaX + 5;
-enemyManaBGy1 = enemyManaY + 34;
-enemyManaBGx2 = enemyManaBGx1 + 25;
-enemyManaBGy2 = enemyManaBGy1 + 23;
-enemyManaCountX = enemyManaBGx1 + 13;
-enemyManaCountY = enemyManaBGy1 + 5;
+enemy_mana3X   = (enemyProfileX + (manaWidth + separation));
+enemy_mana2X   = enemy_mana3X - separation;
+enemy_mana1X   = enemy_mana2X - separation;
+enemy_manaY    = enemyProfileY + 0;
+enemy_manaBGx1 = enemy_mana1X;
+enemy_manaBGx2 = enemy_mana2X;
+enemy_manaBGx3 = enemy_mana3X;
+enemy_manaBGy1 = enemy_manaY + sprite_get_height(spr_mana);
+enemy_manaBGy2 = enemy_manaBGy1 + 16;
+enemy_manaCountX = enemy_manaBGx1;
+enemy_manaCountY = enemy_manaBGy1;
+enemy_manaBG3x1 = enemy_mana3X;
+enemy_manaBG2x1 = enemy_mana2X;
+enemy_manaBG1x1 = enemy_mana1X;
+enemy_manaBG3x2 = enemy_mana3X + sprite_get_width(spr_mana);
+enemy_manaBG2x2 = enemy_mana2X + sprite_get_width(spr_mana);
+enemy_manaBG1x2 = enemy_mana1X + sprite_get_width(spr_mana);
+enemy_mana3CountX = enemy_mana3X + (manaWidth * 0.5);
+enemy_mana2CountX = enemy_mana2X + (manaWidth * 0.5);
+enemy_mana1CountX = enemy_mana1X + (manaWidth * 0.5);
 </string>
           </argument>
         </arguments>
@@ -187,17 +200,23 @@ draw_rectangle(manaBG1x1, manaBGy1, manaBG1x2, manaBGy2, false);
 draw_rectangle(manaBG2x1, manaBGy1, manaBG2x2, manaBGy2, false); 
 draw_rectangle(manaBG3x1, manaBGy1, manaBG3x2, manaBGy2, false); 
 draw_set_color(c_orange);
-draw_text(mana1CountX, manaCountY, global.player.creatureResource);
-draw_text(mana2CountX, manaCountY, global.player.spellResource);
-draw_text(mana3CountX, manaCountY, global.player.enchantResource);
+draw_text(mana1CountX, manaCountY, global.player.creatureResources);
+draw_text(mana2CountX, manaCountY, global.player.spellResources);
+draw_text(mana3CountX, manaCountY, global.player.enchantResources);
 
 // draw enemy mana
 draw_set_font(global.font_Stats);
-draw_sprite(spr_mana, 0, enemyManaX, enemyManaY);
+draw_sprite(spr_mana, 0, enemy_mana1X, enemy_manaY);
+draw_sprite(spr_mana, 1, enemy_mana2X, enemy_manaY);
+draw_sprite(spr_mana, 2, enemy_mana3X, enemy_manaY);
 draw_set_color(c_black);
-draw_rectangle(enemyManaBGx1, enemyManaBGy1, enemyManaBGx2, enemyManaBGy2, false); 
+draw_rectangle(enemy_manaBG1x1, enemy_manaBGy1, enemy_manaBG1x2, enemy_manaBGy2, false);
+draw_rectangle(enemy_manaBG2x1, enemy_manaBGy1, enemy_manaBG2x2, enemy_manaBGy2, false); 
+draw_rectangle(enemy_manaBG3x1, enemy_manaBGy1, enemy_manaBG3x2, enemy_manaBGy2, false); 
 draw_set_color(c_orange);
-draw_text(enemyManaCountX, enemyManaCountY, global.enemy.mana);
+draw_text(enemy_mana1CountX, enemy_manaCountY, global.enemy.creatureResources);
+draw_text(enemy_mana2CountX, enemy_manaCountY, global.enemy.spellResources);
+draw_text(enemy_mana3CountX, enemy_manaCountY, global.enemy.enchantResources);
 
 // reset text
 draw_set_halign(fa_left);

@@ -30,7 +30,7 @@ event_inherited();
 
 visible     = false;
 hp          = 20;
-mana        = 140;                  // arcana, essence, power, spirit, energy
+//mana        = 140;                  // arcana, essence, power, spirit, energy
 cards       = ds_list_create();     // cards in this hero's deck
 graveyard   = ds_list_create();     // cards in this hero's grave
 cardsInPlay = ds_list_create();     // a list of anything on the board under this player's control
@@ -38,9 +38,9 @@ owner       = id;                   // this just helps simplify targeting
 position    = "board";              // this just helps simplify targeting
 waitTime    = 0;                    // mainly used for AI timing but could be used for players also
 scale       = 1;
-creatureResource = 0;
-enchantResource = 0;
-spellResource = 0;
+creatureResources = 0;
+enchantResources = 0;
+spellResources = 0;
 
 // AI
 damageSpellThreshold = 0.75;        // a damage spell is worth using directly if it does more damage than this % of life total

@@ -46,7 +46,7 @@ if (AI_finishedDestructionSpellCasting == false) {
                     tempTarget = ds_list_find_value(targetList, m);
                     
                     if (tempTarget.hp <= spell.attack) {
-                        if (spell.castingCost <= mana) {
+                        if canAffordCasting(spell) {
                             target = tempTarget;
                             break;
                         }

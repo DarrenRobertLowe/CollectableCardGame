@@ -32,6 +32,7 @@ name        = "Ankylo";
 class       = "Beast";
 image       = art_ankylo;
 creatureResourceCost = 3;
+
 description = "All HP damage to Ankylo from melee is halved (round down).";
 
 baseAttack  = 3;

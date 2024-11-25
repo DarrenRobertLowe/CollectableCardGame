@@ -17,7 +17,7 @@ for(var i=0; i<ds_list_size(cards); i++) {
         if (card.attack > 0) {
             //show_debug_message("It was a damage card!");
             
-            if (card.castingCost <= mana) {
+            if (canAffordCasting(card)) {
                 //show_debug_message("The card is within our casting budget!");
                 ds_priority_add(spellQueue, card, card.attack);
             }

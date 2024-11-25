@@ -30,9 +30,8 @@ event_inherited();
 
 name        = "Ether";
 image       = art_Mana_Enchantment_01;
-castingCost = 0;
-amount      = 1;
-description = "Activate: gain " +string(amount) + " Enchantment Resource.";
+enchantResources = 1;
+description = "Activate: gain " +string(enchantResources) + " Enchantment Resource.";
 
 </string>
           </argument>
