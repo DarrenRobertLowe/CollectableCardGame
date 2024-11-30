@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>ATTACKABLE</parentName>
+  <parentName>TARGETABLE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -191,19 +191,23 @@ if ((position == "hand") or (position == "graveyard")) {
         if (displayed) {
             // interactivity
             if (mouseOverCard() == id) {
-                if (canUse) {
-                    y = (owner.hand.handY - 30);
-                    depth -= 10; // make it appear above all other cards
-                    
-                    if (clicked == true) {
-                        clicked = false;
-                        
-                        if (doubleClickWindow &gt; 0) {
-                            show_debug_message("Double-click registered : "+string(id));
-                            castingChecking = true;
-                            doubleClickWindow = 0;
-                        } else {
-                            doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                if (global.TURN == global.player) {
+                    if (owner == global.player) {
+                        if (canUse) {
+                            y = (owner.hand.handY - 30);
+                            depth -= 10; // make it appear above all other cards
+                            
+                            if (clicked == true) {
+                                clicked = false;
+                                
+                                if (doubleClickWindow &gt; 0) {
+                                    show_debug_message("Double-click registered : "+string(id));
+                                    castingChecking = true;
+                                    doubleClickWindow = 0;
+                                } else {
+                                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                                }
+                            }
                         }
                     }
                 }
@@ -219,12 +223,14 @@ if ((position == "hand") or (position == "graveyard")) {
 if (position == "board") {
     // normal activation of card (e.g. combat)
     if (mouseOverCard() == id) {
-        if (clicked == true) {
-            if (doubleClickWindow &gt; 0) {
-                tapped = true;
-                clicked = false;
-            } else {
-                doubleClickWindow = CONTROLS.doubleClickWindowMax;
+        if (canUse) {
+            if (clicked == true) {
+                if (doubleClickWindow &gt; 0) {
+                    tapped = true;
+                    clicked = false;
+                } else {
+                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
+                }
             }
         }
     }
@@ -323,7 +329,7 @@ if (displayed) {
         
         // darken card if it can't be played
         if (canUse == false) 
-        or (alreadyActivated == true){
+        or (alreadyActivated == true) {
             fx_darken_card();
         }
     }

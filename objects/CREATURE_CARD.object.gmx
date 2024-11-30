@@ -31,7 +31,6 @@ event_inherited();
 subclass    = "";
 type        = CREATURE_CARD
 
-
 // stats
 baseAttack  = 1;
 baseDefence = 0;
@@ -44,11 +43,12 @@ hp          = baseHp;
 ds_list_add(classes, "Creature");
 
 // default values
-hasSummoningSickness = false;
+attackable = true;
+summoned  = false;
 attacking = false;
 target    = noone;
-attackIndicator = instance_create(x, y, AttackIndicator);
-attackIndicator.parent = id;
+//attackIndicator = instance_create(x, y, AttackIndicator);
+//attackIndicator.parent = id;
 attackedThisTurn = false;
 canAttack = true;   // e.g. walls can't attack
 canDefend = true;   // e.g. assassins can't defend
@@ -131,18 +131,11 @@ attacking   = false;
             <string>/// interaction
 event_inherited();
 
-if !(alreadyActivated) {
-    if (activated) {
-        alreadyActivated = true;
-        event_user(0); // summon
-    }
-}
-
-if (owner == global.player) {
-    if (castingChecking) {
-        castingChecking = false;
+if (castingChecking) {
+    castingChecking = false;
+    
+    if (summoned == false) {
         if (basicActivationChecks()) {
-            //event_user(0); // summon
             summonCreature(id);
         }
     }
@@ -204,18 +197,18 @@ if (global.GAME_PHASE == "combat") {
         var target = global.target;
         if (global.currentCard == id) {
             if (target != noone) {
-                if (object_is_ancestor(target.object_index, ATTACKABLE)) { // we've chosen a valid target
+                if (object_is_ancestor(target.object_index, CONTESTANT)) {
+                    if !(hasDefenders(target)) {
+                        if (target.owner != owner) {
+                            event_user(1); // setup and perform the attack
+                        }
+                    }
+                }
+                
+                if (object_is_ancestor(target.object_index, CREATURE_CARD)) {
                     if (target.position == "board") {
-                        if (object_is_ancestor(target.object_index, CONTESTANT)) {
-                            if !(hasDefenders(target)) {
-                                if (target.owner != owner) {
-                                    event_user(1); // setup and perform the attack
-                                }
-                            }
-                        } else {
-                            if (target.owner != owner) {
-                                event_user(1); // setup and perform the attack
-                            }
+                        if (target.owner != owner) {
+                            event_user(1); // setup and perform the attack
                         }
                     }
                 }
@@ -250,14 +243,12 @@ clicked = false;
             <kind>1</kind>
             <string>/// SETUP AND PERFORM ATTACK
 
-attackIndicator.attacking = true;
-attackIndicator.target    = global.target;
-ds_list_insert(global.EVENT_LIST, 0, attackIndicator);
 attackedThisTurn = true;
 
 show_debug_message(object_get_name(object_index) + " - " + string(id) + " is attacking");
 
-nextEvent(); // perform the attack
+show_EventPopup(id, global.target, "Attacking");
+fight(id, global.target);
 
 // finish
 global.currentCard = noone;

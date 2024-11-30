@@ -1,11 +1,16 @@
-/// damage(target, amount);
-
-var target = argument0;
-var amount = argument1;
+/// damage(attacker, target, amount);
+var attacker = argument0;
+var target   = argument1;
+var amount   = argument2;
 
 if (exists(target)) {
     target.hp -= amount;
     
+    if (attacker != noone) {
+        if (ds_list_find_index(abilities, "Drain") > -1) {
+            damage(noone, owner, -amount);
+        }
+    }
     
     // find the targX and targY for the DAMAGE_COUNTER
     var targX = 0;

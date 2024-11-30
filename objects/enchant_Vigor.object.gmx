@@ -56,7 +56,6 @@ description = "Target creature gains +2/+0/+0.";
             <kind>1</kind>
             <string>/// SPELL EFFECT
 
-damage(target, 2);
 </string>
           </argument>
         </arguments>

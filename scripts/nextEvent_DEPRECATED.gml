@@ -1,5 +1,5 @@
 ///nextEvent()
-
+/*
 var list = global.EVENT_LIST;
 
 if (ds_list_size(list) > 0) {

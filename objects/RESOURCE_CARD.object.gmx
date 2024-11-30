@@ -64,15 +64,17 @@ event_inherited();
 
 if (position == "hand") {
     if (owner == global.player) {
-        if (castingChecking) {
-            if (basicActivationChecks()) {
-                playResource(id);
+        if (global.TURN == global.player) {
+            if (castingChecking) {
+                if (basicActivationChecks()) {
+                    playResource(id);
+                }
+                
+                castingChecking = false;
             }
-            castingChecking = false;
         }
     }
 }
-
 
 // activate?
 if (position == "board") {
@@ -84,12 +86,11 @@ if (position == "board") {
                     event_user(0); // give mana
                 }
             }
-            
-            clicked = false;
         }
+        
+        clicked = false;
     }
 }
-
 
 // clear click state
 clicked = false;

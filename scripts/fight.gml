@@ -15,7 +15,7 @@ if !(exists(defender)) {
 // is the target a player?
 if (object_is_ancestor(defender.object_index, CONTESTANT)) {
     debug("defender is a contestant, attacking directly");
-    damage(defender, attacker.attack);
+    damage(attacker, defender, attacker.attack);
     attacker.attacking = false;
     attacker.attackedThisTurn = true;
     exit;
@@ -35,28 +35,28 @@ if (ds_list_find_index(defender.abilities, "First-strike") > -1) {
 
 // attacker has initiative
 if (attackerInitiative > defenderInitiative) {
-    damage(defender, attacker.attack);
+    damage(attacker, defender, attacker.attack);
     
     // return damage?
     if (defender.hp > 0) {
-        damage(attacker, defender.attack);
+        damage(defender, attacker, defender.attack);
     }
 }
 
 // defender has initiative
 if (defenderInitiative > attackerInitiative) {
-    damage(attacker, defender.attack);
+    damage(defender, attacker, defender.attack);
     
     // return damage?
     if (attacker.hp > 0) {
-        damage(defender, attacker.attack);
+        damage(attacker, defender, attacker.attack);
     }
 }
 
 // neither has intiative
 if (defenderInitiative == attackerInitiative) {
-    damage(defender, attacker.attack);
-    damage(attacker, defender.attack);
+    damage(attacker, defender, attacker.attack);
+    damage(defender, attacker, defender.attack);
 }
 
 // finish

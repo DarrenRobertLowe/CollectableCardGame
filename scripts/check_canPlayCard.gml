@@ -12,4 +12,14 @@ if (position == "hand") {
     }
 }
 
+if (global.TURN != owner) {
+    canUse = false;
+}
+
+if (object_is_ancestor(object_index, CREATURE_CARD)) {
+    if (attackedThisTurn == true) {
+        canUse = false;
+    }
+}
+
 return canUse;

@@ -54,7 +54,7 @@ event_inherited();
 show_debug_message("Casting: " + object_get_name(object_index));
 event_inherited();
 spawn_CastFX(target);   // gfx
-damage(target, attack);
+damage(id, target, attack);
 completeCasting();
 stopTargeting();
 

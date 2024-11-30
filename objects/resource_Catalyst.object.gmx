@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>RESOURCE_SPELL</parentName>
+  <parentName>RESOURCE_CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,6 +28,7 @@
             <string>/// CLASS VARS
 event_inherited();
 
+sprite_index = spr_card_spell;
 name        = "Catalyst";
 image       = choose(art_Mana_Spell_01, art_Mana_Spell_02);
 spellResources = 1;

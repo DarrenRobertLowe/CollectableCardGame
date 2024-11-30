@@ -91,6 +91,7 @@
     </scripts>
     <scripts name="Cards">
       <script>scripts\organizeHand.gml</script>
+      <script>scripts\organizeResources.gml</script>
       <script>scripts\basicActivationChecks.gml</script>
       <script>scripts\completeCasting.gml</script>
       <script>scripts\removeCardFromHand.gml</script>
@@ -161,7 +162,7 @@
       <script>scripts\check_canPlayCard.gml</script>
       <script>scripts\removeCardFromBoard.gml</script>
       <script>scripts\getCreatures.gml</script>
-      <script>scripts\nextEvent.gml</script>
+      <script>scripts\nextEvent_DEPRECATED.gml</script>
       <script>scripts\draw_card.gml</script>
       <script>scripts\gameOver.gml</script>
     </scripts>
@@ -230,7 +231,6 @@
       <object>objects\CARD</object>
       <objects name="Creatures">
         <object>objects\CREATURE_CARD</object>
-        <object>objects\CREATURE_CARD_MTG_RULES</object>
         <object>objects\cc_VampireBat</object>
         <object>objects\cc_Ankylo</object>
       </objects>
@@ -247,18 +247,9 @@
       </objects>
       <objects name="Mana">
         <object>objects\RESOURCE_CARD</object>
-        <objects name="Creature">
-          <object>objects\RESOURCE_CREATURE</object>
-          <object>objects\resource_Ember</object>
-        </objects>
-        <objects name="Enchantment">
-          <object>objects\RESOURCE_ENCHANTMENT</object>
-          <object>objects\resource_Ether</object>
-        </objects>
-        <objects name="Spell">
-          <object>objects\RESOURCE_SPELL</object>
-          <object>objects\resource_Catalyst</object>
-        </objects>
+        <object>objects\resource_Ember</object>
+        <object>objects\resource_Ether</object>
+        <object>objects\resource_Catalyst</object>
       </objects>
     </objects>
     <objects name="BOARD">
@@ -271,7 +262,6 @@
     <objects name="EVENTS">
       <object>objects\POPUP_EventInfo</object>
       <object>objects\EVENT</object>
-      <object>objects\AttackIndicator</object>
     </objects>
     <objects name="COMBAT">
       <object>objects\DAMAGE_COUNTER</object>

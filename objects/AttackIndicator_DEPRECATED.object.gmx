@@ -74,7 +74,7 @@ if (exists(attacker)) {
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>AttackIndicator</whoName>
+        <whoName>AttackIndicator_DEPRECATED</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -133,7 +133,7 @@ global.WAIT = true;
 parent.attackedThisTurn = true;
 animate = true;
 
-if object_is_ancestor(target, CONTESTANT)
+if (object_is_ancestor(target, CONTESTANT))
   then target = target.parent;
 
 x = parent.x;
@@ -144,7 +144,6 @@ distance = point_distance(x, y, targetX, targetY);
 spd = (distance / room_speed) * 2;
 
 show_EventPopup(parent, target, "Attacking");
-
 </string>
           </argument>
         </arguments>

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>RESOURCE_CREATURE</parentName>
+  <parentName>RESOURCE_CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,6 +28,7 @@
             <string>/// CLASS VARS
 event_inherited();
 
+sprite_index = spr_card;
 name        = "Ember";
 image       = art_Mana_Creature_01;
 creatureResources = 1;
