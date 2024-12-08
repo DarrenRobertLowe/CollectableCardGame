@@ -38,6 +38,8 @@ baseHp      = 1;
 attack      = baseAttack;
 defence     = baseDefence;
 hp          = baseHp;
+enchantments = ds_list_create();
+
 
 // classes
 ds_list_add(classes, "Creature");
@@ -105,7 +107,13 @@ attacking   = false;
 
 
 
-// for(var i=0; i&lt;ds_list_size(enchantments); i++){ ... apply enchantments effects ... }
+for(var i=0; i&lt;ds_list_size(enchantments); i++) { 
+    var enchantment = ds_list_find_value(enchantments, i);
+    
+    with(enchantment) {
+        event_user(1);
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -278,12 +286,8 @@ global.choosingAttackTarget = false;
             <string>/// SUMMON
 debug("Summoned " +string(name));
 
-var side = noone;
-if (global.TURN == global.player)
-    then side = PLAYER_CARDSLOT;
-else side = ENEMY_CARDSLOT;
 
-if (placeOnBoard(side, id) &gt; 0) {
+if (placeOnBoard(global.TURN, id) &gt; 0) {
     finishSummoning();
 }
 </string>

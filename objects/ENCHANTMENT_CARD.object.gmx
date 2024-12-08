@@ -28,10 +28,129 @@
             <string>/// CLASS VARS
 event_inherited();
 
-sprite_index = spr_card_enchantment;
-class    = "Enchantment";
-type     = ENCHANTMENT_CARD
-target   = 0;
+sprite_index    = spr_card_enchantment;
+class           = "Enchantment";
+type            = ENCHANTMENT_CARD
+validTargets    = ds_list_create();
+isTargeted      = true;
+target          = 0;
+targetType      = "friend"; // "friend" or "foe"
+choosingTarget  = false;
+castFX          = fx_lightning;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// common to all enchantments, overwrite in specific enchantments if required
+event_inherited();
+
+if (owner == global.player) {
+    if (castingChecking) {
+        castingChecking = false;
+        if (targetType == "friend") {
+            if (countFriendlyCreatures() == 0) {
+                debug("No friendly creatures on which to place this enchantment!");
+                exit;
+            }
+        } else if (targetType == "foe") {
+            if (countEnemyCreatures() == 0) {
+                debug("No enemy creatures on which to place this enchantment!");
+                exit;
+            }
+        }
+        
+        if (basicActivationChecks()) {
+            casting = true;
+        }
+    }
+    
+    if (casting) {
+        global.target = noone;
+        global.choosingEffectTarget = true; 
+        global.castingSpell = true; 
+        choosingTarget = true;
+        
+        // if this doesn't target cards in graveyard, hand or deck...
+        global.player.hand.showContents      = false;
+        global.player.graveyard.showContents = false;
+        global.enemy.hand.showContents       = false;
+        global.enemy.graveyard.showContents  = false;
+        
+        casting = false;
+    }
+}
+
+if (alreadyActivated == false) {
+    if (activated) {
+        if (global.POPUP_active == false) {
+            event_user(0); // actually cast the spell
+            alreadyActivated = true;
+        }
+    }
+}
+
+
+/// targeting
+if (choosingTarget) {
+    CONTROLS.animate = true;
+    global.currentCard = id;
+    
+    if (global.controls_cancel == true) {
+        stopTargeting();
+        show_debug_message("Cancelled.");
+    }
+    
+    
+    target  = noone;
+    var ptarget = noone;
+    
+    if (global.target != noone) {
+        if (object_is_ancestor(global.target.object_index, CREATURE_CARD)) {
+            if (targetType == "friend") {
+                if (!isOpponentCreature(global.target)) {
+                    ptarget = global.target;
+                }
+            } else if (targetType == "foe") {
+                if (isOpponentCreature(global.target)) {
+                    ptarget = global.target;
+                }
+            }
+        }
+    }
+    
+    
+    if (ptarget != noone) {
+        show_debug_message("potential target is : " +string(ptarget));
+        
+        ptarget.glowing = true;
+        if (global.controls_accept) {
+            target = ptarget;
+            show_debug_message("Actual target is : " +string(target));
+            global.choosingTarget = false;
+            choosingTarget = false;
+            castSpell(id);
+            activated = true;   // activate the spell
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

@@ -28,16 +28,17 @@
             <string>/// CLASS VARS
 event_inherited();
 
-name        = "Lion's Strength";
-image       = art_LionStrength;
+name         = "Lion's Strength";
+image        = art_LionStrength;
 enchantResourceCost = 2;
-description = "Target creature gains +2/+0/+0.";
+description  = "Target creature gains +2/+0/+0.";
+buffQuantity = 2;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="0">
+    <event eventtype="7" enumb="12">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -54,8 +55,72 @@ description = "Target creature gains +2/+0/+0.";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// SPELL EFFECT
+            <string>/// remove effect
+if (exists(target)) {
+    target.attack -= buffQuantity;
+    updateStats(target);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// apply effect
+if (exists(target)) {
+    target.attack += buffQuantity;
+    updateStats(target);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// CAST THE SPELL
+show_debug_message("Casting: " + object_get_name(object_index));
+event_inherited();
+spawn_CastFX(target);   // gfx
 
+enchant(target, id);
+position = "board";
+targetx = target.x;
+targety = target.y + global.enchantmentYDifference;
+
+payCastingCost();
+stopTargeting();
 </string>
           </argument>
         </arguments>

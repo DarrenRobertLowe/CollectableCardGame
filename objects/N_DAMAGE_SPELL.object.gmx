@@ -55,7 +55,8 @@ show_debug_message("Casting: " + object_get_name(object_index));
 event_inherited();
 spawn_CastFX(target);   // gfx
 damage(id, target, attack);
-completeCasting();
+payCastingCost();
+sendToGraveyard(owner.graveyard, id);
 stopTargeting();
 
 </string>

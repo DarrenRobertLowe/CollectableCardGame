@@ -28,7 +28,7 @@
             <string>/// CLASS VARS
 event_inherited();
 
-sprite_index = spr_card_spell;
+sprite_index = spr_resource_card_spell;
 name        = "Catalyst";
 image       = choose(art_Mana_Spell_01, art_Mana_Spell_02);
 spellResources = 1;

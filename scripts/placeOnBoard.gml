@@ -1,5 +1,5 @@
-///placeOnBoard(PLAYER_CARDSLOT or ENEMY_CARDSLOT, card id);
-var cardslots   = argument0;
+///placeOnBoard(contestant, card id);
+var targetOwner = argument0;
 var cardToPlace = argument1;
 var board       = BOARD_CONTROLLER;
 var slots       = board.freeSlots;
@@ -9,9 +9,13 @@ ds_list_clear(slots);
 
 // find all the free slots and add them to slots
 var slots = board.freeSlots;
-with (cardslots) {
-    if (card == noone) {
-        ds_list_add(slots, id); // the local var "slots" is accessible because of the "with" statment. Neat!
+
+with (CARDSLOT) {
+//with (cardslots) {
+    if (owner == targetOwner) {
+        if (card == noone) {
+            ds_list_add(slots, id); // the local var "slots" is accessible because of the "with" statment. Neat!
+        }
     }
 }
 

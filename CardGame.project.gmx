@@ -60,10 +60,14 @@
       <sprite>sprites\spr_card</sprite>
       <sprite>sprites\spr_card_spell</sprite>
       <sprite>sprites\spr_card_enchantment</sprite>
+      <sprite>sprites\spr_card_resource</sprite>
       <sprite>sprites\spr_stat_icons</sprite>
       <sprites name="Bold Numbers">
         <sprite>sprites\spr_card_castingCost_numbers</sprite>
       </sprites>
+      <sprite>sprites\spr_resource_card_creature</sprite>
+      <sprite>sprites\spr_resource_card_enchantment</sprite>
+      <sprite>sprites\spr_resource_card_spell</sprite>
     </sprites>
     <sprite>sprites\spr_target</sprite>
     <sprite>sprites\spr_attacking</sprite>
@@ -85,6 +89,9 @@
     <scripts name="General">
       <script>scripts\exists.gml</script>
       <script>scripts\isOpponentCreature.gml</script>
+      <script>scripts\countFriendlyCreatures.gml</script>
+      <script>scripts\isCreature.gml</script>
+      <script>scripts\countEnemyCreatures.gml</script>
     </scripts>
     <scripts name="Drawing">
       <script>scripts\draw_text_bordered.gml</script>
@@ -93,7 +100,7 @@
       <script>scripts\organizeHand.gml</script>
       <script>scripts\organizeResources.gml</script>
       <script>scripts\basicActivationChecks.gml</script>
-      <script>scripts\completeCasting.gml</script>
+      <script>scripts\payCastingCost.gml</script>
       <script>scripts\removeCardFromHand.gml</script>
       <script>scripts\positionCardElements.gml</script>
       <script>scripts\finishSummoning.gml</script>
@@ -151,7 +158,7 @@
       <scripts name="Combat">
         <script>scripts\fight.gml</script>
         <script>scripts\damage.gml</script>
-        <script>scripts\creatureCount.gml</script>
+        <script>scripts\creatureCountDEPRECATED.gml</script>
         <script>scripts\canAttackDirectly.gml</script>
       </scripts>
       <scripts name="Targeting">
@@ -185,6 +192,8 @@
     <script>scripts\countSpellResources.gml</script>
     <script>scripts\countEnchantResources.gml</script>
     <script>scripts\untap_resources.gml</script>
+    <script>scripts\enchant.gml</script>
+    <script>scripts\updateStats.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -203,7 +212,6 @@
       <object>objects\TARGETABLE</object>
       <object>objects\ATTACKABLE</object>
       <object>objects\CONTESTANT</object>
-      <object>objects\CARDSLOT</object>
       <object>objects\RESOURCESLOT</object>
     </objects>
     <object>objects\MASTER</object>
@@ -215,6 +223,7 @@
     <object>objects\ENEMY_HAND</object>
     <object>objects\ENEMY_GRAVE</object>
     <object>objects\DECK</object>
+    <object>objects\CARDSLOT</object>
     <object>objects\ENEMY</object>
     <object>objects\PLAYER</object>
     <object>objects\PHASE_CONTROLLER</object>
@@ -254,8 +263,6 @@
     </objects>
     <objects name="BOARD">
       <object>objects\BOARD_CONTROLLER</object>
-      <object>objects\PLAYER_CARDSLOT</object>
-      <object>objects\ENEMY_CARDSLOT</object>
       <object>objects\PLAYER_RESOURCESLOT</object>
       <object>objects\ENEMY_RESOURCESLOT</object>
     </objects>

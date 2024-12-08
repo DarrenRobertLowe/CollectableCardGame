@@ -28,7 +28,7 @@
             <string>/// CLASS VARS
 event_inherited();
 
-sprite_index = spr_card_enchantment;
+sprite_index = spr_resource_card_enchantment;
 name        = "Ether";
 image       = art_Mana_Enchantment_01;
 enchantResources = 1;

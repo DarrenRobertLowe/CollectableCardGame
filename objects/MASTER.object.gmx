@@ -48,6 +48,7 @@ setup_card_scales();
 setup_rules();
 setup_fonts();
 setup_text_colours();
+global.enchantmentYDifference = 30;
 
 // setup particle fx
 global.PARTICLE_SYSTEM = part_system_create();

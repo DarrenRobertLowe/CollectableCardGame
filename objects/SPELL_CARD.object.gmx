@@ -64,7 +64,7 @@ event_inherited();
 if (owner == global.player) {
     if (castingChecking) {
         castingChecking = false;
-        if( basicActivationChecks() ){
+        if( basicActivationChecks() ) {
             casting = true;
         }
     }

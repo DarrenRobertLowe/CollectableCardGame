@@ -28,6 +28,7 @@
             <string>/// CLASS VARS
 event_inherited();
 
+sprite_index = spr_card;
 subclass    = "";
 type        = RESOURCE_CARD
 castingCost = 0;

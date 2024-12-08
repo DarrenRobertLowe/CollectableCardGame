@@ -186,6 +186,7 @@ if (global.choosingEffectTarget == true) {
 }
 
 
+// selecting a card to play
 if ((position == "hand") or (position == "graveyard")) {
     if (!global.choosingEffectTarget) and (!global.choosingAttackTarget) {
         if (displayed) {
@@ -239,7 +240,7 @@ if (position == "board") {
 
 
 if (global.choosingEffectTarget == true) {
-    // allow this card to be selected as a combat target
+    // allow this card to be selected as an effect target
     if (global.currentCard != id) {
         if (mouseOverCard() == id) {
             glowing = true;

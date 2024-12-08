@@ -32,9 +32,7 @@ if (exists(target)) {
     
     if (object_is_ancestor(target.object_index, CREATURE_CARD)) {
         // update the stats
-        with (target) {
-            getCardSurface();
-        }
+        updateStats(target);
         
         // destroyed?
         if (target.hp <= 0) {

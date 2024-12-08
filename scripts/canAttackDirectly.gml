@@ -3,7 +3,7 @@
 var contestant = argument0;
 var result = false;
 
-if (creatureCount(contestant) == 0) {
+if (countEnemyCreatures() == 0) {// (creatureCount(contestant) == 0) {
     result = true;
 }
 

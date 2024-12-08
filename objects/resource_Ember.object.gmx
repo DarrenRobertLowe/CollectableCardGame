@@ -28,7 +28,7 @@
             <string>/// CLASS VARS
 event_inherited();
 
-sprite_index = spr_card;
+sprite_index = spr_resource_card_creature;
 name        = "Ember";
 image       = art_Mana_Creature_01;
 creatureResources = 1;

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>SPELL_CARD</parentName>
+  <parentName>ENCHANTMENT_CARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Parent of N_DAMAGE_SPELL and X_DAMAGE_SPELL
+            <string>/// Deals a specific amount of damage (N) or heals by that amount.
 event_inherited();
 
 </string>
@@ -33,7 +33,7 @@ event_inherited();
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -50,43 +50,15 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// targeting
+            <string>/// CAST THE SPELL
+show_debug_message("Casting: " + object_get_name(object_index));
 event_inherited();
-
-if (choosingTarget) {
-    CONTROLS.animate = true;
-    global.currentCard = id;
-    
-    if (global.controls_cancel == true) {
-        stopTargeting();
-        show_debug_message("Cancelled.");
-    }
-    
-    
-    target  = noone;
-    var ptarget = noone;
-    
-    if (global.target != noone) {
-        if (object_is_ancestor(global.target.object_index, CONTESTANT)) 
-        or (object_is_ancestor(global.target.object_index, CREATURE_CARD)) {
-            ptarget = global.target;
-        }
-    }
-    
-    if (ptarget != noone) {
-        show_debug_message("potential target is : " +string(ptarget));
-        
-        ptarget.glowing = true;
-        if (global.controls_accept) {
-            target = ptarget;
-            show_debug_message("Actual target is : " +string(target));
-            global.choosingTarget = false;
-            choosingTarget = false;
-            castSpell(id);
-            activated = true;   // activate the spell
-        }
-    }
-}
+spawn_CastFX(target);   // gfx
+target.Attack += buffQuantity;
+targetx = target.x;
+targety = target.y + global.enchantmentYDifference;
+payCastingCost();
+stopTargeting();
 </string>
           </argument>
         </arguments>

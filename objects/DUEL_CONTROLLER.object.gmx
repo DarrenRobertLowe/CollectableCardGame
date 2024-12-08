@@ -83,19 +83,24 @@ playerBackRow   = 589;
 
 
 // player side
+var slot = noone;
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(playerCardsX + (i * cardSeparation), playerFrontRow, PLAYER_CARDSLOT)
+    slot = instance_create(playerCardsX + (i * cardSeparation), playerFrontRow, CARDSLOT);
+    slot.owner = global.player;
 }
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(playerCardsX + (i * cardSeparation), playerBackRow, PLAYER_CARDSLOT)
+    slot = instance_create(playerCardsX + (i * cardSeparation), playerBackRow, CARDSLOT);
+    slot.owner = global.player;
 }
 
 // enemy side
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyBackRow, ENEMY_CARDSLOT);
+    slot = instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyBackRow, CARDSLOT);
+    slot.owner = global.enemy;
 }
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyFrontRow, ENEMY_CARDSLOT);
+    slot = instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyFrontRow, CARDSLOT);
+    slot.owner = global.enemy;
 }
 
 global.player.resourceLane = instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, PLAYER_RESOURCESLOT);
