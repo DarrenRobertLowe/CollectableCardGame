@@ -34,6 +34,7 @@ description     = "This is the default card and if you're reading this, somethin
 castingCost     = 1;
 abilities       = ds_list_create();
 classes         = ds_list_create();
+enchantments    = ds_list_create();
 sprite_index    = spr_card;
 image_index     = 0;
 image_speed     = 0;
@@ -290,6 +291,41 @@ if (displayed) {
             <kind>1</kind>
             <string>/// no glow
 glowing = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="25">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destruction Event (Sent to Graveyard)
+
+// tell enchantments on this card that they should be destroyed
+for(var i=0; i&lt;ds_list_size(enchantments); i++) {
+    var enchantment = ds_list_find_value(enchantments, i);
+    
+    with(enchantment) {
+        event_user(CONST_DESTROY_EVENT);
+    }
+}
+
+// Go to graveyard by default. Specific cards can override this
+sendToGraveyard(owner.graveyard, id);
 </string>
           </argument>
         </arguments>

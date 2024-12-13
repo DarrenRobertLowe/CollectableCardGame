@@ -34,7 +34,7 @@ type            = ENCHANTMENT_CARD
 validTargets    = ds_list_create();
 isTargeted      = true;
 target          = 0;
-targetType      = "friend"; // "friend" or "foe"
+targetAlliance  = "friend"; // "friend" or "foe" or "any"
 choosingTarget  = false;
 castFX          = fx_lightning;
 </string>
@@ -62,15 +62,20 @@ castFX          = fx_lightning;
             <string>/// common to all enchantments, overwrite in specific enchantments if required
 event_inherited();
 
+if (position == "board") {
+    targetx = target.x;
+    targety = target.y + global.enchantmentYDifference;
+}
+
 if (owner == global.player) {
     if (castingChecking) {
         castingChecking = false;
-        if (targetType == "friend") {
+        if (targetAlliance == "friend" or targetAlliance == "any") {
             if (countFriendlyCreatures() == 0) {
                 debug("No friendly creatures on which to place this enchantment!");
                 exit;
             }
-        } else if (targetType == "foe") {
+        } else if (targetAlliance == "foe") {
             if (countEnemyCreatures() == 0) {
                 debug("No enemy creatures on which to place this enchantment!");
                 exit;
@@ -124,11 +129,11 @@ if (choosingTarget) {
     
     if (global.target != noone) {
         if (object_is_ancestor(global.target.object_index, CREATURE_CARD)) {
-            if (targetType == "friend") {
+            if (targetAlliance == "friend") {
                 if (!isOpponentCreature(global.target)) {
                     ptarget = global.target;
                 }
-            } else if (targetType == "foe") {
+            } else if (targetAlliance == "foe") {
                 if (isOpponentCreature(global.target)) {
                     ptarget = global.target;
                 }
@@ -151,6 +156,32 @@ if (choosingTarget) {
         }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="25">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destroy Event (e.g. sendToGraveyard())
+event_inherited();
+
+sendToGraveyard(owner.graveyard, id);
 </string>
           </argument>
         </arguments>

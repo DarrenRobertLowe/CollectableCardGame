@@ -41,7 +41,12 @@ if (exists(target)) {
                 target.x + ( (sprite_get_width(spr_card)  * target.scale) * 0.5), 
                 target.y + ( (sprite_get_height(spr_card) * target.scale) * 0.5), 
                 fx_explode);
-            sendToGraveyard(target.owner.graveyard, target);
+                
+            with(target) {
+                event_user(CONST_DESTROY_EVENT);
+            }
+            
+            //sendToGraveyard(target.owner.graveyard, target);
         }
     }
 } else log("Error: Invalid target for damage: " + string(target) +" does not exist!");

@@ -21,7 +21,13 @@ if !ds_list_empty(global.NEXT_PHASE_BLOCKERS) {
 
 if (global.GAME_PHASE == "draw") {
     reset_AI_actions();
-    global.GAME_PHASE = "payment";
+    
+    if (ds_list_size(global.PAYMENT_PHASE_LIST) > 0) {
+        global.GAME_PHASE = "payment";
+    } else {
+        global.GAME_PHASE = "main1";
+    }
+    
     waitTime = room_speed;
     exit;
 }
@@ -36,18 +42,12 @@ if (global.GAME_PHASE == "payment") {
 if (global.GAME_PHASE == "main1") {
     var contestant = global.TURN;
     var cardsOnBoard = getCreatures(contestant);
-    
-    if !ds_list_empty(cardsOnBoard) {
-        for(var i=0; i<ds_list_size(cardsOnBoard); i++) {
-            card = ds_list_find_value(cardsOnBoard, i);
-            if (card.canAttack) {
-                global.GAME_PHASE = "combat";
-                waitTime = room_speed;
-                exit;
-            }
-        }
+   
+    if (anyCreaturesCanAttack(cardsOnBoard)) {
+        global.GAME_PHASE = "combat";
+        waitTime = room_speed;
+        exit;
     } else {
-        // no creatures so skip combat phase
         global.GAME_PHASE = "main2";
         waitTime = room_speed;
         exit;

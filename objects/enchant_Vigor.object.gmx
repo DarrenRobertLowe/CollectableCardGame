@@ -115,9 +115,9 @@ event_inherited();
 spawn_CastFX(target);   // gfx
 
 enchant(target, id);
+removeCardFromHand(id);
 position = "board";
-targetx = target.x;
-targety = target.y + global.enchantmentYDifference;
+
 
 payCastingCost();
 stopTargeting();

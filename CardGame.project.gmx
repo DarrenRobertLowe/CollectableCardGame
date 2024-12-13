@@ -194,6 +194,7 @@
     <script>scripts\untap_resources.gml</script>
     <script>scripts\enchant.gml</script>
     <script>scripts\updateStats.gml</script>
+    <script>scripts\anyCreaturesCanAttack.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -293,6 +294,9 @@
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
+  <constants number="1">
+    <constant name="CONST_DESTROY_EVENT">event_user(15)</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
