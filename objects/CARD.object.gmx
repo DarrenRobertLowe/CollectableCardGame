@@ -61,7 +61,8 @@ canPlayFromGraveyard = true;
 creatureResourceCost = 0;
 spellResourceCost = 0;
 enchantResourceCost = 0;
-
+base_enchantmentSeparation = 12
+enchantmentSeparation = base_enchantmentSeparation;
 setup_glowing();
 
 
@@ -192,23 +193,23 @@ if ((position == "hand") or (position == "graveyard")) {
     if (!global.choosingEffectTarget) and (!global.choosingAttackTarget) {
         if (displayed) {
             // interactivity
-            if (mouseOverCard() == id) {
-                if (global.TURN == global.player) {
-                    if (owner == global.player) {
-                        if (canUse) {
+            if (global.TURN == global.player) {
+                if (owner == global.player) {
+                    if (canUse) {
+                        if(mouseOver()) {
                             y = (owner.hand.handY - 30);
                             depth -= 10; // make it appear above all other cards
+                        }
+                        
+                        if (clicked == true) {
+                            clicked = false;
                             
-                            if (clicked == true) {
-                                clicked = false;
-                                
-                                if (doubleClickWindow &gt; 0) {
-                                    show_debug_message("Double-click registered : "+string(id));
-                                    castingChecking = true;
-                                    doubleClickWindow = 0;
-                                } else {
-                                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
-                                }
+                            if (doubleClickWindow &gt; 0) {
+                                show_debug_message("Double-click registered : "+string(id));
+                                castingChecking = true;
+                                doubleClickWindow = 0;
+                            } else {
+                                doubleClickWindow = CONTROLS.doubleClickWindowMax;
                             }
                         }
                     }
@@ -224,15 +225,13 @@ if ((position == "hand") or (position == "graveyard")) {
 
 if (position == "board") {
     // normal activation of card (e.g. combat)
-    if (mouseOverCard() == id) {
+    if (clicked == true) {
         if (canUse) {
-            if (clicked == true) {
-                if (doubleClickWindow &gt; 0) {
-                    tapped = true;
-                    clicked = false;
-                } else {
-                    doubleClickWindow = CONTROLS.doubleClickWindowMax;
-                }
+            if (doubleClickWindow &gt; 0) {
+                tapped = true;
+                clicked = false;
+            } else {
+                doubleClickWindow = CONTROLS.doubleClickWindowMax;
             }
         }
     }
@@ -243,12 +242,10 @@ if (position == "board") {
 if (global.choosingEffectTarget == true) {
     // allow this card to be selected as an effect target
     if (global.currentCard != id) {
-        if (mouseOverCard() == id) {
-            glowing = true;
-            if (clicked) {
-                clicked = false;
-                global.target = id;
-            }
+        glowing = true;
+        if (clicked) {
+            clicked = false;
+            global.target = id;
         }
     }
 }
@@ -267,6 +264,8 @@ if (displayed) {
         calculate_glowAlpha();
     }
 }
+
+organizeEnchantments(id);
 </string>
           </argument>
         </arguments>
@@ -315,6 +314,7 @@ glowing = false;
             <kind>1</kind>
             <string>/// Destruction Event (Sent to Graveyard)
 
+show_debug_message("Running event_user(15) for " + string(id));
 // tell enchantments on this card that they should be destroyed
 for(var i=0; i&lt;ds_list_size(enchantments); i++) {
     var enchantment = ds_list_find_value(enchantments, i);

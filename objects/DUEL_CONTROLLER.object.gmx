@@ -103,8 +103,10 @@ for(var i=0; i&lt;cardSlotsPerRow; i++) {
     slot.owner = global.enemy;
 }
 
-global.player.resourceLane = instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, PLAYER_RESOURCESLOT);
-global.enemy.resourceLane = instance_create(enemyCardsX, enemyBackRow, ENEMY_RESOURCESLOT);
+global.player.resourceLane = instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, RESOURCE_LANE);
+global.enemy.resourceLane = instance_create(enemyCardsX, enemyBackRow, RESOURCE_LANE);
+global.player.resourceLane.owner = global.player;
+global.enemy.resourceLane.owner = global.enemy;
 
 /// draw starting cards
 with (CONTESTANT) {

@@ -59,18 +59,7 @@ verticalSeparation = 20;
             <kind>1</kind>
             <string>/// position card on slot
 
-//calculate_glowAlpha();
-
-var size = ds_list_size(cards);
-for (var i=0; i&lt;size; i++) {
-    var card = ds_list_find_value(cards, i);
-    
-    if (exists(card)) {
-        card.targetX = x;
-        card.targetY = y + (i * verticalSeparation);
-        card.depth = global.card_depth;
-    }
-}
+organizeResources(id, cards);
 </string>
           </argument>
         </arguments>

@@ -8,6 +8,6 @@ global.handFX_depth     = -101; // leaving enough space between cards and drawin
 global.GUI_depth        = -102;
 global.GUI_button_depth = -103;
 global.cardZoomed_depth = -104;
-global.info_depth       = -105;
+global.info_depth       = -100000;
 
-global.drawing_depth    = -99999;
+global.drawing_depth    = -999999;

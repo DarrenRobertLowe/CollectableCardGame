@@ -178,10 +178,46 @@ if (choosingTarget) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Destroy Event (e.g. sendToGraveyard())
+            <string>/// Destroy self and remove our effects from target
+
+event_inherited();
+event_user(2); // remove effects
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="12">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// remove this enchantment from target
+/* Note: The code for undoing the specific effects of an
+ * enchantment are in the user_event(2) of the specific
+ * card.
+*/
 event_inherited();
 
-sendToGraveyard(owner.graveyard, id);
+var thisCard = "Enchantment " + string(id) + " (" +string(object_get_name(object_index)) + ")";
+
+if (exists(target)) {
+    removeEnchantment(id);
+} else {
+    log(thisCard + "'s target did not exist when attempting to remove self from enchantments list!");
+}
 </string>
           </argument>
         </arguments>

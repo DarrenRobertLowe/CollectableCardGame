@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///setup
 clicked = false;
-displayed = true; // needed for click interaction
+displayed = true;       // see CONTROLS for click interaction
 doubleClickWindow = 0;
 </string>
           </argument>

@@ -78,7 +78,6 @@
     <scripts name="Debug">
       <script>scripts\log.gml</script>
       <script>scripts\debug.gml</script>
-      <script>scripts\log_errorOLD.gml</script>
     </scripts>
     <script>scripts\setup_rules.gml</script>
     <script>scripts\setup_depths.gml</script>
@@ -99,6 +98,7 @@
     <scripts name="Cards">
       <script>scripts\organizeHand.gml</script>
       <script>scripts\organizeResources.gml</script>
+      <script>scripts\organizeEnchantments.gml</script>
       <script>scripts\basicActivationChecks.gml</script>
       <script>scripts\payCastingCost.gml</script>
       <script>scripts\removeCardFromHand.gml</script>
@@ -179,7 +179,6 @@
     </scripts>
     <script>scripts\castSpell.gml</script>
     <script>scripts\summonCreature.gml</script>
-    <script>scripts\playResource.gml</script>
     <script>scripts\show_EventPopup.gml</script>
     <script>scripts\AI_combat_phase.gml</script>
     <script>scripts\hasDefenders.gml</script>
@@ -195,6 +194,10 @@
     <script>scripts\enchant.gml</script>
     <script>scripts\updateStats.gml</script>
     <script>scripts\anyCreaturesCanAttack.gml</script>
+    <script>scripts\removeEnchantment.gml</script>
+    <script>scripts\addResourceCardToLane.gml</script>
+    <script>scripts\removeResource.gml</script>
+    <script>scripts\playResource.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -213,7 +216,8 @@
       <object>objects\TARGETABLE</object>
       <object>objects\ATTACKABLE</object>
       <object>objects\CONTESTANT</object>
-      <object>objects\RESOURCESLOT</object>
+      <object>objects\RESOURCE_LANE</object>
+      <object>objects\BOARD_CONTROLLER</object>
     </objects>
     <object>objects\MASTER</object>
     <object>objects\GUI</object>
@@ -262,11 +266,6 @@
         <object>objects\resource_Catalyst</object>
       </objects>
     </objects>
-    <objects name="BOARD">
-      <object>objects\BOARD_CONTROLLER</object>
-      <object>objects\PLAYER_RESOURCESLOT</object>
-      <object>objects\ENEMY_RESOURCESLOT</object>
-    </objects>
     <objects name="EVENTS">
       <object>objects\POPUP_EventInfo</object>
       <object>objects\EVENT</object>
@@ -294,8 +293,9 @@
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="1">
-    <constant name="CONST_DESTROY_EVENT">event_user(15)</constant>
+  <constants number="2">
+    <constant name="CONST_DESTROY_EVENT">15</constant>
+    <constant name="CONST_TAP_EVENT">1</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

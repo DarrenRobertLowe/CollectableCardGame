@@ -79,6 +79,7 @@ if (global.POPUP_active == false) {
         if (mouseOver()) {
             if (displayed) {
                 ds_priority_add(CONTROLS.clickableUnderPointer, id, depth);
+                //show_debug_message("Added to queue: " + string(id) + " with depth: " + string(depth));
             }
         }
     }

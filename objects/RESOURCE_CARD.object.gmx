@@ -68,7 +68,7 @@ if (position == "hand") {
         if (global.TURN == global.player) {
             if (castingChecking) {
                 if (basicActivationChecks()) {
-                    playResource(id);
+                    event_user(0);  // play this land
                 }
                 
                 castingChecking = false;
@@ -79,12 +79,16 @@ if (position == "hand") {
 
 // activate?
 if (position == "board") {
+    // set our x
+    //targetX = owner.resourceLane.x;
+    
+    
     if (clicked) {
         if (owner == global.player) {
             if (global.TURN == global.player) {
                 if !(alreadyActivated) {
                     alreadyActivated = true;
-                    event_user(0); // give mana
+                    event_user(1); // tap the card for its resources
                 }
             }
         }
@@ -125,7 +129,7 @@ alreadyActivated = false;
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="10">
+    <event eventtype="7" enumb="11">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -149,6 +153,32 @@ owner.spellResources     += spellResources;
 owner.enchantResources   += enchantResources;
 alreadyActivated = true;
 show_debug_message("Tapped "  +string(name));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Add the land to the resource lane
+removeCardFromHand(id);
+position = "board";
+addResourceCardToLane(owner.resourceLane, id);
 </string>
           </argument>
         </arguments>

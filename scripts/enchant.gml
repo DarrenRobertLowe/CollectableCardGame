@@ -8,7 +8,7 @@ var position = ds_list_find_index(target.enchantments, enchantment);
 if (position > -1) {
     ds_list_delete(target.enchantments, position);
     with(enchantment) {
-        event_user(2); // remove effects
+        event_user(15); // remove effects
     }
 }
 

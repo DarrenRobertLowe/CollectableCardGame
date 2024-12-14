@@ -56,6 +56,8 @@ buffQuantity = 2;
           <argument>
             <kind>1</kind>
             <string>/// remove effect
+event_inherited();
+
 if (exists(target)) {
     target.attack -= buffQuantity;
     updateStats(target);
@@ -118,6 +120,9 @@ enchant(target, id);
 removeCardFromHand(id);
 position = "board";
 
+global.choosingEffectTarget = false; 
+global.castingSpell = false; 
+choosingTarget = false;
 
 payCastingCost();
 stopTargeting();
