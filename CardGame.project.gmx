@@ -293,8 +293,9 @@
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="2">
+  <constants number="3">
     <constant name="CONST_DESTROY_EVENT">15</constant>
+    <constant name="CONST_PLAY_CARD_EVENT">0</constant>
     <constant name="CONST_TAP_EVENT">1</constant>
   </constants>
   <help>
