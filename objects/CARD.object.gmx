@@ -238,14 +238,16 @@ if (position == "board") {
 }
 
 
-
+// allow this card to be selected as an effect target
 if (global.choosingEffectTarget == true) {
-    // allow this card to be selected as an effect target
     if (global.currentCard != id) {
-        glowing = true;
-        if (clicked) {
-            clicked = false;
-            global.target = id;
+        if (isValidTarget(id)) {
+            glowing = true;
+            
+            if (clicked) {
+                clicked = false;
+                global.target = id;
+            }
         }
     }
 }

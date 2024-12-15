@@ -34,7 +34,7 @@ type            = ENCHANTMENT_CARD
 validTargets    = ds_list_create();
 isTargeted      = true;
 target          = 0;
-targetAlliance  = "friend"; // "friend" or "foe" or "any"
+targetAlliance  = "any"; // "friend" or "foe" or "any"
 choosingTarget  = false;
 castFX          = fx_lightning;
 </string>
@@ -90,7 +90,7 @@ if (owner == global.player) {
     if (casting) {
         global.target = noone;
         global.choosingEffectTarget = true; 
-        global.castingSpell = true; 
+        global.castingSpell = true; // changes the cursor to a wand
         choosingTarget = true;
         
         // if this doesn't target cards in graveyard, hand or deck...
@@ -124,36 +124,24 @@ if (choosingTarget) {
     }
     
     
-    target  = noone;
+    target = noone;
     var ptarget = noone;
     
     if (global.target != noone) {
-        if (object_is_ancestor(global.target.object_index, CREATURE_CARD)) {
-            if (targetAlliance == "friend") {
-                if (!isOpponentCreature(global.target)) {
-                    ptarget = global.target;
-                }
-            } else if (targetAlliance == "foe") {
-                if (isOpponentCreature(global.target)) {
-                    ptarget = global.target;
-                }
-            }
+        if (isValidTarget(global.target)) {
+            ptarget = global.target;
         }
     }
     
     
     if (ptarget != noone) {
-        show_debug_message("potential target is : " +string(ptarget));
-        
-        ptarget.glowing = true;
-        if (global.controls_accept) {
+        //if (global.controls_accept) {
             target = ptarget;
-            show_debug_message("Actual target is : " +string(target));
-            global.choosingTarget = false;
+            global.choosingEffectTarget = false;
             choosingTarget = false;
             castSpell(id);
-            activated = true;   // activate the spell
-        }
+            //activated = true;   // activate the spell
+        //}
     }
 }
 </string>

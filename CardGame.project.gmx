@@ -198,6 +198,8 @@
     <script>scripts\addResourceCardToLane.gml</script>
     <script>scripts\removeResource.gml</script>
     <script>scripts\playResource.gml</script>
+    <script>scripts\isValidTarget.gml</script>
+    <script>scripts\isContestant.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">

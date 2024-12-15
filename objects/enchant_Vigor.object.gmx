@@ -33,6 +33,7 @@ image        = art_LionStrength;
 enchantResourceCost = 2;
 description  = "Target creature gains +2/+0/+0.";
 buffQuantity = 2;
+ds_list_add(validTargets, "any creature on board");
 </string>
           </argument>
         </arguments>

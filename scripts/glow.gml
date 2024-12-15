@@ -1,7 +1,15 @@
 ///glow
+var glow_scale = scale;//(scale * 1.1);
 
-//glowAlpha = (glow_alpha_offset + glow_alpha_range * sin(current_time / glowSpeed));
+/*
+var width  = sprite_get_width(sprite_index);
+var height = sprite_get_height(sprite_index); 
+
+var glowWidth  = (width  * glow_scale);
+var glowHeight = (height * glow_scale);
+*/
+
 
 draw_set_blend_mode(bm_add);
-draw_sprite_ext(glow_sprite, image_index, x + glow_offset_x, y + glow_offset_y, scale * 1.1, scale * 1.1, 0, glow_colour, glowAlpha);
+draw_sprite_ext(glow_sprite, image_index, x, y, glow_scale, glow_scale, 0, glow_colour, glowAlpha);
 draw_set_blend_mode(bm_normal);
