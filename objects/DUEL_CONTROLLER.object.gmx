@@ -108,10 +108,15 @@ global.enemy.resourceLane = instance_create(enemyCardsX, enemyBackRow, RESOURCE_
 global.player.resourceLane.owner = global.player;
 global.enemy.resourceLane.owner = global.enemy;
 
+
+instance_create(-100, -100, EMBIGGENED_CARD_DRAWER);
+
+
 /// draw starting cards
 with (CONTESTANT) {
     alarm[0] = 2;
 }
+
 
 /// start the game
 nextPhase();

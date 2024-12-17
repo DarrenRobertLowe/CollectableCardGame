@@ -364,6 +364,13 @@ if (displayed) {
     } else {
         if (cardSurfaceSprite != noone) {
             draw_sprite_ext(cardSurfaceSprite, 0, x, y, scale, scale, image_angle, c_white, 1);
+            
+            // draw embiggened card in center of screen
+            if(mouseOver()) {
+                ds_set_add(EMBIGGENED_CARD_DRAWER.cardSet, cardSurfaceSprite);
+            } else {
+                ds_list_remove(EMBIGGENED_CARD_DRAWER.cardSet, cardSurfaceSprite);
+            }
         }
         
         // darken card if it can't be played

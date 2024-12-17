@@ -146,6 +146,9 @@ enemy_manaBG1x2 = enemy_mana1X + sprite_get_width(spr_mana);
 enemy_mana3CountX = enemy_mana3X + (manaWidth * 0.5);
 enemy_mana2CountX = enemy_mana2X + (manaWidth * 0.5);
 enemy_mana1CountX = enemy_mana1X + (manaWidth * 0.5);
+
+
+ 
 </string>
           </argument>
         </arguments>
