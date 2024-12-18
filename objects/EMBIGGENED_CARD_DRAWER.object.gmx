@@ -28,9 +28,9 @@
             <string>/// embiggened card view
 sprite = noone;
 cardSet = ds_list_create();
-embiggenedCardScale = 1;
+embiggenedCardScale = .65;
 depth = global.drawing_depth;
-embiggenedCardX = ((view_wview[0] * 0.5) - (sprite_get_width(spr_card)  * 0.5 * embiggenedCardScale));
+embiggenedCardX = 0;//((view_wview[0] * 0.5) - (sprite_get_width(spr_card)  * 0.5 * embiggenedCardScale));
 embiggenedCardY = ((view_hview[0] * 0.5) - (sprite_get_height(spr_card) * 0.5 * embiggenedCardScale));
 </string>
           </argument>
@@ -55,6 +55,13 @@ embiggenedCardY = ((view_hview[0] * 0.5) - (sprite_get_height(spr_card) * 0.5 * 
           <argument>
             <kind>1</kind>
             <string>/// draw the embiggened card
+
+if (global.choosingAttackTarget) 
+or (global.choosingEffectTarget) 
+or (global.POPUP_active) {
+    exit;
+}
+
 
 // get the sprite
 if (ds_list_empty(cardSet)) {
