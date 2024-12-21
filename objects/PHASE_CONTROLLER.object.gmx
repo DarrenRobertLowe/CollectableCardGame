@@ -169,7 +169,7 @@ if (showPhaseBanner) {
     }
     
     if (global.GAME_PHASE == "draw") {
-        draw_text(bannerX, bannerY, "DRAW PHASE");
+        draw_text(bannerX, bannerY, "DRAW A CARD");
     }
     
     if (global.GAME_PHASE == "payment") {
