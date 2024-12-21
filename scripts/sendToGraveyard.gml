@@ -15,15 +15,15 @@ ds_list_add(graveyard.contents, card);
 
 switch(card.position) {
     case "hand":
-        removeCardFromHand(card);
+        removeFromHand(card);
     break;
     
     case "board":
-        removeCardFromBoard(card);
+        removeFromBoard(card);
     break;
     
     case "deck":
-        removeCardFromDeck(card.owner.deck, card);
+        removeFromDeck(card.owner.deck, card);
     break;
 }
 

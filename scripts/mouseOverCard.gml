@@ -1,7 +1,6 @@
 /// mouseOverCard();
-
-var hand  = global.player.hand;
-var grave = global.player.graveyard;
+var hand  = owner.hand;
+var grave = owner.graveyard;
 
 // prevent clicking through hand to cards below
 if (position == "board") {

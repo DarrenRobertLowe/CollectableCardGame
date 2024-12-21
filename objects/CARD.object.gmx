@@ -63,6 +63,7 @@ spellResourceCost = 0;
 enchantResourceCost = 0;
 base_enchantmentSeparation = 12
 enchantmentSeparation = base_enchantmentSeparation;
+isMouseOver = false;
 setup_glowing();
 
 
@@ -123,8 +124,15 @@ if (displayed == false) {
 image_index = faceUp;
 
 
+if (mouseOver()) {
+    isMouseOver = true;
+} else {
+    isMouseOver = false;
+}
+
+
 // check if can't be played so we can darken the card
-canUse = check_canPlayCard();
+canUse = canPlayCard();
 
 
 switch (position) {
@@ -366,11 +374,11 @@ if (displayed) {
             draw_sprite_ext(cardSurfaceSprite, 0, x, y, scale, scale, image_angle, c_white, 1);
             
             // draw embiggened card in center of screen
-            if(mouseOver()) {
+            /*if(mouseOver()) {
                 ds_set_add(EMBIGGENED_CARD_DRAWER.cardSet, cardSurfaceSprite);
             } else {
                 ds_list_remove(EMBIGGENED_CARD_DRAWER.cardSet, cardSurfaceSprite);
-            }
+            }*/
         }
         
         // darken card if it can't be played

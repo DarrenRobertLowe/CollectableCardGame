@@ -1,4 +1,4 @@
-/// removeCardFromHand(card id);
+/// removeFromHand(card id);
 var card = argument0;
 show_debug_message("removing card from hand: " + string(card));
 var hand = card.owner.hand;

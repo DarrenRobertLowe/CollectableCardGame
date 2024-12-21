@@ -83,7 +83,7 @@ if (global.GAME_PHASE == "endturn") {
     
     phaseSetup_draw_phase();
     resetResources(global.TURN);
-    untap_resources(global.TURN);
+    untapResources(global.TURN);
     global.GAME_PHASE = "draw";
     exit;
 }

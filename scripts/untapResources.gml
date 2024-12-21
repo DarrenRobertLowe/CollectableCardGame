@@ -1,4 +1,4 @@
-///untap_resources(contestant);
+///untapResources(contestant);
 
 var contestant = argument0;
 

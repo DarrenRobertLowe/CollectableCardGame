@@ -1,4 +1,4 @@
-/// removeCardFromDeck(deck, card)
+/// removeFromDeck(deck, card)
 
 var targetDeck = argument0;
 var targetCard = argument1;

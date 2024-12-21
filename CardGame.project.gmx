@@ -79,39 +79,30 @@
       <script>scripts\log.gml</script>
       <script>scripts\debug.gml</script>
     </scripts>
-    <script>scripts\setup_rules.gml</script>
-    <script>scripts\setup_depths.gml</script>
-    <script>scripts\setup_card_scales.gml</script>
-    <script>scripts\setup_fonts.gml</script>
-    <script>scripts\setup_text_colours.gml</script>
-    <script>scripts\setup_options.gml</script>
+    <scripts name="Setup">
+      <script>scripts\setup_rules.gml</script>
+      <script>scripts\setup_depths.gml</script>
+      <script>scripts\setup_card_scales.gml</script>
+      <script>scripts\setup_fonts.gml</script>
+      <script>scripts\setup_text_colours.gml</script>
+      <script>scripts\setup_options.gml</script>
+    </scripts>
     <scripts name="General">
-      <script>scripts\exists.gml</script>
-      <script>scripts\isOpponentCreature.gml</script>
-      <script>scripts\countFriendlyCreatures.gml</script>
-      <script>scripts\isCreature.gml</script>
-      <script>scripts\countEnemyCreatures.gml</script>
+      <scripts name="Predicate Methods">
+        <script>scripts\exists.gml</script>
+        <script>scripts\isCreature.gml</script>
+      </scripts>
+      <scripts name="Datastructures">
+        <script>scripts\ds_set_add.gml</script>
+        <script>scripts\ds_list_remove.gml</script>
+      </scripts>
+      <scripts name="Calculations">
+        <script>scripts\countFriendlyCreatures.gml</script>
+        <script>scripts\countEnemyCreatures.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Drawing">
       <script>scripts\draw_text_bordered.gml</script>
-    </scripts>
-    <scripts name="Cards">
-      <script>scripts\organizeHand.gml</script>
-      <script>scripts\organizeResources.gml</script>
-      <script>scripts\organizeEnchantments.gml</script>
-      <script>scripts\basicActivationChecks.gml</script>
-      <script>scripts\payCastingCost.gml</script>
-      <script>scripts\removeCardFromHand.gml</script>
-      <script>scripts\positionCardElements.gml</script>
-      <script>scripts\finishSummoning.gml</script>
-      <script>scripts\placeOnBoard.gml</script>
-      <script>scripts\sendToGraveyard.gml</script>
-      <script>scripts\cardSlideIntoPosition.gml</script>
-      <script>scripts\removeCardFromDeck.gml</script>
-      <script>scripts\wand_rotateToNormal.gml</script>
-      <script>scripts\getCardSurface.gml</script>
-      <script>scripts\creatureCanAttack.gml</script>
-      <script>scripts\creatureCanDefend.gml</script>
     </scripts>
     <scripts name="Animation FX">
       <scripts name="Glowing">
@@ -120,15 +111,21 @@
         <script>scripts\setup_glowing.gml</script>
         <script>scripts\calculate_glowAlpha.gml</script>
       </scripts>
-      <script>scripts\anim_floatReturn.gml</script>
-      <script>scripts\anim_float.gml</script>
-      <script>scripts\anim_float_setup.gml</script>
-      <script>scripts\wand_rotate.gml</script>
-      <script>scripts\floating.gml</script>
+      <scripts name="Floating">
+        <script>scripts\anim_float_setup.gml</script>
+        <script>scripts\anim_float.gml</script>
+        <script>scripts\floating.gml</script>
+        <script>scripts\anim_floatReturn.gml</script>
+      </scripts>
+      <scripts name="Cursor and Wand">
+        <script>scripts\cursor_default.gml</script>
+        <script>scripts\wand_rotate.gml</script>
+        <script>scripts\wand_rotateToNormal.gml</script>
+        <script>scripts\setup_wand_particles.gml</script>
+      </scripts>
+      <script>scripts\show_EventPopup.gml</script>
       <script>scripts\fx_darken_card.gml</script>
       <script>scripts\fx_create_lightning_branch.gml</script>
-      <script>scripts\setup_wand_particles.gml</script>
-      <script>scripts\cursor_default.gml</script>
       <script>scripts\spawn_CastFX.gml</script>
     </scripts>
     <scripts name="PREGAME">
@@ -136,72 +133,94 @@
       <script>scripts\build_deck.gml</script>
     </scripts>
     <scripts name="AI">
-      <script>scripts\AI_playCreatureCard.gml</script>
       <script>scripts\AI_wait.gml</script>
+      <script>scripts\AI_paused.gml</script>
+      <script>scripts\reset_AI_actions.gml</script>
+      <script>scripts\AI_main_phase.gml</script>
+      <script>scripts\AI_combat_phase.gml</script>
+      <script>scripts\AI_playResourceCards.gml</script>
+      <script>scripts\AI_playCreatureCard.gml</script>
       <script>scripts\AI_playDestructionSpells.gml</script>
       <script>scripts\AI_playAnySpells.gml</script>
       <script>scripts\getDamageSpellsByStrongestCastable.gml</script>
-      <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\getHealingSpellsByStrongestCastable.gml</script>
-      <script>scripts\reset_AI_actions.gml</script>
-      <script>scripts\AI_main_phase.gml</script>
-      <script>scripts\getMaxDamageOutput_spells.gml</script>
+      <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
-      <script>scripts\AI_paused.gml</script>
-      <script>scripts\AI_combat_phaseOLD.gml</script>
+      <script>scripts\getMaxDamageOutput_spells.gml</script>
     </scripts>
-    <scripts name="GAME FLOW">
-      <scripts name="Phases">
-        <script>scripts\nextPhase.gml</script>
-        <script>scripts\phaseSetup_draw_phase.gml</script>
+    <scripts name="Game Loop">
+      <script>scripts\draw_card.gml</script>
+      <scripts name="General">
+        <script>scripts\getCreatures.gml</script>
+        <script>scripts\updateStats.gml</script>
+      </scripts>
+      <scripts name="Cards">
+        <script>scripts\isCard.gml</script>
+        <script>scripts\organizeHand.gml</script>
+        <script>scripts\organizeResources.gml</script>
+        <script>scripts\organizeEnchantments.gml</script>
+        <script>scripts\cardSlideIntoPosition.gml</script>
+        <script>scripts\placeOnBoard.gml</script>
+        <script>scripts\removeFromBoard.gml</script>
+        <script>scripts\removeFromHand.gml</script>
+        <script>scripts\removeFromDeck.gml</script>
+        <script>scripts\sendToGraveyard.gml</script>
+        <script>scripts\basicActivationChecks.gml</script>
+        <script>scripts\payCastingCost.gml</script>
+        <script>scripts\positionCardElements.gml</script>
+        <script>scripts\getCardSurface.gml</script>
+      </scripts>
+      <scripts name="Main">
+        <script>scripts\canPlayCard.gml</script>
+        <script>scripts\canAffordCasting.gml</script>
+        <script>scripts\summonCreature.gml</script>
+        <script>scripts\finishSummoning.gml</script>
+        <script>scripts\castSpell.gml</script>
       </scripts>
       <scripts name="Combat">
         <script>scripts\fight.gml</script>
         <script>scripts\damage.gml</script>
-        <script>scripts\creatureCountDEPRECATED.gml</script>
+        <script>scripts\isOpponentCreature.gml</script>
+        <script>scripts\isContestant.gml</script>
+        <script>scripts\isValidTarget.gml</script>
+        <script>scripts\hasDefenders.gml</script>
         <script>scripts\canAttackDirectly.gml</script>
+        <script>scripts\creatureCanDefend.gml</script>
+        <script>scripts\creatureCanAttack.gml</script>
+        <script>scripts\anyCreaturesCanAttack.gml</script>
       </scripts>
       <scripts name="Targeting">
         <script>scripts\mouseOverCreature.gml</script>
         <script>scripts\mouseOverPlayer.gml</script>
         <script>scripts\stopTargeting.gml</script>
       </scripts>
-      <script>scripts\check_canPlayCard.gml</script>
-      <script>scripts\removeCardFromBoard.gml</script>
-      <script>scripts\getCreatures.gml</script>
-      <script>scripts\nextEvent_DEPRECATED.gml</script>
-      <script>scripts\draw_card.gml</script>
+      <scripts name="Phases">
+        <script>scripts\nextPhase.gml</script>
+        <script>scripts\phaseSetup_draw_phase.gml</script>
+      </scripts>
       <script>scripts\gameOver.gml</script>
+      <scripts name="Resources">
+        <script>scripts\resetResources.gml</script>
+        <script>scripts\untapResources.gml</script>
+        <script>scripts\autoTapResources.gml</script>
+        <script>scripts\getUntappedResources.gml</script>
+        <script>scripts\addResourceCardToLane.gml</script>
+        <script>scripts\countCreatureResources.gml</script>
+        <script>scripts\countEnchantResources.gml</script>
+        <script>scripts\countSpellResources.gml</script>
+        <script>scripts\playResource.gml</script>
+        <script>scripts\removeResource.gml</script>
+      </scripts>
+      <scripts name="Enchantments">
+        <script>scripts\enchant.gml</script>
+        <script>scripts\removeEnchantment.gml</script>
+      </scripts>
     </scripts>
     <scripts name="UI">
       <script>scripts\mouseOver.gml</script>
       <script>scripts\mouseOverCard.gml</script>
+      <script>scripts\getTopClickable.gml</script>
     </scripts>
-    <script>scripts\castSpell.gml</script>
-    <script>scripts\summonCreature.gml</script>
-    <script>scripts\show_EventPopup.gml</script>
-    <script>scripts\AI_combat_phase.gml</script>
-    <script>scripts\hasDefenders.gml</script>
-    <script>scripts\resetResources.gml</script>
-    <script>scripts\AI_playResourceCards.gml</script>
-    <script>scripts\canAffordCasting.gml</script>
-    <script>scripts\autoTapResources.gml</script>
-    <script>scripts\getUntappedResources.gml</script>
-    <script>scripts\countCreatureResources.gml</script>
-    <script>scripts\countSpellResources.gml</script>
-    <script>scripts\countEnchantResources.gml</script>
-    <script>scripts\untap_resources.gml</script>
-    <script>scripts\enchant.gml</script>
-    <script>scripts\updateStats.gml</script>
-    <script>scripts\anyCreaturesCanAttack.gml</script>
-    <script>scripts\removeEnchantment.gml</script>
-    <script>scripts\addResourceCardToLane.gml</script>
-    <script>scripts\removeResource.gml</script>
-    <script>scripts\playResource.gml</script>
-    <script>scripts\isValidTarget.gml</script>
-    <script>scripts\isContestant.gml</script>
-    <script>scripts\ds_set_add.gml</script>
-    <script>scripts\ds_list_remove.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">

@@ -11,7 +11,6 @@ ds_list_clear(slots);
 var slots = board.freeSlots;
 
 with (CARDSLOT) {
-//with (cardslots) {
     if (owner == targetOwner) {
         if (card == noone) {
             ds_list_add(slots, id); // the local var "slots" is accessible because of the "with" statment. Neat!
@@ -25,7 +24,7 @@ if (ds_list_size(slots) > 0) {
     var slot = ds_list_find_value(slots, ds_list_size(slots)-1);
     slot.card = cardToPlace;
     cardToPlace.position = "board";
-    removeCardFromHand(cardToPlace);
+    removeFromHand(cardToPlace);
     return slot;
 } else {
     show_debug_message("No free slots for placing card!");

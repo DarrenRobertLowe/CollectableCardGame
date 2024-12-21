@@ -118,7 +118,7 @@ event_inherited();
 spawn_CastFX(target);   // gfx
 
 enchant(target, id);
-removeCardFromHand(id);
+removeFromHand(id);
 position = "board";
 
 global.choosingEffectTarget = false; 

@@ -137,15 +137,13 @@ old_mouse_x = mouse_x;
             <kind>1</kind>
             <string>/// determine what we're clicking on
 
-if (ds_priority_size(clickableUnderPointer) &gt; 0) {
-    global.target = ds_priority_find_min(clickableUnderPointer);
-    if (global.target != noone){
-        global.target.clicked = true;
-        show_debug_message("clicked: " +string(global.target));
-    }
+var target = getTopClickable(clickableUnderPointer);
+
+if (target != noone) {
+    global.target = target;
+    target.clicked = true;
+    show_debug_message("clicked: " +string(global.target));
 }
-
-
 
 ds_priority_clear(clickableUnderPointer);
 </string>

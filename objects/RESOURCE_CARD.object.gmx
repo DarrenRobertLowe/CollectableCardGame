@@ -176,7 +176,7 @@ show_debug_message("Tapped "  +string(name));
           <argument>
             <kind>1</kind>
             <string>/// Add the land to the resource lane
-removeCardFromHand(id);
+removeFromHand(id);
 position = "board";
 addResourceCardToLane(owner.resourceLane, id);
 </string>
