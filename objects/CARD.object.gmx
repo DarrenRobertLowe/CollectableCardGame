@@ -324,14 +324,17 @@ glowing = false;
             <kind>1</kind>
             <string>/// Destruction Event (Sent to Graveyard)
 
-show_debug_message("Running event_user(15) for " + string(id));
 // tell enchantments on this card that they should be destroyed
-for(var i=0; i&lt;ds_list_size(enchantments); i++) {
+for (var i = ds_list_size(enchantments) - 1; i &gt;= 0; i--) {
     var enchantment = ds_list_find_value(enchantments, i);
     
+    //removeEnchantment(enchantment);
     with(enchantment) {
+        show_debug_message(string(id) + " told to be destroyed.");
         event_user(CONST_DESTROY_EVENT);
     }
+    
+    show_debug_message("current i: " + string(i));
 }
 
 // Go to graveyard by default. Specific cards can override this

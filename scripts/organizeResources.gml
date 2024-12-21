@@ -4,7 +4,6 @@ var lane  = argument0;
 var cards = argument1; // the list that represents the contents of the lane
 var targetX = lane.x;
 var targetY = lane.y;
-var baseDepth = global.card_depth;
 var verticalSeparation = lane.verticalSeparation;
 
 
@@ -20,6 +19,6 @@ if (cards > 0) {
         
         card.targetX = targetX;
         card.targetY = round(targetY + (i * verticalSeparation));
-        card.depth = (baseDepth - y * i);
+        card.depth = (global.card_depth - i);
     }
 }

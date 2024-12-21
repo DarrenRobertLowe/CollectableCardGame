@@ -30,9 +30,9 @@ event_inherited();
 
 name         = "Lion's Strength";
 image        = art_LionStrength;
-enchantResourceCost = 2;
-description  = "Target creature gains +2/+0/+0.";
-buffQuantity = 2;
+enchantResourceCost = 0; //2
+buffQuantity = 1;
+description  = "Target creature gains +" + string(buffQuantity) + "/+0/+0.";
 ds_list_add(validTargets, "any creature on board");
 </string>
           </argument>
