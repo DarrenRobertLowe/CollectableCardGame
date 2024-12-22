@@ -6,8 +6,8 @@ if (global.GAME_PHASE == "draw") {
 }
 
 if (position == "hand") {
-    if  (global.GAME_PHASE != "main1")
-    and (global.GAME_PHASE != "main2") {
+    if  (global.GAME_PHASE != "main")
+    and (global.GAME_PHASE != "aftermath") {
         canUse = false;
     }
 }

@@ -47,7 +47,7 @@ and !(AI_finishedEnchantmentCasting) {
 if  (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
 and (AI_finishedEnchantmentCasting)
-and (global.GAME_PHASE == "main1") {
+and (global.GAME_PHASE == "main") {
     nextPhase();
 }
 
@@ -57,7 +57,7 @@ if  (AI_finishedSummoning)
 and (AI_finishedDestructionSpellCasting)
 and (AI_finishedEnchantmentCasting)
 and !(AI_finishedAnySpellCasting)
-and (global.GAME_PHASE == "main2") {
+and (global.GAME_PHASE == "aftermath") {
     if !(AI_paused()) {
         show_debug_message("*************** play remaining spells ***************");
         AI_playAnySpells();
@@ -69,7 +69,7 @@ and (AI_finishedSummoning)
 and (AI_finishedEnchantmentCasting)
 and (AI_finishedSummoning)
 and (AI_finishedAnySpellCasting)
-and (global.GAME_PHASE == "main2") {
+and (global.GAME_PHASE == "aftermath") {
     if !(AI_paused()) {
         show_debug_message("*************** finished turn ***************");
         nextPhase();

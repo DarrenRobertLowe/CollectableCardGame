@@ -40,6 +40,7 @@ animate = false;
 animationTimeMax = 20;
 animationTime = 0;
 option_doubleClickRequired = false;
+phaseText = "";
 
 /// floating animation
 anim_float_setup();
@@ -120,6 +121,33 @@ if (animate) {
         animate = 0;
     }
 }
+
+
+// determine phase text
+if (global.GAME_PHASE == "draw") {
+    phaseText = "DRAW A CARD";
+}
+
+if (global.GAME_PHASE == "payment") {
+    phaseText = "PAYMENT PHASE";
+}
+
+if (global.GAME_PHASE == "main") {
+    phaseText = "MAIN PHASE - CAST SPELLS";
+}
+
+if (global.GAME_PHASE == "combat") {
+    phaseText = "COMBAT! CHOOSE YOUR ATTACKERS!";
+}
+
+if (global.GAME_PHASE == "aftermath") {
+    phaseText = "AFTERMATH PHASE - CAST SPELLS";
+}
+
+if (global.GAME_PHASE == "endturn") {
+    phaseText = "END TURN";
+}
+
 </string>
           </argument>
         </arguments>
@@ -168,34 +196,14 @@ if (showPhaseBanner) {
         }
     }
     
-    if (global.GAME_PHASE == "draw") {
-        draw_text(bannerX, bannerY, "DRAW A CARD");
-    }
-    
-    if (global.GAME_PHASE == "payment") {
-        draw_text(bannerX, bannerY, "PAYMENT PHASE");
-    }
-    
-    if (global.GAME_PHASE == "main1") {
-        draw_text(bannerX, bannerY, "MAIN PHASE - CAST SPELLS");
-    }
-    
-    if (global.GAME_PHASE == "combat") {
-        draw_text(bannerX, bannerY, "COMBAT! CHOOSE YOUR ATTACKERS!");
-    }
-    
-    if (global.GAME_PHASE == "main2") {
-        draw_text(bannerX, bannerY, "AFTERMATH PHASE - CAST SPELLS");
-    }
-    
-    if (global.GAME_PHASE == "endturn") {
-        draw_text(bannerX, bannerY, "END TURN");
-    }
+    draw_text(bannerX, bannerY, phaseText);
 }
 
 // reset_text();
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
+
+
 </string>
           </argument>
         </arguments>

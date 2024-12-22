@@ -125,9 +125,9 @@ or (global.WAIT &gt; 0){
             exit;
         }
         
-        if (global.GAME_PHASE == "main1") {
+        if (global.GAME_PHASE == "main") {
             waitTime = room_speed;
-            show_debug_message("entered main1 phase");
+            show_debug_message("entered main phase");
             AI_main_phase()
         }
         
@@ -135,7 +135,7 @@ or (global.WAIT &gt; 0){
         if (global.GAME_PHASE == "combat") {
             AI_combat_phase();
         }
-        if (global.GAME_PHASE == "main2") {
+        if (global.GAME_PHASE == "aftermath") {
             AI_main_phase()
         }
         if (global.GAME_PHASE == "endturn") {

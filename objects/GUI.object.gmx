@@ -148,7 +148,15 @@ enemy_mana2CountX = enemy_mana2X + (manaWidth * 0.5);
 enemy_mana1CountX = enemy_mana1X + (manaWidth * 0.5);
 
 
- 
+// Create the game phase icons
+var phaseIconY      = (room_height * 0.5) - (sprite_get_height(spr_gui_phases) * 0.5);
+var phaseIconXStep  = 80;
+drawPhaseIcon       = instance_create(20,  phaseIconY, GUI_DrawPhase);
+paymentPhaseIcon    = instance_create(drawPhaseIcon.x + phaseIconXStep,  phaseIconY, GUI_PaymentPhase);
+mainPhaseIcon       = instance_create(paymentPhaseIcon.x + phaseIconXStep, phaseIconY, GUI_MainPhase);
+
+aftermathPhaseIcon  = instance_create((room_width - 20) - sprite_get_width(spr_gui_phases), phaseIconY, GUI_AftermathPhase);
+combatPhaseIcon     = instance_create(aftermathPhaseIcon.x - phaseIconXStep, phaseIconY, GUI_CombatPhase);
 </string>
           </argument>
         </arguments>

@@ -25,7 +25,7 @@ if (global.GAME_PHASE == "draw") {
     if (ds_list_size(global.PAYMENT_PHASE_LIST) > 0) {
         global.GAME_PHASE = "payment";
     } else {
-        global.GAME_PHASE = "main1";
+        global.GAME_PHASE = "main";
     }
     
     waitTime = room_speed;
@@ -33,13 +33,13 @@ if (global.GAME_PHASE == "draw") {
 }
 
 if (global.GAME_PHASE == "payment") {
-    global.GAME_PHASE = "main1";
+    global.GAME_PHASE = "main";
     waitTime = room_speed;
     exit;
 }
 
 
-if (global.GAME_PHASE == "main1") {
+if (global.GAME_PHASE == "main") {
     var contestant = global.TURN;
     var cardsOnBoard = getCreatures(contestant);
    
@@ -48,7 +48,7 @@ if (global.GAME_PHASE == "main1") {
         waitTime = room_speed;
         exit;
     } else {
-        global.GAME_PHASE = "main2";
+        global.GAME_PHASE = "aftermath";
         waitTime = room_speed;
         exit;
     }
@@ -56,12 +56,12 @@ if (global.GAME_PHASE == "main1") {
 
 if (global.GAME_PHASE == "combat") {
     reset_AI_actions();
-    global.GAME_PHASE = "main2";
+    global.GAME_PHASE = "aftermath";
     waitTime = room_speed;
     exit;
 }
 
-if (global.GAME_PHASE == "main2") {
+if (global.GAME_PHASE == "aftermath") {
     waitTime = room_speed;
     global.GAME_PHASE = "endturn";
 }
