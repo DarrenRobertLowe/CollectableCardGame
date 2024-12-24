@@ -35,6 +35,7 @@ if (global.GAME_PHASE == "draw") {
         setMarqueeText(paymentPhaseText);
     } else {
         global.GAME_PHASE = "main";
+        startMainPhase();
         setMarqueeText(mainPhaseText);
     }
     
@@ -44,6 +45,7 @@ if (global.GAME_PHASE == "draw") {
 
 if (global.GAME_PHASE == "payment") {
     global.GAME_PHASE = "main";
+    startMainPhase();
     setMarqueeText(mainPhaseText);
     waitTime = room_speed;
     exit;

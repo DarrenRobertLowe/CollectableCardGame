@@ -48,11 +48,10 @@ attackable = true;
 summoned  = false;
 attacking = false;
 target    = noone;
-//attackIndicator = instance_create(x, y, AttackIndicator);
-//attackIndicator.parent = id;
 attackedThisTurn = false;
 canAttack = true;   // e.g. walls can't attack
 canDefend = true;   // e.g. assassins can't defend
+canMoveLane = false;
 
 
 // CARD ELEMENT POSITIONS
@@ -74,7 +73,8 @@ defenceIconY  = iconsY;
 hpIconX     = 231;
 hpIconY     = iconsY;
 
-
+//AI
+preferredSlot = FRONT_SLOT; // FRONT_SLOT or BACK_SLOT
 </string>
           </argument>
         </arguments>
@@ -143,14 +143,59 @@ if (castingChecking) {
     
     if (summoned == false) {
         if (basicActivationChecks()) {
-            summonCreature(id);
+            selectingSummonSlot = true;
+            global.summoning = true;
+            global.currentCard = id;
         }
     }
 }
 
-if (mouseOverCard()) {
+
+if (selectingSummonSlot) {
+    global.TURN.hand.forceHideContents = true;
+    global.TURN.graveyard.showContents = false;
+    
+    with(BACK_SLOT) {
+        if (owner == global.TURN) {
+            glow();
+            
+            if (clicked) {
+                if (card == noone) {
+                    other.slot = id;
+                    card = other.id;
+                    other.selectingSummonSlot = false;
+                    summonCreature(other.id);
+                }
+            }
+        }
+    }
 }
 
+if (global.GAME_PHASE == "main" or global.GAME_PHASE == "aftermath") {
+    if (canMoveLane) {
+        if (clicked == true) {
+            clicked = false;
+            
+            if (doubleClickWindow &gt; 0) {
+                show_debug_message("Double-click registered : "+string(id));
+                
+                if (slot.alternativeSlot.card == noone) {
+                    slot.card = noone;
+                    slot = slot.alternativeSlot;
+                    slot.card = id;
+                    canMoveLane = false;
+                    show_debug_message("Moved into slot");
+                } else {
+                    show_debug_message("Alternative slot is full: " + string(slot.alternativeSlot.card));
+                }
+                
+                doubleClickWindow = 0;
+            } else {
+                doubleClickWindow = CONTROLS.doubleClickWindowMax;
+            }
+        }
+    }
+}
 
 if (global.GAME_PHASE == "combat") {
     if (position == "board") {
@@ -175,7 +220,7 @@ if (global.GAME_PHASE == "combat") {
                 // Attacking
                 if (global.choosingAttackTarget == false) {
                     // start the attacking state
-                    if (!(attacking) and !(attackedThisTurn)) {
+                    if (creatureCanAttack(id)) {
                         attacking = true;
                         
                         global.currentCard = id;
@@ -230,6 +275,31 @@ if (global.GAME_PHASE == "combat") {
 
 // clear click state
 clicked = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="12">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// MAIN PHASE STARTED
+
+canMoveLane = true;
 </string>
           </argument>
         </arguments>
@@ -295,9 +365,17 @@ if(!anyCreaturesCanAttack(getCreatures(owner))) {
 debug("Summoned " +string(name));
 
 
-if (placeOnBoard(global.TURN, id) &gt; 0) {
-    finishSummoning();
+if (ds_list_find_index(abilities, "Haste")) {
+    canMoveLane = true;
+} else {
+    canMoveLane = false;
 }
+
+global.TURN.hand.forceHideContents = false;
+finishSummoning();
+removeFromHand(id);
+global.currentCard = noone;
+position = "board";
 </string>
           </argument>
         </arguments>

@@ -26,67 +26,19 @@
           <argument>
             <kind>1</kind>
             <string>/// setup
-image_speed = 0;
-myPhase = "";
-setup_glowing();
-centerX = (x + (sprite_get_width(sprite_index)  * 0.5));
-centerY = (y + (sprite_get_height(sprite_index) * 0.5));
-depth = global.GUI_button_depth;
+contents = ds_list_create();
+showContents = true;
+forceHideContents = false;
+owner = noone;
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Move the PhaseHighlight over us
+profileArea = sprite_get_width(global.player.deck.sprite_index) + 20;
+handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
 
-if (global.GAME_PHASE == myPhase) {
-    if (exists(PhaseHighlight)) {
-        PhaseHighlight.targetX = centerX;
-        PhaseHighlight.targetY = centerY;
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// glow when our phase
-draw_self();
+base_cardSeparation = 150;
+cardSeparation = base_cardSeparation;
+
+currentCardHover = noone;
+cardHoverQueue = ds_priority_create(); // used for depth sorting in hand
 </string>
           </argument>
         </arguments>

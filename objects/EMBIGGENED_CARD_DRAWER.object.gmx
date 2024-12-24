@@ -32,8 +32,9 @@ clickableUnderPointer = CONTROLS.clickableUnderPointer;
 embiggenedCardScale = .65;
 depth = global.drawing_depth;
 
-popupTimer = room_speed * .5;
+popupTimer = (room_speed * .5);
 timer = 0;
+drawCard = false;
 </string>
           </argument>
         </arguments>
@@ -58,12 +59,29 @@ timer = 0;
             <kind>1</kind>
             <string>/// get the sprite
 card = getTopClickable(clickableUnderPointer);
+drawCard = false;
 
 if (exists(card)) {
     if (isCard(card)) {
         sprite = card.cardSurfaceSprite;
     }
 }
+
+if (exists(card)) {
+    if (isCard(card)) {
+        if(card.displayed) {
+            if (card.isMouseOver) {
+                timer++;
+                
+                if (timer &gt; popupTimer) {
+                    if (sprite != noone) {
+                        drawCard = true;
+                    }
+                }
+            } else timer = 0;
+        }
+    } else timer = 0;
+} else timer = 0;
 </string>
           </argument>
         </arguments>
@@ -95,30 +113,18 @@ or (global.POPUP_active) {
 }
 
 
-if (exists(card)) {
-    if (isCard(card)) {
-        if (card.isMouseOver) {
-            timer++;
-            
-            if (timer &gt; popupTimer) {
-                if (sprite != noone) {
-                    draw_sprite_ext(
-                        sprite,
-                        0,
-                        mouse_x - ((sprite_get_width(spr_card) * card.scale) * 0.5 ),
-                        max(0, mouse_y - (sprite_get_height(spr_card) * card.scale)),
-                        embiggenedCardScale,
-                        embiggenedCardScale,
-                        0,
-                        c_white,
-                        1
-                    )
-                }
-            }
-        }
-    }
-} else {
-    timer *= 0.5;
+if (drawCard) {
+    draw_sprite_ext(
+        sprite,
+        0,
+        mouse_x - ((sprite_get_width(spr_card) * card.scale) * 0.5 ),
+        max(0, mouse_y - (sprite_get_height(spr_card) * card.scale)),
+        embiggenedCardScale,
+        embiggenedCardScale,
+        0,
+        c_white,
+        1
+    )
 }
 </string>
           </argument>

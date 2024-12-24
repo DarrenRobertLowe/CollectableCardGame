@@ -162,6 +162,7 @@
       <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
       <script>scripts\getMaxDamageOutput_spells.gml</script>
+      <script>scripts\AI_marchCreatures.gml</script>
     </scripts>
     <scripts name="Game Loop">
       <script>scripts\draw_card.gml</script>
@@ -175,7 +176,7 @@
         <script>scripts\organizeResources.gml</script>
         <script>scripts\organizeEnchantments.gml</script>
         <script>scripts\cardSlideIntoPosition.gml</script>
-        <script>scripts\placeOnBoard.gml</script>
+        <script>scripts\placeOnBoard_DEPRECATED.gml</script>
         <script>scripts\removeFromBoard.gml</script>
         <script>scripts\removeFromHand.gml</script>
         <script>scripts\removeFromDeck.gml</script>
@@ -237,6 +238,10 @@
       <script>scripts\getTopClickable.gml</script>
       <script>scripts\setMarqueeText.gml</script>
     </scripts>
+    <script>scripts\startMainPhase.gml</script>
+    <script>scripts\getAvailableBackSlots.gml</script>
+    <script>scripts\swapSlot.gml</script>
+    <script>scripts\marchCreatureForward.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -257,6 +262,7 @@
       <object>objects\ATTACKABLE</object>
       <object>objects\CONTESTANT</object>
       <object>objects\RESOURCE_LANE</object>
+      <object>objects\HAND</object>
       <object>objects\BOARD_CONTROLLER</object>
     </objects>
     <object>objects\MASTER</object>
@@ -264,8 +270,8 @@
     <object>objects\CONTROLS</object>
     <object>objects\DUEL_CONTROLLER</object>
     <object>objects\PLAYER_HAND</object>
-    <object>objects\PLAYER_GRAVE</object>
     <object>objects\ENEMY_HAND</object>
+    <object>objects\PLAYER_GRAVE</object>
     <object>objects\ENEMY_GRAVE</object>
     <object>objects\DECK</object>
     <object>objects\CARDSLOT</object>
@@ -342,15 +348,18 @@
       </objects>
     </objects>
     <object>objects\MARQUEE</object>
+    <object>objects\FRONT_SLOT</object>
+    <object>objects\BACK_SLOT</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="4">
+  <constants number="5">
     <constant name="EPSILON">0.00001</constant>
     <constant name="CONST_DESTROY_EVENT">15</constant>
     <constant name="CONST_PLAY_CARD_EVENT">0</constant>
     <constant name="CONST_TAP_EVENT">1</constant>
+    <constant name="MAIN_PHASE_EVENT">2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

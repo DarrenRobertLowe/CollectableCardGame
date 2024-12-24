@@ -32,7 +32,7 @@ name        = "Vampire Bat";
 class       = "Beast";
 image       = art_vampirebat;
 
-creatureResourceCost = 1;
+creatureResourceCost = 0;//1;
 description = "When Vampire Bat deals damage to target enemy, controller gains health equal to damage dealt.";
 
 baseAttack  = 1;

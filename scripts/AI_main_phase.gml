@@ -3,9 +3,19 @@
 // here we can run the logic per enemy type
 // for now, we'll just make the most basic logic.
 
-// play mana gathering cards
-// AI_playManaCard;
 
+// AI_playManaCard
+if !(AI_finishedMarchingCreatures) {
+    if !(AI_paused()) {
+        show_debug_message("*************** march creatures forward ***************");
+        AI_marchCreatures();
+    }
+}
+
+
+
+
+// AI_playManaCard
 if !(AI_finishedResourceCardPlaying) {
     if !(AI_paused()) {
         show_debug_message("*************** play resource cards ***************");

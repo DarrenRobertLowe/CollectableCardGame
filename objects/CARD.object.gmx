@@ -64,6 +64,7 @@ enchantResourceCost = 0;
 base_enchantmentSeparation = 12
 enchantmentSeparation = base_enchantmentSeparation;
 isMouseOver = false;
+selectingSummonSlot = false;
 setup_glowing();
 
 
@@ -117,6 +118,10 @@ artY = 43;
 event_inherited();
 glowing = false;
 
+if (owner.hand.forceHideContents) {
+    displayed = false;
+}
+
 if (displayed == false) {
     visible = false;
 } else visible = true;
@@ -125,7 +130,9 @@ image_index = faceUp;
 
 
 if (mouseOver()) {
-    isMouseOver = true;
+    if (displayed) {
+        isMouseOver = true;
+    }
 } else {
     isMouseOver = false;
 }
@@ -141,7 +148,7 @@ switch (position) {
         break;
     
     case "drawing":
-        displayed = true;
+        //displayed = true;
         fullyDrawn = false;
         faceUp = false;
         visible = true;
@@ -186,7 +193,7 @@ switch (position) {
 
 
 // position card to left of screen when casting spell
-if (global.choosingEffectTarget == true) {
+if (global.choosingEffectTarget) or (global.summoning) {
     if (global.currentCard == id) {
         displayed = true;
         depth = global.cardZoomed_depth;
@@ -370,7 +377,9 @@ if (surfaceDrawn == false) {
     getCardSurface(id);
 }
 
+
 if (displayed) {
+    if (owner.hand.forceHideContents) then exit;
     if (!faceUp) {
         draw_sprite_ext(sprite_index, 0, x, y, scale, scale, 0, c_white, 1); // draw the back of the card
     } else {

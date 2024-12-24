@@ -36,6 +36,7 @@ global.currentCard  = noone;    // the currently active card (e.g. the attacker 
 global.choosingEffectTarget = false;
 global.choosingAttackTarget = false;
 global.castingSpell = false;
+global.summoning    = false;
 global.target       = noone;
 global.WAIT         = false;
 global.POPUP_active = false;
@@ -69,6 +70,7 @@ var enemyGrave     = instance_create(-100, -100, ENEMY_GRAVE);
 enemyGrave.owner = global.enemy;
 global.enemy.graveyard = enemyGrave;
 
+
 // game area
 cardSlotsPerRow = 5;
 cardSeparation  = 128;
@@ -83,24 +85,30 @@ playerBackRow   = 589;
 
 
 // player side
-var slot = noone;
+var slotFront = noone;
+var slotBack  = noone;
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    slot = instance_create(playerCardsX + (i * cardSeparation), playerFrontRow, CARDSLOT);
-    slot.owner = global.player;
+    slotFront = instance_create(playerCardsX + (i * cardSeparation), playerFrontRow, FRONT_SLOT);
+    slotFront.owner = global.player;
+    
+    slotBack = instance_create(playerCardsX + (i * cardSeparation), playerBackRow, BACK_SLOT);
+    slotBack.owner = global.player;
+    
+    slotFront.alternativeSlot = slotBack;
+    slotBack.alternativeSlot = slotFront;
 }
-for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    slot = instance_create(playerCardsX + (i * cardSeparation), playerBackRow, CARDSLOT);
-    slot.owner = global.player;
-}
+
 
 // enemy side
 for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    slot = instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyBackRow, CARDSLOT);
-    slot.owner = global.enemy;
-}
-for(var i=0; i&lt;cardSlotsPerRow; i++) {
-    slot = instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyFrontRow, CARDSLOT);
-    slot.owner = global.enemy;
+    slotBack = instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyBackRow, BACK_SLOT);
+    slotBack.owner = global.enemy;
+    
+    slotFront = instance_create(enemyCardsX + ((i + 1) * cardSeparation), enemyFrontRow, FRONT_SLOT);
+    slotFront.owner = global.enemy;
+    
+    slotFront.alternativeSlot = slotBack;
+    slotBack.alternativeSlot = slotFront;
 }
 
 global.player.resourceLane = instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, RESOURCE_LANE);

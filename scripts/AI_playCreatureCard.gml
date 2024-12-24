@@ -9,8 +9,7 @@ if (AI_finishedSummoning == false) {
     // create a priority queue of creatures to summon, ranked by attack 
     for(var i=0; i<ds_list_size(cards); i++) {
         card = ds_list_find_value(cards, i);
-        if (card.type == CREATURE_CARD and canAffordCasting(card))
-        {
+        if (card.type == CREATURE_CARD and canAffordCasting(card)) {
             ds_priority_add(AI_creatureList, card, card.attack);
         }
     }
@@ -20,11 +19,33 @@ if (AI_finishedSummoning == false) {
         show_debug_message("found creature cards in our hand");
         var creature = ds_priority_delete_max(AI_creatureList);
         
-        with(creature) {
-            other.waitTime = room_speed;
-            autoTapResources(global.enemy, creature);
-            summonCreature(creature);
+        var backSlots = ds_list_create();
+        backSlots = getAvailableBackSlots(backSlots);
+        var slot = noone;
+        if (ds_list_size(backSlots) > 0) {
+            for(var i=0; i<ds_list_size(backSlots); i++) {
+                slot = ds_list_find_value(backSlots, 0);
+                if (slot.alternativeSlot.card == noone)         // prefer slots where there's nothing in the font lane
+                or (i == ds_list_size(backSlots)-1) {           // or just take the lastmost slot
+                    break;
+                }
+            }
         }
+        
+        if (slot != noone) {
+            creature.slot = slot;
+            slot.card = creature;
+            with(creature) {
+                other.waitTime = room_speed;
+                autoTapResources(global.enemy, creature);
+                summonCreature(creature);
+            }
+        } else {
+            show_debug_message("No available creature slots found.");
+        }
+        
+        // clean up
+        ds_list_destroy(backSlots);
     } else {
         show_debug_message("No more creatures to summon");
         AI_finishedSummoning = true;
