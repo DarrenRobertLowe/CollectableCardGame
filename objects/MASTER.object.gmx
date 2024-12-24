@@ -57,7 +57,6 @@ part_system_depth(global.PARTICLE_SYSTEM, global.cardFX_depth); // this doesn't 
 // start game
 instance_create(0, 0, CONTROLS);
 instance_create(0, 0, DUEL_CONTROLLER);
-instance_create(0, 0, GUI);
 
 </string>
           </argument>

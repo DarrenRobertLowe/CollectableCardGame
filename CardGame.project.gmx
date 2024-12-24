@@ -25,6 +25,8 @@
       <sprite>sprites\spr_gui_gauntlet</sprite>
       <sprite>sprites\spr_gui_wand</sprite>
       <sprite>sprites\spr_gui_phases</sprite>
+      <sprite>sprites\spr_highlight_circle</sprite>
+      <sprite>sprites\spr_marquee</sprite>
     </sprites>
     <sprites name="CardArts">
       <sprite>sprites\spr_defaultArt_OLD</sprite>
@@ -124,9 +126,17 @@
         <script>scripts\wand_rotateToNormal.gml</script>
         <script>scripts\setup_wand_particles.gml</script>
       </scripts>
+      <scripts name="Scaling">
+        <script>scripts\updateAuraScale.gml</script>
+      </scripts>
       <scripts name="Pulsing">
         <script>scripts\pulse.gml</script>
         <script>scripts\pulse_setup.gml</script>
+      </scripts>
+      <scripts name="Sliding">
+        <script>scripts\slideIntoPosition.gml</script>
+        <script>scripts\slideIntoPositionX.gml</script>
+        <script>scripts\slideIntoPositionY.gml</script>
       </scripts>
       <script>scripts\show_EventPopup.gml</script>
       <script>scripts\fx_darken_card.gml</script>
@@ -225,6 +235,7 @@
       <script>scripts\mouseOver.gml</script>
       <script>scripts\mouseOverCard.gml</script>
       <script>scripts\getTopClickable.gml</script>
+      <script>scripts\setMarqueeText.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -233,6 +244,7 @@
       <font>fonts\fnt_card_18_bold</font>
       <font>fonts\fnt_card_21_bold</font>
       <font>fonts\fnt_card_24_bold</font>
+      <font>fonts\font_marquee</font>
     </fonts>
     <font>fonts\font_gui_small</font>
     <font>fonts\font_gui_medium</font>
@@ -320,6 +332,7 @@
     <object>objects\EMBIGGENED_CARD_DRAWER</object>
     <objects name="GUI">
       <objects name="Phases">
+        <object>objects\PhaseHighlight</object>
         <object>objects\GUI_Phase_Icon</object>
         <object>objects\GUI_DrawPhase</object>
         <object>objects\GUI_PaymentPhase</object>
@@ -328,11 +341,13 @@
         <object>objects\GUI_AftermathPhase</object>
       </objects>
     </objects>
+    <object>objects\MARQUEE</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="3">
+  <constants number="4">
+    <constant name="EPSILON">0.00001</constant>
     <constant name="CONST_DESTROY_EVENT">15</constant>
     <constant name="CONST_PLAY_CARD_EVENT">0</constant>
     <constant name="CONST_TAP_EVENT">1</constant>

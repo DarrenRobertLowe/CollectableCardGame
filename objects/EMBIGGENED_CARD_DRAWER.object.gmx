@@ -31,8 +31,9 @@ card = noone;
 clickableUnderPointer = CONTROLS.clickableUnderPointer;
 embiggenedCardScale = .65;
 depth = global.drawing_depth;
-embiggenedCardX = 0;//((view_wview[0] * 0.5) - (sprite_get_width(spr_card)  * 0.5 * embiggenedCardScale));
-embiggenedCardY = ((view_hview[0] * 0.5) - (sprite_get_height(spr_card) * 0.5 * embiggenedCardScale));
+
+popupTimer = room_speed * .5;
+timer = 0;
 </string>
           </argument>
         </arguments>
@@ -93,24 +94,31 @@ or (global.POPUP_active) {
     exit;
 }
 
+
 if (exists(card)) {
     if (isCard(card)) {
         if (card.isMouseOver) {
-            if (sprite != noone) {
-                draw_sprite_ext(
-                    sprite,
-                    0,
-                    embiggenedCardX,
-                    embiggenedCardY,
-                    embiggenedCardScale,
-                    embiggenedCardScale,
-                    0,
-                    c_white,
-                    1
-                )
+            timer++;
+            
+            if (timer &gt; popupTimer) {
+                if (sprite != noone) {
+                    draw_sprite_ext(
+                        sprite,
+                        0,
+                        mouse_x - ((sprite_get_width(spr_card) * card.scale) * 0.5 ),
+                        max(0, mouse_y - (sprite_get_height(spr_card) * card.scale)),
+                        embiggenedCardScale,
+                        embiggenedCardScale,
+                        0,
+                        c_white,
+                        1
+                    )
+                }
             }
         }
     }
+} else {
+    timer *= 0.5;
 }
 </string>
           </argument>

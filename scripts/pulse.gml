@@ -1,5 +1,7 @@
 /// pulse(pulse_factor, pulse_speed)
 // returns float : pulse_value
+var pulse_factor = argument0;
+var pulse_speed  = argument1;
 
 // Update the pulse factor over time
 pulse_factor += pulse_speed;

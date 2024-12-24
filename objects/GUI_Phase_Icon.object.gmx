@@ -29,6 +29,38 @@
 image_speed = 0;
 myPhase = "";
 setup_glowing();
+centerX = (x + (sprite_get_width(sprite_index)  * 0.5));
+centerY = (y + (sprite_get_height(sprite_index) * 0.5));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Move the PhaseHighlight over us
+
+if (global.GAME_PHASE == myPhase) {
+    if (exists(PhaseHighlight)) {
+        PhaseHighlight.targetX = centerX;
+        PhaseHighlight.targetY = centerY;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -53,27 +85,6 @@ setup_glowing();
             <kind>1</kind>
             <string>/// glow when our phase
 draw_self();
-
-if (global.GAME_PHASE == myPhase) {
-    var width  = sprite_get_width(sprite_index);
-    var height = sprite_get_height(sprite_index); 
-    
-    // aura
-    draw_set_colour(c_white);
-    var auraScale = 0.15;
-    var auraAlpha = 0.3;
-    draw_set_alpha(auraAlpha);
-    
-    draw_rectangle(
-        x - (width   * auraScale),
-        y - (height  * auraScale),
-        x + (width)  + (width * auraScale),
-        y + (height) + (height * auraScale),
-        false
-    );
-    
-    draw_set_alpha(1);
-}
 </string>
           </argument>
         </arguments>

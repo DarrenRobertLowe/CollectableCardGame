@@ -42,8 +42,8 @@ artVariant      = 0;
 scale           = global.card_hand_scale;
 fullyDrawn      = false;        // a check for animation
 carddraw_xSpeed = 10;//room_width / room_speed;
-cardSlideSpeedMax = 10;
-cardSnapDistance= 4;
+slideSpeedMax   = 10;
+snapDistance    = 4;
 targetX         = room_width * 0.5;
 targetY         = y;
 casting         = false;
@@ -263,7 +263,8 @@ if (global.choosingEffectTarget == true) {
 
 
 // move the card into the targetX and targetY
-cardSlideIntoPosition();
+//cardSlideIntoPosition();
+slideIntoPosition();
 
 if (displayed) {
     // visuals

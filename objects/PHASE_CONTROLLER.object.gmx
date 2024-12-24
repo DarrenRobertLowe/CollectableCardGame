@@ -122,32 +122,32 @@ if (animate) {
     }
 }
 
-
+/*
 // determine phase text
 if (global.GAME_PHASE == "draw") {
-    phaseText = "DRAW A CARD";
+    setMarqueeText("DRAW A CARD");
 }
 
 if (global.GAME_PHASE == "payment") {
-    phaseText = "PAYMENT PHASE";
+    setMarqueeText("PAYMENT PHASE");
 }
 
 if (global.GAME_PHASE == "main") {
-    phaseText = "MAIN PHASE - CAST SPELLS";
+    setMarqueeText("MAIN PHASE - SUMMON CREATURES, PLAY ENHANCEMENTS AND CAST SPELLS");
 }
 
 if (global.GAME_PHASE == "combat") {
-    phaseText = "COMBAT! CHOOSE YOUR ATTACKERS!";
+    setMarqueeText("COMBAT PHASE - CHOOSE YOUR ATTACKERS!");
 }
 
 if (global.GAME_PHASE == "aftermath") {
-    phaseText = "AFTERMATH PHASE - CAST SPELLS";
+    setMarqueeText("AFTERMATH PHASE - SUMMON CREATURES, PLAY ENHANCEMENTS AND CAST SPELLS");
 }
 
 if (global.GAME_PHASE == "endturn") {
-    phaseText = "END TURN";
+    setMarqueeText("END TURN");
 }
-
+*/
 </string>
           </argument>
         </arguments>
@@ -181,29 +181,27 @@ if !(ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
 }
 
 // draw current phase text
-draw_set_colour(global.GUI_title_colour);
-draw_set_font(global.font_Phase);
-draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
+//draw_set_colour(global.GUI_title_colour);
+//draw_set_font(global.font_Marquee);
+//draw_set_halign(fa_center);
+//draw_set_valign(fa_middle);
 
-
+/*
 if (showPhaseBanner) {
-    
     if (bannerTimesOut) {
         bannerTimer--;
         if (bannerTimer &lt;= 0) {
             showPhaseBanner = false;
         }
     }
-    
     draw_text(bannerX, bannerY, phaseText);
 }
+
 
 // reset_text();
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-
-
+*/
 </string>
           </argument>
         </arguments>

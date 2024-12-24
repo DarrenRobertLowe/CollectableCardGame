@@ -1,10 +1,18 @@
 /// next_phase();
+var drawPhaseText       = "DRAW PHASE - CLICK ON YOUR DECK TO DRAW A CARD";
+var paymentPhaseText    = "PAYMENT PHASE"
+var mainPhaseText       = "MAIN PHASE - SUMMON CREATURES, PLAY ENHANCEMENTS AND CAST SPELLS";
+var combatPhaseText     = "COMBAT PHASE - CHOOSE YOUR ATTACKERS!";
+var aftermathPhaseText  = "AFTERMATH PHASE - SUMMON CREATURES, PLAY ENHANCEMENTS AND CAST SPELLS";
+var endTurnPhaseText    = "END TURN";
+
 
 PHASE_CONTROLLER.showPhaseBanner = true;
-PHASE_CONTROLLER.bannerTimer = PHASE_CONTROLLER.bannerTimerMax;
+PHASE_CONTROLLER.bannerTimer     = PHASE_CONTROLLER.bannerTimerMax;
 
 if (global.GAME_PHASE == "start") {
     global.GAME_PHASE = "draw";
+    setMarqueeText(drawPhaseText);
     global.TURN = global.player;
     waitTime = room_speed;
     exit;
@@ -24,8 +32,10 @@ if (global.GAME_PHASE == "draw") {
     
     if (ds_list_size(global.PAYMENT_PHASE_LIST) > 0) {
         global.GAME_PHASE = "payment";
+        setMarqueeText(paymentPhaseText);
     } else {
         global.GAME_PHASE = "main";
+        setMarqueeText(mainPhaseText);
     }
     
     waitTime = room_speed;
@@ -34,21 +44,24 @@ if (global.GAME_PHASE == "draw") {
 
 if (global.GAME_PHASE == "payment") {
     global.GAME_PHASE = "main";
+    setMarqueeText(mainPhaseText);
     waitTime = room_speed;
     exit;
 }
 
 
 if (global.GAME_PHASE == "main") {
-    var contestant = global.TURN;
+    var contestant   = global.TURN;
     var cardsOnBoard = getCreatures(contestant);
-   
+    
     if (anyCreaturesCanAttack(cardsOnBoard)) {
         global.GAME_PHASE = "combat";
+        setMarqueeText(combatPhaseText);
         waitTime = room_speed;
         exit;
     } else {
         global.GAME_PHASE = "aftermath";
+        setMarqueeText(aftermathPhaseText);
         waitTime = room_speed;
         exit;
     }
@@ -57,6 +70,7 @@ if (global.GAME_PHASE == "main") {
 if (global.GAME_PHASE == "combat") {
     reset_AI_actions();
     global.GAME_PHASE = "aftermath";
+    setMarqueeText(aftermathPhaseText);
     waitTime = room_speed;
     exit;
 }
@@ -64,6 +78,7 @@ if (global.GAME_PHASE == "combat") {
 if (global.GAME_PHASE == "aftermath") {
     waitTime = room_speed;
     global.GAME_PHASE = "endturn";
+    setMarqueeText(endTurnPhaseText);
 }
 
 if (global.GAME_PHASE == "endturn") {
@@ -85,5 +100,6 @@ if (global.GAME_PHASE == "endturn") {
     resetResources(global.TURN);
     untapResources(global.TURN);
     global.GAME_PHASE = "draw";
+    setMarqueeText(drawPhaseText);
     exit;
 }

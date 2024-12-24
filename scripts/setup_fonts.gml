@@ -1,5 +1,5 @@
 /// setup_fonts();
-global.font_Phase = font_gui_medium;
+global.font_Marquee = font_marquee;//font_gui_medium;
 global.font_DamageCounter = font_gui_large;
 global.font_InfoPopupTitles  = font_gui_large;
 global.font_Health = font_gui_large;
