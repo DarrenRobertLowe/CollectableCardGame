@@ -7,10 +7,19 @@ var contestant  = argument0;
 var card        = argument1;
 var resources   = contestant.resourceLane.cards;
 
+
 // get the needed values
 var creatureResourcesNeeded = card.creatureResourceCost;
 var spellResourcesNeeded    = card.spellResourceCost;
 var enchantResourcesNeeded  = card.enchantResourceCost;
+
+
+if  (creatureResourcesNeeded == 0)
+and (spellResourcesNeeded == 0)
+and (enchantResourcesNeeded == 0) {
+    exit;
+}
+
 
 // remove cost equal to the amount of resources in our pool already (not untapped cards)
 creatureResourcesNeeded -= contestant.creatureResources;
@@ -34,7 +43,6 @@ while (creatureResourcesNeeded > 0) {
         }
     }
 }
-
 
 while (spellResourcesNeeded > 0) {
     for (var i=0; i<ds_list_size(resources); i++) {

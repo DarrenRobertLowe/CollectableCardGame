@@ -31,7 +31,6 @@ cardSurface     = -1;
 name            = "";
 class           = "";
 description     = "This is the default card and if you're reading this, something went wrong";
-castingCost     = 1;
 abilities       = ds_list_create();
 classes         = ds_list_create();
 enchantments    = ds_list_create();
@@ -39,6 +38,9 @@ sprite_index    = spr_card;
 image_index     = 0;
 image_speed     = 0;
 artVariant      = 0;
+creatureResourceCost = 0;
+spellResourceCost    = 0;
+enchantResourceCost  = 0;
 scale           = global.card_hand_scale;
 fullyDrawn      = false;        // a check for animation
 carddraw_xSpeed = 10;//room_width / room_speed;
@@ -65,6 +67,7 @@ base_enchantmentSeparation = 12
 enchantmentSeparation = base_enchantmentSeparation;
 isMouseOver = false;
 selectingSummonSlot = false;
+
 setup_glowing();
 
 
@@ -118,7 +121,7 @@ artY = 43;
 event_inherited();
 glowing = false;
 
-if (owner.hand.forceHideContents) {
+if (position == "hand") and (owner.hand.forceHideContents) {
     displayed = false;
 }
 
@@ -379,7 +382,6 @@ if (surfaceDrawn == false) {
 
 
 if (displayed) {
-    if (owner.hand.forceHideContents) then exit;
     if (!faceUp) {
         draw_sprite_ext(sprite_index, 0, x, y, scale, scale, 0, c_white, 1); // draw the back of the card
     } else {

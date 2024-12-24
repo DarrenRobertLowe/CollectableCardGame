@@ -12,6 +12,7 @@ if (count > 0) {
             if (creature.preferredSlot == FRONT_SLOT) {
                 if (creature.canMoveLane) {
                     marchCreatureForward(creature);
+                    waitTime = room_speed;
                 }
             }
         }

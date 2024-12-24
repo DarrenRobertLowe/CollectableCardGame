@@ -22,24 +22,25 @@ if (AI_finishedSummoning == false) {
         var backSlots = ds_list_create();
         backSlots = getAvailableBackSlots(backSlots);
         var slot = noone;
-        if (ds_list_size(backSlots) > 0) {
-            for(var i=0; i<ds_list_size(backSlots); i++) {
-                slot = ds_list_find_value(backSlots, 0);
-                if (slot.alternativeSlot.card == noone)         // prefer slots where there's nothing in the font lane
-                or (i == ds_list_size(backSlots)-1) {           // or just take the lastmost slot
-                    break;
-                }
+        var count = ds_list_size(backSlots);
+        show_debug_message("backSlots count is: " + string(count));
+        
+        for(var i=0; i<count; i++) {
+            slot = ds_list_find_value(backSlots, 0);
+            if (slot.alternativeSlot.card == noone)     // prefer slots where there's nothing in the font lane
+            or (i == count-1) {                         // or just take the last slot
+                break;
             }
         }
+        
+        show_debug_message("slot is : " + string(slot));
         
         if (slot != noone) {
             creature.slot = slot;
             slot.card = creature;
-            with(creature) {
-                other.waitTime = room_speed;
-                autoTapResources(global.enemy, creature);
-                summonCreature(creature);
-            }
+            waitTime = room_speed;
+            autoTapResources(id, creature);
+            summonCreature(creature);
         } else {
             show_debug_message("No available creature slots found.");
         }
@@ -55,4 +56,5 @@ if (AI_finishedSummoning == false) {
     
     // clean up
     ds_priority_destroy(AI_creatureList);
+    show_debug_message("Reached end of AI_playCreatureCard");
 }

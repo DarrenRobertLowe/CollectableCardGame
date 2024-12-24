@@ -27,6 +27,7 @@
       <sprite>sprites\spr_gui_phases</sprite>
       <sprite>sprites\spr_highlight_circle</sprite>
       <sprite>sprites\spr_marquee</sprite>
+      <sprite>sprites\spr_slot_arrow</sprite>
     </sprites>
     <sprites name="CardArts">
       <sprite>sprites\spr_defaultArt_OLD</sprite>
@@ -350,6 +351,7 @@
     <object>objects\MARQUEE</object>
     <object>objects\FRONT_SLOT</object>
     <object>objects\BACK_SLOT</object>
+    <object>objects\slot_arrow</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

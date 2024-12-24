@@ -8,7 +8,7 @@ var creatureList = ds_list_create();
 
 with (CARDSLOT) {
     show_debug_message("checking slot " +string(id) + " for creature");
-    if (owner == global.TURN) {
+    if (owner == contestant) {
         if (card != noone) {
             if (card.type = CREATURE_CARD) {
                 show_debug_message("Found a creature");

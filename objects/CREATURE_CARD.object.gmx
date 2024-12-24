@@ -73,8 +73,14 @@ defenceIconY  = iconsY;
 hpIconX     = 231;
 hpIconY     = iconsY;
 
-//AI
+
+// AI
 preferredSlot = FRONT_SLOT; // FRONT_SLOT or BACK_SLOT
+
+
+// Indicators
+slotArrow = instance_create(x, y, slot_arrow);
+slotArrow.parent = id;
 </string>
           </argument>
         </arguments>
@@ -157,7 +163,7 @@ if (selectingSummonSlot) {
     
     with(BACK_SLOT) {
         if (owner == global.TURN) {
-            glow();
+            glowing = true;
             
             if (clicked) {
                 if (card == noone) {
@@ -171,31 +177,6 @@ if (selectingSummonSlot) {
     }
 }
 
-if (global.GAME_PHASE == "main" or global.GAME_PHASE == "aftermath") {
-    if (canMoveLane) {
-        if (clicked == true) {
-            clicked = false;
-            
-            if (doubleClickWindow &gt; 0) {
-                show_debug_message("Double-click registered : "+string(id));
-                
-                if (slot.alternativeSlot.card == noone) {
-                    slot.card = noone;
-                    slot = slot.alternativeSlot;
-                    slot.card = id;
-                    canMoveLane = false;
-                    show_debug_message("Moved into slot");
-                } else {
-                    show_debug_message("Alternative slot is full: " + string(slot.alternativeSlot.card));
-                }
-                
-                doubleClickWindow = 0;
-            } else {
-                doubleClickWindow = CONTROLS.doubleClickWindowMax;
-            }
-        }
-    }
-}
 
 if (global.GAME_PHASE == "combat") {
     if (position == "board") {

@@ -3,7 +3,6 @@
  * or enemy enchantments, etc.
  */
 
-// determine what to cast or summon
 spell  = noone;
 target = noone;
 
