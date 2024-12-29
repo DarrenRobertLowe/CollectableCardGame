@@ -32,7 +32,7 @@ parent = noone;
 active = false;
 parentSpriteCentre = 0;
 
-depth = global.GUI_button_depth;
+depth = global.cardFX_depth;
 </string>
           </argument>
         </arguments>
@@ -82,21 +82,16 @@ if (active) {
     
     if (clicked) {
         clicked = false;
-        swapSlot(parent.slot, parent.slot.alternativeSlot);
-        parent.canMoveLane  = false;
-        show_debug_message("Moved slot");
-        /*
-        if (parent.slot.alternativeSlot.card == noone) {
-            parent.slot.card    = noone;
-            parent.slot         = parent.slot.alternativeSlot;
-            parent.slot.card    = id;
+        
+        if (canSwapSlot(parent)) {
+            var slot = parent.slot;
+            var altSlot = slot.alternativeSlot;
+            swapSlot(slot, altSlot);
             parent.canMoveLane  = false;
-            show_debug_message("Moved slot");
-            */
         } else {
             show_debug_message("Alternative slot is full: " + string(parent.slot.alternativeSlot.card));
         }
-    //}
+    }
 }
 </string>
           </argument>

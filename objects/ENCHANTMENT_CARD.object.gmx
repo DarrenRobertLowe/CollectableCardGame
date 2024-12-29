@@ -103,12 +103,11 @@ if (owner == global.player) {
     }
 }
 
-if (alreadyActivated == false) {
-    if (activated) {
-        if (global.POPUP_active == false) {
-            event_user(0); // actually cast the spell
-            alreadyActivated = true;
-        }
+
+if (activated) {
+    if (global.POPUP_active == false) {
+        event_user(0); // actually cast the spell
+        activated = false;
     }
 }
 

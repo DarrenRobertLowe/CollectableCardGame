@@ -51,8 +51,6 @@ targetY         = y;
 casting         = false;
 castingChecking = false;
 activated       = false;
-alreadyActivated= false;
-tapped          = false;
 displayed       = false;        // display or don't display the card
 position        = "none";       // in "hand", in "deck", on "board", in "graveyard", or "none"
 faceUp          = false;        // 0 or 1, false or true, it corresponds to the image_index.
@@ -66,7 +64,8 @@ enchantResourceCost = 0;
 base_enchantmentSeparation = 12
 enchantmentSeparation = base_enchantmentSeparation;
 isMouseOver = false;
-selectingSummonSlot = false;
+global.selectingSummonSlot = false;
+waitTime = 0;
 
 setup_glowing();
 
@@ -118,6 +117,7 @@ artY = 43;
           <argument>
             <kind>1</kind>
             <string>/// state
+//note: "clicked" occurs via CONTROLS object, not here.
 event_inherited();
 glowing = false;
 
@@ -206,6 +206,16 @@ if (global.choosingEffectTarget) or (global.summoning) {
 }
 
 
+if (displayed) {
+    // visuals
+    image_xscale = scale;
+    image_yscale = scale;
+    
+    if (glowing) {
+        calculate_glowAlpha();
+    }
+}
+
 // selecting a card to play
 if ((position == "hand") or (position == "graveyard")) {
     if (!global.choosingEffectTarget) and (!global.choosingAttackTarget) {
@@ -244,47 +254,15 @@ if ((position == "hand") or (position == "graveyard")) {
 if (position == "board") {
     // normal activation of card (e.g. combat)
     if (clicked == true) {
-        if (canUse) {
-            if (doubleClickWindow &gt; 0) {
-                tapped = true;
-                clicked = false;
-            } else {
-                doubleClickWindow = CONTROLS.doubleClickWindowMax;
-            }
-        }
+        tryActivate();
     }
 }
-
 
 // allow this card to be selected as an effect target
-if (global.choosingEffectTarget == true) {
-    if (global.currentCard != id) {
-        if (isValidTarget(id)) {
-            glowing = true;
-            
-            if (clicked) {
-                clicked = false;
-                global.target = id;
-            }
-        }
-    }
-}
-
-
+allowSelectAsEffectTarget()
 
 // move the card into the targetX and targetY
-//cardSlideIntoPosition();
 slideIntoPosition();
-
-if (displayed) {
-    // visuals
-    image_xscale = scale;
-    image_yscale = scale;
-    
-    if (glowing) {
-        calculate_glowAlpha();
-    }
-}
 
 organizeEnchantments(id);
 </string>
@@ -391,7 +369,7 @@ if (displayed) {
         
         // darken card if it can't be played
         if (canUse == false) 
-        or (alreadyActivated == true) {
+        or (activated == true) {
             fx_darken_card();
         }
     }

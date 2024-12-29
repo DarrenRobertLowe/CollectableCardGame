@@ -79,7 +79,7 @@ preferredSlot = FRONT_SLOT; // FRONT_SLOT or BACK_SLOT
 
 
 // Indicators
-slotArrow = instance_create(x, y, slot_arrow);
+slotArrow = instance_create(x, y, SlotArrow);
 slotArrow.parent = id;
 </string>
           </argument>
@@ -149,113 +149,83 @@ if (castingChecking) {
     
     if (summoned == false) {
         if (basicActivationChecks()) {
-            selectingSummonSlot = true;
+            global.selectingSummonSlot = true;
+            waitTime = room_speed;
             global.summoning = true;
             global.currentCard = id;
         }
     }
 }
 
+// make the slots glow
+if (global.selectingSummonSlot) {
+    forceHideCards();
+    glowCardSlots();
+}
 
-if (selectingSummonSlot) {
-    global.TURN.hand.forceHideContents = true;
-    global.TURN.graveyard.showContents = false;
+
+/// INTERACTIVITY
+if (waitTime &gt; 0) {
+    waitTime--;
+} else {
+    if (global.currentCard == id) {
+        if (global.selectingSummonSlot) {
+            // allow us to select a slot
+            allowCancelSelectSummonSlot();
+            selectSummonSlot();
+        }
+    }
     
-    with(BACK_SLOT) {
-        if (owner == global.TURN) {
-            glowing = true;
-            
-            if (clicked) {
-                if (card == noone) {
-                    other.slot = id;
-                    card = other.id;
-                    other.selectingSummonSlot = false;
-                    summonCreature(other.id);
+    if (global.GAME_PHASE == "combat") {
+        allowCancelCombatTarget();
+        
+        // attack
+        if (position == "board") {
+            if (clicked == true) {
+                if (!global.choosingAttackTarget) {
+                    clicked = false;
+                    // On our turn, allow us to be selected as an attacker
+                    combat_trySelectAsAttacker();
+                } else {
+                    show_debug_message("we're now trying to choose a target");
+                    // If not our turn, allow this card to be selected as a combat target
+                    combat_allowSelectAsTarget();
+                    // Initiate Attack on Target
+                    combat_initiateAttackTarget();
                 }
             }
         }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="25">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// destroy SLOT_ARROW associated with this card
 
+event_inherited();
 
-if (global.GAME_PHASE == "combat") {
-    if (position == "board") {
-        
-        // allow attack CANCEL
-        if (global.currentCard == id) {
-            if (global.choosingAttackTarget) {
-                if (global.controls_cancel) {
-                    attacking = false;
-                    global.currentCard = id;
-                    global.target = noone;
-                    global.choosingAttackTarget = false;
-                }
-            }
-        }
-        
-        if (clicked) {
-            clicked = false;
-            
-            // Our turn
-            if (global.TURN == owner) {
-                // Attacking
-                if (global.choosingAttackTarget == false) {
-                    // start the attacking state
-                    if (creatureCanAttack(id)) {
-                        attacking = true;
-                        
-                        global.currentCard = id;
-                        global.target = noone;
-                        global.choosingAttackTarget = true;
-                    }
-                }
-            }
-            
-            // not our turn
-            if  (global.TURN != owner) 
-            and (global.currentCard != id) {
-                // allow this card to be selected as a combat target
-                if (global.choosingAttackTarget == true) {
-                    if (global.currentCard.owner != owner) {
-                        if (mouseOverCard() == id) {
-                            glowing = true;
-                            if (clicked) {
-                                clicked = false;
-                                global.target = id;
-                            }
-                        }
-                    }
-                }
-            }
-        } // end (clicked)
-        
-        
-        // ATTACK ENEMY
-        var target = global.target;
-        if (global.currentCard == id) {
-            if (target != noone) {
-                if (object_is_ancestor(target.object_index, CONTESTANT)) {
-                    if !(hasDefenders(target)) {
-                        if (target.owner != owner) {
-                            event_user(1); // setup and perform the attack
-                        }
-                    }
-                }
-                
-                if (object_is_ancestor(target.object_index, CREATURE_CARD)) {
-                    if (target.position == "board") {
-                        if (target.owner != owner) {
-                            event_user(1); // setup and perform the attack
-                        }
-                    }
-                }
-            }
-        }
-    } // end (position == "board")
-} // end (combat)
-
-// clear click state
-clicked = false;
+if (exists(slotArrow)) {
+    instance_destroy(slotArrow, true);
+}
 </string>
           </argument>
         </arguments>
@@ -343,8 +313,7 @@ if(!anyCreaturesCanAttack(getCreatures(owner))) {
           <argument>
             <kind>1</kind>
             <string>/// SUMMON
-debug("Summoned " +string(name));
-
+show_debug_message("Summoned " +string(name));
 
 if (ds_list_find_index(abilities, "Haste")) {
     canMoveLane = true;

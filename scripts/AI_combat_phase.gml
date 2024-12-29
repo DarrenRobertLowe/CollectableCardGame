@@ -22,8 +22,8 @@ if (listedCreatures == false) {
 
 // can we attack?
 if (ds_list_size(ourCreatures) > 0) {
-    var creature = ds_list_find_value(ourCreatures, 0);
-    ds_list_delete(ourCreatures, 0);
+    var creature = ds_list_find_value(ourCreatures, ds_list_size(ourCreatures) - 1);
+    ds_list_delete(ourCreatures, ds_list_size(ourCreatures) - 1);
     
     // can we attack directly?
     if (ds_list_size(theirCreatures) == 0) {

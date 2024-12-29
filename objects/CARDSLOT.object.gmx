@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// setup
 event_inherited();
-
+type = object_get_name(object_index);
 depth = global.cardSlot_depth;
 sprite_index = spr_cardSlot;
 card = noone;
@@ -58,6 +58,7 @@ glow_colour = c_white;
           <argument>
             <kind>1</kind>
             <string>/// position card on slot
+event_inherited();
 
 calculate_glowAlpha();
 

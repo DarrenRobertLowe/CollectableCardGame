@@ -35,7 +35,7 @@ castingCost = 0;
 creatureResources = 0;
 spellResources    = 0;
 enchantResources  = 0;
-
+activated   = false;
 // classes
 ds_list_add(classes, "Creature Resource");
 </string>
@@ -84,8 +84,8 @@ if (position == "board") {
         if (owner == global.player) {
             if (global.TURN == global.player) {
                 if !(global.GAME_PHASE == "draw") {
-                    if !(alreadyActivated) {
-                        alreadyActivated = true;
+                    if !(activated) {
+                        activated = true;
                         event_user(CONST_TAP_EVENT); // tap the card for its resources
                     }
                 }
@@ -123,7 +123,7 @@ clicked = false;
             <kind>1</kind>
             <string>/// Untap
 
-alreadyActivated = false;
+activated = false;
 </string>
           </argument>
         </arguments>
@@ -151,7 +151,7 @@ alreadyActivated = false;
 owner.creatureResources  += creatureResources;
 owner.spellResources     += spellResources;
 owner.enchantResources   += enchantResources;
-alreadyActivated = true;
+activated = true;
 show_debug_message("Tapped "  +string(name));
 </string>
           </argument>

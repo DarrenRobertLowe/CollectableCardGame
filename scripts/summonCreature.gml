@@ -1,6 +1,12 @@
 /// summonCreature(card id)
 var creature = argument0;
-creature.activated = true;
+show_debug_message("Creature is: "+string(creature));
+creature.summoned = true;
+
+with(BACK_SLOT) {
+    glowing = false;
+}
+
 show_EventPopup(creature, noone, "Summoning");
 
 with(creature) {

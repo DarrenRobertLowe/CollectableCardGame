@@ -30,6 +30,7 @@ event_inherited();
 
 image_speed = 0;
 type        = DECK;
+position    = "board";
 owner       = noone;
 cards       = ds_list_create();
 playStack   = ds_stack_create();
