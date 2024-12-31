@@ -63,8 +63,8 @@ castFX          = fx_lightning;
 event_inherited();
 
 if (position == "board") {
-    targetx = target.x;
-    targety = target.y + global.enchantmentYDifference;
+    targetX = target.x;
+    targetY = target.y + global.enchantmentYDifference;
 }
 
 if (owner == global.player) {
