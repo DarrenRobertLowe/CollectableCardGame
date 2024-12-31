@@ -28,6 +28,8 @@
             <string>/// set sprite
 event_inherited();
 image_index = 0;
+activeIndex   = 0;
+inactiveIndex = 1;
 myPhase = "draw";
 </string>
           </argument>

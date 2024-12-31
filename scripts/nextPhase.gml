@@ -85,8 +85,12 @@ if (global.GAME_PHASE == "aftermath") {
 
 if (global.GAME_PHASE == "endturn") {
     with (CREATURE_CARD) {
-        attackedThisTurn = false;
         alarm[0] = 1; // recalculate stats
+        
+        if (global.TURN == owner) {
+            attackedThisTurn = false;
+            activated = false;
+        }
     }
     
     switch(global.TURN) {

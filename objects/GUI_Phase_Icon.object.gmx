@@ -26,12 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>/// setup
+depth = global.phaseIcon_depth;
 image_speed = 0;
 myPhase = "";
 setup_glowing();
 centerX = (x + (sprite_get_width(sprite_index)  * 0.5));
 centerY = (y + (sprite_get_height(sprite_index) * 0.5));
-depth = global.GUI_button_depth;
+
 
 </string>
           </argument>
@@ -56,11 +57,14 @@ depth = global.GUI_button_depth;
           <argument>
             <kind>1</kind>
             <string>/// Move the PhaseHighlight over us
+image_index = inactiveIndex;
 
 if (global.GAME_PHASE == myPhase) {
-    if (exists(PhaseHighlight)) {
-        PhaseHighlight.targetX = centerX;
-        PhaseHighlight.targetY = centerY;
+    image_index = activeIndex;
+    
+    if (exists(PhaseSpotlight)) {
+        PhaseSpotlight.targetX = centerX;
+        PhaseSpotlight.targetY = centerY;
     }
 }
 </string>

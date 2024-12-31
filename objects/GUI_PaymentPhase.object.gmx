@@ -27,7 +27,8 @@
             <kind>1</kind>
             <string>/// set sprite
 event_inherited();
-image_index = 1;
+activeIndex   = 2;
+inactiveIndex = 3;
 myPhase = "payment";
 </string>
           </argument>

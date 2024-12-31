@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///setup
+depth  = global.spotlight_depth;
 width  = sprite_get_width(spr_gui_phases);
 height = sprite_get_height(spr_gui_phases);
 auraScale = 0.15;

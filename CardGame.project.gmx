@@ -263,6 +263,7 @@
       <script>scripts\subscribe_to_event.gml</script>
       <script>scripts\trigger_event.gml</script>
     </scripts>
+    <script>scripts\setup_cardElementPositions.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -360,7 +361,7 @@
     <object>objects\EMBIGGENED_CARD_DRAWER</object>
     <objects name="GUI">
       <objects name="Phases">
-        <object>objects\PhaseHighlight</object>
+        <object>objects\PhaseSpotlight</object>
         <object>objects\GUI_Phase_Icon</object>
         <object>objects\GUI_DrawPhase</object>
         <object>objects\GUI_PaymentPhase</object>

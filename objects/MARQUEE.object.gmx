@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// setup
 
-depth = global.GUI_button_depth;
+depth = global.marquee_depth;
 text = "";
 count = 30; // how many characters fit in the marquee, depends on the font
 scrollSpeed = 0.10;

@@ -1,8 +1,11 @@
 ///setup_depths()
 
-global.cardSlot_depth   = -1;
-global.card_depth       = -2;
-global.cardFX_depth     = -3;
+global.marquee_depth    = 0;
+global.spotlight_depth  = -1;
+global.phaseIcon_depth  = -2;
+global.cardSlot_depth   = -3;
+global.card_depth       = -20;
+global.cardFX_depth     = -30;
 global.hand_depth       = -400;     // the depth of a card in the hand is also based on its position in the list
 global.handFX_depth     = -1001;    // leaving enough space between cards and drawing above cards
 global.GUI_depth        = -1002;

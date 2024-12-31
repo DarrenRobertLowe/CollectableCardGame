@@ -158,7 +158,7 @@ mainPhaseIcon       = instance_create(paymentPhaseIcon.x + phaseIconXStep, phase
 aftermathPhaseIcon  = instance_create((room_width - 20) - sprite_get_width(spr_gui_phases), phaseIconY, GUI_AftermathPhase);
 combatPhaseIcon     = instance_create(aftermathPhaseIcon.x - phaseIconXStep, phaseIconY, GUI_CombatPhase);
 
-phaseHighlight      = instance_create(0, phaseIconY, PhaseHighlight);
+phaseSpotlight      = instance_create(0, phaseIconY, PhaseSpotlight);
 
 
 /// create the marquee
