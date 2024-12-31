@@ -139,9 +139,8 @@ old_mouse_x = mouse_x;
 var target = getTopClickable(clickableUnderPointer);
 
 if (target != noone) {
-    global.target = target;
     target.clicked = true;
-    show_debug_message("clicked: " +string(global.target) + "("+string(object_get_name(target.object_index)) + ")");
+    show_debug_message("clicked: " +string(target) + "("+string(object_get_name(target.object_index)) + ")");
 }
 
 ds_priority_clear(clickableUnderPointer);

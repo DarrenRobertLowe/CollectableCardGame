@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>GRAVE</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,20 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>/// setup
-contents = ds_list_create();
+event_inherited();
 
-var profileArea = sprite_get_width(global.player.deck.sprite_index) + 20;
 handX = ENEMY_HAND.handX;
 handY = ENEMY_HAND.handY;
-handAreaWidth = (view_wview[0] - sprite_get_width(spr_card));
-showContents = false;
-owner = noone;
 
-base_cardSeparation = 150;
-cardSeparation = base_cardSeparation;
-
-currentCardHover = noone;
-cardHoverQueue = ds_priority_create(); // used for depth sorting in hand
 </string>
           </argument>
         </arguments>

@@ -77,7 +77,7 @@ if (hand.showContents = true) {
 
 if (global.currentCard == noone) { // prevent clicking when casting a spell, etc.
     // show or hide hand
-    if (clicked) {
+    if (clicked) and (!hand.forceHideContents) {
         clicked = false;
         if (hand.showContents == false) {
         hand.showContents = true;

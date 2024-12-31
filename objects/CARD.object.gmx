@@ -121,9 +121,9 @@ artY = 43;
 event_inherited();
 glowing = false;
 
-if (position == "hand") and (owner.hand.forceHideContents) {
-    displayed = false;
-}
+
+
+
 
 if (displayed == false) {
     visible = false;
@@ -172,6 +172,10 @@ switch (position) {
         if (global.GAME_PHASE == "main") or (global.GAME_PHASE == "aftermath")
             then canUse = true;
         scale = global.card_hand_scale;
+        if (owner.hand.forceHideContents) {
+            displayed = false;
+        }
+        
         if (global.currentCard != id) {
             y = owner.hand.handY;
             targetY = owner.hand.handY;
@@ -191,6 +195,9 @@ switch (position) {
             else canUse = false;
         y = owner.hand.handY;
         scale = global.card_grave_scale;
+        if (owner.graveyard.forceHideContents) {
+            displayed = false;
+        }
         break;
 }
 

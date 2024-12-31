@@ -67,7 +67,7 @@ event_inherited();
 // get count
 count = ds_list_size(contents); 
 
-if (global.currentCard == noone) { // prevent clicking when casting a spell, etc.
+if (global.currentCard == noone) and (!graveyard.forceHideContents) { // prevent clicking when casting a spell, etc.
     // show / hide
     if (clicked) {
         clicked = false;

@@ -150,19 +150,12 @@ if (castingChecking) {
     if (summoned == false) {
         if (basicActivationChecks()) {
             global.selectingSummonSlot = true;
-            waitTime = (room_speed * 0.25)
             global.summoning = true;
             global.currentCard = id;
+            waitTime = (room_speed * 0.25)
         }
     }
 }
-
-// make the slots glow
-if (global.selectingSummonSlot) {
-    forceHideCards();
-    glowCardSlots();
-}
-
 
 /// INTERACTIVITY
 if (waitTime &gt; 0) {
@@ -171,14 +164,17 @@ if (waitTime &gt; 0) {
     if (global.currentCard == id) {
         if (global.selectingSummonSlot) {
             // allow us to select a slot
+            enforceHideCards();
+            glowCardSlots();
             allowCancelSelectSummonSlot();
             selectSummonSlot();
+        } else {
+            unenforceHideCards();
         }
     }
     
+    
     if (global.GAME_PHASE == "combat") {
-        allowCancelCombatTarget();
-        
         // attack
         if (position == "board") {
             // make potential targets glow
@@ -188,15 +184,19 @@ if (waitTime &gt; 0) {
                     else glowing = false;
             }
             
+            if (global.choosingAttackTarget) {
+                if (global.TURN == global.player) {
+                    enforceHideCards();
+                    allowCancelCombatTarget();
+                }
+            }
+            
+            
             if (clicked) {
                 if (!global.choosingAttackTarget) {
                     combat_trySelectAsAttacker();
                 } else {
-                    combat_allowSelectAsAttackTarget();
-                    
-                    if (global.target &gt; 0) {
-                        combat_initiateAttackTarget();
-                    }
+                    combat_selectAsAttackTarget();
                 }
             }
             
@@ -295,8 +295,9 @@ show_EventPopup(id, global.target, "Attacking");
 fight(id, global.target);
 
 // finish
-global.currentCard = noone;
 global.choosingAttackTarget = false;
+global.currentCard = noone;
+global.target = noone;
 
 // end the phase if no other creatures on the battlefield can attack
 if(!anyCreaturesCanAttack(getCreatures(owner))) {

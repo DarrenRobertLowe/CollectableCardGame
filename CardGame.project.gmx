@@ -249,12 +249,13 @@
     <script>scripts\allowCancelCombatTarget.gml</script>
     <script>scripts\allowCancelSelectSummonSlot.gml</script>
     <script>scripts\combat_initiateAttackTarget.gml</script>
-    <script>scripts\combat_allowSelectAsAttackTarget.gml</script>
+    <script>scripts\combat_selectAsAttackTarget.gml</script>
     <script>scripts\combat_trySelectAsAttacker.gml</script>
     <script>scripts\glowCardSlots.gml</script>
     <script>scripts\allowSelectAsEffectTarget.gml</script>
     <script>scripts\tryActivate.gml</script>
-    <script>scripts\forceHideCards.gml</script>
+    <script>scripts\enforceHideCards.gml</script>
+    <script>scripts\unenforceHideCards.gml</script>
     <script>scripts\create_DamageCounter.gml</script>
     <script>scripts\destroyCreature.gml</script>
     <script>scripts\triggerAbilitiesOnDamage.gml</script>
@@ -283,6 +284,7 @@
       <object>objects\CONTESTANT</object>
       <object>objects\RESOURCE_LANE</object>
       <object>objects\HAND</object>
+      <object>objects\GRAVE</object>
       <object>objects\BOARD_CONTROLLER</object>
     </objects>
     <object>objects\MASTER</object>
