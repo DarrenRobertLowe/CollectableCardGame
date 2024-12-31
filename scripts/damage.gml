@@ -3,50 +3,39 @@ var attacker = argument0;
 var target   = argument1;
 var amount   = argument2;
 
-if (exists(target)) {
-    target.hp -= amount;
-    
-    if (attacker != noone) {
-        if (ds_list_find_index(abilities, "Drain") > -1) {
-            damage(noone, owner, -amount);
-        }
+// ESCAPE CONDITIONS
+if (amount >= 0) {
+    show_debug_message(string(attacker) +" is damaging "+ string(target) +" for "+ string(amount));
+} else {
+    show_debug_message(string(attacker) +" is healing "+ string(target) +" for "+ string(amount));
+}
+
+if (!exists(attacker)) {
+    if (attacker != noone) { // we need this to allow abilities like drain to damage()
+        log("Error: Invalid attacker in damage(): " + string(attacker) +" does not exist and is not noone (-4)!");
+        exit;
     }
+}
+
+if (!exists(target)) {
+    log("Error: Invalid target in damage(): " + string(target) +" does not exist!");
+    exit;
+}
+
+
+// EVENT
+target.hp -= amount;
+
+if (attacker != noone) {
+    triggerAbilitiesOnDamage(attacker, target, amount);
+}
+
+create_DamageCounter(target, amount);
+
+if (object_is_ancestor(target.object_index, CREATURE_CARD)) {
+    updateStats(target);
     
-    // find the targX and targY for the DAMAGE_COUNTER
-    var targX = 0;
-    var targY = 0;
-    
-    if (target == global.player) {
-        targX = GUI.playerHPX;
-        targY = GUI.playerHPY;
-    } else if (target == global.enemy) {
-        targX = GUI.enemyHPX;
-        targY = GUI.enemyHPY;
-    } else {
-        targX = (target.x + ((sprite_get_width(target.sprite_index)  * target.scale) * 0.5));
-        targY = (target.y + ((sprite_get_height(target.sprite_index) * target.scale) * 0.5));
+    if (target.hp <= 0) {
+        destroyCreature(target);
     }
-    
-    var dmgCounter = instance_create(targX, targY, DAMAGE_COUNTER);
-    dmgCounter.value = amount;
-    
-    if (object_is_ancestor(target.object_index, CREATURE_CARD)) {
-        // update the stats
-        updateStats(target);
-        
-        // destroyed?
-        if (target.hp <= 0) {
-            // create an explosion
-            instance_create(
-                target.x + ( (sprite_get_width(spr_card)  * target.scale) * 0.5), 
-                target.y + ( (sprite_get_height(spr_card) * target.scale) * 0.5), 
-                fx_explode);
-                
-            with(target) {
-                event_user(CONST_DESTROY_EVENT);
-            }
-            
-            //sendToGraveyard(target.owner.graveyard, target);
-        }
-    }
-} else log("Error: Invalid target for damage: " + string(target) +" does not exist!");
+}

@@ -249,12 +249,19 @@
     <script>scripts\allowCancelCombatTarget.gml</script>
     <script>scripts\allowCancelSelectSummonSlot.gml</script>
     <script>scripts\combat_initiateAttackTarget.gml</script>
-    <script>scripts\combat_allowSelectAsTarget.gml</script>
+    <script>scripts\combat_allowSelectAsAttackTarget.gml</script>
     <script>scripts\combat_trySelectAsAttacker.gml</script>
     <script>scripts\glowCardSlots.gml</script>
     <script>scripts\allowSelectAsEffectTarget.gml</script>
     <script>scripts\tryActivate.gml</script>
     <script>scripts\forceHideCards.gml</script>
+    <script>scripts\create_DamageCounter.gml</script>
+    <script>scripts\destroyCreature.gml</script>
+    <script>scripts\triggerAbilitiesOnDamage.gml</script>
+    <scripts name="Events">
+      <script>scripts\subscribe_to_event.gml</script>
+      <script>scripts\trigger_event.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -364,6 +371,7 @@
     <object>objects\FRONT_SLOT</object>
     <object>objects\BACK_SLOT</object>
     <object>objects\SlotArrow</object>
+    <object>objects\EVENT_LISTENER</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

@@ -5,10 +5,10 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CLICKABLE</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="0">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,8 +25,44 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// allow us to be selected as a target
-event_inherited();
+            <string>/// Initialize event maps
+subscriptions = ds_map_create();    // a list of all subscription maps, used in destroy event.
+
+SpellCastSubscribers = ds_map_create();
+ds_list_add(subscriptions, SpellCastSubscribers);
+
+CardPlayedSubscribers = ds_map_create();
+ds_list_add(subscriptions, CardPlayedSubscribers);
+
+// Add more event maps as needed
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// clean up
+
+for (var i=0; i&lt;ds_list_size(subscriptions); i++) {
+    ds_map_destroy(SpellCastSubscribers);
+    ds_map_destroy(CardPlayedSubscribers);
+}
 </string>
           </argument>
         </arguments>

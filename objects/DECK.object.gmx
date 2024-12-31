@@ -96,18 +96,16 @@ playStack = build_deck(cards);
           <argument>
             <kind>1</kind>
             <string>/// click to draw card
+event_inherited();
+
 
 if (clicked) {
     clicked = false;
     
-    if (global.choosingEffectTarget == true) or (global.choosingAttackTarget == true) {
-        global.target = owner;
-    } else {
-        if (global.GAME_PHASE == "draw") {
-            if (global.TURN == owner) {
-                draw_card(owner.hand, id);
-                nextPhase();
-            }
+    if (global.GAME_PHASE == "draw") {
+        if (global.TURN == owner) {
+            draw_card(owner.hand, id);
+            nextPhase();
         }
     }
 }

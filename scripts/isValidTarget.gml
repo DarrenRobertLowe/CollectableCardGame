@@ -6,16 +6,12 @@ if !(exists(global.currentCard)) {
     exit;
 }
 
-//show_debug_message("global.currentCard: " + string(global.currentCard));
-
 var validTargets = global.currentCard.validTargets;
 var size = ds_list_size(validTargets);
-//show_debug_message("global.currentCard.validTargets size is : " + string(size) );
 
 
 for(var i=0; i<size; i++) {
     var value = ds_list_find_value(validTargets, i);
-    //show_debug_message("validTarget is: " +string(value));
     switch(value) {
         case "contestant":
             if (isContestant(target))
@@ -23,9 +19,7 @@ for(var i=0; i<size; i++) {
         break;
         
         case "any creature on board":
-            //show_debug_message('Checking for "any creature on board"');
             if ((isCreature(target)) and (target.position == "board")) {
-                //show_debug_message("This is a creature on board and therefore passes.");
                 return true;
               }
         break;
@@ -41,5 +35,3 @@ for(var i=0; i<size; i++) {
         break;
     }
 }
-
-//show_debug_message(string(id) + ": not a valid target");

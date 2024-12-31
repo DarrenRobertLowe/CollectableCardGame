@@ -150,7 +150,7 @@ if (castingChecking) {
     if (summoned == false) {
         if (basicActivationChecks()) {
             global.selectingSummonSlot = true;
-            waitTime = room_speed;
+            waitTime = (room_speed * 0.25)
             global.summoning = true;
             global.currentCard = id;
         }
@@ -181,16 +181,28 @@ if (waitTime &gt; 0) {
         
         // attack
         if (position == "board") {
-            if (clicked == true) {
+            // make potential targets glow
+            if (global.TURN != owner) {
+                if (!global.choosingAttackTarget)
+                    then glowing = true;
+                    else glowing = false;
+            }
+            
+            if (clicked) {
                 if (!global.choosingAttackTarget) {
-                    clicked = false;
-                    // On our turn, allow us to be selected as an attacker
                     combat_trySelectAsAttacker();
                 } else {
-                    show_debug_message("we're now trying to choose a target");
-                    // If not our turn, allow this card to be selected as a combat target
-                    combat_allowSelectAsTarget();
-                    // Initiate Attack on Target
+                    combat_allowSelectAsAttackTarget();
+                    
+                    if (global.target &gt; 0) {
+                        combat_initiateAttackTarget();
+                    }
+                }
+            }
+            
+            
+            if (global.target &gt; 0) {
+                if (global.currentCard == id) {
                     combat_initiateAttackTarget();
                 }
             }
