@@ -1,10 +1,13 @@
 /// AI_combat_phase();
 
+show_debug_message("******* COMBAT *******");
+
+
 // get all our creatures that can attack and the opponent's defenders
 if (listedCreatures == false) {
     with (CARDSLOT) {
         if (card != noone) {
-            if (card.owner == id) {
+            if (card.owner == global.TURN) {
                 if (creatureCanAttack(card)) {
                     ds_list_add(global.TURN.ourCreatures, card);
                 }
@@ -22,6 +25,7 @@ if (listedCreatures == false) {
 
 // can we attack?
 if (ds_list_size(ourCreatures) > 0) {
+    show_debug_message("AI: We have creatures.");
     var creature = ds_list_find_value(ourCreatures, ds_list_size(ourCreatures) - 1);
     ds_list_delete(ourCreatures, ds_list_size(ourCreatures) - 1);
     
