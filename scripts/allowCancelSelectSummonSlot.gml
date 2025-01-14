@@ -2,7 +2,9 @@
 
 // allow summon CANCEL
 if (global.controls_cancel) {
-    selectingSummonSlot = false;
+    global.selectingSummonSlot = false;
+    global.currentCard = noone;
+    unenforceHideCards();
     
     with(BACK_SLOT) {
         glowing = false;

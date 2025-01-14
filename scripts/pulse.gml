@@ -1,15 +1,24 @@
-/// pulse(pulse_factor, pulse_speed)
+/// pulse(current_value, max_value, min_value, speed)
 // returns float : pulse_value
-var pulse_factor = argument0;
-var pulse_speed  = argument1;
+var current_value = argument0;
+var max_value = argument1;
+var min_value = argument2;
+var spd = argument3;
+
+// Calculate the mid-point and amplitude
+var mid_point = (max_value + min_value) / 2;
+var amplitude = (max_value - min_value) / 2;
 
 // Update the pulse factor over time
-pulse_factor += pulse_speed;
+pulse_factor += spd;
 
-// Optional: Adjust the speed if needed
+// Optional: Adjust the factor if needed
 if (pulse_factor > 2 * pi) {
     pulse_factor -= 2 * pi; // Reset the factor to keep it in range
 }
 
 // Calculate the pulsing value using the sine function
-pulse_value = 0.5 + 0.5 * sin(pulse_factor); // Value oscillates between 0 and 1
+var pulse_value = mid_point + amplitude * sin(pulse_factor);
+
+return pulse_value;
+

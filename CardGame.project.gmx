@@ -28,6 +28,9 @@
       <sprite>sprites\spr_highlight_circle</sprite>
       <sprite>sprites\spr_marquee</sprite>
       <sprite>sprites\spr_slot_arrow</sprite>
+      <sprites name="FX">
+        <sprite>sprites\spr_resource_glow</sprite>
+      </sprites>
     </sprites>
     <sprites name="CardArts">
       <sprite>sprites\spr_defaultArt_OLD</sprite>
@@ -90,6 +93,7 @@
       <script>scripts\setup_fonts.gml</script>
       <script>scripts\setup_text_colours.gml</script>
       <script>scripts\setup_options.gml</script>
+      <script>scripts\setup_cardElementPositions.gml</script>
     </scripts>
     <scripts name="General">
       <scripts name="Predicate Methods">
@@ -131,7 +135,6 @@
         <script>scripts\updateAuraScale.gml</script>
       </scripts>
       <scripts name="Pulsing">
-        <script>scripts\pulse.gml</script>
         <script>scripts\pulse_setup.gml</script>
       </scripts>
       <scripts name="Sliding">
@@ -143,6 +146,8 @@
       <script>scripts\fx_darken_card.gml</script>
       <script>scripts\fx_create_lightning_branch.gml</script>
       <script>scripts\spawn_CastFX.gml</script>
+      <script>scripts\spawn_resource_fx.gml</script>
+      <script>scripts\pulse.gml</script>
     </scripts>
     <scripts name="PREGAME">
       <script>scripts\create_card.gml</script>
@@ -239,6 +244,10 @@
       <script>scripts\getTopClickable.gml</script>
       <script>scripts\setMarqueeText.gml</script>
     </scripts>
+    <scripts name="Events">
+      <script>scripts\subscribe_to_event.gml</script>
+      <script>scripts\trigger_event.gml</script>
+    </scripts>
     <script>scripts\startMainPhase.gml</script>
     <script>scripts\getAvailableBackSlots.gml</script>
     <script>scripts\swapSlot.gml</script>
@@ -259,11 +268,8 @@
     <script>scripts\create_DamageCounter.gml</script>
     <script>scripts\destroyCreature.gml</script>
     <script>scripts\triggerAbilitiesOnDamage.gml</script>
-    <scripts name="Events">
-      <script>scripts\subscribe_to_event.gml</script>
-      <script>scripts\trigger_event.gml</script>
-    </scripts>
-    <script>scripts\setup_cardElementPositions.gml</script>
+    <script>scripts\autoShowHideHand.gml</script>
+    <script>scripts\movement_waveX.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -303,12 +309,16 @@
     <object>objects\PHASE_CONTROLLER</object>
     <objects name="GUI Buttons">
       <object>objects\GUI_BUTTON</object>
-      <object>objects\BUTTON_SHOW_GRAVEYARD</object>
-      <object>objects\button_showPlayerGraveyard</object>
-      <object>objects\button_showEnemyGraveyard</object>
-      <object>objects\BUTTON_SHOWHAND</object>
-      <object>objects\button_showPlayerHand</object>
-      <object>objects\button_showEnemyHand</object>
+      <objects name="Graves">
+        <object>objects\BUTTON_SHOW_GRAVEYARD</object>
+        <object>objects\button_showEnemyGraveyard</object>
+        <object>objects\button_showPlayerGraveyard</object>
+      </objects>
+      <objects name="Hands">
+        <object>objects\BUTTON_SHOWHAND</object>
+        <object>objects\button_showPlayerHand</object>
+        <object>objects\button_showEnemyHand</object>
+      </objects>
     </objects>
     <objects name="CARDS">
       <object>objects\CARD</object>
@@ -328,7 +338,7 @@
         <object>objects\ENCHANTMENT_CARD</object>
         <object>objects\enchant_Vigor</object>
       </objects>
-      <objects name="Mana">
+      <objects name="Resources">
         <object>objects\RESOURCE_CARD</object>
         <object>objects\resource_Ember</object>
         <object>objects\resource_Ether</object>
@@ -345,6 +355,7 @@
     <objects name="FX">
       <object>objects\FX</object>
       <object>objects\fx_explode</object>
+      <object>objects\fx_resource_glowie</object>
       <objects name="Lightning">
         <object>objects\fx_lightning</object>
         <object>objects\fx_lightning_branch</object>

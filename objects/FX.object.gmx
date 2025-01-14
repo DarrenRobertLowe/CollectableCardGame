@@ -28,6 +28,8 @@
             <string>/// set the depth
 
 // for depth see MASTER create event
+
+depth = global.handFX_depth;
 </string>
           </argument>
         </arguments>

@@ -30,9 +30,12 @@ if (cards > 0) {
         
         if (owner == global.player) {
             card.targetX = round(handX + (i * cardSeparation));
+            card.targetY = owner.hand.handY;
         } else {
             card.targetX = round(handX - (i * cardSeparation)); // opposite direction for enemy
         }
+        
+        
         
         
         card.depth = ((global.hand_depth - handsize) + i);

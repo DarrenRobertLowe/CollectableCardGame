@@ -29,8 +29,6 @@
 event_inherited();
 handX = (view_wview[0] - profileArea - (sprite_get_width(spr_card) * global.card_hand_scale));
 handY = 20;
-
-
 </string>
           </argument>
         </arguments>

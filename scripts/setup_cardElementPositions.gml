@@ -22,3 +22,5 @@ descriptionX = 35;
 descriptionY = 303;
 artX = 22;
 artY = 43;
+centerX = (sprite_width * 0.5);
+centerY = (sprite_height * 0.5);

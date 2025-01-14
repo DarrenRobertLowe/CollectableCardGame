@@ -146,13 +146,97 @@ activated = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// give player resources
+            <string>/// give player resources and spawn particle fx
 
 owner.creatureResources  += creatureResources;
 owner.spellResources     += spellResources;
 owner.enchantResources   += enchantResources;
 activated = true;
 show_debug_message("Tapped "  +string(name));
+
+
+// particles
+var particleCount = 3;
+var glowieStartX  = x;
+var glowieStartY  = y;
+var minAmplitude  = 50;
+var maxAmplitude  = 150;
+var minFrequency  = 0.5;
+var maxFrequency  = 2;
+
+
+
+if (creatureResources &gt; 0) {
+    if (owner == global.player) {
+        var glowieTargetX  = GUI.mana1X;
+        var glowieTargetY  = GUI.manaY;
+    } else {
+        var glowieTargetX  = GUI.enemy_mana1X;
+        var glowieTargetY  = GUI.enemy_manaY;
+    }
+    
+    repeat(particleCount) {
+        var col_red   = 155 + random(100);
+        var col_green = 0;
+        var col_blue  = 0;
+        
+        var colour = make_colour_rgb(col_red, col_green, col_blue);
+        
+        var randX = 50;
+        var randY = 50;
+        
+        spawn_resource_fx(glowieStartX + random(randX), glowieStartY + random(randY), glowieTargetX, glowieTargetY, colour, minAmplitude, maxAmplitude, minFrequency, maxFrequency);
+    }
+}
+
+
+if (spellResources &gt; 0) {
+    if (owner == global.player) {
+        var glowieTargetX  = GUI.mana2X;
+        var glowieTargetY  = GUI.manaY;
+    } else {
+        var glowieTargetX  = GUI.enemy_mana2X;
+        var glowieTargetY  = GUI.enemy_manaY;
+    }
+    
+    repeat(particleCount) {
+        var col_red   = 0;
+        var col_green = 0;
+        var col_blue  = 155 + random(100);
+        
+        var colour = make_colour_rgb(col_red, col_green, col_blue);
+        
+        var randX = 50;
+        var randY = 50;
+        
+        spawn_resource_fx(glowieStartX  + random(randX), glowieStartY  + random(randY), glowieTargetX, glowieTargetY, colour, minAmplitude, maxAmplitude, minFrequency, maxFrequency);
+    }
+}
+
+
+if (enchantResources &gt; 0) {
+    if (owner == global.player) {
+        var glowieTargetX  = GUI.mana3X;
+        var glowieTargetY  = GUI.manaY;
+    } else {
+        var glowieTargetX  = GUI.enemy_mana3X;
+        var glowieTargetY  = GUI.enemy_manaY;
+    }
+    
+    repeat(particleCount) {
+        var col_red   = 0;
+        var col_green = 155 + random(100);
+        var col_blue  = 0;
+        
+        var colour = make_colour_rgb(col_red, col_green, col_blue);
+        
+        var randX = 50;
+        var randY = 50;
+        
+        spawn_resource_fx(glowieStartX + random(randX), glowieStartY + random(randY), glowieTargetX, glowieTargetY, colour, minAmplitude, maxAmplitude, minFrequency, maxFrequency);
+    }
+}
+
 </string>
           </argument>
         </arguments>

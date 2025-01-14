@@ -39,7 +39,11 @@ countBGy2 = countY + 20;
 image_index = 0;
 image_speed = 0;
 depth = global.GUI_button_depth;
-
+yShowThreshold = (room_height - 30);
+yHideThreshold = (room_height - 300);
+shownY  = (room_height - 200);
+hiddenY = (room_height - 15);
+allowAutoShowHide = false;
 </string>
           </argument>
         </arguments>
@@ -68,25 +72,37 @@ event_inherited();
 // get count
 count = ds_list_size(hand.contents); 
 
+// autohide/autoshow
+if (allowAutoShowHide) {
+    autoShowHideHand();
+}
+
 // set correct image index
-if (hand.showContents = true) {
+if  (hand.showContents == true) 
+and (!hand.forceHideContents) {
     image_index = 1;
 } else {
     image_index = 0;
 }
 
+
 if (global.currentCard == noone) { // prevent clicking when casting a spell, etc.
-    // show or hide hand
-    if (clicked) and (!hand.forceHideContents) {
-        clicked = false;
-        if (hand.showContents == false) {
-        hand.showContents = true;
-        graveyard.showContents = false;
-        } else {
-            hand.showContents = false
+    if (!hand.forceHideContents) {
+        // show or hide hand
+        if (clicked) {
+            if (hand.owner == global.TURN) {
+                clicked = false;
+                if (hand.showContents == false) {
+                    hand.showContents = true;
+                    graveyard.showContents = false;
+                } else {
+                    hand.showContents = false
+                }
+            }
         }
     }
 }
+
 
 if (glowing) {
     calculate_glowAlpha();

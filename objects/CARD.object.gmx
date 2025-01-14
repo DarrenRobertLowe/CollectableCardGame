@@ -99,9 +99,6 @@ event_inherited();
 glowing = false;
 
 
-
-
-
 if (displayed == false) {
     visible = false;
 } else visible = true;
@@ -117,7 +114,6 @@ if (mouseOver()) {
     isMouseOver = false;
 }
 
-
 // check if can't be played so we can darken the card
 canUse = canPlayCard();
 
@@ -128,7 +124,7 @@ switch (position) {
         break;
     
     case "drawing":
-        //displayed = true;
+        displayed = true;
         fullyDrawn = false;
         faceUp = false;
         visible = true;
@@ -149,12 +145,16 @@ switch (position) {
         if (global.GAME_PHASE == "main") or (global.GAME_PHASE == "aftermath")
             then canUse = true;
         scale = global.card_hand_scale;
-        if (owner.hand.forceHideContents) {
+        if (owner.hand.forceHideContents)
+        or (owner == global.enemy) {
             displayed = false;
         }
         
+        if (owner == global.enemy) {
+            owner.hand.showContents = false;
+        }
+        
         if (global.currentCard != id) {
-            y = owner.hand.handY;
             targetY = owner.hand.handY;
         } else targetY = owner.hand.handY;
         break;

@@ -99,7 +99,7 @@ showEnemyGraveyardX = enemyProfileX - 3;
 showEnemyGraveyardY = enemyProfileY + 90;
 instance_create(showEnemyGraveyardX, showEnemyGraveyardY, button_showEnemyGraveyard);
 
-// mana count
+// resource count
 var manaWidth  = sprite_get_width(spr_mana);
 var manaMargin = 4;
 var separation = (manaWidth + 4);
@@ -125,7 +125,7 @@ mana2CountX = mana2X + (manaWidth * 0.5);
 mana1CountX = mana1X + (manaWidth * 0.5);
 
 
-// enemy mana count
+// enemy resource count
 enemy_mana3X   = (enemyProfileX + (manaWidth + separation));
 enemy_mana2X   = enemy_mana3X - separation;
 enemy_mana1X   = enemy_mana2X - separation;
