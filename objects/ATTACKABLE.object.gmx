@@ -29,7 +29,7 @@
 
 if (clicked) {
     if (global.choosingAttackTarget) {
-        combat_selectAsAttackTarget();
+        combat_trySelectAsAttackTarget();
     }
 }
 </string>

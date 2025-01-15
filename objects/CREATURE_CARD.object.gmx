@@ -52,7 +52,7 @@ attackedThisTurn = false;
 canAttack = true;   // e.g. walls can't attack
 canDefend = true;   // e.g. assassins can't defend
 canMoveLane = false;
-
+slot = noone;
 
 // CARD ELEMENT POSITIONS
 // position attack/defence
@@ -196,7 +196,7 @@ if (waitTime &gt; 0) {
                 if (!global.choosingAttackTarget) {
                     combat_trySelectAsAttacker();
                 } else {
-                    combat_selectAsAttackTarget();
+                    combat_trySelectAsAttackTarget();
                 }
             }
             

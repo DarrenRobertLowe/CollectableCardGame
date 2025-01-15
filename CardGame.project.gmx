@@ -258,7 +258,7 @@
     <script>scripts\allowCancelCombatTarget.gml</script>
     <script>scripts\allowCancelSelectSummonSlot.gml</script>
     <script>scripts\combat_initiateAttackTarget.gml</script>
-    <script>scripts\combat_selectAsAttackTarget.gml</script>
+    <script>scripts\combat_trySelectAsAttackTarget.gml</script>
     <script>scripts\combat_trySelectAsAttacker.gml</script>
     <script>scripts\glowCardSlots.gml</script>
     <script>scripts\allowSelectAsEffectTarget.gml</script>
