@@ -29,6 +29,7 @@
 
 // setup speed
 global.DEBUG = true;
+
 randomize();
 
 // setup view
@@ -55,6 +56,7 @@ global.PARTICLE_SYSTEM = part_system_create();
 part_system_depth(global.PARTICLE_SYSTEM, global.cardFX_depth); // this doesn't seem to work
 
 // start game
+if (global.DEBUG == true) {instance_create(0,0,TESTER);}
 instance_create(0, 0, CONTROLS);
 instance_create(0, 0, DUEL_CONTROLLER);
 

@@ -5,7 +5,7 @@ var amount   = argument2;
 
 // ESCAPE CONDITIONS
 if (amount >= 0) {
-    show_debug_message(string(attacker) +" is damaging "+ string(target) +" for "+ string(amount));
+    show_debug_message(object_get_name(attacker.object_index) +  "(" + string(attacker) +") is damaging " + object_get_name(target.object_index) + "(" + string(target) +") for "+ string(amount));
 } else {
     show_debug_message(string(attacker) +" is healing "+ string(target) +" for "+ string(amount));
 }

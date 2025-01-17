@@ -4,7 +4,7 @@
 // for now, we'll just make the most basic logic.
 
 
-// AI_playManaCard
+// March creatures forward
 if !(AI_finishedMarchingCreatures) {
     if !(AI_paused()) {
         show_debug_message("*************** march creatures forward ***************");
@@ -12,17 +12,13 @@ if !(AI_finishedMarchingCreatures) {
     }
 }
 
-
-
-
-// AI_playManaCard
+// Play mana card
 if !(AI_finishedResourceCardPlaying) {
     if !(AI_paused()) {
         show_debug_message("*************** play resource cards ***************");
         AI_playResourceCards();
     }
 }
-
 
 // destruction spells
 if  (AI_finishedResourceCardPlaying)
@@ -39,6 +35,14 @@ and !(AI_finishedSummoning) {
     if !(AI_paused()) {
         show_debug_message("*************** summon monsters ***************");
         AI_playCreatureCard();
+    }
+}
+
+// Enchant creatures
+if (AI_finishedSummoning) {
+    if !(AI_paused()) {
+        show_debug_message("*************** enchant creatures ***************");
+        AI_playEnchantments();
     }
 }
 

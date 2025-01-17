@@ -25,29 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// TEST CREATURE - FOR TESTING ONLY!
 event_inherited();
-
-name        = "Ankylo";
-class       = "Beast";
-image       = art_ankylo;
-creatureResourceCost = 3;
-
-description = "All HP damage to Ankylo from melee is halved (round down).";
-
-baseAttack  = 2;
-baseDefence = 3;
-baseHp      = 2;
-attack      = baseAttack;
-defence     = baseDefence;
-hp          = baseHp;
-
-// lists
-ds_list_add(abilities, "Ironskin"); //Ironskin - Melee damage to this creature is halved (rounded down). 
-
-alarm[0] = 1;
-
-
+scale = 1;
 </string>
           </argument>
         </arguments>

@@ -83,6 +83,10 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Debug">
+      <scripts name="TESTING">
+        <script>scripts\assertEquals.gml</script>
+        <script>scripts\test_CastDamageSpell.gml</script>
+      </scripts>
       <script>scripts\log.gml</script>
       <script>scripts\debug.gml</script>
     </scripts>
@@ -270,6 +274,7 @@
     <script>scripts\triggerAbilitiesOnDamage.gml</script>
     <script>scripts\autoShowHideHand.gml</script>
     <script>scripts\movement_waveX.gml</script>
+    <script>scripts\AI_playEnchantments.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -298,14 +303,14 @@
     <object>objects\GUI</object>
     <object>objects\CONTROLS</object>
     <object>objects\DUEL_CONTROLLER</object>
+    <object>objects\PLAYER</object>
+    <object>objects\ENEMY</object>
     <object>objects\PLAYER_HAND</object>
     <object>objects\ENEMY_HAND</object>
     <object>objects\PLAYER_GRAVE</object>
     <object>objects\ENEMY_GRAVE</object>
     <object>objects\DECK</object>
     <object>objects\CARDSLOT</object>
-    <object>objects\ENEMY</object>
-    <object>objects\PLAYER</object>
     <object>objects\PHASE_CONTROLLER</object>
     <objects name="GUI Buttons">
       <object>objects\GUI_BUTTON</object>
@@ -386,6 +391,14 @@
     <object>objects\BACK_SLOT</object>
     <object>objects\SlotArrow</object>
     <object>objects\EVENT_LISTENER</object>
+    <objects name="TESTING">
+      <object>objects\TESTER</object>
+      <object>objects\Test_Player</object>
+      <object>objects\Test_Opponent</object>
+      <object>objects\Test_Creature</object>
+      <object>objects\Test_DamageSpell</object>
+      <object>objects\Test_HealingSpell</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

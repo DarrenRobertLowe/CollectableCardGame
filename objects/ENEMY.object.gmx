@@ -32,6 +32,7 @@ image_index = 1;    // avatar for deck
 
 reset_AI_actions();
 
+
 ds_list_add(cards, create_card(cc_VampireBat, id));
 ds_list_add(cards, create_card(cc_VampireBat, id));
 ds_list_add(cards, create_card(cc_VampireBat, id));
@@ -44,6 +45,10 @@ ds_list_add(cards, create_card(spell_Bolt, id));
 ds_list_add(cards, create_card(spell_Bolt, id));
 ds_list_add(cards, create_card(spell_Bolt, id));
 ds_list_add(cards, create_card(spell_Bolt, id));
+ds_list_add(cards, create_card(spell_Heal, id));
+ds_list_add(cards, create_card(spell_Heal, id));
+ds_list_add(cards, create_card(spell_Heal, id));
+ds_list_add(cards, create_card(spell_Heal, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
 ds_list_add(cards, create_card(enchant_Vigor, id));
@@ -56,6 +61,10 @@ ds_list_add(cards, create_card(resource_Ether, id));
 ds_list_add(cards, create_card(resource_Ether, id));
 ds_list_add(cards, create_card(resource_Ether, id));
 ds_list_add(cards, create_card(resource_Ether, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
+ds_list_add(cards, create_card(resource_Catalyst, id));
 ds_list_add(cards, create_card(resource_Catalyst, id));
 ds_list_add(cards, create_card(resource_Catalyst, id));
 ds_list_add(cards, create_card(resource_Catalyst, id));
@@ -131,13 +140,15 @@ or (global.WAIT &gt; 0){
             AI_main_phase()
         }
         
-        
+
         if (global.GAME_PHASE == "combat") {
             AI_combat_phase();
         }
+        
         if (global.GAME_PHASE == "aftermath") {
             AI_main_phase()
         }
+        
         if (global.GAME_PHASE == "endturn") {
             nextPhase();
             exit;

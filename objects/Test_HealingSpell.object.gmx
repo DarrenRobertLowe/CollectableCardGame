@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CREATURE_CARD</parentName>
+  <parentName>N_DAMAGE_SPELL</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,28 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// TEST HEALING SPELL - FOR TESTING ONLY!
+
 event_inherited();
 
-name        = "Ankylo";
-class       = "Beast";
-image       = art_ankylo;
-creatureResourceCost = 3;
+name        = "Test_HealingSpell";
+image       = art_heal;
+spellResourceCost = 1;
+description = "Target creature or player gains 3 health.";
+ds_list_add(validTargets, "player", "any creature on board");
+attack      = -3;
 
-description = "All HP damage to Ankylo from melee is halved (round down).";
-
-baseAttack  = 2;
-baseDefence = 3;
-baseHp      = 2;
-attack      = baseAttack;
-defence     = baseDefence;
-hp          = baseHp;
-
-// lists
-ds_list_add(abilities, "Ironskin"); //Ironskin - Melee damage to this creature is halved (rounded down). 
-
-alarm[0] = 1;
-
+// fx
+target      = noone;
+castFX      = fx_healing;
 
 </string>
           </argument>

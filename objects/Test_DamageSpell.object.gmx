@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>CREATURE_CARD</parentName>
+  <parentName>N_DAMAGE_SPELL</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,29 +25,44 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// CLASS VARS
+            <string>/// TEST DAMAGE SPELL - FOR TESTING ONLY!
+
 event_inherited();
 
-name        = "Ankylo";
-class       = "Beast";
-image       = art_ankylo;
-creatureResourceCost = 3;
+name        = "Test_DamageSpell";
+image       = art_bolt;
+spellResourceCost = 2;
+description = "Deal 2 damage to target creature or player.";
+ds_list_add(validTargets, "contestant", "any creature on board");
+attack      = 2;
+castFX      = fx_lightning;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// OVERRIDES CAST EVENT - DO NOT INHERIT!
 
-description = "All HP damage to Ankylo from melee is halved (round down).";
-
-baseAttack  = 2;
-baseDefence = 3;
-baseHp      = 2;
-attack      = baseAttack;
-defence     = baseDefence;
-hp          = baseHp;
-
-// lists
-ds_list_add(abilities, "Ironskin"); //Ironskin - Melee damage to this creature is halved (rounded down). 
-
-alarm[0] = 1;
-
-
+damage(id, target, attack);
+payCastingCost();
+sendToGraveyard(owner.graveyard, id);
 </string>
           </argument>
         </arguments>
