@@ -1,4 +1,4 @@
-/// assertEquals(expected, actual);
+/// assertEquals(expected, actual, caller);
 var expected   = argument0;
 var actual     = argument1;
 var caller     = argument2;

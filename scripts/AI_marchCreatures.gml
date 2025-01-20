@@ -1,8 +1,7 @@
 ///AI_playResourceCards();
 
 // move creatures forward
-var creatures = ds_list_create();
-creatures = getCreatures(id);
+var creatures = getCreatures(id);
 var count = ds_list_size(creatures);
 
 if (count > 0) {
@@ -19,5 +18,9 @@ if (count > 0) {
     }
 }
 
+
 // clean up
-ds_list_destroy(creatures);
+AI_finishedMarchingCreatures = true;
+if (ds_exists(creatures, ds_type_list)) {
+    ds_list_destroy(creatures);
+}

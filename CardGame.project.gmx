@@ -107,6 +107,7 @@
       <scripts name="Datastructures">
         <script>scripts\ds_set_add.gml</script>
         <script>scripts\ds_list_remove.gml</script>
+        <script>scripts\priorityQueueToList.gml</script>
       </scripts>
       <scripts name="Calculations">
         <script>scripts\countFriendlyCreatures.gml</script>
@@ -166,6 +167,7 @@
       <script>scripts\AI_playResourceCards.gml</script>
       <script>scripts\AI_playCreatureCard.gml</script>
       <script>scripts\AI_playDestructionSpells.gml</script>
+      <script>scripts\AI_playEnchantments.gml</script>
       <script>scripts\AI_playAnySpells.gml</script>
       <script>scripts\getDamageSpellsByStrongestCastable.gml</script>
       <script>scripts\getHealingSpellsByStrongestCastable.gml</script>
@@ -274,7 +276,7 @@
     <script>scripts\triggerAbilitiesOnDamage.gml</script>
     <script>scripts\autoShowHideHand.gml</script>
     <script>scripts\movement_waveX.gml</script>
-    <script>scripts\AI_playEnchantments.gml</script>
+    <script>scripts\getTotalCastingCost.gml</script>
   </scripts>
   <fonts name="fonts">
     <fonts name="Card Fonts">
@@ -298,6 +300,14 @@
       <object>objects\HAND</object>
       <object>objects\GRAVE</object>
       <object>objects\BOARD_CONTROLLER</object>
+    </objects>
+    <objects name="TESTING">
+      <object>objects\TESTER</object>
+      <object>objects\Test_Player</object>
+      <object>objects\Test_Opponent</object>
+      <object>objects\Test_Creature</object>
+      <object>objects\Test_DamageSpell</object>
+      <object>objects\Test_HealingSpell</object>
     </objects>
     <object>objects\MASTER</object>
     <object>objects\GUI</object>
@@ -391,14 +401,6 @@
     <object>objects\BACK_SLOT</object>
     <object>objects\SlotArrow</object>
     <object>objects\EVENT_LISTENER</object>
-    <objects name="TESTING">
-      <object>objects\TESTER</object>
-      <object>objects\Test_Player</object>
-      <object>objects\Test_Opponent</object>
-      <object>objects\Test_Creature</object>
-      <object>objects\Test_DamageSpell</object>
-      <object>objects\Test_HealingSpell</object>
-    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

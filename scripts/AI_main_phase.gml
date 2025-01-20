@@ -3,7 +3,6 @@
 // here we can run the logic per enemy type
 // for now, we'll just make the most basic logic.
 
-
 // March creatures forward
 if !(AI_finishedMarchingCreatures) {
     if !(AI_paused()) {
@@ -39,28 +38,18 @@ and !(AI_finishedSummoning) {
 }
 
 // Enchant creatures
-if (AI_finishedSummoning) {
+if  (AI_finishedSummoning)
+and !(AI_finishedEnchanting) {
     if !(AI_paused()) {
         show_debug_message("*************** enchant creatures ***************");
         AI_playEnchantments();
     }
 }
 
-// enchantments and other monster buffs
-if  (AI_finishedDestructionSpellCasting)
-and (AI_finishedSummoning) 
-and !(AI_finishedEnchantmentCasting) {
-    if !(AI_paused()) {
-//      show_debug_message("*************** play enchantments and buffs ***************");
-//      AI_playEnchantments();
-        AI_finishedEnchantmentCasting = true; // remove when we actually have enchantment AI being worked on
-    }
-}
-
 // move to combat phase
 if  (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
-and (AI_finishedEnchantmentCasting)
+and (AI_finishedEnchanting)
 and (global.GAME_PHASE == "main") {
     nextPhase();
 }
@@ -69,9 +58,10 @@ and (global.GAME_PHASE == "main") {
 // other spells
 if  (AI_finishedSummoning)
 and (AI_finishedDestructionSpellCasting)
-and (AI_finishedEnchantmentCasting)
+and (AI_finishedEnchanting)
 and !(AI_finishedAnySpellCasting)
 and (global.GAME_PHASE == "aftermath") {
+    listedCreatures = false; // clean up after combat
     if !(AI_paused()) {
         show_debug_message("*************** play remaining spells ***************");
         AI_playAnySpells();
@@ -80,7 +70,7 @@ and (global.GAME_PHASE == "aftermath") {
 
 if  (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
-and (AI_finishedEnchantmentCasting)
+and (AI_finishedEnchanting)
 and (AI_finishedSummoning)
 and (AI_finishedAnySpellCasting)
 and (global.GAME_PHASE == "aftermath") {

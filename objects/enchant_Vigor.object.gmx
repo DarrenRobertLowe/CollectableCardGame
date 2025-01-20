@@ -56,7 +56,7 @@ ds_list_add(validTargets, "any creature on board");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// remove effect
+            <string>/// remove effect (e.g. when destroyed)
 event_inherited();
 
 if (exists(target)) {
@@ -85,7 +85,7 @@ if (exists(target)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// apply effect
+            <string>/// apply effect (e.g. every turn)
 if (exists(target)) {
     target.attack += buffQuantity;
     updateStats(target);
@@ -113,9 +113,10 @@ if (exists(target)) {
           <argument>
             <kind>1</kind>
             <string>/// CAST THE SPELL
-show_debug_message("Casting: " + object_get_name(object_index));
 event_inherited();
-spawn_CastFX(target);   // gfx
+
+show_debug_message("Casting: " + name + " on " + string(target));
+spawn_CastFX(target); // gfx
 
 enchant(target, id);
 removeFromHand(id);

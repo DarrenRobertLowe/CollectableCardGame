@@ -33,5 +33,6 @@ instance_destroy(mock_opponent, true);
 instance_destroy(mock_creature, true);
 instance_destroy(mock_spell, true);
 
+
 // return result
 return testPassed;

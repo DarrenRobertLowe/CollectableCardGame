@@ -60,11 +60,17 @@ if (global.GAME_PHASE == "main") {
         global.GAME_PHASE = "combat";
         setMarqueeText(combatPhaseText);
         waitTime = room_speed;
+        
+        // clean up
+        if (ds_exists(cardsOnBoard, ds_type_list)) { ds_list_destroy(cardsOnBoard);}
         exit;
     } else {
         global.GAME_PHASE = "aftermath";
         setMarqueeText(aftermathPhaseText);
         waitTime = room_speed;
+        
+        // clean up
+        if (ds_exists(cardsOnBoard, ds_type_list)) { ds_list_destroy(cardsOnBoard);}
         exit;
     }
 }

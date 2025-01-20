@@ -329,8 +329,14 @@ global.currentCard = noone;
 global.target = noone;
 
 // end the phase if no other creatures on the battlefield can attack
-if(!anyCreaturesCanAttack(getCreatures(owner))) {
+var creatures = getCreatures(owner);
+if(!anyCreaturesCanAttack(creatures)) {
     nextPhase();
+}
+
+// clean up
+if (ds_exists(creatures, ds_type_list)) {
+    ds_list_destroy(creatures);
 }
 </string>
           </argument>

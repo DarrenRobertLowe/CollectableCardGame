@@ -64,6 +64,12 @@ if (AI_finishedDestructionSpellCasting == false) {
                 // to calculate the max damage output, which we'll want anyway.
             }
         }
+        
+        
+        // clean up
+        if (ds_exists(opponentCreatures, ds_type_list)) {
+            ds_list_destroy(opponentCreatures);
+        }
     }
     
     

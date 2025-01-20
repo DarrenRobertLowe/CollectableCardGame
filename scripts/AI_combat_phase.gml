@@ -3,7 +3,7 @@
 show_debug_message("******* COMBAT *******");
 
 
-// get all our creatures that can attack and the opponent's defenders
+// get all our creatures that can attack
 if (listedCreatures == false) {
     with (CARDSLOT) {
         if (card != noone) {
@@ -23,50 +23,52 @@ if (listedCreatures == false) {
 }
 
 
-// can we attack?
+// Try to attack
+global.target = noone;
 if (ds_list_size(ourCreatures) > 0) {
-    show_debug_message("AI: We have creatures.");
-    var creature = ds_list_find_value(ourCreatures, ds_list_size(ourCreatures) - 1);
-    ds_list_delete(ourCreatures, ds_list_size(ourCreatures) - 1);
+    var lastIndex   = (ds_list_size(ourCreatures) - 1);
+    var ourCreature = ds_list_find_value(ourCreatures, lastIndex);
+    ds_list_delete(ourCreatures, lastIndex);
     
-    // can we attack directly?
     if (ds_list_size(theirCreatures) == 0) {
-        show_debug_message("Attacking opponent directly");
+        // attack the oppenent directly
+        show_debug_message("They have no creatures! Muahahah!");
         global.target = opponent;
-        waitTime = room_speed;
-        with(creature) {
-            event_user(1); // setup and perform the attack
-        }
     } else {
-        attacked = false;
-        while(attacked == false) {
-            // attack their creatures
-            if (ds_list_size(theirCreatures) > 0) {
-                var targetCreature = ds_list_find_value(theirCreatures, 0);
-                
-                if  (exists(targetCreature)) 
-                and (targetCreature.position == "board") { // cards can be sent to graveyard during battle
-                    global.target = targetCreature;
-                    waitTime = room_speed;
-                    attacked = true;
-                    
-                    with(creature) {
-                        event_user(1); // setup and perform the attack
-                    }
-                } else {
-                    // remove creatures that are no longer on the board
-                    ds_list_delete(theirCreatures, 0);
-                }
+        for (var i=ds_list_size(theirCreatures); i>0; i--) {
+            // Try to attack their creatures
+            show_debug_message("Insolant fools are standing in our way!");
+            var targetCreature  = ds_list_find_value(theirCreatures, 0);
+            var targetSlot      = targetCreature.slot;
+            var frontSlot       = targetSlot.alternativeSlot;
+            
+            if (!exists(targetCreature)) 
+            or (!targetCreature.position == "board") {                          // because cards can be sent to graveyard during battle
+                //ds_list_delete(theirCreatures, 0);
+                continue;
             } else {
-                attacked = true;
                 
-                show_debug_message("Attacking opponent directly");
-                global.target = opponent;
-                waitTime = room_speed;
-                with(creature) {
-                    event_user(1); // setup and perform the attack
+                if (targetSlot.object_index == FRONT_SLOT) {
+                    global.target = targetCreature;
+                    break;
+                } else {
+                    if (frontSlot.card != noone) {      
+                        //ds_list_delete(theirCreatures, 0);                      // remove creatures which can't be reached
+                        continue;
+                    } else {
+                        global.target = targetCreature;
+                    }
                 }
             }
+        }
+    }
+    
+    // successfully found a valid target?
+    if (global.target != noone) {
+        attacked = true;
+        waitTime = room_speed;                                          // add a delay between attacks
+        with(ourCreature) {
+            event_user(1);                                              // perform the attack
         }
     }
 } else {

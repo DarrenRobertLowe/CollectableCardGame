@@ -61,9 +61,9 @@ if (global.DEBUG) {
     
     // result
     if (allTestsPassed) {
-        show_debug_message("All tests passed!");
+        show_debug_message("****************** All tests passed! ******************");
     } else {
-        show_debug_message("Some tests FAILED! See above for details.");
+        show_debug_message("****************** Some tests FAILED! See above for details. ******************");
     }
 }
 </string>
