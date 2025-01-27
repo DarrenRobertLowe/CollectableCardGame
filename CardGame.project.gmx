@@ -168,13 +168,13 @@
       <script>scripts\AI_playCreatureCard.gml</script>
       <script>scripts\AI_playDestructionSpells.gml</script>
       <script>scripts\AI_playEnchantments.gml</script>
-      <script>scripts\AI_playAnySpells.gml</script>
       <script>scripts\getDamageSpellsByStrongestCastable.gml</script>
       <script>scripts\getHealingSpellsByStrongestCastable.gml</script>
       <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
       <script>scripts\getMaxDamageOutput_spells.gml</script>
       <script>scripts\AI_marchCreatures.gml</script>
+      <script>scripts\creatureCanMoveLane.gml</script>
     </scripts>
     <scripts name="Game Loop">
       <script>scripts\draw_card.gml</script>

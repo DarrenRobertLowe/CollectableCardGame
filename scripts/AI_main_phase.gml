@@ -12,7 +12,8 @@ if !(AI_finishedMarchingCreatures) {
 }
 
 // Play mana card
-if !(AI_finishedResourceCardPlaying) {
+if (AI_finishedMarchingCreatures)
+and !(AI_finishedResourceCardPlaying) {
     if !(AI_paused()) {
         show_debug_message("*************** play resource cards ***************");
         AI_playResourceCards();
@@ -20,7 +21,8 @@ if !(AI_finishedResourceCardPlaying) {
 }
 
 // destruction spells
-if  (AI_finishedResourceCardPlaying)
+if  (AI_finishedMarchingCreatures)
+and (AI_finishedResourceCardPlaying)
 and !(AI_finishedDestructionSpellCasting) {
     if !(AI_paused()) {
         show_debug_message("*************** cast desctruction spells ***************");
@@ -29,7 +31,9 @@ and !(AI_finishedDestructionSpellCasting) {
 }
 
 // summon monsters
-if  (AI_finishedDestructionSpellCasting)
+if  (AI_finishedMarchingCreatures)
+and (AI_finishedResourceCardPlaying)
+and (AI_finishedDestructionSpellCasting)
 and !(AI_finishedSummoning) {
     if !(AI_paused()) {
         show_debug_message("*************** summon monsters ***************");
@@ -38,7 +42,10 @@ and !(AI_finishedSummoning) {
 }
 
 // Enchant creatures
-if  (AI_finishedSummoning)
+if  (AI_finishedMarchingCreatures)
+and (AI_finishedResourceCardPlaying)
+and (AI_finishedDestructionSpellCasting)
+and (AI_finishedSummoning)
 and !(AI_finishedEnchanting) {
     if !(AI_paused()) {
         show_debug_message("*************** enchant creatures ***************");
@@ -47,7 +54,9 @@ and !(AI_finishedEnchanting) {
 }
 
 // move to combat phase
-if  (AI_finishedDestructionSpellCasting)
+if  (AI_finishedMarchingCreatures)
+and (AI_finishedResourceCardPlaying)
+and (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
 and (AI_finishedEnchanting)
 and (global.GAME_PHASE == "main") {
@@ -55,26 +64,16 @@ and (global.GAME_PHASE == "main") {
 }
 
 
-// other spells
-if  (AI_finishedSummoning)
+// end turn
+if (global.GAME_PHASE == "aftermath")
+and (AI_finishedMarchingCreatures)
+and (AI_finishedResourceCardPlaying)
 and (AI_finishedDestructionSpellCasting)
-and (AI_finishedEnchanting)
-and !(AI_finishedAnySpellCasting)
-and (global.GAME_PHASE == "aftermath") {
-    listedCreatures = false; // clean up after combat
-    if !(AI_paused()) {
-        show_debug_message("*************** play remaining spells ***************");
-        AI_playAnySpells();
-    }
-}
-
-if  (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
-and (AI_finishedEnchanting)
-and (AI_finishedSummoning)
-and (AI_finishedAnySpellCasting)
-and (global.GAME_PHASE == "aftermath") {
+and (AI_finishedEnchanting) {
     if !(AI_paused()) {
+        ds_list_clear(ourCreatures);
+        ds_list_clear(theirCreatures);
         show_debug_message("*************** finished turn ***************");
         nextPhase();
         exit;

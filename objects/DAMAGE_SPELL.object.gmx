@@ -67,7 +67,8 @@ if (choosingTarget) {
     var ptarget = noone;
     
     if (global.target != noone) {
-        if (object_is_ancestor(global.target.object_index, CONTESTANT)) 
+        if (object_is_ancestor(global.target.object_index, CONTESTANT))
+        or (global.target.object_index == DECK)
         or (object_is_ancestor(global.target.object_index, CREATURE_CARD)) {
             ptarget = global.target;
         }

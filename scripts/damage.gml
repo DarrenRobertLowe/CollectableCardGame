@@ -32,6 +32,8 @@ if (attacker != noone) {
 
 create_DamageCounter(target, amount);
 
+
+// update stats if Creature Card.
 if (object_is_ancestor(target.object_index, CREATURE_CARD)) {
     updateStats(target);
     

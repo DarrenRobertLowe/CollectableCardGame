@@ -19,7 +19,7 @@ if (global.GAME_PHASE == "start") {
 }
 
 
-if !ds_list_empty(global.NEXT_PHASE_BLOCKERS) {
+if (!ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
     var reason = ds_list_find_value(global.NEXT_PHASE_BLOCKERS, 0);
     show_debug_message("Cannot move to next phase! reason: " +string(reason));
     waitTime = room_speed;
@@ -43,6 +43,7 @@ if (global.GAME_PHASE == "draw") {
     exit;
 }
 
+
 if (global.GAME_PHASE == "payment") {
     global.GAME_PHASE = "main";
     startMainPhase();
@@ -56,32 +57,33 @@ if (global.GAME_PHASE == "main") {
     var contestant   = global.TURN;
     var cardsOnBoard = getCreatures(contestant);
     
+    // change phase depending on board state
     if (anyCreaturesCanAttack(cardsOnBoard)) {
         global.GAME_PHASE = "combat";
         setMarqueeText(combatPhaseText);
-        waitTime = room_speed;
-        
-        // clean up
-        if (ds_exists(cardsOnBoard, ds_type_list)) { ds_list_destroy(cardsOnBoard);}
-        exit;
     } else {
         global.GAME_PHASE = "aftermath";
         setMarqueeText(aftermathPhaseText);
-        waitTime = room_speed;
-        
-        // clean up
-        if (ds_exists(cardsOnBoard, ds_type_list)) { ds_list_destroy(cardsOnBoard);}
-        exit;
     }
+       
+    // finish up
+    if (ds_exists(cardsOnBoard, ds_type_list)) { ds_list_destroy(cardsOnBoard); }
+    waitTime = room_speed;
+    exit;
 }
+
 
 if (global.GAME_PHASE == "combat") {
     reset_AI_actions();
+    listedCreatures = false; // clean up after combat
     global.GAME_PHASE = "aftermath";
+    show_debug_message("***** END COMBAT *****");
+    show_debug_message("***** START AFTERMATH *****");
     setMarqueeText(aftermathPhaseText);
     waitTime = room_speed;
     exit;
 }
+
 
 if (global.GAME_PHASE == "aftermath") {
     waitTime = room_speed;
@@ -89,9 +91,10 @@ if (global.GAME_PHASE == "aftermath") {
     setMarqueeText(endTurnPhaseText);
 }
 
+
 if (global.GAME_PHASE == "endturn") {
     with (CREATURE_CARD) {
-        alarm[0] = 1; // recalculate stats
+        alarm[0] = 1;   // recalculate stats
         
         if (global.TURN == owner) {
             attackedThisTurn = false;

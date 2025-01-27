@@ -32,7 +32,7 @@ name        = "Heal";
 image       = art_heal;
 spellResourceCost = 1;
 description = "Target creature or player gains 3 health.";
-ds_list_add(validTargets, "player", "any creature on board");
+ds_list_add(validTargets, "self", "any creature on board");
 attack      = -3;
 
 // fx

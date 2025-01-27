@@ -107,6 +107,9 @@ if (clicked) {
             draw_card(owner.hand, id);
             nextPhase();
         }
+    } else {
+        global.target = owner;
+        show_debug_message("DECK says: returned owner as target");
     }
 }
 

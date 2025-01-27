@@ -58,7 +58,6 @@ damage(id, target, attack);
 payCastingCost();
 sendToGraveyard(owner.graveyard, id);
 stopTargeting();
-
 </string>
           </argument>
         </arguments>

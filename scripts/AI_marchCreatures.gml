@@ -9,9 +9,8 @@ if (count > 0) {
         var creature = ds_list_find_value(creatures, i);
         if (creature.slot.object_index == BACK_SLOT) {
             if (creature.preferredSlot == FRONT_SLOT) {
-                if (creature.canMoveLane) {
+                if (creatureCanMoveLane(creature)) {
                     marchCreatureForward(creature);
-                    waitTime = room_speed;
                 }
             }
         }

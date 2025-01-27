@@ -52,6 +52,7 @@ attackedThisTurn = false;
 canAttack = true;   // e.g. walls can't attack
 canDefend = true;   // e.g. assassins can't defend
 canMoveLane = false;
+movedLane   = false;
 slot = noone;
 
 // CARD ELEMENT POSITIONS

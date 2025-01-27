@@ -1,4 +1,4 @@
-///isValidTarget(card)
+///isValidTarget(card/contestant)
 var target = argument0;
 
 if !(exists(global.currentCard)) { 
@@ -14,14 +14,22 @@ for(var i=0; i<size; i++) {
     var value = ds_list_find_value(validTargets, i);
     switch(value) {
         case "contestant":
-            if (isContestant(target))
+            if (isContestant(target)) {
               return true;
+            }
+        break;
+        
+        case "self":
+            if (target == global.TURN)
+            or (target == global.TURN.deck) {
+              return true;
+            }
         break;
         
         case "any creature on board":
             if ((isCreature(target)) and (target.position == "board")) {
                 return true;
-              }
+            }
         break;
         
         case "allied creature on board":

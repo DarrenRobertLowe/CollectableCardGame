@@ -39,23 +39,28 @@ if (ds_list_size(ourCreatures) > 0) {
             // Try to attack their creatures
             show_debug_message("Insolant fools are standing in our way!");
             var targetCreature  = ds_list_find_value(theirCreatures, 0);
+            show_debug_message(" Looking at " + targetCreature.name + " (" + string(targetCreature) + ")");
             var targetSlot      = targetCreature.slot;
             var frontSlot       = targetSlot.alternativeSlot;
             
-            if (!exists(targetCreature)) 
-            or (!targetCreature.position == "board") {                          // because cards can be sent to graveyard during battle
+            if !(exists(targetCreature)) 
+            or (targetCreature.position != "board") {                          // because cards can be sent to graveyard during battle
                 //ds_list_delete(theirCreatures, 0);
+                show_debug_message("Either targetCreature != exist() or targetCreature.position != board");
                 continue;
             } else {
-                
                 if (targetSlot.object_index == FRONT_SLOT) {
+                    show_debug_message("Target is in front lane! We'll attack this target!");
                     global.target = targetCreature;
                     break;
                 } else {
-                    if (frontSlot.card != noone) {      
+                    show_debug_message("target is in the back lane.");
+                    if (frontSlot.card != noone) {
+                        show_debug_message("Front lane is not empty, we'll ignore this target...");
                         //ds_list_delete(theirCreatures, 0);                      // remove creatures which can't be reached
                         continue;
                     } else {
+                        show_debug_message("Front lane is empty, we'll attack this target!");
                         global.target = targetCreature;
                     }
                 }

@@ -41,10 +41,12 @@ ds_list_add(cards, create_card(cc_Ankylo, id));
 ds_list_add(cards, create_card(cc_Ankylo, id));
 ds_list_add(cards, create_card(cc_Ankylo, id));
 ds_list_add(cards, create_card(cc_Ankylo, id));
+/*
 ds_list_add(cards, create_card(spell_Bolt, id));
 ds_list_add(cards, create_card(spell_Bolt, id));
 ds_list_add(cards, create_card(spell_Bolt, id));
 ds_list_add(cards, create_card(spell_Bolt, id));
+*/
 ds_list_add(cards, create_card(spell_Heal, id));
 ds_list_add(cards, create_card(spell_Heal, id));
 ds_list_add(cards, create_card(spell_Heal, id));
@@ -110,10 +112,10 @@ deck.alarm[0] = 1;  // shuffles the deck and creates the play stack
             <kind>1</kind>
             <string>/// ENEMY AI
 if (waitTime &gt; 0)
-or (global.WAIT &gt; 0){
+or (global.WAIT &gt; 0) {
     if (global.WAIT &gt; waitTime)
       then waitTime = global.WAIT;
-      
+    
     waitTime--;
 } else {
     if (global.TURN == id) {
@@ -142,6 +144,7 @@ or (global.WAIT &gt; 0){
         
 
         if (global.GAME_PHASE == "combat") {
+            show_debug_message("TIME: " +string(current_time));
             AI_combat_phase();
         }
         
