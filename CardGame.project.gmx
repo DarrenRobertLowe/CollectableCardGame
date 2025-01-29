@@ -162,6 +162,7 @@
       <script>scripts\AI_wait.gml</script>
       <script>scripts\AI_paused.gml</script>
       <script>scripts\reset_AI_actions.gml</script>
+      <script>scripts\AI_marchCreatures.gml</script>
       <script>scripts\AI_main_phase.gml</script>
       <script>scripts\AI_combat_phase.gml</script>
       <script>scripts\AI_playResourceCards.gml</script>
@@ -173,7 +174,6 @@
       <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
       <script>scripts\getMaxDamageOutput_spells.gml</script>
-      <script>scripts\AI_marchCreatures.gml</script>
       <script>scripts\creatureCanMoveLane.gml</script>
     </scripts>
     <scripts name="Game Loop">

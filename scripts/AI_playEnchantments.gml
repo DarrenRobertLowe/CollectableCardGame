@@ -1,7 +1,8 @@
 ///AI_playEnchantments();
 
-if (AI_finishedEnchanting == false) {
+show_debug_message("*************** enchant creatures ***************");
 
+if (AI_finishedEnchanting == false) {
     // get the cards in the hand
     var cards = hand.contents;
     
@@ -10,7 +11,6 @@ if (AI_finishedEnchanting == false) {
         AI_finishedEnchanting = true;
         exit;
     }
-    
     
     
     // create a list of friendly creatures we can put an enchantment on.
@@ -33,7 +33,6 @@ if (AI_finishedEnchanting == false) {
     }
     
     
-    
     // get a list of enchantments in an ordered queue
     var AI_enchantmentQueue = ds_priority_create();
     
@@ -44,6 +43,7 @@ if (AI_finishedEnchanting == false) {
             ds_priority_add(AI_enchantmentQueue, card, getTotalCastingCost(card)); // assume the cost maps to it being a better enchantment, this could be informed by a queue instead
         }
     }
+    
     
     // ! escape now if no castable enchantments
     if (ds_priority_size(AI_enchantmentQueue) == 0) {
@@ -61,13 +61,17 @@ if (AI_finishedEnchanting == false) {
         ds_priority_destroy(AI_enchantmentQueue); // clean up
     }
     
+    
     // DEBUG
+    /*****************************************************************************/
     var size = ds_list_size(AI_enchantmentList);
     show_debug_message("ds_list_size(AI_enchantmentList) = " + string(size));
     for(var i=0; i<size; i++) {
         var enchantment = ds_list_find_value(AI_enchantmentList, i);
         show_debug_message(enchantment.name);
     }
+    /*****************************************************************************/
+    
     
     var target = ds_list_find_value(creatures, irandom(ds_list_size(creatures)-1));
     
@@ -88,6 +92,6 @@ if (AI_finishedEnchanting == false) {
     if (ds_exists(creatures, ds_type_list)) {
         ds_list_destroy(creatures);
     }
-
+    
     show_debug_message("FINISHED AI_playEnchantments()!");
 }

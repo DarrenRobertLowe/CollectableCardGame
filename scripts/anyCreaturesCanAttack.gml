@@ -10,5 +10,7 @@ for(var i=0; i<ds_list_size(creatures); i++) {
     
     if (creatureCanAttack(creature)) {
         return true;
+    } else {
+        show_debug_message("No creatures can attack.");
     }
 }

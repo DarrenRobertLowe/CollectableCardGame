@@ -47,20 +47,23 @@ and (AI_finishedResourceCardPlaying)
 and (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
 and !(AI_finishedEnchanting) {
-    if !(AI_paused()) {
-        show_debug_message("*************** enchant creatures ***************");
+    if !(AI_paused()) { 
         AI_playEnchantments();
     }
 }
 
 // move to combat phase
-if  (AI_finishedMarchingCreatures)
+if (global.GAME_PHASE == "main") 
+and (AI_finishedMarchingCreatures)
 and (AI_finishedResourceCardPlaying)
 and (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
-and (AI_finishedEnchanting)
-and (global.GAME_PHASE == "main") {
-    nextPhase();
+and (AI_finishedEnchanting) {
+    show_debug_message("AI_main_phase says: I AM MAIN PHASOR");
+    if !(AI_paused()) {
+        show_debug_message("_____I am calling nextPhase() now_____");
+        nextPhase();
+    }
 }
 
 

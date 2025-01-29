@@ -54,6 +54,7 @@ if (global.GAME_PHASE == "payment") {
 
 
 if (global.GAME_PHASE == "main") {
+    show_debug_message("************* LEAVING MAIN PHASE *************");
     var contestant   = global.TURN;
     var cardsOnBoard = getCreatures(contestant);
     

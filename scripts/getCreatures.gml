@@ -9,7 +9,7 @@ with (CARDSLOT) {
     if (owner == contestant) {
         if (card != noone) {
             if (card.type = CREATURE_CARD) {
-                show_debug_message("Found a creature");
+                show_debug_message("getCreautures(): Found a creature");
                 ds_list_add(creatureList, card);
             }
         }

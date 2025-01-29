@@ -6,3 +6,4 @@ AI_finishedSummoning = false;
 AI_finishedDestructionSpellCasting = false;
 AI_finishedEnchanting = false;
 AI_finishedCombat = false;
+listedCreatures = false;
