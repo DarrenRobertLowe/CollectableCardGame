@@ -76,7 +76,6 @@ if (global.GAME_PHASE == "main") {
 
 if (global.GAME_PHASE == "combat") {
     reset_AI_actions();
-    listedCreatures = false; // clean up after combat
     global.GAME_PHASE = "aftermath";
     show_debug_message("***** END COMBAT *****");
     show_debug_message("***** START AFTERMATH *****");

@@ -1,6 +1,6 @@
 ///AI_playEnchantments();
 
-show_debug_message("*************** enchant creatures ***************");
+
 
 if (AI_finishedEnchanting == false) {
     // get the cards in the hand
@@ -92,6 +92,4 @@ if (AI_finishedEnchanting == false) {
     if (ds_exists(creatures, ds_type_list)) {
         ds_list_destroy(creatures);
     }
-    
-    show_debug_message("FINISHED AI_playEnchantments()!");
 }

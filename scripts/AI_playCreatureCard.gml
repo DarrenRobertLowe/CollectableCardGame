@@ -1,5 +1,4 @@
 /// AI_playCreatureCard()
-show_debug_message("running AI_playCreatureCard()");
 
 // determine what to cast or summon
 if (AI_finishedSummoning == false) {

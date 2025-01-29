@@ -18,6 +18,5 @@ if (exists(card)) {
     }
     
     // return true if all other checks pass
-    show_debug_message("creatureCanAttack: " + string(card) + " can attack");
     return true;
 }

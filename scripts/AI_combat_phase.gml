@@ -77,7 +77,5 @@ if (ds_list_size(ourCreatures) > 0) {
         }
     }
 } else {
-    listedCreatures = false;
     nextPhase();
 }
-
