@@ -28,6 +28,7 @@
             <string>/// CLASS VARS
 event_inherited();
 cardSurface     = -1;
+//owner         = see create_card()
 name            = "";
 class           = "";
 description     = "This is the default card and if you're reading this, something went wrong";
@@ -61,7 +62,7 @@ canPlayFromGraveyard = true;
 creatureResourceCost = 0;
 spellResourceCost = 0;
 enchantResourceCost = 0;
-base_enchantmentSeparation = 12
+base_enchantmentSeparation = 12;
 enchantmentSeparation = base_enchantmentSeparation;
 isMouseOver = false;
 global.selectingSummonSlot = false;

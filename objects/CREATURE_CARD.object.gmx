@@ -182,7 +182,7 @@ if (castingChecking) {
             global.selectingSummonSlot = true;
             global.summoning = true;
             global.currentCard = id;
-            waitTime = (room_speed * 0.25)
+            waitTime = (room_speed * 0.25);
         }
     }
 }

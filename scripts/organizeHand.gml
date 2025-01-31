@@ -5,10 +5,9 @@
 var cards = argument0; // the list that represents the contents of the hand
 cardSeparation = base_cardSeparation;
 
+var handsize = ds_list_size(cards);
 
-if (cards > 0) {
-    var handsize = ds_list_size(cards);
-    
+if (handsize > 0) {
     if (handsize > 5)
       then cardSeparation = (handAreaWidth / handsize);
 

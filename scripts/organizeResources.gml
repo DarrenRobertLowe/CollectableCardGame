@@ -6,10 +6,8 @@ var targetX = lane.x;
 var targetY = lane.y;
 var verticalSeparation = lane.verticalSeparation;
 
-
-if (cards > 0) {
-    var laneLength = ds_list_size(cards);
-    
+var laneLength = ds_list_size(cards);
+if (laneLength > 0) {
     //if (laneLength > 5)
      // then verticalSeparation = (laneHeight / laneLength);
 
