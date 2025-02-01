@@ -1,4 +1,4 @@
-///isValidTarget(card/contestant)
+///isValidTarget(target id)
 var target = argument0;
 
 if !(exists(global.currentCard)) { 

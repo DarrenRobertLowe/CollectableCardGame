@@ -115,7 +115,9 @@ if (clicked) {
 
 if (mouseOver()) {
     if (global.choosingEffectTarget == true) {
-        glowing = true;
+        if (isValidTarget(id)) {
+            glowing = true;
+        }
     }
     
     if (global.choosingAttackTarget == true) {
