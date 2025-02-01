@@ -134,7 +134,6 @@ if (ds_exists(enchantments, ds_type_list)) {
             <string>/// state
 //note: "clicked" occurs via CONTROLS object, not here.
 event_inherited();
-glowing = false;
 
 
 if (displayed == false) {
@@ -143,14 +142,25 @@ if (displayed == false) {
 
 image_index = faceUp;
 
-
+// get mouseOver state
+isMouseOver = false;
 if (mouseOver()) {
     if (displayed) {
         isMouseOver = true;
     }
-} else {
-    isMouseOver = false;
 }
+/*
+if (!isMouseOver) {
+    glowing = false;
+}
+*/
+
+
+if (glowing) {
+    calculate_glowAlpha();
+}
+
+
 
 // check if can't be played so we can darken the card
 canUse = canPlayCard();
@@ -159,7 +169,7 @@ canUse = canPlayCard();
 switch (position) {
     case "deck":
         displayed = false;
-        break;
+    break;
     
     case "drawing":
         displayed = true;
@@ -176,7 +186,7 @@ switch (position) {
             position    = "hand";
             fullyDrawn  = true;
         }
-        break;
+    break;
     
     case "hand":
         if (global.TURN == global.player) then faceUp = true;
@@ -195,14 +205,14 @@ switch (position) {
         if (global.currentCard != id) {
             targetY = owner.hand.handY;
         } else targetY = owner.hand.handY;
-        break;
+    break;
         
     case "board":
         canUse = true;
         displayed = true;
         faceUp = true;
         scale = global.card_board_scale;
-        break;
+    break;
         
     case "graveyard":
         if (canPlayFromGraveyard)
@@ -213,7 +223,7 @@ switch (position) {
         if (owner.graveyard.forceHideContents) {
             displayed = false;
         }
-        break;
+    break;
 }
 
 
@@ -228,15 +238,7 @@ if (global.choosingEffectTarget) or (global.summoning) {
 }
 
 
-if (displayed) {
-    // visuals
-    image_xscale = scale;
-    image_yscale = scale;
-    
-    if (glowing) {
-        calculate_glowAlpha();
-    }
-}
+
 
 // selecting a card to play
 if ((position == "hand") or (position == "graveyard")) {
@@ -278,6 +280,15 @@ if (position == "board") {
     if (clicked == true) {
         tryActivate();
     }
+}
+
+
+
+
+// scale and glow
+if (displayed) {
+    image_xscale = scale;
+    image_yscale = scale;
 }
 
 // allow this card to be selected as an effect target
@@ -373,13 +384,13 @@ sendToGraveyard(owner.graveyard, id);
           <argument>
             <kind>1</kind>
             <string>/// draw self and card elements
-draw_set_alpha(1);
-draw_set_color(c_black);
+event_inherited();
+//draw_set_alpha(1);
+//draw_set_color(c_black);
 
 if (surfaceDrawn == false) {
     getCardSurface(id);
 }
-
 
 if (displayed) {
     if (!faceUp) {
@@ -396,8 +407,11 @@ if (displayed) {
         }
     }
     
-    check_glow();   // draw the hover glow behind the sprite
+    glow_sprite = cardSurfaceSprite;
+    check_glow();   // draw the hover glow over the sprite
 }
+
+
 </string>
           </argument>
         </arguments>

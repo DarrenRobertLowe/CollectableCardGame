@@ -187,9 +187,7 @@ glowing = false;
             <kind>1</kind>
             <string>/// draw self and glowing
 event_inherited();
-
 draw_self();
-
 check_glow();
 </string>
           </argument>

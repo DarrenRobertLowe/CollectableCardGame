@@ -191,6 +191,7 @@ if (castingChecking) {
 if (waitTime &gt; 0) {
     waitTime--;
 } else {
+    // summoning
     if (global.currentCard == id) {
         if (global.selectingSummonSlot) {
             // allow us to select a slot
@@ -201,6 +202,8 @@ if (waitTime &gt; 0) {
         } else {
             unenforceHideCards();
         }
+    } else {
+        unenforceHideCards();
     }
     
     
@@ -210,8 +213,8 @@ if (waitTime &gt; 0) {
             // make potential targets glow
             if (global.TURN != owner) {
                 if (!global.choosingAttackTarget)
-                    then glowing = true;
-                    else glowing = false;
+                  then glowing = true;
+                else glowing = false;
             }
             
             if (global.choosingAttackTarget) {
