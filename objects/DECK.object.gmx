@@ -120,7 +120,9 @@ if (mouseOver()) {
     
     if (global.choosingAttackTarget == true) {
         if (canAttackDirectly(owner)) {
-            glowing = true;
+            if (owner != global.TURN) {
+                glowing = true;
+            }
         }
     }
 }
