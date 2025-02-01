@@ -7,7 +7,7 @@ if (surface_exists(cardSurface)) {
     surface_set_target(cardSurface);
     draw_clear_alpha(c_white, 0);
     draw_set_halign(fa_left);
-    draw_set_colour(c_black);
+    draw_set_color(global.cardTextColour_black);
     
     // background
     draw_sprite(sprite_index, 1, 0, 0);
@@ -75,24 +75,26 @@ if (surface_exists(cardSurface)) {
         draw_set_font(statsFont);
         draw_set_halign(fa_center);
         draw_set_valign(fa_top);
-        draw_set_color(c_black);
-        
+
         // attack
-        if (attack < baseAttack) then draw_set_color(c_orange);
-        if (attack > baseAttack) then draw_set_color(c_green);
+        draw_set_color(global.cardTextColour_black);
+        if (attack < baseAttack) then draw_set_color(global.cardTextColour_orange);
+        if (attack > baseAttack) then draw_set_color(global.cardTextColour_green);
         draw_text(attackX,  attackY,  attack);
         
         // defence
-        if (defence < baseDefence) then draw_set_color(c_orange);
-        if (defence > baseDefence) then draw_set_color(c_green);
+        draw_set_color(global.cardTextColour_black);
+        if (defence < baseDefence) then draw_set_color(global.cardTextColour_orange);
+        if (defence > baseDefence) then draw_set_color(global.cardTextColour_green);
         draw_text(defenceX, defenceY, defence);
         
         // health
-        if (hp < baseHp) then draw_set_color(c_red);
+        draw_set_color(global.cardTextColour_black);
+        if (hp < baseHp) then draw_set_color(global.cardTextColour_red);
         draw_text(hpX, hpY, hp);
         
         // reset text
-        draw_set_color(c_black);
+        draw_set_color(global.cardTextColour_black);
         draw_set_halign(fa_left);
     }
     
