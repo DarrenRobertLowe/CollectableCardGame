@@ -41,6 +41,9 @@ creatureResources = 0;
 enchantResources = 0;
 spellResources = 0;
 
+resourceLane = instance_create(x, y, RESOURCE_LANE);
+resourceLane.owner = id;
+
 // AI
 damageSpellThreshold = 0.75;        // a damage spell is worth using directly if it does more damage than this % of life total
 </string>
@@ -65,7 +68,7 @@ damageSpellThreshold = 0.75;        // a damage spell is worth using directly if
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// clean up datastructures
+            <string>/// clean up datastructures, etc
 event_inherited();
 
 if (ds_exists(cards, ds_type_list)) {
@@ -74,6 +77,10 @@ if (ds_exists(cards, ds_type_list)) {
 
 if (ds_exists(cardsInPlay, ds_type_list)) {
     ds_list_destroy(cardsInPlay);
+}
+
+if (exists(resourceLane)) {
+    instance_destroy(resourceLane);
 }
 </string>
           </argument>

@@ -149,12 +149,6 @@ if (mouseOver()) {
         isMouseOver = true;
     }
 }
-/*
-if (!isMouseOver) {
-    glowing = false;
-}
-*/
-
 
 if (glowing) {
     calculate_glowAlpha();
@@ -190,16 +184,18 @@ switch (position) {
     
     case "hand":
         if (global.TURN == global.player) then faceUp = true;
+
         if (global.GAME_PHASE == "main") or (global.GAME_PHASE == "aftermath")
             then canUse = true;
         scale = global.card_hand_scale;
         if (owner.hand.forceHideContents)
-        or (owner == global.enemy) {
+        //or (owner == global.enemy) 
+        {
             displayed = false;
         }
         
         if (owner == global.enemy) {
-            owner.hand.showContents = false;
+            //owner.hand.showContents = false;
         }
         
         if (global.currentCard != id) {

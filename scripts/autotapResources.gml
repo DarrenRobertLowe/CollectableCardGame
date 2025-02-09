@@ -7,26 +7,19 @@ var contestant  = argument0;
 var card        = argument1;
 var resources   = contestant.resourceLane.cards;
 
-
 // get the needed values
 var creatureResourcesNeeded = card.creatureResourceCost;
 var spellResourcesNeeded    = card.spellResourceCost;
 var enchantResourcesNeeded  = card.enchantResourceCost;
 
 
-if  (creatureResourcesNeeded == 0)
-and (spellResourcesNeeded == 0)
-and (enchantResourcesNeeded == 0) {
-    exit;
-}
-
-
-// remove cost equal to the amount of resources in our pool already (not untapped cards)
+// remove cost equal to the amount of resources in our pool already (before tapping any cards)
 creatureResourcesNeeded -= contestant.creatureResources;
 spellResourcesNeeded    -= contestant.spellResources;
 enchantResourcesNeeded  -= contestant.enchantResources;
 
 
+// tap creature resources
 while (creatureResourcesNeeded > 0) {
     for (var i=0; i<ds_list_size(resources); i++) {
         var resource = ds_list_find_value(resources, i);
@@ -42,8 +35,14 @@ while (creatureResourcesNeeded > 0) {
             if (creatureResourcesNeeded <= 0) then break;
         }
     }
+    
+    if (creatureResourcesNeeded > 0) {
+        show_debug_message("autoTapResources says: Not enough creature resources! Have: " + string(contestant.creatureResources) + "   need: " +string(creatureResourcesNeeded) + " of " + string(card.creatureResourceCost) );
+        return false;
+    }
 }
 
+// tap spell resources
 while (spellResourcesNeeded > 0) {
     for (var i=0; i<ds_list_size(resources); i++) {
         var resource = ds_list_find_value(resources, i);
@@ -59,9 +58,14 @@ while (spellResourcesNeeded > 0) {
             if (spellResourcesNeeded <= 0) then break;
         }
     }
+    
+    if (spellResourcesNeeded > 0) {
+        show_debug_message("autoTapResources says: Not enough spell resources! Have: " + string(contestant.spellResources) + "   need: " +string(spellResourcesNeeded) + " of " + string(card.spellResourceCost) );
+        return false;
+    }
 }
 
-
+// tap enchantment resources
 while (enchantResourcesNeeded > 0) {
     for (var i=0; i<ds_list_size(resources); i++) {
         var resource = ds_list_find_value(resources, i);
@@ -77,4 +81,11 @@ while (enchantResourcesNeeded > 0) {
             if (enchantResourcesNeeded <= 0) then break;
         }
     }
+    
+    if (enchantResourcesNeeded > 0) {
+        show_debug_message("autoTapResources says: Not enough enchantment resources! Have: " + string(contestant.enchantResources) + "   need: " +string(enchantResourcesNeeded) + " of " + string(card.enchantResourceCost) );
+        return false;
+    }
 }
+
+return true;

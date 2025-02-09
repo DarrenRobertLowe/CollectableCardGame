@@ -111,10 +111,15 @@ for(var i=0; i&lt;cardSlotsPerRow; i++) {
     slotBack.alternativeSlot = slotFront;
 }
 
-global.player.resourceLane = instance_create(playerCardsX + (cardSlotsPerRow * cardSeparation), playerFrontRow, RESOURCE_LANE);
-global.enemy.resourceLane = instance_create(enemyCardsX, enemyBackRow, RESOURCE_LANE);
-global.player.resourceLane.owner = global.player;
-global.enemy.resourceLane.owner = global.enemy;
+
+// position the resource lanes
+var playerLane = global.player.resourceLane;
+playerLane.x = playerCardsX + (cardSlotsPerRow * cardSeparation);
+playerLane.y = playerFrontRow;
+
+var enemyLane = global.enemy.resourceLane;
+enemyLane.x = enemyCardsX;
+enemyLane.y = enemyBackRow;
 
 
 instance_create(-100, -100, EMBIGGENED_CARD_DRAWER);

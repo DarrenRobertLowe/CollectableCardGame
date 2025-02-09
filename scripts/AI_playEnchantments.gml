@@ -16,15 +16,6 @@ if (AI_finishedEnchanting == false) {
     // create a list of friendly creatures we can put an enchantment on.
     var creatures = getCreatures(global.TURN);
     
-    // To do: filter any that can't have an enchantment for some reason
-    
-    // To do:
-    // for each enchantment...
-        // if the enchantment improves hp, arrange by hp, cast on the lowest
-        // else if the enchantment improves defence, arrange by defence, cast on the lowest
-        // else if the enchantment improves attack, arrange by attack, cast on the lowest
-        // else choose the monster with the strongest attack, cast on that one.
-    
     // ! escape now if no creatures
     if (ds_list_size(creatures) == 0) {
         ds_list_destroy(creatures);
@@ -32,18 +23,25 @@ if (AI_finishedEnchanting == false) {
         exit;
     }
     
+    // To do: prioriotize best enchantment
+    // for each enchantment...
+        // if the enchantment improves hp, arrange by hp, cast on the lowest
+        // else if the enchantment improves defence, arrange by defence, cast on the lowest
+        // else if the enchantment improves attack, arrange by attack, cast on the lowest
+        // else choose the monster with the strongest attack, cast on that one.
     
     // get a list of enchantments in an ordered queue
     var AI_enchantmentQueue = ds_priority_create();
     
     // generate a list of the ones we can cast
     for(var i=0; i<ds_list_size(cards); i++) {
-        card = ds_list_find_value(cards, i);
-        if (card.type == ENCHANTMENT_CARD and canAffordCasting(card)) {
-            ds_priority_add(AI_enchantmentQueue, card, getTotalCastingCost(card)); // assume the cost maps to it being a better enchantment, this could be informed by a queue instead
+        enchantment = ds_list_find_value(cards, i);
+        if (enchantment.type == ENCHANTMENT_CARD) {
+            if (canAffordCasting(enchantment)) {
+                ds_priority_add(AI_enchantmentQueue, enchantment, getTotalCastingCost(enchantment)); // we're assuming for now that the casting cost maps to it being a better enchantment, this could be informed by a queue instead
+            }
         }
     }
-    
     
     // ! escape now if no castable enchantments
     if (ds_priority_size(AI_enchantmentQueue) == 0) {
@@ -52,7 +50,7 @@ if (AI_finishedEnchanting == false) {
         exit;
     }
     
-    
+    // LIST CASTABLE ENCHANTMENTS
     // convert priority queue to an actual list
     var size = ds_priority_size(AI_enchantmentQueue);
     show_debug_message("ds_priority_size(AI_enchantmentQueue) = " +string(size));
@@ -62,7 +60,7 @@ if (AI_finishedEnchanting == false) {
     }
     
     
-    // DEBUG
+    // DEBUG: print enchantment list size and each enchantment name
     /*****************************************************************************/
     var size = ds_list_size(AI_enchantmentList);
     show_debug_message("ds_list_size(AI_enchantmentList) = " + string(size));
@@ -73,18 +71,20 @@ if (AI_finishedEnchanting == false) {
     /*****************************************************************************/
     
     
-    var target = ds_list_find_value(creatures, irandom(ds_list_size(creatures)-1));
+    // CHOOSE TARGET
+    var target = ds_list_find_value(creatures, irandom(ds_list_size(creatures)-1));     // NEEDS TO ACTUALLY DECIDE THE BEST UNIT
     
-    var card = ds_list_find_value(AI_enchantmentList, 0);
-    card.target = target;
-    show_debug_message("************** card = " + string(card));
+    var enchantment = ds_list_find_value(AI_enchantmentList, 0);
+    show_debug_message("************** enchantment = " + string(enchantment));
     
-    if (exists(card)) {
-        with(card) {
+    
+    if (exists(enchantment)) {
+        enchantment.target = target;
+        with(enchantment) {
             event_user(0);
         }
     } else {
-        show_debug_message("ERROR in AI_playEnchantments: card " + string(card) + " doesn't exist!");
+        show_debug_message("ERROR in AI_playEnchantments: enchantment " + string(enchantment) + " doesn't exist!");
     }
     
     

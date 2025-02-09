@@ -125,7 +125,6 @@ position = "board";
 global.choosingEffectTarget = false; 
 global.castingSpell = false; 
 choosingTarget = false;
-
 payCastingCost();
 stopTargeting();
 </string>

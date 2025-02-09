@@ -146,7 +146,7 @@ activated = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// give player resources and spawn particle fx
+            <string>/// GIVE RESOURCE and spawn particle fx
 
 owner.creatureResources  += creatureResources;
 owner.spellResources     += spellResources;
