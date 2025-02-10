@@ -24,7 +24,8 @@ while (creatureResourcesNeeded > 0) {
     for (var i=0; i<ds_list_size(resources); i++) {
         var resource = ds_list_find_value(resources, i);
         
-        if (resource.creatureResources > 0) {
+        
+        if ((resource.creatureResources > 0) and (resource.activated == false)) {
             with(resource) {
                 event_user(CONST_TAP_EVENT); // tap the resource
             }
@@ -47,7 +48,7 @@ while (spellResourcesNeeded > 0) {
     for (var i=0; i<ds_list_size(resources); i++) {
         var resource = ds_list_find_value(resources, i);
         
-        if (resource.spellResources > 0) {
+        if ((resource.spellResources > 0) and (resource.activated == false)) {
             with(resource) {
                 event_user(CONST_TAP_EVENT); // tap the resource
             }
@@ -70,7 +71,7 @@ while (enchantResourcesNeeded > 0) {
     for (var i=0; i<ds_list_size(resources); i++) {
         var resource = ds_list_find_value(resources, i);
         
-        if (resource.enchantResources > 0) {
+        if ((resource.enchantResources > 0) and (resource.activated == false)) {
             with(resource) {
                 event_user(CONST_TAP_EVENT); // tap the resource
             }

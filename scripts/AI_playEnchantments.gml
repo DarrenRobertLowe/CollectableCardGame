@@ -53,7 +53,6 @@ if (AI_finishedEnchanting == false) {
     // LIST CASTABLE ENCHANTMENTS
     // convert priority queue to an actual list
     var size = ds_priority_size(AI_enchantmentQueue);
-    show_debug_message("ds_priority_size(AI_enchantmentQueue) = " +string(size));
     if (ds_exists(AI_enchantmentQueue, ds_type_priority)) {
         AI_enchantmentList = priorityQueueToList(AI_enchantmentQueue);
         ds_priority_destroy(AI_enchantmentQueue); // clean up
@@ -81,7 +80,8 @@ if (AI_finishedEnchanting == false) {
     if (exists(enchantment)) {
         enchantment.target = target;
         with(enchantment) {
-            event_user(0);
+            autoTapResources(owner, id); // tap for mana
+            event_user(0); // "cast the spell"
         }
     } else {
         show_debug_message("ERROR in AI_playEnchantments: enchantment " + string(enchantment) + " doesn't exist!");

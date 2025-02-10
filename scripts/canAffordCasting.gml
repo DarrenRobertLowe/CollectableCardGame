@@ -13,6 +13,11 @@ var totalCreatureResources  = countCreatureResources(untappedResources);
 var totalSpellResources     = countSpellResources(untappedResources);
 var totalEnchantResources   = countEnchantResources(untappedResources);
 
+// add existing resources in pool
+totalCreatureResources += card.owner.creatureResources;
+totalSpellResources    += card.owner.spellResources;
+totalEnchantResources  += card.owner.enchantResources;
+
 // clean up
 ds_list_destroy(untappedResources);
 
