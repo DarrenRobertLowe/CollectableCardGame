@@ -10,7 +10,7 @@ var handsize = ds_list_size(cards);
 if (handsize > 0) {
     if (handsize > 5)
       then cardSeparation = (handAreaWidth / handsize);
-
+    
     
     for (var i=0; i<handsize; i++) {
         var card = ds_list_find_value(cards, i);
@@ -33,8 +33,6 @@ if (handsize > 0) {
         } else {
             card.targetX = round(handX - (i * cardSeparation)); // opposite direction for enemy
         }
-        
-        
         
         
         card.depth = ((global.hand_depth - handsize) + i);

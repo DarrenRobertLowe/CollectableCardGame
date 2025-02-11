@@ -189,13 +189,12 @@ switch (position) {
             then canUse = true;
         scale = global.card_hand_scale;
         if (owner.hand.forceHideContents)
-        //or (owner == global.enemy) 
         {
             displayed = false;
         }
         
         if (owner == global.enemy) {
-            //owner.hand.showContents = false;
+            owner.hand.showContents = false;
         }
         
         if (global.currentCard != id) {
@@ -245,8 +244,10 @@ if ((position == "hand") or (position == "graveyard")) {
                 if (owner == global.player) {
                     if (canUse) {
                         if(mouseOver()) {
-                            y = (owner.hand.handY - 30);
-                            depth -= 10; // make it appear above all other cards
+                            if (ds_priority_find_min(CONTROLS.clickableUnderPointer) == id) {
+                                y = (owner.hand.handY - 30);
+                                //depth -= 10; // make it appear above all other cards
+                            }
                         }
                         
                         if (clicked == true) {
