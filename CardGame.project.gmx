@@ -89,6 +89,7 @@
       </scripts>
       <script>scripts\log.gml</script>
       <script>scripts\debug.gml</script>
+      <script>scripts\debug_draw_card.gml</script>
     </scripts>
     <scripts name="Setup">
       <script>scripts\setup_rules.gml</script>

@@ -192,15 +192,13 @@ if (waitTime &gt; 0) {
     waitTime--;
 } else {
     // summoning
-    if (global.currentCard == id) {
-        if (global.selectingSummonSlot) {
+    if (global.selectingSummonSlot) {
+        if (global.currentCard == id) {
             // allow us to select a slot
             enforceHideCards();
             glowCardSlots();
             allowCancelSelectSummonSlot();
             selectSummonSlot();
-        } else {
-            unenforceHideCards();
         }
     } else {
         unenforceHideCards();

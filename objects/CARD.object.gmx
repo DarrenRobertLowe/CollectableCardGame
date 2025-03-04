@@ -246,7 +246,7 @@ if ((position == "hand") or (position == "graveyard")) {
                         if(mouseOver()) {
                             if (ds_priority_find_min(CONTROLS.clickableUnderPointer) == id) {
                                 y = (owner.hand.handY - 30);
-                                //depth -= 10; // make it appear above all other cards. Causes problems with highlighting the correct card.
+                                //depth -= 10; // make it appear above all other cards. WARNING: Causes problems with highlighting the correct card. If we want this behaviour we need to create an object that will draw the sprite above the other cards.
                             }
                         }
                         

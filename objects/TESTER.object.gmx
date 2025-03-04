@@ -91,31 +91,55 @@ if (global.DEBUG) {
             <string>/// ADD SPECIFIC CARDS TO OPPONENT'S HAND
 
 if (global.DEBUG) {
-    var enemy = global.enemy;
-    var hand  = enemy.hand;
+    var contestant = global.enemy;
+    var hand = contestant.hand;
 
     repeat(3) {
-        var card = create_card(resource_Ether, enemy);
-        ds_list_add(hand.contents, card);
-        card.x = enemy.deck.x;
-        card.y = enemy.deck.y;
-        card.position = "drawing";
+        var card = create_card(cc_VampireBat, contestant);
+        debug_draw_card(hand, card);
     }
     
     repeat(3) {
-        var card = create_card(enchant_Vigor, enemy);
-        ds_list_add(hand.contents, card);
-        card.x = enemy.deck.x;
-        card.y = enemy.deck.y;
-        card.position = "drawing";
+        var card = create_card(resource_Ember, contestant);
+        debug_draw_card(hand, card);
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="10" enumb="8">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// add cards to player's hand
+
+if (global.DEBUG) {
+    var contestant = global.player;
+    var hand = contestant.hand;
+
+    repeat(2) {
+        var card = create_card(resource_Ember, contestant);
+        debug_draw_card(hand, card);
     }
     
-    repeat(1) {
-        var card = create_card(cc_VampireBat, enemy);
-        ds_list_add(hand.contents, card);
-        card.x = enemy.deck.x;
-        card.y = enemy.deck.y;
-        card.position = "drawing";
+    repeat(2) {
+        var card = create_card(cc_VampireBat, contestant);
+        debug_draw_card(hand, card);
     }
 }
 </string>
