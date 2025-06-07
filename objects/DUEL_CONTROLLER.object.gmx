@@ -37,6 +37,8 @@ global.choosingEffectTarget = false;
 global.choosingAttackTarget = false;
 global.castingSpell = false;
 global.summoning    = false;
+global.allowSacrifice = false;  // used to make selectSummonSlot() allow creature sacrifice to make room for a new creature (e.g. Plague Of Rats)
+global.allowCancelCasting = true;
 global.target       = noone;
 global.WAIT         = false;
 global.POPUP_active = false;
@@ -45,6 +47,8 @@ global.PAUSED       = false;
 
 instance_create(room_width -25, room_height -40, PHASE_CONTROLLER);
 instance_create(-100, -100, BOARD_CONTROLLER);
+instance_create(-100, -100, EVENT_HANDLER);
+instance_create(-100, -100, EVENT_LISTENER);
 
 global.player = instance_create(0, view_hview[0], PLAYER);
 global.enemy  = instance_create(view_wview[0], 0, ENEMY);

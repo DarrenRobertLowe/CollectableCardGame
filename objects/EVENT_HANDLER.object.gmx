@@ -7,7 +7,83 @@
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// QUEUE AND RUN EVENTS
+
+events = ds_list_create();  // this is a list of maps where key=Object, value=event_user(number)
+eventOwner = noone;         // the current key object
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="25">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// RING THE BELL FOR THE NEXT EVENT
+
+var debugging = true;
+
+if (ds_list_empty(events)) {
+    if (debugging) then debug("EVENT_HANDLER: Reached the end of the event stack.");
+} else {
+    var index = (ds_list_size(events)-1); // lastmost index
+    if (debugging) then show_debug_message("events index is " +string(index));
+    var eventMap = ds_list_find_value(events, index);
+    
+    if (debugging) then show_debug_message("eventMap size is " +string(ds_map_size(eventMap)));
+    if (ds_exists(eventMap, ds_type_map)) {
+        if (debugging) then show_debug_message("eventMap is indeed a map");
+        var eventOwner = ds_map_find_first(eventMap);
+        var event      = ds_map_find_value(eventMap, eventOwner);
+        
+        if (debugging) then show_debug_message("eventOwner: " +string(eventOwner));
+        if (debugging) then show_debug_message("event:" +string(event));
+        with(eventOwner) {
+            event_user(event);
+        }
+    } else {
+        if (debugging) then show_debug_message("eventMap was not a ds_type_map!");
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>

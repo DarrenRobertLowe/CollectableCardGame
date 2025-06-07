@@ -68,7 +68,7 @@ if (position == "hand") {
         if (global.TURN == global.player) {
             if (castingChecking) {
                 if (basicActivationChecks()) {
-                    event_user(CONST_PLAY_CARD_EVENT);  // play this land
+                    event_user(global.PLAY_CARD_EVENT);  // play this land
                 }
                 
                 castingChecking = false;
@@ -86,7 +86,7 @@ if (position == "board") {
                 if !(global.GAME_PHASE == "draw") {
                     if !(activated) {
                         activated = true;
-                        event_user(CONST_TAP_EVENT); // tap the card for its resources
+                        event_user(global.TAP_EVENT); // tap the card for its resources
                     }
                 }
             }

@@ -1,4 +1,5 @@
 /// positionCardElements()
+/*
 castCircleX = x + (base_castCircleX * scale);
 castCircleY = y + (base_castCircleY * scale);
 castingCostX = x + (base_castingCostX * scale);

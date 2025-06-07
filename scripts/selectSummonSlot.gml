@@ -4,12 +4,18 @@
 // summon to slot
 with(BACK_SLOT) {
     if (clicked) {
-        if (card == noone) {
+        if (card == noone) {    // card slot free?
             other.slot = id;
             card = other.id;
             
             global.selectingSummonSlot = false;
-            summonCreature(other.id);
-        } else show_debug_message("Slot is occupied already by " +string(card));
+            summonCreature(card);
+        } else {                // card slot not free?
+            if (global.allowSacrifice == true) {
+                sendToGraveyard(card.owner.graveyard, card);
+            } else {
+                show_debug_message("Slot is occupied already by " +string(card));
+            }
+        }
     }
 }

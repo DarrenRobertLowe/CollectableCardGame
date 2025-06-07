@@ -4,7 +4,7 @@
  * take into consideration any boosting effects or 
  * target weakness there might be.
  */
- 
+/*
 var contestant = argument0;
 var spellList = getDamageSpellsByStrongestCastable(id);   // get all the castable damage spells in order of power
 var tempMana = contestant.mana;

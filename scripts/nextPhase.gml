@@ -29,15 +29,14 @@ if (!ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
 
 if (global.GAME_PHASE == "draw") {
     reset_AI_actions();
-    
+    /*
     if (ds_list_size(global.PAYMENT_PHASE_LIST) > 0) {
         global.GAME_PHASE = "payment";
         setMarqueeText(paymentPhaseText);
-    } else {
-        global.GAME_PHASE = "main";
+    } else {*/
         startMainPhase();
         setMarqueeText(mainPhaseText);
-    }
+    //}
     
     waitTime = room_speed;
     exit;
@@ -54,7 +53,7 @@ if (global.GAME_PHASE == "payment") {
 
 
 if (global.GAME_PHASE == "main") {
-    show_debug_message("************* LEAVING MAIN PHASE *************");
+    //show_debug_message("************* LEAVING MAIN PHASE *************");
     var contestant   = global.TURN;
     var cardsOnBoard = getCreatures(contestant);
     
@@ -93,15 +92,17 @@ if (global.GAME_PHASE == "aftermath") {
 
 
 if (global.GAME_PHASE == "endturn") {
+    
+    // reset friendly creature stats before our turn starts
     with (CREATURE_CARD) {
-        alarm[0] = 1;   // recalculate stats
-        
-        if (global.TURN == owner) {
+        if (global.TURN != owner) {
+            alarm[0] = 1;   // recalculate stats
             attackedThisTurn = false;
             activated = false;
         }
     }
     
+    // SWITCH TURNS
     switch(global.TURN) {
         case(global.enemy):
             global.TURN = global.player;

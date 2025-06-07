@@ -37,6 +37,7 @@
       <sprites name="Creatures">
         <sprite>sprites\art_ankylo</sprite>
         <sprite>sprites\art_vampirebat</sprite>
+        <sprite>sprites\art_blackrat</sprite>
       </sprites>
       <sprites name="Spells">
         <sprite>sprites\art_bolt</sprite>
@@ -56,6 +57,9 @@
           <sprite>sprites\art_Mana_Spell_01</sprite>
           <sprite>sprites\art_Mana_Spell_02</sprite>
         </sprites>
+      </sprites>
+      <sprites name="Artifacts">
+        <sprite>sprites\art_PlagueOfRats</sprite>
       </sprites>
     </sprites>
     <sprites name="Card Elements">
@@ -92,6 +96,7 @@
       <script>scripts\debug_draw_card.gml</script>
     </scripts>
     <scripts name="Setup">
+      <script>scripts\setup_constants.gml</script>
       <script>scripts\setup_rules.gml</script>
       <script>scripts\setup_depths.gml</script>
       <script>scripts\setup_card_scales.gml</script>
@@ -171,10 +176,10 @@
       <script>scripts\AI_playDestructionSpells.gml</script>
       <script>scripts\AI_playEnchantments.gml</script>
       <script>scripts\getDamageSpellsByStrongestCastable.gml</script>
-      <script>scripts\getHealingSpellsByStrongestCastable.gml</script>
+      <script>scripts\getHealingSpellsByStrongestCastable_DEPRECATED.gml</script>
       <script>scripts\prioritiseCardsByAttack.gml</script>
       <script>scripts\AI_tryDefeatOpponentWithSpells.gml</script>
-      <script>scripts\getMaxDamageOutput_spells.gml</script>
+      <script>scripts\getMaxDamageOutput_spells_DEPRECATED.gml</script>
       <script>scripts\creatureCanMoveLane.gml</script>
     </scripts>
     <scripts name="Game Loop">
@@ -188,7 +193,7 @@
         <script>scripts\organizeHand.gml</script>
         <script>scripts\organizeResources.gml</script>
         <script>scripts\organizeEnchantments.gml</script>
-        <script>scripts\cardSlideIntoPosition.gml</script>
+        <script>scripts\cardSlideIntoPosition_DEPRECATED.gml</script>
         <script>scripts\placeOnBoard_DEPRECATED.gml</script>
         <script>scripts\removeFromBoard.gml</script>
         <script>scripts\removeFromHand.gml</script>
@@ -196,7 +201,7 @@
         <script>scripts\sendToGraveyard.gml</script>
         <script>scripts\basicActivationChecks.gml</script>
         <script>scripts\payCastingCost.gml</script>
-        <script>scripts\positionCardElements.gml</script>
+        <script>scripts\positionCardElements_DEPRECATED.gml</script>
         <script>scripts\getCardSurface.gml</script>
       </scripts>
       <scripts name="Main">
@@ -253,7 +258,12 @@
     </scripts>
     <scripts name="Events">
       <script>scripts\subscribe_to_event.gml</script>
-      <script>scripts\trigger_event.gml</script>
+      <script>scripts\trigger_event_DEPRECATED.gml</script>
+      <script>scripts\event_queue.gml</script>
+      <script>scripts\concludeEvent.gml</script>
+      <script>scripts\alertEventSubscribers.gml</script>
+      <script>scripts\nextEvent.gml</script>
+      <script>scripts\unsubscribe_from_events.gml</script>
     </scripts>
     <script>scripts\startMainPhase.gml</script>
     <script>scripts\getAvailableBackSlots.gml</script>
@@ -342,6 +352,7 @@
         <object>objects\CREATURE_CARD</object>
         <object>objects\cc_VampireBat</object>
         <object>objects\cc_Ankylo</object>
+        <object>objects\cc_BlackRat</object>
       </objects>
       <objects name="Spells">
         <object>objects\SPELL_CARD</object>
@@ -360,10 +371,16 @@
         <object>objects\resource_Ether</object>
         <object>objects\resource_Catalyst</object>
       </objects>
+      <objects name="Artifacts">
+        <object>objects\ARTIFACT_CARD</object>
+        <object>objects\artifact_PlagueOfRats</object>
+      </objects>
     </objects>
     <objects name="EVENTS">
       <object>objects\POPUP_EventInfo</object>
       <object>objects\EVENT</object>
+      <object>objects\EVENT_HANDLER</object>
+      <object>objects\EVENT_LISTENER</object>
     </objects>
     <objects name="COMBAT">
       <object>objects\DAMAGE_COUNTER</object>
@@ -401,18 +418,10 @@
     <object>objects\FRONT_SLOT</object>
     <object>objects\BACK_SLOT</object>
     <object>objects\SlotArrow</object>
-    <object>objects\EVENT_LISTENER</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="5">
-    <constant name="EPSILON">0.00001</constant>
-    <constant name="CONST_DESTROY_EVENT">15</constant>
-    <constant name="CONST_PLAY_CARD_EVENT">0</constant>
-    <constant name="CONST_TAP_EVENT">1</constant>
-    <constant name="MAIN_PHASE_EVENT">2</constant>
-  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

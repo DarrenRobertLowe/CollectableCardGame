@@ -28,29 +28,30 @@
             <string>/// CLASS VARS
 event_inherited();
 
-subclass    = "";
-type        = CREATURE_CARD
+sprite_index    = spr_card_enchantment;
+subclass        = "";
+type            = ARTIFACT_CARD
 
 // stats
-baseAttack  = 1;
+baseAttack  = 0;
 baseDefence = 0;
-baseHp      = 1;
+baseHp      = 0;
 attack      = baseAttack;
 defence     = baseDefence;
 hp          = baseHp;
-image       = art_Mana_Creature_01;
+image       = art_Mana_Enchantment_01;
 
 // classes
-ds_list_add(classes, "Creature");
+ds_list_add(classes, "Artifact");
 
 // default values
-attackable = true;
+attackable = false;
 summoned  = false;
 attacking = false;
 target    = noone;
 attackedThisTurn = false;
-canAttack = true;   // e.g. walls can't attack
-canDefend = true;   // e.g. assassins can't defend
+canAttack = false;          // e.g. walls can't attack
+canDefend = false;          // e.g. artifacts can't defend
 canMoveLane = false;
 movedLane   = false;
 slot = noone;
@@ -76,15 +77,7 @@ hpIconY     = iconsY;
 
 
 // AI
-preferredSlot = FRONT_SLOT; // FRONT_SLOT or BACK_SLOT
-
-
-// Indicators
-slotArrow = instance_create(x, y, SlotArrow);
-slotArrow.parent = id;
-
-
-
+preferredSlot = BACK_SLOT; // FRONT_SLOT or BACK_SLOT
 </string>
           </argument>
         </arguments>
@@ -109,12 +102,6 @@ slotArrow.parent = id;
             <kind>1</kind>
             <string>/// Destroy dependencies (e.g. SlotArrow)
 event_inherited();
- 
-unsubscribe_from_events(id); // UNFINISHED!
-
-if (exists(slotArrow)) {
-    instance_destroy(slotArrow, true);
-}
 </string>
           </argument>
         </arguments>
@@ -137,15 +124,14 @@ if (exists(slotArrow)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// reset stats
+            <string>/// reapply ENCHANTMENT effects
+// called by nextPhase()
 
-attack      = baseAttack;
-defence     = baseDefence;
-attacking   = false;
-//hp          = baseHp; // MTG style rules
+if (position == "board") {
+    event_user(1); // trigger event
+}
 
-
-// reapply enchantment effects
+// trigger any enchantments on this card
 for(var i=0; i&lt;ds_list_size(enchantments); i++) { 
     var enchantment = ds_list_find_value(enchantments, i);
     
@@ -191,176 +177,22 @@ if (castingChecking) {
     }
 }
 
+
 /// INTERACTIVITY
 if (waitTime &gt; 0) {
     waitTime--;
 } else {
-
-    // SUMMONING
+    // summoning
     if (global.selectingSummonSlot) {
         if (global.currentCard == id) {
-            if (global.allowCancelCasting) {
-                allowCancelSelectSummonSlot();
-            }
-            
             enforceHideCards();             // hide hand so we can see the slots
             glowCardSlots();
+            allowCancelSelectSummonSlot();
             selectSummonSlot();             // allow player to select a given slot
         }
     } else {
         unenforceHideCards();
     }
-    
-    
-    if (global.GAME_PHASE == "combat") {
-        // attack
-        if (position == "board") {
-            // make potential targets glow
-            if (global.TURN != owner) {
-                if (global.choosingAttackTarget) {
-                    if (global.target == id)
-                      then glowing = true;
-                    else glowing = false;
-                }
-            }
-            
-            // hide player's hand when choosing attack target
-            if (global.choosingAttackTarget) {
-                if (global.TURN == global.player) {
-                    enforceHideCards();
-                    allowCancelCombatTarget();
-                }
-            }
-            
-            
-            if (clicked) {
-                if (!global.choosingAttackTarget) {
-                    combat_trySelectAsAttacker();
-                } else {
-                    combat_trySelectAsAttackTarget();
-                }
-            }
-            
-            
-            if (global.target &gt; 0) {
-                if (global.currentCard == id) {
-                    combat_initiateAttackTarget();
-                }
-            }
-        }
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="25">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// destroy SLOT_ARROW associated with this card
-
-event_inherited();
-
-if (exists(slotArrow)) {
-    instance_destroy(slotArrow, true);
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="12">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// MAIN PHASE LISTENER
-/* Note: This event is called by EVENT_LISTENER.
- * This card's subscriptions are in the create_event.
-*/
-event_inherited();
-var debugging = true;
-
-if (debugging) then show_debug_message(string(name) + " " + string(id) + " acknowledged Main Phase event.");
-
-if (global.TURN == owner) { // our turn?
-    canMoveLane = true;
-}
-
-
-concludeEvent(id, 2); // there might be a more generic way to do this
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="11">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// SETUP AND PERFORM ATTACK
-
-attackedThisTurn = true;
-
-show_debug_message(object_get_name(object_index) + " - " + string(id) + " is attacking");
-
-show_EventPopup(id, global.target, "Attacking");
-fight(id, global.target);
-
-// finish
-global.choosingAttackTarget = false;
-global.currentCard = noone;
-global.target = noone;
-
-// end the phase if no other creatures on the battlefield can attack
-var creatures = getCreatures(owner);
-if(!anyCreaturesCanAttack(creatures)) {
-    nextPhase();
-}
-
-// clean up
-if (ds_exists(creatures, ds_type_list)) {
-    ds_list_destroy(creatures);
 }
 </string>
           </argument>
@@ -384,14 +216,10 @@ if (ds_exists(creatures, ds_type_list)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// FINISH SUMMON
-show_debug_message("Summoned " +string(name));
+            <string>/// SUMMON
+event_inherited();
 
-if (ds_list_find_index(abilities, "Haste")) {
-    canMoveLane = true;
-} else {
-    canMoveLane = false;
-}
+show_debug_message("Constructed " +string(name));
 
 global.TURN.hand.forceHideContents = false;
 finishSummoning();
@@ -399,8 +227,8 @@ removeFromHand(id);
 global.currentCard = noone;
 position = "board";
 
-// EVENT LISTENERS
-subscribe_to_event(EVENT_LISTENER.MainPhaseSubscribers, id, 2);
+event_user(1);  // setup event listener for effect
+
 </string>
           </argument>
         </arguments>

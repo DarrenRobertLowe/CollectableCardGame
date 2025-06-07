@@ -10,5 +10,5 @@ instance_create(
 
 // start the destruction event
 with(target) {
-    event_user(CONST_DESTROY_EVENT);
+    event_user(global.DESTROY_EVENT);
 }

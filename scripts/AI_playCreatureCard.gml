@@ -1,4 +1,5 @@
 /// AI_playCreatureCard()
+var debugging = false;
 
 // determine what to cast or summon
 if (AI_finishedSummoning == false) {
@@ -15,14 +16,14 @@ if (AI_finishedSummoning == false) {
     
     // we have a creature card to play
     if (ds_priority_size(AI_creatureList) > 0) {
-        show_debug_message("found creature cards in our hand");
+        if (debugging) then show_debug_message("found creature cards in our hand");
         var creature = ds_priority_delete_max(AI_creatureList);
         
         var backSlots = ds_list_create();
         backSlots = getAvailableBackSlots(backSlots);
         var slot = noone;
         var count = ds_list_size(backSlots);
-        show_debug_message("backSlots count is: " + string(count));
+        if (debugging) then show_debug_message("backSlots count is: " + string(count));
         
         for(var i=0; i<count; i++) {
             slot = ds_list_find_value(backSlots, 0);
@@ -32,7 +33,7 @@ if (AI_finishedSummoning == false) {
             }
         }
         
-        show_debug_message("slot is : " + string(slot));
+        if (debugging) then show_debug_message("slot is : " + string(slot));
         
         if (slot != noone) {
             creature.slot = slot;
@@ -41,19 +42,19 @@ if (AI_finishedSummoning == false) {
             autoTapResources(id, creature);
             summonCreature(creature);
         } else {
-            show_debug_message("No available creature slots found.");
+            if (debugging) then show_debug_message("No available creature slots found.");
         }
         
         // clean up
         ds_list_destroy(backSlots);
     } else {
-        show_debug_message("No more creatures to summon");
+        if (debugging) then show_debug_message("No more creatures to summon");
         AI_finishedSummoning = true;
-        show_debug_message("finished AI_playCreatureCard()");
+        if (debugging) then show_debug_message("finished AI_playCreatureCard()");
     }
     
     
     // clean up
     ds_priority_destroy(AI_creatureList);
-    show_debug_message("Reached end of AI_playCreatureCard");
+    if (debugging) then show_debug_message("Reached end of AI_playCreatureCard");
 }

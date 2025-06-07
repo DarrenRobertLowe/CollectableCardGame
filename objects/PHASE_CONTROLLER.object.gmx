@@ -71,7 +71,7 @@ event_inherited();
 
 
 // hover on mouse over
-if (animate == false) {    
+if (animate == false) {
     if (mouseOver()) {
         if (ds_list_empty(global.NEXT_PHASE_BLOCKERS)) {
             anim_float();

@@ -2,11 +2,11 @@
 
 // here we can run the logic per enemy type
 // for now, we'll just make the most basic logic.
-
+var debugging   = false;
 // March creatures forward
 if !(AI_finishedMarchingCreatures) {
     if !(AI_paused()) {
-        show_debug_message("*************** march creatures forward ***************");
+        if (debugging) then show_debug_message("*************** march creatures forward ***************");
         AI_marchCreatures();
     }
 }
@@ -15,7 +15,7 @@ if !(AI_finishedMarchingCreatures) {
 if (AI_finishedMarchingCreatures)
 and !(AI_finishedResourceCardPlaying) {
     if !(AI_paused()) {
-        show_debug_message("*************** play resource cards ***************");
+        if (debugging) then show_debug_message("*************** play resource cards ***************");
         AI_playResourceCards();
     }
 }
@@ -25,7 +25,7 @@ if  (AI_finishedMarchingCreatures)
 and (AI_finishedResourceCardPlaying)
 and !(AI_finishedDestructionSpellCasting) {
     if !(AI_paused()) {
-        show_debug_message("*************** cast desctruction spells ***************");
+        if (debugging) then show_debug_message("*************** cast desctruction spells ***************");
         AI_playDestructionSpells();
     }
 }
@@ -36,7 +36,7 @@ and (AI_finishedResourceCardPlaying)
 and (AI_finishedDestructionSpellCasting)
 and !(AI_finishedSummoning) {
     if !(AI_paused()) {
-        show_debug_message("*************** summon monsters ***************");
+        if (debugging) then show_debug_message("*************** summon monsters ***************");
         AI_playCreatureCard();
     }
 }
@@ -48,7 +48,7 @@ and (AI_finishedDestructionSpellCasting)
 and (AI_finishedSummoning)
 and !(AI_finishedEnchanting) {
     if !(AI_paused()) {
-        show_debug_message("*************** enchant creatures ***************");
+        if (debugging) then show_debug_message("*************** enchant creatures ***************");
         AI_playEnchantments();
     }
 }
@@ -76,7 +76,7 @@ and (AI_finishedEnchanting) {
     if !(AI_paused()) {
         ds_list_clear(ourCreatures);
         ds_list_clear(theirCreatures);
-        show_debug_message("*************** finished turn ***************");
+        if (debugging) then show_debug_message("*************** finished turn ***************");
         nextPhase();
         exit;
     }

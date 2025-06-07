@@ -4,7 +4,7 @@
  * 
  * @returns list
  */
- 
+ /*
 // check if we have any healing spells
 var spellQueue = ds_priority_create();
 var cards = hand.contents;
@@ -12,8 +12,7 @@ for(var i=0; i<ds_list_size(cards); i++) {
     card = ds_list_find_value(cards, i);
     
     // spells
-    if (card.type == DAMAGE_SPELL
-    and card.attack < 0) {
+    if (card.type == DAMAGE_SPELL and card.attack < 0) {
         if (card.castingCost <= mana) {
             ds_priority_add(spellQueue, card, card.attack);
         }

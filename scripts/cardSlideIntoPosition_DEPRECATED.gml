@@ -1,5 +1,5 @@
 ///cardSlideIntoPosition();
-
+/*
 var epsilon = 0.00001; // avoid division by zero
 
 if (x != targetX) {

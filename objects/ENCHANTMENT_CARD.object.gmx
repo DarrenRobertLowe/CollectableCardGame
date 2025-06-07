@@ -95,7 +95,10 @@ if (position == "board") {
     targetY = target.y + global.enchantmentYDifference;
 }
 
+// CASTING CHECK and change to target select mode
 if (owner == global.player) {
+
+    // Are we trying to cast this for spell?
     if (castingChecking) {
         castingChecking = false;
         if (targetAlliance == "friend" or targetAlliance == "any") {
@@ -115,6 +118,7 @@ if (owner == global.player) {
         }
     }
     
+    // If we're casting, choose a target...
     if (casting) {
         global.target = noone;
         global.choosingEffectTarget = true; 
@@ -132,6 +136,7 @@ if (owner == global.player) {
 }
 
 
+// CASTING
 if (activated) {
     if (global.POPUP_active == false) {
         event_user(0); // actually cast the spell
@@ -140,7 +145,7 @@ if (activated) {
 }
 
 
-/// targeting
+/// TARGETING
 if (choosingTarget) {
     CONTROLS.animate = true;
     global.currentCard = id;
@@ -152,7 +157,7 @@ if (choosingTarget) {
     
     
     target = noone;
-    var ptarget = noone;
+    var ptarget = noone; // potential target
     
     if (global.target != noone) {
         if (isValidTarget(global.target)) {
@@ -162,13 +167,10 @@ if (choosingTarget) {
     
     
     if (ptarget != noone) {
-        //if (global.controls_accept) {
             target = ptarget;
             global.choosingEffectTarget = false;
             choosingTarget = false;
             castSpell(id);
-            //activated = true;   // activate the spell
-        //}
     }
 }
 </string>
@@ -196,7 +198,8 @@ if (choosingTarget) {
             <string>/// Destroy self and remove our effects from target
 
 event_inherited();
-event_user(2); // remove effects
+
+event_user(14); // remove effects from target
 </string>
           </argument>
         </arguments>
@@ -219,10 +222,34 @@ event_user(2); // remove effects
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// MAIN PHASE STARTED
+event_inherited();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// remove this enchantment from target
 /* Note: The code for undoing the specific effects of an
- * enchantment are in the user_event(2) of the specific
- * card.
+ * enchantment are in the user_event(14) of the specific
+ * enchantment card.
 */
 event_inherited();
 

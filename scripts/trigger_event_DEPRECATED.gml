@@ -2,8 +2,8 @@
 /* Usage example:
  * trigger_event(EVENT_LISTENER.SpellCast);
  */
-
-var event = argument0;
+/*
+var event_map = argument0;
 
 with (EVENT_LISTENER) {
     var key = ds_map_find_first(event_map);

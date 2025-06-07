@@ -27,7 +27,7 @@ while (creatureResourcesNeeded > 0) {
         
         if ((resource.creatureResources > 0) and (resource.activated == false)) {
             with(resource) {
-                event_user(CONST_TAP_EVENT); // tap the resource
+                event_user(global.TAP_EVENT); // tap the resource
             }
             
             // update the needed vs have
@@ -50,7 +50,7 @@ while (spellResourcesNeeded > 0) {
         
         if ((resource.spellResources > 0) and (resource.activated == false)) {
             with(resource) {
-                event_user(CONST_TAP_EVENT); // tap the resource
+                event_user(global.TAP_EVENT); // tap the resource
             }
             
             // update the needed vs have
@@ -73,7 +73,7 @@ while (enchantResourcesNeeded > 0) {
         
         if ((resource.enchantResources > 0) and (resource.activated == false)) {
             with(resource) {
-                event_user(CONST_TAP_EVENT); // tap the resource
+                event_user(global.TAP_EVENT); // tap the resource
             }
             
             // update the needed vs have

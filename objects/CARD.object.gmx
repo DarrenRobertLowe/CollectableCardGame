@@ -68,6 +68,7 @@ isMouseOver = false;
 global.selectingSummonSlot = false;
 waitTime = 0;
 hasActivationAbility = false;
+freeCast    = false; // used when a creature is brought directly into play by an effect
 
 
 setup_glowing();
@@ -350,7 +351,7 @@ for (var i = ds_list_size(enchantments) - 1; i &gt;= 0; i--) {
     //removeEnchantment(enchantment);
     with(enchantment) {
         show_debug_message(string(id) + " told to be destroyed.");
-        event_user(CONST_DESTROY_EVENT);
+        event_user(global.DESTROY_EVENT);
     }
     
     show_debug_message("current i: " + string(i));
@@ -358,6 +359,31 @@ for (var i = ds_list_size(enchantments) - 1; i &gt;= 0; i--) {
 
 // Go to graveyard by default. Specific cards can override this
 sendToGraveyard(owner.graveyard, id);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="12">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// MAIN PHASE STARTED
+
+
 </string>
           </argument>
         </arguments>
