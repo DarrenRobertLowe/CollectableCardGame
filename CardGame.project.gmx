@@ -378,7 +378,7 @@
     </objects>
     <objects name="EVENTS">
       <object>objects\POPUP_EventInfo</object>
-      <object>objects\EVENT</object>
+      <object>objects\EVENT_DEPRECATED</object>
       <object>objects\EVENT_HANDLER</object>
       <object>objects\EVENT_LISTENER</object>
     </objects>

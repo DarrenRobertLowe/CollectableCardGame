@@ -110,7 +110,7 @@ slotArrow.parent = id;
             <string>/// Destroy dependencies (e.g. SlotArrow)
 event_inherited();
  
-unsubscribe_from_events(id); // UNFINISHED!
+unsubscribe_from_events(id);
 
 if (exists(slotArrow)) {
     instance_destroy(slotArrow, true);
@@ -276,6 +276,8 @@ if (waitTime &gt; 0) {
 
 event_inherited();
 
+unsubscribe_from_events(id);
+
 if (exists(slotArrow)) {
     instance_destroy(slotArrow, true);
 }
@@ -306,14 +308,10 @@ if (exists(slotArrow)) {
  * This card's subscriptions are in the create_event.
 */
 event_inherited();
-var debugging = true;
-
-if (debugging) then show_debug_message(string(name) + " " + string(id) + " acknowledged Main Phase event.");
 
 if (global.TURN == owner) { // our turn?
     canMoveLane = true;
 }
-
 
 concludeEvent(id, 2); // there might be a more generic way to do this
 </string>
